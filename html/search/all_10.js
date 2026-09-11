@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['parselevel_0',['parseLevel',['../loggerconf_8c.html#a98ff4e8e9f381fd27ae85c45123a673e',1,'loggerconf.c']]],
+  ['parseline_1',['parseLine',['../loggerconf_8c.html#a4b9fee262d8117fda358e976b4865752',1,'loggerconf.c']]],
+  ['pin_5fdir_2',['PIN_DIR',['../gpio__pins_8h.html#ad863d37df885f2008e345bacdc255135',1,'gpio_pins.h']]],
+  ['pin_5fenable_3',['PIN_ENABLE',['../gpio__pins_8h.html#ae680761fa74600f1c60c1f0282591896',1,'gpio_pins.h']]],
+  ['pin_5fendstop_4',['PIN_ENDSTOP',['../gpio__pins_8h.html#a0fce84a9f1cb9f2cbcfdce129dae6baf',1,'gpio_pins.h']]],
+  ['pin_5flaser_5',['PIN_LASER',['../gpio__pins_8h.html#abfee9a86a7dcef22c0de66de8fa80a4f',1,'gpio_pins.h']]],
+  ['pin_5flid_6',['PIN_LID',['../gpio__pins_8h.html#a0dfb4dc2b402efb8644c8dee8999cfa4',1,'gpio_pins.h']]],
+  ['pin_5fms1_7',['PIN_MS1',['../gpio__pins_8h.html#a443ade7b0d7bb6d9bd45c9673154e60b',1,'gpio_pins.h']]],
+  ['pin_5fms2_8',['PIN_MS2',['../gpio__pins_8h.html#a9a92f3978d304f18722e66086c95aca6',1,'gpio_pins.h']]],
+  ['pin_5fms3_9',['PIN_MS3',['../gpio__pins_8h.html#a3d2127c2c43cb1f5cfd4a081969c153e',1,'gpio_pins.h']]],
+  ['pin_5fstep_10',['PIN_STEP',['../gpio__pins_8h.html#a5773b1263b90c032debf6975ab6e4dcc',1,'gpio_pins.h']]],
+  ['pinout_11',['Pinout',['../index.html#autotoc_md4',1,'']]],
+  ['pitch_12',['pitch',['../structcam__t.html#a21bafafbcd0e889b72f992285bb42baa',1,'cam_t']]],
+  ['pitfalls_13',['pitfalls',['../camera_sdk.html#autotoc_md17',1,'Common pitfalls'],['../index.html#autotoc_md7',1,'Common pitfalls']]],
+  ['pixels_14',['pixels',['../structroi__t.html#a0c34594b1ed9abc91f607753c519e5a2',1,'roi_t']]],
+  ['pos_15',['pos',['../structstepper__t.html#a8558ddccd51d832d38218aff10efc763',1,'stepper_t']]],
+  ['pos_5fpipe_16',['pos_pipe',['../utils_8h.html#a35547b35e98a74c8879cf6c360388139',1,'POS_PIPE:&#160;utils.h'],['../sweep__run_8c.html#a35547b35e98a74c8879cf6c360388139',1,'POS_PIPE:&#160;sweep_run.c'],['../camera-sdk_2utils_8h.html#a35547b35e98a74c8879cf6c360388139',1,'POS_PIPE:&#160;utils.h']]],
+  ['prep_17',['prep',['../structstepper__t.html#aa2d1c2fa55f52387bc15bd23cd6b9794',1,'stepper_t']]],
+  ['prerequisites_18',['prerequisites',['../index.html#autotoc_md0',1,'Prerequisites'],['../camera_sdk.html#autotoc_md9',1,'Prerequisites']]],
+  ['prism_20scan_20controller_19',['Sprint1 — Prism scan controller',['../index.html',1,'']]],
+  ['prm_5ffile_20',['prm_file',['../utils_8h.html#ab86b8648d7d34030b9344b376894d377',1,'PRM_FILE:&#160;utils.h'],['../sweep__run_8c.html#ab86b8648d7d34030b9344b376894d377',1,'PRM_FILE:&#160;sweep_run.c']]],
+  ['protocol_21',['Command protocol',['../index.html#autotoc_md5',1,'']]],
+  ['pulse_5fgpio_22',['pulse_gpio',['../stepper_8c.html#ab29246891164b83b782688312fbb7474',1,'stepper.c']]],
+  ['pulse_5fstep_23',['pulse_step',['../stepper_8c.html#a9688ebf1b177acdd4fb9e22d28aa5a9c',1,'stepper.c']]]
+];
