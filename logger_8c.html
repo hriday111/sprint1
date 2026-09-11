@@ -132,9 +132,6 @@ Functions</h2></td></tr>
 <tr class="separator:abb7cc7eb4e959fda6a43c8dd85f20090"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbe16e531630cb4bba3856e11b812c88" id="r_afbe16e531630cb4bba3856e11b812c88"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8c.html#afbe16e531630cb4bba3856e11b812c88">getCurrentThreadID</a> (void)</td></tr>
 <tr class="separator:afbe16e531630cb4bba3856e11b812c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b21fc8b632340ed7bb760f80e3480e0" id="r_a7b21fc8b632340ed7bb760f80e3480e0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8c.html#a7b21fc8b632340ed7bb760f80e3480e0">logger_initConsoleLogger</a> (FILE *<a class="el" href="logger_8c.html#ab41bf19330e50c3c7bf3544c53f30971">output</a>)</td></tr>
-<tr class="memdesc:a7b21fc8b632340ed7bb760f80e3480e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable console logging.  <br /></td></tr>
-<tr class="separator:a7b21fc8b632340ed7bb760f80e3480e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e7ab1cba8b2883943ec52875583fc03" id="r_a9e7ab1cba8b2883943ec52875583fc03"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8c.html#a9e7ab1cba8b2883943ec52875583fc03">getFileSize</a> (const char *<a class="el" href="logger_8c.html#af6a8f5950a36cd4a6e5a675609f2b1e5">filename</a>)</td></tr>
 <tr class="separator:a9e7ab1cba8b2883943ec52875583fc03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a426e46a24c27812049028471209ffdc9" id="r_a426e46a24c27812049028471209ffdc9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8c.html#a426e46a24c27812049028471209ffdc9">logger_initFileLogger</a> (const char *<a class="el" href="logger_8c.html#af6a8f5950a36cd4a6e5a675609f2b1e5">filename</a>, long <a class="el" href="logger_8c.html#af1a27a84697d62ca640a488079e80195">maxFileSize</a>, unsigned char <a class="el" href="logger_8c.html#a61178c1f12cf88c191f14915076d70d6">maxBackupFiles</a>)</td></tr>
@@ -161,10 +158,10 @@ Functions</h2></td></tr>
 <tr class="separator:ac1844d406e77b7fd443b3f3b1a184c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdab680ff248b1252822d4c2eccf82aa" id="r_acdab680ff248b1252822d4c2eccf82aa"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8c.html#acdab680ff248b1252822d4c2eccf82aa">getTimestamp</a> (const struct timeval *time, char *timestamp, size_t size)</td></tr>
 <tr class="separator:acdab680ff248b1252822d4c2eccf82aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add1d825698e2b0eded012c5dad6f1515" id="r_add1d825698e2b0eded012c5dad6f1515"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8c.html#add1d825698e2b0eded012c5dad6f1515">getBackupFileName</a> (const char *basename, unsigned char index, char *backupname, size_t size)</td></tr>
-<tr class="separator:add1d825698e2b0eded012c5dad6f1515"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a291f387e451774670c2f9622166dc97f" id="r_a291f387e451774670c2f9622166dc97f"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8c.html#a291f387e451774670c2f9622166dc97f">isFileExist</a> (const char *<a class="el" href="logger_8c.html#af6a8f5950a36cd4a6e5a675609f2b1e5">filename</a>)</td></tr>
 <tr class="separator:a291f387e451774670c2f9622166dc97f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add1d825698e2b0eded012c5dad6f1515" id="r_add1d825698e2b0eded012c5dad6f1515"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8c.html#add1d825698e2b0eded012c5dad6f1515">getBackupFileName</a> (const char *basename, unsigned char index, char *backupname, size_t size)</td></tr>
+<tr class="separator:add1d825698e2b0eded012c5dad6f1515"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f487fdf4732cdc756792ca5b373ee73" id="r_a4f487fdf4732cdc756792ca5b373ee73"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8c.html#a4f487fdf4732cdc756792ca5b373ee73">rotateLogFiles</a> (void)</td></tr>
 <tr class="memdesc:a4f487fdf4732cdc756792ca5b373ee73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate <code>filename</code> → <code></code>.1 .  <br /></td></tr>
 <tr class="separator:a4f487fdf4732cdc756792ca5b373ee73"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -289,9 +286,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00255">255</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00253">253</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00282">rotateLogFiles()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00267">rotateLogFiles()</a>.</p>
 
 </div>
 </div>
@@ -321,7 +318,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00113">113</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -349,11 +346,11 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00142">142</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00127">127</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00038">filename</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00156">logger_initFileLogger()</a>, and <a class="el" href="logger_8c_source.html#l00282">rotateLogFiles()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00141">logger_initFileLogger()</a>, and <a class="el" href="logger_8c_source.html#l00267">rotateLogFiles()</a>.</p>
 
 </div>
 </div>
@@ -381,11 +378,11 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00230">230</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00215">215</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8h_source.html#l00041">LogLevel_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00044">LogLevel_ERROR</a>, <a class="el" href="logger_8h_source.html#l00045">LogLevel_FATAL</a>, <a class="el" href="logger_8h_source.html#l00042">LogLevel_INFO</a>, <a class="el" href="logger_8h_source.html#l00040">LogLevel_TRACE</a>, and <a class="el" href="logger_8h_source.html#l00043">LogLevel_WARN</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -429,9 +426,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00243">243</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00228">228</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -469,9 +466,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00210">210</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00195">195</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00215">logger_flush()</a>, and <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00200">logger_flush()</a>, and <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -503,7 +500,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00048">s_initialized</a>, and <a class="el" href="logger_8c_source.html#l00052">s_mutex</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00126">logger_initConsoleLogger()</a>, and <a class="el" href="logger_8c_source.html#l00156">logger_initFileLogger()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00141">logger_initFileLogger()</a>.</p>
 
 </div>
 </div>
@@ -531,11 +528,11 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00269">269</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00242">242</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00038">filename</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00282">rotateLogFiles()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00267">rotateLogFiles()</a>.</p>
 
 </div>
 </div>
@@ -567,7 +564,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00052">s_mutex</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00126">logger_initConsoleLogger()</a>, <a class="el" href="logger_8c_source.html#l00156">logger_initFileLogger()</a>, and <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00141">logger_initFileLogger()</a>, and <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -595,11 +592,11 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00205">205</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00190">190</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00047">s_flushInterval</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="loggerconf_8c_source.html#l00125">parseLine()</a>, and <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="loggerconf_8c_source.html#l00121">parseLine()</a>, and <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>.</p>
 
 </div>
 </div>
@@ -621,7 +618,7 @@ Variables</h2></td></tr>
 
 <p>Close the file logger output stream (if open). </p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00379">379</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00364">364</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9">s_flog</a>.</p>
 
@@ -647,9 +644,9 @@ Variables</h2></td></tr>
 
 <p>Flush buffered console/file log output immediately. </p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00215">215</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00200">200</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">References <a class="el" href="logger_8c_source.html#l00210">hasFlag()</a>, <a class="el" href="logger_8c_source.html#l00024">kConsoleLogger</a>, <a class="el" href="logger_8c_source.html#l00025">kFileLogger</a>, <a class="el" href="logger_8c.html#a710d4e2e2f27f6add971887b06900631">s_clog</a>, <a class="el" href="logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9">s_flog</a>, <a class="el" href="logger_8c_source.html#l00048">s_initialized</a>, and <a class="el" href="logger_8c_source.html#l00045">s_logger</a>.</p>
+<p class="reference">References <a class="el" href="logger_8c_source.html#l00195">hasFlag()</a>, <a class="el" href="logger_8c_source.html#l00024">kConsoleLogger</a>, <a class="el" href="logger_8c_source.html#l00025">kFileLogger</a>, <a class="el" href="logger_8c.html#a710d4e2e2f27f6add971887b06900631">s_clog</a>, <a class="el" href="logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9">s_flog</a>, <a class="el" href="logger_8c_source.html#l00048">s_initialized</a>, and <a class="el" href="logger_8c_source.html#l00045">s_logger</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="crash_8c_source.html#l00151">crash_signal_handler()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, and <a class="el" href="grab__check_8c_source.html#l00017">main()</a>.</p>
 
@@ -673,44 +670,11 @@ Variables</h2></td></tr>
 
 <p>Return the current log level threshold. </p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00195">195</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00180">180</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00046">s_logLevel</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="loggerconf_8c_source.html#l00169">parseLevel()</a>.</p>
-
-</div>
-</div>
-<a id="a7b21fc8b632340ed7bb760f80e3480e0" name="a7b21fc8b632340ed7bb760f80e3480e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b21fc8b632340ed7bb760f80e3480e0">&#9670;&#160;</a></span>logger_initConsoleLogger()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int logger_initConsoleLogger </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>output</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Enable console logging. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">output</td><td><code>stdout</code>, <code>stderr</code>, or NULL (defaults to stdout). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Non-zero on success, 0 on error. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00126">126</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
-
-<p class="reference">References <a class="el" href="logger_8c_source.html#l00055">init()</a>, <a class="el" href="logger_8c_source.html#l00024">kConsoleLogger</a>, <a class="el" href="logger_8c_source.html#l00068">lock()</a>, <a class="el" href="logger_8c_source.html#l00032">output</a>, <a class="el" href="logger_8c.html#a710d4e2e2f27f6add971887b06900631">s_clog</a>, <a class="el" href="logger_8c_source.html#l00045">s_logger</a>, and <a class="el" href="logger_8c_source.html#l00077">unlock()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="loggerconf_8c_source.html#l00043">logger_configure()</a>, and <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="loggerconf_8c_source.html#l00165">parseLevel()</a>.</p>
 
 </div>
 </div>
@@ -757,9 +721,9 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Non-zero on success, 0 on error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00156">156</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00141">141</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">References <a class="el" href="logger_8c_source.html#l00038">filename</a>, <a class="el" href="logger_8c_source.html#l00142">getFileSize()</a>, <a class="el" href="logger_8c_source.html#l00055">init()</a>, <a class="el" href="logger_8c_source.html#l00028">kDefaultMaxFileSize</a>, <a class="el" href="logger_8c_source.html#l00025">kFileLogger</a>, <a class="el" href="logger_8c_source.html#l00027">kMaxFileNameLen</a>, <a class="el" href="logger_8c_source.html#l00068">lock()</a>, <a class="el" href="logger_8c_source.html#l00040">maxBackupFiles</a>, <a class="el" href="logger_8c_source.html#l00039">maxFileSize</a>, <a class="el" href="logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9">s_flog</a>, <a class="el" href="logger_8c_source.html#l00045">s_logger</a>, and <a class="el" href="logger_8c_source.html#l00077">unlock()</a>.</p>
+<p class="reference">References <a class="el" href="logger_8c_source.html#l00038">filename</a>, <a class="el" href="logger_8c_source.html#l00127">getFileSize()</a>, <a class="el" href="logger_8c_source.html#l00055">init()</a>, <a class="el" href="logger_8c_source.html#l00028">kDefaultMaxFileSize</a>, <a class="el" href="logger_8c_source.html#l00025">kFileLogger</a>, <a class="el" href="logger_8c_source.html#l00027">kMaxFileNameLen</a>, <a class="el" href="logger_8c_source.html#l00068">lock()</a>, <a class="el" href="logger_8c_source.html#l00040">maxBackupFiles</a>, <a class="el" href="logger_8c_source.html#l00039">maxFileSize</a>, <a class="el" href="logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9">s_flog</a>, <a class="el" href="logger_8c_source.html#l00045">s_logger</a>, and <a class="el" href="logger_8c_source.html#l00077">unlock()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="loggerconf_8c_source.html#l00043">logger_configure()</a>, and <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>.</p>
 
@@ -790,11 +754,11 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Non-zero if enabled. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00200">200</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00185">185</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00046">s_logLevel</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -855,9 +819,9 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00339">339</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00324">324</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">References <a class="el" href="logger_8c_source.html#l00113">getCurrentThreadID()</a>, <a class="el" href="logger_8c_source.html#l00230">getLevelChar()</a>, <a class="el" href="logger_8c_source.html#l00243">getTimestamp()</a>, <a class="el" href="logger_8c_source.html#l00210">hasFlag()</a>, <a class="el" href="logger_8c_source.html#l00024">kConsoleLogger</a>, <a class="el" href="logger_8c_source.html#l00025">kFileLogger</a>, <a class="el" href="logger_8c_source.html#l00068">lock()</a>, <a class="el" href="logger_8c_source.html#l00200">logger_isEnabled()</a>, <a class="el" href="logger_8c_source.html#l00282">rotateLogFiles()</a>, <a class="el" href="logger_8c.html#a710d4e2e2f27f6add971887b06900631">s_clog</a>, <a class="el" href="logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9">s_flog</a>, <a class="el" href="logger_8c_source.html#l00048">s_initialized</a>, <a class="el" href="logger_8c_source.html#l00045">s_logger</a>, <a class="el" href="logger_8c_source.html#l00077">unlock()</a>, and <a class="el" href="logger_8c_source.html#l00314">vflog()</a>.</p>
+<p class="reference">References <a class="el" href="logger_8c_source.html#l00113">getCurrentThreadID()</a>, <a class="el" href="logger_8c_source.html#l00215">getLevelChar()</a>, <a class="el" href="logger_8c_source.html#l00228">getTimestamp()</a>, <a class="el" href="logger_8c_source.html#l00195">hasFlag()</a>, <a class="el" href="logger_8c_source.html#l00024">kConsoleLogger</a>, <a class="el" href="logger_8c_source.html#l00025">kFileLogger</a>, <a class="el" href="logger_8c_source.html#l00068">lock()</a>, <a class="el" href="logger_8c_source.html#l00185">logger_isEnabled()</a>, <a class="el" href="logger_8c_source.html#l00267">rotateLogFiles()</a>, <a class="el" href="logger_8c.html#a710d4e2e2f27f6add971887b06900631">s_clog</a>, <a class="el" href="logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9">s_flog</a>, <a class="el" href="logger_8c_source.html#l00048">s_initialized</a>, <a class="el" href="logger_8c_source.html#l00045">s_logger</a>, <a class="el" href="logger_8c_source.html#l00077">unlock()</a>, and <a class="el" href="logger_8c_source.html#l00299">vflog()</a>.</p>
 
 </div>
 </div>
@@ -885,11 +849,11 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00190">190</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00175">175</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00046">s_logLevel</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="loggerconf_8c_source.html#l00125">parseLine()</a>, and <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="loggerconf_8c_source.html#l00121">parseLine()</a>, and <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>.</p>
 
 </div>
 </div>
@@ -920,11 +884,11 @@ Variables</h2></td></tr>
 <p>Rotate <code>filename</code> → <code></code>.1 . </p>
 <p>. <code></code>.N when size exceeds the limit. </p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00282">282</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00267">267</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">References <a class="el" href="logger_8c_source.html#l00255">getBackupFileName()</a>, <a class="el" href="logger_8c_source.html#l00142">getFileSize()</a>, <a class="el" href="logger_8c_source.html#l00269">isFileExist()</a>, <a class="el" href="logger_8c_source.html#l00027">kMaxFileNameLen</a>, and <a class="el" href="logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9">s_flog</a>.</p>
+<p class="reference">References <a class="el" href="logger_8c_source.html#l00253">getBackupFileName()</a>, <a class="el" href="logger_8c_source.html#l00127">getFileSize()</a>, <a class="el" href="logger_8c_source.html#l00242">isFileExist()</a>, <a class="el" href="logger_8c_source.html#l00027">kMaxFileNameLen</a>, and <a class="el" href="logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9">s_flog</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -956,7 +920,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00052">s_mutex</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00126">logger_initConsoleLogger()</a>, <a class="el" href="logger_8c_source.html#l00156">logger_initFileLogger()</a>, and <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00141">logger_initFileLogger()</a>, and <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -1042,11 +1006,11 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00314">314</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00299">299</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8c_source.html#l00033">flushedTime</a>, and <a class="el" href="logger_8c_source.html#l00047">s_flushInterval</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -1081,7 +1045,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00038">38</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00142">getFileSize()</a>, <a class="el" href="logger_8c_source.html#l00269">isFileExist()</a>, <a class="el" href="main_8c_source.html#l00035">loadParams()</a>, and <a class="el" href="logger_8c_source.html#l00156">logger_initFileLogger()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00127">getFileSize()</a>, <a class="el" href="logger_8c_source.html#l00242">isFileExist()</a>, <a class="el" href="main_8c_source.html#l00035">loadParams()</a>, and <a class="el" href="logger_8c_source.html#l00141">logger_initFileLogger()</a>.</p>
 
 </div>
 </div>
@@ -1099,7 +1063,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00033">33</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00314">vflog()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00299">vflog()</a>.</p>
 
 </div>
 </div>
@@ -1117,7 +1081,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00040">40</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00156">logger_initFileLogger()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00141">logger_initFileLogger()</a>.</p>
 
 </div>
 </div>
@@ -1135,7 +1099,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00039">39</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00156">logger_initFileLogger()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00141">logger_initFileLogger()</a>.</p>
 
 </div>
 </div>
@@ -1153,8 +1117,6 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00032">32</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00126">logger_initConsoleLogger()</a>.</p>
-
 </div>
 </div>
 <a id="a710d4e2e2f27f6add971887b06900631" name="a710d4e2e2f27f6add971887b06900631"></a>
@@ -1169,7 +1131,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00215">logger_flush()</a>, <a class="el" href="logger_8c_source.html#l00126">logger_initConsoleLogger()</a>, and <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00200">logger_flush()</a>, and <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -1185,7 +1147,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00379">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00215">logger_flush()</a>, <a class="el" href="logger_8c_source.html#l00156">logger_initFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>, and <a class="el" href="logger_8c_source.html#l00282">rotateLogFiles()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00364">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00200">logger_flush()</a>, <a class="el" href="logger_8c_source.html#l00141">logger_initFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>, and <a class="el" href="logger_8c_source.html#l00267">rotateLogFiles()</a>.</p>
 
 </div>
 </div>
@@ -1211,7 +1173,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00047">47</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00205">logger_autoFlush()</a>, and <a class="el" href="logger_8c_source.html#l00314">vflog()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00190">logger_autoFlush()</a>, and <a class="el" href="logger_8c_source.html#l00299">vflog()</a>.</p>
 
 </div>
 </div>
@@ -1237,7 +1199,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00048">48</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00055">init()</a>, <a class="el" href="logger_8c_source.html#l00215">logger_flush()</a>, and <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00055">init()</a>, <a class="el" href="logger_8c_source.html#l00200">logger_flush()</a>, and <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -1263,7 +1225,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00045">45</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00215">logger_flush()</a>, <a class="el" href="logger_8c_source.html#l00126">logger_initConsoleLogger()</a>, <a class="el" href="logger_8c_source.html#l00156">logger_initFileLogger()</a>, and <a class="el" href="logger_8c_source.html#l00339">logger_log()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00200">logger_flush()</a>, <a class="el" href="logger_8c_source.html#l00141">logger_initFileLogger()</a>, and <a class="el" href="logger_8c_source.html#l00324">logger_log()</a>.</p>
 
 </div>
 </div>
@@ -1289,7 +1251,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="logger_8c_source.html#l00046">46</a> of file <a class="el" href="logger_8c_source.html">logger.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00195">logger_getLevel()</a>, <a class="el" href="logger_8c_source.html#l00200">logger_isEnabled()</a>, and <a class="el" href="logger_8c_source.html#l00190">logger_setLevel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="logger_8c_source.html#l00180">logger_getLevel()</a>, <a class="el" href="logger_8c_source.html#l00185">logger_isEnabled()</a>, and <a class="el" href="logger_8c_source.html#l00175">logger_setLevel()</a>.</p>
 
 </div>
 </div>

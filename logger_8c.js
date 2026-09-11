@@ -13,7 +13,6 @@ var logger_8c =
     [ "logger_exitFileLogger", "logger_8c.html#ad5d3a24fcd76144fec96b8beb5c38783", null ],
     [ "logger_flush", "logger_8c.html#a533628f2d321568458c67e0ed9148822", null ],
     [ "logger_getLevel", "logger_8c.html#ab3df101a807169932b206ae2e5b6b4db", null ],
-    [ "logger_initConsoleLogger", "logger_8c.html#a7b21fc8b632340ed7bb760f80e3480e0", null ],
     [ "logger_initFileLogger", "logger_8c.html#a426e46a24c27812049028471209ffdc9", null ],
     [ "logger_isEnabled", "logger_8c.html#a02b2f771af9da38b2cb8ec5d1c6a437a", null ],
     [ "logger_log", "logger_8c.html#ac2e7d3e96e1dea30be02d4dbda1301a1", null ],

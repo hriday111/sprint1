@@ -178,42 +178,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a4646902b858402d9c8d605504a8de39a" id="r_a4646902b858402d9c8d605504a8de39a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#a4646902b858402d9c8d605504a8de39a">stepperRead</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
 <tr class="memdesc:a4646902b858402d9c8d605504a8de39a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read current position, or -1 if not yet homed.  <br /></td></tr>
 <tr class="separator:a4646902b858402d9c8d605504a8de39a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42f91044d44e2ca9f5dc4cc5e7a465c9" id="r_a42f91044d44e2ca9f5dc4cc5e7a465c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#a42f91044d44e2ca9f5dc4cc5e7a465c9">stepper_goTo</a> (int pos, <a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:a42f91044d44e2ca9f5dc4cc5e7a465c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue an absolute move to <code>pos</code>.  <br /></td></tr>
-<tr class="separator:a42f91044d44e2ca9f5dc4cc5e7a465c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7b6c46bd569b92a8b8b1798d095961e" id="r_ad7b6c46bd569b92a8b8b1798d095961e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#ad7b6c46bd569b92a8b8b1798d095961e">stepper_goRel</a> (int rel, <a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:ad7b6c46bd569b92a8b8b1798d095961e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue a relative move by <code>rel</code> steps from the current position.  <br /></td></tr>
-<tr class="separator:ad7b6c46bd569b92a8b8b1798d095961e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae581db0afbebfe017227bb81502ad2b1" id="r_ae581db0afbebfe017227bb81502ad2b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#ae581db0afbebfe017227bb81502ad2b1">stepper_goStart</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:ae581db0afbebfe017227bb81502ad2b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move to <code>stepper-&gt;start</code>.  <br /></td></tr>
-<tr class="separator:ae581db0afbebfe017227bb81502ad2b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad037110109aa35354c36984175fdd211" id="r_ad037110109aa35354c36984175fdd211"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#ad037110109aa35354c36984175fdd211">stepper_goStop</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:ad037110109aa35354c36984175fdd211"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move to <code>stepper-&gt;stop</code>.  <br /></td></tr>
-<tr class="separator:ad037110109aa35354c36984175fdd211"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e5dc8057fb3f5f4ac522b1ba88198fc" id="r_a1e5dc8057fb3f5f4ac522b1ba88198fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#a1e5dc8057fb3f5f4ac522b1ba88198fc">stepper_goZero</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:a1e5dc8057fb3f5f4ac522b1ba88198fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move to <code>stepper-&gt;zero</code>.  <br /></td></tr>
-<tr class="separator:a1e5dc8057fb3f5f4ac522b1ba88198fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a659b33aeea0fcb544edc4ccc2bfb6851" id="r_a659b33aeea0fcb544edc4ccc2bfb6851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#a659b33aeea0fcb544edc4ccc2bfb6851">stepper_goPrepare</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:a659b33aeea0fcb544edc4ccc2bfb6851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move to <code>stepper-&gt;prep</code>.  <br /></td></tr>
-<tr class="separator:a659b33aeea0fcb544edc4ccc2bfb6851"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a536954e71ca8f6231e4f86c2d6c8c8" id="r_a6a536954e71ca8f6231e4f86c2d6c8c8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#a6a536954e71ca8f6231e4f86c2d6c8c8">stepper_getPercent</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:a6a536954e71ca8f6231e4f86c2d6c8c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Progress through the scan window as a percentage.  <br /></td></tr>
-<tr class="separator:a6a536954e71ca8f6231e4f86c2d6c8c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e42acd621c411075f09d49e2d1c1441" id="r_a5e42acd621c411075f09d49e2d1c1441"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#a5e42acd621c411075f09d49e2d1c1441">stepper_next</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:a5e42acd621c411075f09d49e2d1c1441"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single step forward if below <code>stop</code>.  <br /></td></tr>
-<tr class="separator:a5e42acd621c411075f09d49e2d1c1441"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a976a1eb3dbdf1687b8d1966317a303bc" id="r_a976a1eb3dbdf1687b8d1966317a303bc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#a976a1eb3dbdf1687b8d1966317a303bc">stepper_prev</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:a976a1eb3dbdf1687b8d1966317a303bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single step backward if above <code>start</code>.  <br /></td></tr>
-<tr class="separator:a976a1eb3dbdf1687b8d1966317a303bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a838706abb789e69a2c1fec807a51af2d" id="r_a838706abb789e69a2c1fec807a51af2d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#a838706abb789e69a2c1fec807a51af2d">stepperInit</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
 <tr class="memdesc:a838706abb789e69a2c1fec807a51af2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Home by stepping forward until the endstop goes HIGH.  <br /></td></tr>
 <tr class="separator:a838706abb789e69a2c1fec807a51af2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add3367d3f66f1ecf2bbc4d1e974d2350" id="r_add3367d3f66f1ecf2bbc4d1e974d2350"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#add3367d3f66f1ecf2bbc4d1e974d2350">stepper_laserOn</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:add3367d3f66f1ecf2bbc4d1e974d2350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set laser PWM to full scale.  <br /></td></tr>
-<tr class="separator:add3367d3f66f1ecf2bbc4d1e974d2350"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a764d92521f97e429c69ebc3984e7e160" id="r_a764d92521f97e429c69ebc3984e7e160"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#a764d92521f97e429c69ebc3984e7e160">stepper_laserOff</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper)</td></tr>
-<tr class="memdesc:a764d92521f97e429c69ebc3984e7e160"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set laser PWM to 0.  <br /></td></tr>
-<tr class="separator:a764d92521f97e429c69ebc3984e7e160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf5f603864935631d78a6703aaa4cc08" id="r_acf5f603864935631d78a6703aaa4cc08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stepper_8c.html#acf5f603864935631d78a6703aaa4cc08">stepper_setBrightness</a> (<a class="el" href="structstepper__t.html">stepper_t</a> *stepper, int brightness)</td></tr>
 <tr class="memdesc:acf5f603864935631d78a6703aaa4cc08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clamp and apply laser PWM duty.  <br /></td></tr>
 <tr class="separator:acf5f603864935631d78a6703aaa4cc08"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -287,7 +254,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="stepper_8c_source.html#l00103">check_endstop()</a>, <a class="el" href="stepper_8h_source.html#l00027">stepper_t::error</a>, <a class="el" href="stepper_8h_source.html#l00021">stepper_t::init</a>, and <a class="el" href="stepper_8h_source.html#l00023">stepper_t::pos</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00148">pulse_step()</a>, and <a class="el" href="stepper_8c_source.html#l00204">stepper_thread()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00148">pulse_step()</a>, and <a class="el" href="stepper_8c_source.html#l00203">stepper_thread()</a>.</p>
 
 </div>
 </div>
@@ -352,9 +319,9 @@ Variables</h2></td></tr>
 
 <p>Configure <code>pin</code> as INPUT with pull-up. </p>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00246">246</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00245">245</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>.</p>
 
 </div>
 </div>
@@ -388,7 +355,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="gpio__pins_8h_source.html#l00027">LASER_PWM_CLOCK</a>, <a class="el" href="gpio__pins_8h_source.html#l00026">LASER_PWM_RANGE</a>, and <a class="el" href="gpio__pins_8h_source.html#l00020">PIN_LASER</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>.</p>
 
 </div>
 </div>
@@ -428,9 +395,9 @@ Variables</h2></td></tr>
 
 <p>Configure <code>pin</code> as OUTPUT with <code>initial</code> level. </p>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00239">239</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00238">238</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>.</p>
 
 </div>
 </div>
@@ -464,7 +431,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="stepper_8h_source.html#l00024">stepper_t::ena</a>, <a class="el" href="stepper_8h_source.html#l00027">stepper_t::error</a>, <a class="el" href="stepper_8c_source.html#l00025">gpio_write()</a>, <a class="el" href="stepper_8h_source.html#l00021">stepper_t::init</a>, <a class="el" href="gpio__pins_8h_source.html#l00019">PIN_ENABLE</a>, and <a class="el" href="stepper_8h_source.html#l00022">stepper_t::steps</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00301">stepperClose()</a>, <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>, and <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00300">stepperClose()</a>, <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>, and <a class="el" href="stepper_8c_source.html#l00322">stepperSend()</a>.</p>
 
 </div>
 </div>
@@ -499,7 +466,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="stepper_8h_source.html#l00024">stepper_t::ena</a>, <a class="el" href="stepper_8h_source.html#l00027">stepper_t::error</a>, <a class="el" href="stepper_8c_source.html#l00025">gpio_write()</a>, and <a class="el" href="gpio__pins_8h_source.html#l00019">PIN_ENABLE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00322">stepperSend()</a>.</p>
 
 </div>
 </div>
@@ -624,7 +591,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="stepper_8h_source.html#l00026">stepper_t::laser</a>, <a class="el" href="gpio__pins_8h_source.html#l00026">LASER_PWM_RANGE</a>, and <a class="el" href="gpio__pins_8h_source.html#l00020">PIN_LASER</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00489">stepper_setBrightness()</a>, <a class="el" href="stepper_8c_source.html#l00301">stepperClose()</a>, <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>, and <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00411">stepper_setBrightness()</a>, <a class="el" href="stepper_8c_source.html#l00300">stepperClose()</a>, <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>, and <a class="el" href="stepper_8c_source.html#l00322">stepperSend()</a>.</p>
 
 </div>
 </div>
@@ -664,7 +631,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="stepper_8c_source.html#l00025">gpio_write()</a>, <a class="el" href="gpio__pins_8h_source.html#l00018">PIN_DIR</a>, <a class="el" href="gpio__pins_8h_source.html#l00017">PIN_STEP</a>, and <a class="el" href="stepper_8c_source.html#l00075">step_delay()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00148">pulse_step()</a>, and <a class="el" href="stepper_8c_source.html#l00204">stepper_thread()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00148">pulse_step()</a>, and <a class="el" href="stepper_8c_source.html#l00203">stepper_thread()</a>.</p>
 
 </div>
 </div>
@@ -708,7 +675,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="stepper_8c_source.html#l00131">account_step()</a>, and <a class="el" href="stepper_8c_source.html#l00117">pulse_gpio()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00322">stepperSend()</a>.</p>
 
 </div>
 </div>
@@ -759,7 +726,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="stepper_8h_source.html#l00025">stepper_t::dir</a>, <a class="el" href="stepper_8h_source.html#l00027">stepper_t::error</a>, <a class="el" href="stepper_8h_source.html#l00021">stepper_t::init</a>, <a class="el" href="stepper_8h_source.html#l00023">stepper_t::pos</a>, and <a class="el" href="stepper_8h_source.html#l00022">stepper_t::steps</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00322">stepperSend()</a>.</p>
 
 </div>
 </div>
@@ -793,7 +760,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="stepper_8c_source.html#l00025">gpio_write()</a>, <a class="el" href="gpio__pins_8h_source.html#l00029">PIN_MS1</a>, <a class="el" href="gpio__pins_8h_source.html#l00030">PIN_MS2</a>, and <a class="el" href="gpio__pins_8h_source.html#l00031">PIN_MS3</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>.</p>
 
 </div>
 </div>
@@ -831,31 +798,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a6a536954e71ca8f6231e4f86c2d6c8c8" name="a6a536954e71ca8f6231e4f86c2d6c8c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a536954e71ca8f6231e4f86c2d6c8c8">&#9670;&#160;</a></span>stepper_getPercent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int stepper_getPercent </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Progress through the scan window as a percentage. </p>
-<dl class="section return"><dt>Returns</dt><dd>0..100 (or 0 if start == stop). </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00411">411</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="stepper_8h_source.html#l00023">stepper_t::pos</a>, <a class="el" href="stepper_8h_source.html#l00017">stepper_t::start</a>, and <a class="el" href="stepper_8h_source.html#l00018">stepper_t::stop</a>.</p>
-
-</div>
-</div>
 <a id="a0ac9a3b2121787462effe94f160596e0" name="a0ac9a3b2121787462effe94f160596e0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ac9a3b2121787462effe94f160596e0">&#9670;&#160;</a></span>stepper_getPos()</h2>
 
@@ -874,273 +816,11 @@ Variables</h2></td></tr>
 
 <p>Alias for stepperRead. </p>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00497">497</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00419">419</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stepper_8c_source.html#l00361">stepperRead()</a>.</p>
+<p class="reference">References <a class="el" href="stepper_8c_source.html#l00360">stepperRead()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="main_8c_source.html#l00135">handle_command()</a>.</p>
-
-</div>
-</div>
-<a id="a659b33aeea0fcb544edc4ccc2bfb6851" name="a659b33aeea0fcb544edc4ccc2bfb6851"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a659b33aeea0fcb544edc4ccc2bfb6851">&#9670;&#160;</a></span>stepper_goPrepare()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void stepper_goPrepare </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Move to <code>stepper-&gt;prep</code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00406">406</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="stepper_8h_source.html#l00019">stepper_t::prep</a>, and <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
-
-</div>
-</div>
-<a id="ad7b6c46bd569b92a8b8b1798d095961e" name="ad7b6c46bd569b92a8b8b1798d095961e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7b6c46bd569b92a8b8b1798d095961e">&#9670;&#160;</a></span>stepper_goRel()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void stepper_goRel </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>rel</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Queue a relative move by <code>rel</code> steps from the current position. </p>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00383">383</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="stepper_8c_source.html#l00361">stepperRead()</a>, and <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
-
-</div>
-</div>
-<a id="ae581db0afbebfe017227bb81502ad2b1" name="ae581db0afbebfe017227bb81502ad2b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae581db0afbebfe017227bb81502ad2b1">&#9670;&#160;</a></span>stepper_goStart()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void stepper_goStart </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Move to <code>stepper-&gt;start</code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00391">391</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="stepper_8h_source.html#l00017">stepper_t::start</a>, and <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
-
-</div>
-</div>
-<a id="ad037110109aa35354c36984175fdd211" name="ad037110109aa35354c36984175fdd211"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad037110109aa35354c36984175fdd211">&#9670;&#160;</a></span>stepper_goStop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void stepper_goStop </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Move to <code>stepper-&gt;stop</code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00396">396</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>, and <a class="el" href="stepper_8h_source.html#l00018">stepper_t::stop</a>.</p>
-
-</div>
-</div>
-<a id="a42f91044d44e2ca9f5dc4cc5e7a465c9" name="a42f91044d44e2ca9f5dc4cc5e7a465c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42f91044d44e2ca9f5dc4cc5e7a465c9">&#9670;&#160;</a></span>stepper_goTo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void stepper_goTo </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pos</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Queue an absolute move to <code>pos</code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00378">378</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
-
-</div>
-</div>
-<a id="a1e5dc8057fb3f5f4ac522b1ba88198fc" name="a1e5dc8057fb3f5f4ac522b1ba88198fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e5dc8057fb3f5f4ac522b1ba88198fc">&#9670;&#160;</a></span>stepper_goZero()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void stepper_goZero </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Move to <code>stepper-&gt;zero</code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00401">401</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>, and <a class="el" href="stepper_8h_source.html#l00020">stepper_t::zero</a>.</p>
-
-</div>
-</div>
-<a id="a764d92521f97e429c69ebc3984e7e160" name="a764d92521f97e429c69ebc3984e7e160"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a764d92521f97e429c69ebc3984e7e160">&#9670;&#160;</a></span>stepper_laserOff()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void stepper_laserOff </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set laser PWM to 0. </p>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00484">484</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="stepper_8c_source.html#l00489">stepper_setBrightness()</a>.</p>
-
-</div>
-</div>
-<a id="add3367d3f66f1ecf2bbc4d1e974d2350" name="add3367d3f66f1ecf2bbc4d1e974d2350"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add3367d3f66f1ecf2bbc4d1e974d2350">&#9670;&#160;</a></span>stepper_laserOn()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void stepper_laserOn </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set laser PWM to full scale. </p>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00479">479</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="gpio__pins_8h_source.html#l00026">LASER_PWM_RANGE</a>, and <a class="el" href="stepper_8c_source.html#l00489">stepper_setBrightness()</a>.</p>
-
-</div>
-</div>
-<a id="a5e42acd621c411075f09d49e2d1c1441" name="a5e42acd621c411075f09d49e2d1c1441"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e42acd621c411075f09d49e2d1c1441">&#9670;&#160;</a></span>stepper_next()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int stepper_next </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Single step forward if below <code>stop</code>. </p>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, -1 if at/ past stop or not homed. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00426">426</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="commands_8h_source.html#l00019">CMD_NEXT</a>, <a class="el" href="stepper_8c_source.html#l00361">stepperRead()</a>, <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>, and <a class="el" href="stepper_8h_source.html#l00018">stepper_t::stop</a>.</p>
-
-</div>
-</div>
-<a id="a976a1eb3dbdf1687b8d1966317a303bc" name="a976a1eb3dbdf1687b8d1966317a303bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a976a1eb3dbdf1687b8d1966317a303bc">&#9670;&#160;</a></span>stepper_prev()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int stepper_prev </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structstepper__t.html">stepper_t</a> *&#160;</td>
-          <td class="paramname"><em>stepper</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Single step backward if above <code>start</code>. </p>
-<dl class="section return"><dt>Returns</dt><dd>1 on success, -1 if at/ past start or not homed. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00436">436</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
-
-<p class="reference">References <a class="el" href="commands_8h_source.html#l00020">CMD_PREV</a>, <a class="el" href="stepper_8c_source.html#l00361">stepperRead()</a>, and <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
 
 </div>
 </div>
@@ -1163,9 +843,9 @@ Variables</h2></td></tr>
 <p>Convert current step position to prism angle in degrees. </p>
 <dl class="section return"><dt>Returns</dt><dd>0.1125 * pos, or 0.0 if not homed. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00502">502</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00424">424</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stepper_8c_source.html#l00361">stepperRead()</a>.</p>
+<p class="reference">References <a class="el" href="stepper_8c_source.html#l00360">stepperRead()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="main_8c_source.html#l00259">main()</a>.</p>
 
@@ -1206,11 +886,11 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00489">489</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00411">411</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
 <p class="reference">References <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="stepper_8c_source.html#l00038">laser_set_unlocked()</a>, and <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="main_8c_source.html#l00135">handle_command()</a>, <a class="el" href="main_8c_source.html#l00259">main()</a>, <a class="el" href="stepper_8c_source.html#l00484">stepper_laserOff()</a>, and <a class="el" href="stepper_8c_source.html#l00479">stepper_laserOn()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="main_8c_source.html#l00135">handle_command()</a>, and <a class="el" href="main_8c_source.html#l00259">main()</a>.</p>
 
 </div>
 </div>
@@ -1247,11 +927,11 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Always NULL. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00204">204</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00203">203</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
 <p class="reference">References <a class="el" href="stepper_8c_source.html#l00131">account_step()</a>, <a class="el" href="stepper_8h_source.html#l00025">stepper_t::dir</a>, <a class="el" href="stepper_8h_source.html#l00024">stepper_t::ena</a>, <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="stepper_8c_source.html#l00020">g_stepper</a>, <a class="el" href="stepper_8c_source.html#l00019">g_thread_run</a>, <a class="el" href="stepper_8c_source.html#l00117">pulse_gpio()</a>, and <a class="el" href="stepper_8h_source.html#l00022">stepper_t::steps</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>.</p>
 
 </div>
 </div>
@@ -1279,7 +959,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00301">301</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00300">300</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
 <p class="reference">References <a class="el" href="stepper_8c_source.html#l00155">disable_motor()</a>, <a class="el" href="stepper_8h_source.html#l00016">stepper_t::fd</a>, <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="stepper_8c_source.html#l00020">g_stepper</a>, <a class="el" href="stepper_8c_source.html#l00018">g_thread</a>, <a class="el" href="stepper_8c_source.html#l00019">g_thread_run</a>, <a class="el" href="stepper_8c_source.html#l00038">laser_set_unlocked()</a>, <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, and <a class="el" href="gpio__pins_8h_source.html#l00020">PIN_LASER</a>.</p>
 
@@ -1312,9 +992,9 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Homed position on success, -1 on failure. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00446">446</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00378">378</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">References <a class="el" href="commands_8h_source.html#l00017">CMD_ENABLE</a>, <a class="el" href="commands_8h_source.html#l00019">CMD_NEXT</a>, <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="camera-sdk_2utils_8c_source.html#l00011">ms_sleep()</a>, <a class="el" href="gpio__pins_8h_source.html#l00032">PIN_ENDSTOP</a>, <a class="el" href="stepper_8c_source.html#l00361">stepperRead()</a>, <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>, and <a class="el" href="stepper_8h_source.html#l00020">stepper_t::zero</a>.</p>
+<p class="reference">References <a class="el" href="commands_8h_source.html#l00017">CMD_ENABLE</a>, <a class="el" href="commands_8h_source.html#l00019">CMD_NEXT</a>, <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="camera-sdk_2utils_8c_source.html#l00011">ms_sleep()</a>, <a class="el" href="gpio__pins_8h_source.html#l00032">PIN_ENDSTOP</a>, <a class="el" href="stepper_8c_source.html#l00360">stepperRead()</a>, <a class="el" href="stepper_8c_source.html#l00322">stepperSend()</a>, and <a class="el" href="stepper_8h_source.html#l00020">stepper_t::zero</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="main_8c_source.html#l00259">main()</a>.</p>
 
@@ -1356,9 +1036,9 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>1 on success, 0 on failure. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00252">252</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00251">251</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stepper_8c_source.html#l00246">claim_input_pullup()</a>, <a class="el" href="stepper_8c_source.html#l00053">claim_laser_pwm()</a>, <a class="el" href="stepper_8c_source.html#l00239">claim_output()</a>, <a class="el" href="commands_8h_source.html#l00029">CMD_POS_ZERO</a>, <a class="el" href="stepper_8c_source.html#l00155">disable_motor()</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00026">ERR</a>, <a class="el" href="stepper_8h_source.html#l00016">stepper_t::fd</a>, <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="stepper_8c_source.html#l00020">g_stepper</a>, <a class="el" href="stepper_8c_source.html#l00018">g_thread</a>, <a class="el" href="stepper_8c_source.html#l00019">g_thread_run</a>, <a class="el" href="stepper_8c_source.html#l00038">laser_set_unlocked()</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="gpio__pins_8h_source.html#l00018">PIN_DIR</a>, <a class="el" href="gpio__pins_8h_source.html#l00019">PIN_ENABLE</a>, <a class="el" href="gpio__pins_8h_source.html#l00032">PIN_ENDSTOP</a>, <a class="el" href="gpio__pins_8h_source.html#l00035">PIN_LID</a>, <a class="el" href="gpio__pins_8h_source.html#l00029">PIN_MS1</a>, <a class="el" href="gpio__pins_8h_source.html#l00030">PIN_MS2</a>, <a class="el" href="gpio__pins_8h_source.html#l00031">PIN_MS3</a>, <a class="el" href="gpio__pins_8h_source.html#l00017">PIN_STEP</a>, <a class="el" href="stepper_8c_source.html#l00081">set_microstep_16()</a>, <a class="el" href="stepper_8c_source.html#l00204">stepper_thread()</a>, <a class="el" href="stepper_8c_source.html#l00089">update_lid()</a>, and <a class="el" href="stepper_8h_source.html#l00020">stepper_t::zero</a>.</p>
+<p class="reference">References <a class="el" href="stepper_8c_source.html#l00245">claim_input_pullup()</a>, <a class="el" href="stepper_8c_source.html#l00053">claim_laser_pwm()</a>, <a class="el" href="stepper_8c_source.html#l00238">claim_output()</a>, <a class="el" href="commands_8h_source.html#l00029">CMD_POS_ZERO</a>, <a class="el" href="stepper_8c_source.html#l00155">disable_motor()</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00026">ERR</a>, <a class="el" href="stepper_8h_source.html#l00016">stepper_t::fd</a>, <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="stepper_8c_source.html#l00020">g_stepper</a>, <a class="el" href="stepper_8c_source.html#l00018">g_thread</a>, <a class="el" href="stepper_8c_source.html#l00019">g_thread_run</a>, <a class="el" href="stepper_8c_source.html#l00038">laser_set_unlocked()</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="gpio__pins_8h_source.html#l00018">PIN_DIR</a>, <a class="el" href="gpio__pins_8h_source.html#l00019">PIN_ENABLE</a>, <a class="el" href="gpio__pins_8h_source.html#l00032">PIN_ENDSTOP</a>, <a class="el" href="gpio__pins_8h_source.html#l00035">PIN_LID</a>, <a class="el" href="gpio__pins_8h_source.html#l00029">PIN_MS1</a>, <a class="el" href="gpio__pins_8h_source.html#l00030">PIN_MS2</a>, <a class="el" href="gpio__pins_8h_source.html#l00031">PIN_MS3</a>, <a class="el" href="gpio__pins_8h_source.html#l00017">PIN_STEP</a>, <a class="el" href="stepper_8c_source.html#l00081">set_microstep_16()</a>, <a class="el" href="stepper_8c_source.html#l00203">stepper_thread()</a>, <a class="el" href="stepper_8c_source.html#l00089">update_lid()</a>, and <a class="el" href="stepper_8h_source.html#l00020">stepper_t::zero</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="main_8c_source.html#l00259">main()</a>.</p>
 
@@ -1389,11 +1069,11 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Step position, or -1. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00361">361</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00360">360</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
 <p class="reference">References <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="stepper_8h_source.html#l00021">stepper_t::init</a>, <a class="el" href="stepper_8h_source.html#l00023">stepper_t::pos</a>, and <a class="el" href="stepper_8c_source.html#l00089">update_lid()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00497">stepper_getPos()</a>, <a class="el" href="stepper_8c_source.html#l00383">stepper_goRel()</a>, <a class="el" href="stepper_8c_source.html#l00426">stepper_next()</a>, <a class="el" href="stepper_8c_source.html#l00436">stepper_prev()</a>, <a class="el" href="stepper_8c_source.html#l00502">stepper_prismAngle()</a>, and <a class="el" href="stepper_8c_source.html#l00446">stepperInit()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00419">stepper_getPos()</a>, <a class="el" href="stepper_8c_source.html#l00424">stepper_prismAngle()</a>, and <a class="el" href="stepper_8c_source.html#l00378">stepperInit()</a>.</p>
 
 </div>
 </div>
@@ -1433,11 +1113,11 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Always 1 (legacy API). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00323">323</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00322">322</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
 <p class="reference">References <a class="el" href="commands_8h_source.html#l00016">CMD_ANGLE_MAX</a>, <a class="el" href="commands_8h_source.html#l00015">CMD_ANGLE_MIN</a>, <a class="el" href="commands_8h_source.html#l00018">CMD_DISABLE</a>, <a class="el" href="commands_8h_source.html#l00017">CMD_ENABLE</a>, <a class="el" href="commands_8h_source.html#l00024">CMD_LASER_OFF</a>, <a class="el" href="commands_8h_source.html#l00023">CMD_LASER_ON</a>, <a class="el" href="commands_8h_source.html#l00019">CMD_NEXT</a>, <a class="el" href="commands_8h_source.html#l00020">CMD_PREV</a>, <a class="el" href="commands_8h_source.html#l00025">CMD_RESET</a>, <a class="el" href="commands_8h_source.html#l00022">CMD_UPDATE_LID</a>, <a class="el" href="stepper_8h_source.html#l00025">stepper_t::dir</a>, <a class="el" href="stepper_8c_source.html#l00155">disable_motor()</a>, <a class="el" href="stepper_8h_source.html#l00024">stepper_t::ena</a>, <a class="el" href="stepper_8c_source.html#l00165">enable_motor()</a>, <a class="el" href="stepper_8h_source.html#l00027">stepper_t::error</a>, <a class="el" href="stepper_8c_source.html#l00017">g_mutex</a>, <a class="el" href="gpio__pins_8h_source.html#l00026">LASER_PWM_RANGE</a>, <a class="el" href="stepper_8c_source.html#l00038">laser_set_unlocked()</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="stepper_8c_source.html#l00148">pulse_step()</a>, <a class="el" href="stepper_8c_source.html#l00177">queue_goto()</a>, <a class="el" href="stepper_8h_source.html#l00022">stepper_t::steps</a>, and <a class="el" href="stepper_8c_source.html#l00089">update_lid()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="main_8c_source.html#l00135">handle_command()</a>, <a class="el" href="main_8c_source.html#l00259">main()</a>, <a class="el" href="stepper_8c_source.html#l00406">stepper_goPrepare()</a>, <a class="el" href="stepper_8c_source.html#l00383">stepper_goRel()</a>, <a class="el" href="stepper_8c_source.html#l00391">stepper_goStart()</a>, <a class="el" href="stepper_8c_source.html#l00396">stepper_goStop()</a>, <a class="el" href="stepper_8c_source.html#l00378">stepper_goTo()</a>, <a class="el" href="stepper_8c_source.html#l00401">stepper_goZero()</a>, <a class="el" href="stepper_8c_source.html#l00426">stepper_next()</a>, <a class="el" href="stepper_8c_source.html#l00436">stepper_prev()</a>, and <a class="el" href="stepper_8c_source.html#l00446">stepperInit()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="main_8c_source.html#l00135">handle_command()</a>, <a class="el" href="main_8c_source.html#l00259">main()</a>, and <a class="el" href="stepper_8c_source.html#l00378">stepperInit()</a>.</p>
 
 </div>
 </div>
@@ -1471,7 +1151,7 @@ Variables</h2></td></tr>
 
 <p class="reference">References <a class="el" href="stepper_8c_source.html#l00066">gpio_read()</a>, <a class="el" href="stepper_8h_source.html#l00028">stepper_t::lid</a>, and <a class="el" href="gpio__pins_8h_source.html#l00035">PIN_LID</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>, <a class="el" href="stepper_8c_source.html#l00361">stepperRead()</a>, and <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>, <a class="el" href="stepper_8c_source.html#l00360">stepperRead()</a>, and <a class="el" href="stepper_8c_source.html#l00322">stepperSend()</a>.</p>
 
 </div>
 </div>
@@ -1498,7 +1178,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00017">17</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00411">stepper_getPercent()</a>, <a class="el" href="stepper_8c_source.html#l00489">stepper_setBrightness()</a>, <a class="el" href="stepper_8c_source.html#l00204">stepper_thread()</a>, <a class="el" href="stepper_8c_source.html#l00301">stepperClose()</a>, <a class="el" href="stepper_8c_source.html#l00446">stepperInit()</a>, <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>, <a class="el" href="stepper_8c_source.html#l00361">stepperRead()</a>, and <a class="el" href="stepper_8c_source.html#l00323">stepperSend()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00411">stepper_setBrightness()</a>, <a class="el" href="stepper_8c_source.html#l00203">stepper_thread()</a>, <a class="el" href="stepper_8c_source.html#l00300">stepperClose()</a>, <a class="el" href="stepper_8c_source.html#l00378">stepperInit()</a>, <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>, <a class="el" href="stepper_8c_source.html#l00360">stepperRead()</a>, and <a class="el" href="stepper_8c_source.html#l00322">stepperSend()</a>.</p>
 
 </div>
 </div>
@@ -1524,7 +1204,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00020">20</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00204">stepper_thread()</a>, <a class="el" href="stepper_8c_source.html#l00301">stepperClose()</a>, and <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00203">stepper_thread()</a>, <a class="el" href="stepper_8c_source.html#l00300">stepperClose()</a>, and <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>.</p>
 
 </div>
 </div>
@@ -1550,7 +1230,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00018">18</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00301">stepperClose()</a>, and <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00300">stepperClose()</a>, and <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>.</p>
 
 </div>
 </div>
@@ -1576,7 +1256,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="stepper_8c_source.html#l00019">19</a> of file <a class="el" href="stepper_8c_source.html">stepper.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00204">stepper_thread()</a>, <a class="el" href="stepper_8c_source.html#l00301">stepperClose()</a>, and <a class="el" href="stepper_8c_source.html#l00252">stepperOpen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00203">stepper_thread()</a>, <a class="el" href="stepper_8c_source.html#l00300">stepperClose()</a>, and <a class="el" href="stepper_8c_source.html#l00251">stepperOpen()</a>.</p>
 
 </div>
 </div>
