@@ -30,7 +30,7 @@ var searchData=
   ['logger_5fsetlevel_27',['logger_setlevel',['../logger_8c.html#a095e4aaeee136e42efdf4dd644b36d2e',1,'logger_setLevel(LogLevel level):&#160;logger.c'],['../logger_8h.html#a095e4aaeee136e42efdf4dd644b36d2e',1,'logger_setLevel(LogLevel level):&#160;logger.c']]],
   ['loggerconf_2ec_28',['loggerconf.c',['../loggerconf_8c.html',1,'']]],
   ['loggerconf_2eh_29',['loggerconf.h',['../loggerconf_8h.html',1,'']]],
-  ['logging_20and_20crashes_30',['Logging and crashes',['../index.html#autotoc_md13',1,'']]],
+  ['logging_20and_20crashes_30',['Logging and crashes',['../index.html#autotoc_md14',1,'']]],
   ['loglevel_31',['LogLevel',['../logger_8h.html#aca1fd1d8935433e6ba2e3918214e07f9',1,'logger.h']]],
   ['loglevel_5fdebug_32',['LogLevel_DEBUG',['../logger_8h.html#aca1fd1d8935433e6ba2e3918214e07f9a38182a13b5a026feffe5fb1f7d0aec79',1,'logger.h']]],
   ['loglevel_5ferror_33',['LogLevel_ERROR',['../logger_8h.html#aca1fd1d8935433e6ba2e3918214e07f9a43306589e1acd6c07d7a7390a79f17c4',1,'logger.h']]],

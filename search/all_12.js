@@ -22,7 +22,7 @@ var searchData=
   ['roi_5fsat_5ffrac_19',['roi_sat_frac',['../roi_8c.html#ad77c1ad09dc2290e9527e778540370e4',1,'roi_sat_frac(const unsigned char *pixels, int width, int height, int pitch, const rois_t *rois, int sat_level, double *frac):&#160;roi.c'],['../roi_8h.html#ad77c1ad09dc2290e9527e778540370e4',1,'roi_sat_frac(const unsigned char *pixels, int width, int height, int pitch, const rois_t *rois, int sat_level, double *frac):&#160;roi.c']]],
   ['roi_5fsave_5fjson_20',['roi_save_json',['../roi_8c.html#a2421057cf7a103d23806e5757b3992a2',1,'roi_save_json(const char *path, const rois_t *rois):&#160;roi.c'],['../roi_8h.html#a2421057cf7a103d23806e5757b3992a2',1,'roi_save_json(const char *path, const rois_t *rois):&#160;roi.c']]],
   ['roi_5ft_21',['roi_t',['../structroi__t.html',1,'']]],
-  ['rois_22',['Why fixed ROIs?',['../index.html#autotoc_md18',1,'']]],
+  ['rois_22',['Why fixed ROIs?',['../index.html#autotoc_md19',1,'']]],
   ['rois_5ft_23',['rois_t',['../structrois__t.html',1,'']]],
   ['rotatelogfiles_24',['rotateLogFiles',['../logger_8c.html#a4f487fdf4732cdc756792ca5b373ee73',1,'logger.c']]],
   ['rx_25',['rx',['../structEllipseCand.html#abf7c96463e4822ee0ec1ba1765714922',1,'EllipseCand']]],

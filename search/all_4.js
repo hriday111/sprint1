@@ -11,6 +11,7 @@ var searchData=
   ['detection_20design_20why_20calibrate_20≠_20measure_8',['Detection design (why calibrate ≠ measure)',['../camera_sdk.html#autotoc_md7',1,'']]],
   ['dir_9',['dir',['../structstepper__t.html#aa09ee8590086fac1e6a507b56d371c64',1,'stepper_t']]],
   ['disable_5fmotor_10',['disable_motor',['../stepper_8c.html#a998b86e0e1f0d21f2db6500719addaa1',1,'stepper.c']]],
-  ['does_11',['What it does',['../camera_sdk.html#autotoc_md2',1,'']]],
-  ['draw_5fellipse_5fmask_12',['draw_ellipse_mask',['../detect_8cpp.html#acef10141a28e3c0d4451e2d0a407cf36',1,'detect.cpp']]]
+  ['documentation_11',['Documentation',['../index.html#autotoc_md10',1,'']]],
+  ['does_12',['What it does',['../camera_sdk.html#autotoc_md2',1,'']]],
+  ['draw_5fellipse_5fmask_13',['draw_ellipse_mask',['../detect_8cpp.html#acef10141a28e3c0d4451e2d0a407cf36',1,'detect.cpp']]]
 ];

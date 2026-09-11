@@ -94,8 +94,12 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Sprint1 — Prism scan controller </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="mainpage"></a> Sprint1 runs a Raspberry Pi–mounted A4988 stepper, laser, and endstop (“the black box”) while <code>camera-sdk/</code> grabs frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The two processes talk over named FIFOs under <code>/run/sprint1/</code>. This guide is for engineers operating the rig on a Pi 4 with WiringPi and the uEye SDK.</p>
+<div class="textblock"><p><a class="anchor" id="mainpage"></a></p>
+<p>Sprint1 runs a Raspberry Pi–mounted A4988 stepper, laser, and endstop (“the black box”) while <code>camera-sdk/</code> grabs frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The two processes talk over named FIFOs under <code>/run/sprint1/</code>. This guide is for engineers operating the rig on a Pi 4 with WiringPi and the uEye SDK.</p>
 <h1><a class="anchor" id="autotoc_md10"></a>
+Documentation</h1>
+<p><a href="https://hriday111.github.io/sprint1">Documentation uploaded to GH pages</a> </p>
+<h1><a class="anchor" id="autotoc_md11"></a>
 Prerequisites</h1>
 <ul>
 <li>Raspberry Pi 4 with WiringPi (<code>-lwiringPi</code>)</li>
@@ -105,7 +109,7 @@ Prerequisites</h1>
 <li>Writable <code>/run/sprint1/</code> (FIFOs), <code>/var/lib/sprint1/</code> (<code>rois.json</code>, <code>saved.prm</code>), and a local <code>logs/</code> directory (created on start)</li>
 <li>A sample <code>saved.prm</code> lives in the repo; <code>rois.json</code> is produced by <code>calibrate</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="autotoc_md12"></a>
 Quickstart</h1>
 <div class="fragment"><div class="line"># Terminal 1 — motor + laser daemon</div>
 <div class="line">sudo make</div>
@@ -122,7 +126,7 @@ Quickstart</h1>
 <div class="line">./build/bin/sweep_run /var/lib/sprint1/rois.json 0.1 ../sensor_data.csv</div>
 </div><!-- fragment --><p>On success, <code>sensor_data.csv</code> has one row per step: <code>Angle_deg</code> plus one mean column per ROI.</p>
 <p><b>Note:</b> When <code>sweep_run</code> finishes it sends <code>-1</code> on the command FIFO, which <b>exits</b> <code>servo_calib</code>. Restart the daemon before another sweep.</p>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Architecture</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -145,7 +149,7 @@ Architecture</h1>
 <td class="markdownTableBodyNone"><code>/run/sprint1/pos_pipe</code>   </td><td class="markdownTableBodyNone">servo → client   </td><td class="markdownTableBodyNone">position after command <code>4000</code>   </td></tr>
 </table>
 <p>Keep the command FIFO open for the whole sweep. Opening and closing per command races with <code>servo_calib</code>’s reopen and can cause <code>EPIPE</code>.</p>
-<h1><a class="anchor" id="autotoc_md13"></a>
+<h1><a class="anchor" id="autotoc_md14"></a>
 Logging and crashes</h1>
 <p>Every binary that calls <code>sprint1_logging_init</code> writes:</p>
 <ul>
@@ -154,7 +158,7 @@ Logging and crashes</h1>
 <li><b>Auto-flush:</b> every 100 ms while logging</li>
 </ul>
 <p>On SIGSEGV/SIGABRT/SIGBUS/SIGFPE/SIGILL/SIGQUIT/SIGSYS/SIGTRAP, the process logs where the core dump is expected (from <code>/proc/sys/kernel/core_pattern</code>), flushes, then re-raises for a kernel dump. <code>RLIMIT_CORE</code> is raised to unlimited and the process is marked dumpable.</p>
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md15"></a>
 Pinout</h1>
 <p>BCM pins are defined in <code><a class="el" href="gpio__pins_8h.html" title="BCM GPIO mapping for Raspberry Pi 4 to A4988 driver and laser PWM.">gpio_pins.h</a></code>. Enable is active LOW; endstop is active HIGH; laser uses hardware PWM on GPIO 18.</p>
 <table class="markdownTable">
@@ -170,7 +174,7 @@ Pinout</h1>
 <td class="markdownTableBodyNone">Laser / Endstop   </td><td class="markdownTableBodyNone">18 / 17   </td><td class="markdownTableBodyNone">Blue→White / Grey   </td></tr>
 </table>
 <p>Microstepping is fixed at 1/16. Step half-period: <code>STEP_DELAY_US</code> (20 ms).</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Command protocol</h1>
 <p>Send ASCII lines on <code>data_pipe</code>. Integer lines are commands; <code>bN</code> sets laser brightness (0–255).</p>
 <table class="markdownTable">
@@ -200,7 +204,7 @@ Command protocol</h1>
 <div class="line">printf &#39;b255\n1001\n4000\n&#39; &gt;&amp;3</div>
 <div class="line">timeout 1 cat /run/sprint1/pos_pipe</div>
 </div><!-- fragment --><p>Angle conversion uses <b>0.1125° per step</b>. Homing lands near step <code>400 + 34</code> when the endstop trips during bookkeeping (<code>CMD_POS_ZERO</code> + <code>DELTA</code>).</p>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 Config files</h1>
 <p>**<code>/var/lib/sprint1/saved.prm</code>** — three integers <code>start stop prep</code> (example: <code>345 395 373</code>).</p>
 <ul>
@@ -209,7 +213,7 @@ Config files</h1>
 <li>Both <code>servo_calib</code> and <code>sweep_run</code> use this path.</li>
 </ul>
 <p>**<code>/var/lib/sprint1/rois.json</code>** — up to 8 boxes in crop coordinates (<code>CAM_CROP_*</code>: 600×740 at origin (350, 60) on the sensor). Intensity is the rectangle mean (no ellipse mask at scan time).</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 Common pitfalls</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -233,7 +237,7 @@ Common pitfalls</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">No <code>logs/</code> file   </td><td class="markdownTableBodyNone">Process must start in a writable cwd (creates <code>logs/</code>)   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 Why fixed ROIs?</h1>
 <p>Detection runs only at calibration time. Measurement is a cheap mean over boxes so <code>sweep_run</code> stays OpenCV-free and keeps up with step-by-step motion. After any optical change, recalibrate once. See <a class="el" href="camera-sdk_2README_8md.html">camera-sdk/README.md</a> for the full camera API and tool reference.</p>
 <p>API HTML (Doxygen): run <code>./docs/generate.sh</code>, then open <code>docs/html/index.html</code>.</p>
