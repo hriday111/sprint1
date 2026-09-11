@@ -65,11 +65,7 @@ int logger_configure(const char* filename)
     }
     fclose(fp);
 
-    if (hasFlag(s_logger, kConsoleLogger)) {
-        if (!logger_initConsoleLogger(s_clog.output)) {
-            return 0;
-        }
-    }
+    
     if (hasFlag(s_logger, kFileLogger)) {
         if (!logger_initFileLogger(s_flog.filename, s_flog.maxFileSize, s_flog.maxBackupFiles)) {
             return 0;

@@ -123,21 +123,6 @@ static long getCurrentThreadID(void)
 #endif
 }
 
-int logger_initConsoleLogger(FILE* output)
-{
-    output = (output != NULL) ? output : stdout;
-    if (output != stdout && output != stderr) {
-        assert(0 && "output must be stdout or stderr");
-        return 0;
-    }
-
-    init();
-    lock();
-    s_clog.output = output;
-    s_logger |= kConsoleLogger;
-    unlock();
-    return 1;
-}
 
 static long getFileSize(const char* filename)
 {
@@ -252,6 +237,19 @@ static void getTimestamp(const struct timeval* time, char* timestamp, size_t siz
     sprintf(&timestamp[17], ".%06ld", (long) time->tv_usec);
 }
 
+
+
+static int isFileExist(const char* filename)
+{
+    FILE* fp;
+
+    if ((fp = fopen(filename, "r")) == NULL) {
+        return 0;
+    } else {
+        fclose(fp);
+        return 1;
+    }
+}
 static void getBackupFileName(const char* basename, unsigned char index,
         char* backupname, size_t size)
 {
@@ -265,19 +263,6 @@ static void getBackupFileName(const char* basename, unsigned char index,
         strncat(backupname, indexname, strlen(indexname));
     }
 }
-
-static int isFileExist(const char* filename)
-{
-    FILE* fp;
-
-    if ((fp = fopen(filename, "r")) == NULL) {
-        return 0;
-    } else {
-        fclose(fp);
-        return 1;
-    }
-}
-
 /** @brief Rotate @c filename → @c .1 .. @c .N when size exceeds the limit. */
 static int rotateLogFiles(void)
 {

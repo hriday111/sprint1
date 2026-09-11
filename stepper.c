@@ -195,7 +195,6 @@ static void queue_goto(stepper_t *stepper, int pos)
     }
     stepper->error = 0;
 }
-
 /**
  * @brief Background worker: execute queued steps without holding the mutex during delays.
  * @param arg Unused.
@@ -375,73 +374,6 @@ int stepperRead(stepper_t *stepper)
     return result;
 }
 
-void stepper_goTo(int pos, stepper_t *stepper)
-{
-    stepperSend(pos, stepper);
-}
-
-void stepper_goRel(int rel, stepper_t *stepper)
-{
-    int pos = stepperRead(stepper);
-    if (pos >= 0) {
-        stepperSend(pos + rel, stepper);
-    }
-}
-
-void stepper_goStart(stepper_t *stepper)
-{
-    stepperSend(stepper->start, stepper);
-}
-
-void stepper_goStop(stepper_t *stepper)
-{
-    stepperSend(stepper->stop, stepper);
-}
-
-void stepper_goZero(stepper_t *stepper)
-{
-    stepperSend(stepper->zero, stepper);
-}
-
-void stepper_goPrepare(stepper_t *stepper)
-{
-    stepperSend(stepper->prep, stepper);
-}
-
-int stepper_getPercent(stepper_t *stepper)
-{
-    int percent;
-
-    pthread_mutex_lock(&g_mutex);
-    if (stepper->stop == stepper->start) {
-        percent = 0;
-    } else {
-        percent = (stepper->pos - stepper->start) * 100 /
-                  (stepper->stop - stepper->start);
-    }
-    pthread_mutex_unlock(&g_mutex);
-    return percent;
-}
-
-int stepper_next(stepper_t *stepper)
-{
-    int pos = stepperRead(stepper);
-    if (pos < 0 || pos >= stepper->stop) {
-        return -1;
-    }
-    stepperSend(CMD_NEXT, stepper);
-    return 1;
-}
-
-int stepper_prev(stepper_t *stepper)
-{
-    int pos = stepperRead(stepper);
-    if (pos < 0 || pos <= stepper->start) {
-        return -1;
-    }
-    stepperSend(CMD_PREV, stepper);
-    return 1;
-}
 
 int stepperInit(stepper_t *stepper)
 {
@@ -474,16 +406,6 @@ int stepperInit(stepper_t *stepper)
 
     LOG_INFO("Endstop hit after %d steps, position=%d", attempts, pos);
     return pos;
-}
-
-void stepper_laserOn(stepper_t *stepper)
-{
-    stepper_setBrightness(stepper, LASER_PWM_RANGE);
-}
-
-void stepper_laserOff(stepper_t *stepper)
-{
-    stepper_setBrightness(stepper, 0);
 }
 
 void stepper_setBrightness(stepper_t *stepper, int brightness)

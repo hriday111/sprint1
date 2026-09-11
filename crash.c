@@ -213,7 +213,7 @@ int sprint1_logging_init(const char *app_name, char *path_out, size_t path_sz)
         fprintf(stderr, "logger_initFileLogger(%s) failed\n", path);
         return -1;
     }
-    logger_initConsoleLogger(stderr);
+    
     logger_setLevel(LogLevel_DEBUG);
     logger_autoFlush(100);
 
