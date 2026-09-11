@@ -1,7 +1,10 @@
 # Sprint1 — Prism scan controller {#mainpage}
 
+
 Sprint1 runs a Raspberry Pi–mounted A4988 stepper, laser, and endstop (“the black box”) while `camera-sdk/` grabs frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The two processes talk over named FIFOs under `/run/sprint1/`. This guide is for engineers operating the rig on a Pi 4 with WiringPi and the uEye SDK.
 
+## Documentation
+[Documentation uploaded to GH pages](https://hriday111.github.io/sprint1)
 ## Prerequisites
 
 - Raspberry Pi 4 with WiringPi (`-lwiringPi`)
