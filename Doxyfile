@@ -90,7 +90,7 @@ FILE_PATTERNS          = *.c \
                          *.cpp \
                          *.hpp \
                          *.md
-RECURSIVE              = NO
+RECURSIVE              = YES
 EXCLUDE                = tuibox.h \
                          .tools \
                          .ua \
@@ -163,6 +163,6 @@ DIRECTORY_GRAPH        = NO
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = NO
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = . camera-sdk
+INCLUDE_PATH           = ./camera-sdk
 PREDEFINED             =
 SKIP_FUNCTION_MACROS   = YES

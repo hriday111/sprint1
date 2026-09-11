@@ -2,24 +2,26 @@ name: Docs
 
 on:
   push:
-    branches: [ "main"]
+    branches: ["main"]
 
 jobs:
   generate-docs:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
+
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Install Doxygen
-      run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
+      - name: Install Doxygen
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
 
-    - name: Generate Documentation
-      run: doxygen Doxyfile
+      - name: Generate Documentation
+        run: doxygen Doxyfile
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/html
