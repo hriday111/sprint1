@@ -111,7 +111,7 @@ Quickstart</h1>
 <div class="line"> </div>
 <div class="line"># Optional: place ROIs (servo_calib already running for laser)</div>
 <div class="line">./build/bin/calibrate 0.1</div>
-<div class="line"># Check tmp/detected.png — green squares inside the three dark discs</div>
+<div class="line"># Check tmp/detected.png — green ellipses on the three dark discs</div>
 <div class="line"># Logs: logs/calibrate-&lt;epoch&gt;.log</div>
 <div class="line"> </div>
 <div class="line"># Intensity sweep → CSV</div>
@@ -126,9 +126,9 @@ What it does</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code><a class="el" href="cam_8c.html" title="IDS uEye camera open/close, exposure, and cropped grab.">cam.c</a></code> / <code><a class="el" href="cam_8h.html" title="Thin C wrapper around the IDS uEye API for the Thorlabs DCC1545M (mono8).">cam.h</a></code>   </td><td class="markdownTableBodyNone">Open uEye, set exposure, grab cropped mono8    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code><a class="el" href="roi_8c.html" title="ROI JSON parsing, clipping, means, saturation, and PGM export.">roi.c</a></code> / <code><a class="el" href="roi_8h.html" title="Axis-aligned ROI boxes, JSON I/O, and intensity statistics.">roi.h</a></code>   </td><td class="markdownTableBodyNone">JSON boxes, means, saturation fraction, PGM    </td></tr>
+<td class="markdownTableBodyNone"><code><a class="el" href="roi_8c.html" title="Elliptical blob ROI JSON parsing, clipping, means, saturation, and PGM export.">roi.c</a></code> / <code><a class="el" href="roi_8h.html" title="Elliptical blob ROIs, JSON I/O, and intensity statistics.">roi.h</a></code>   </td><td class="markdownTableBodyNone">Ellipse JSON blobs, means, saturation fraction, PGM    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code><a class="el" href="detect_8cpp.html" title="Disc-mark detector for calibrate.">detect.cpp</a></code>   </td><td class="markdownTableBodyNone">Find dark discs; emit inscribed boxes    </td></tr>
+<td class="markdownTableBodyNone"><code><a class="el" href="detect_8cpp.html" title="Disc-mark detector for calibrate.">detect.cpp</a></code>   </td><td class="markdownTableBodyNone">Find dark discs; emit elliptical blob ROIs    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>calibrate</code>   </td><td class="markdownTableBodyNone">One-shot detect → <code>rois.json</code> + overlays    </td></tr>
 <tr class="markdownTableRowOdd">
@@ -178,25 +178,25 @@ ROI API</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function   </th><th class="markdownTableHeadNone">Role    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>roi_load_json</code> / <code>roi_save_json</code>   </td><td class="markdownTableBodyNone">Box JSON <code>{name,x,y,w,h}</code>; also loads legacy <code>{cx,cy,rx,ry}</code> via <code>roi_inscribe</code>    </td></tr>
+<td class="markdownTableBodyNone"><code>roi_load_json</code> / <code>roi_save_json</code>   </td><td class="markdownTableBodyNone">Ellipse JSON <code>{name,cx,cy,rx,ry,angle}</code>; also loads legacy <code>{x,y,w,h}</code> as an axis-aligned ellipse    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>roi_clip</code>   </td><td class="markdownTableBodyNone">Clamp boxes to frame; set <code>pixels = w*h</code>    </td></tr>
+<td class="markdownTableBodyNone"><code>roi_clip</code>   </td><td class="markdownTableBodyNone">Clamp AABB to frame; set <code>pixels</code> = mask count    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>roi_means</code>   </td><td class="markdownTableBodyNone">Mean intensity 0–255 per box    </td></tr>
+<td class="markdownTableBodyNone"><code>roi_means</code>   </td><td class="markdownTableBodyNone">Mean intensity 0–255 inside each ellipse mask    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>roi_sat_frac</code>   </td><td class="markdownTableBodyNone">Fraction of pixels ≥ <code>sat_level</code> (tools use 250)    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>roi_draw</code> / <code>write_pgm</code>   </td><td class="markdownTableBodyNone">Debug overlays / PGM export    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>detect_boxes_cv</code>   </td><td class="markdownTableBodyNone">OpenCV disc finder → up to <code>ROI_MAX</code> (8) named <code>ringN</code>    </td></tr>
+<td class="markdownTableBodyNone"><code>detect_boxes_cv</code>   </td><td class="markdownTableBodyNone">OpenCV disc finder → up to <code>ROI_MAX</code> (8) named <code>ringN</code> blobs    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>frame_mat</code>   </td><td class="markdownTableBodyNone">Contiguous <code>CV_8UC1</code> Mat from a pitched buffer   </td></tr>
 </table>
 <p><code>rois.json</code> example:</p>
 <div class="fragment"><div class="line">[</div>
-<div class="line">  {&quot;name&quot;: &quot;ring1&quot;, &quot;x&quot;: 140, &quot;y&quot;: 114, &quot;w&quot;: 67, &quot;h&quot;: 67},</div>
-<div class="line">  {&quot;name&quot;: &quot;ring2&quot;, &quot;x&quot;: 447, &quot;y&quot;: 149, &quot;w&quot;: 60, &quot;h&quot;: 60},</div>
-<div class="line">  {&quot;name&quot;: &quot;ring3&quot;, &quot;x&quot;: 276, &quot;y&quot;: 429, &quot;w&quot;: 61, &quot;h&quot;: 61}</div>
+<div class="line">  {&quot;name&quot;: &quot;ring1&quot;, &quot;cx&quot;: 173.5, &quot;cy&quot;: 147.5, &quot;rx&quot;: 47.5, &quot;ry&quot;: 45.0, &quot;angle&quot;: 12.0},</div>
+<div class="line">  {&quot;name&quot;: &quot;ring2&quot;, &quot;cx&quot;: 477.0, &quot;cy&quot;: 179.0, &quot;rx&quot;: 42.0, &quot;ry&quot;: 40.0, &quot;angle&quot;: -5.0},</div>
+<div class="line">  {&quot;name&quot;: &quot;ring3&quot;, &quot;cx&quot;: 306.5, &quot;cy&quot;: 459.5, &quot;rx&quot;: 43.0, &quot;ry&quot;: 41.0, &quot;angle&quot;: 3.0}</div>
 <div class="line">]</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
 Tool CLI</h1>
@@ -213,7 +213,7 @@ Tool CLI</h1>
 <p><b>FIFO contract for <code>sweep_run</code>:</b> keep one write fd on <code>/run/sprint1/data_pipe</code> for the whole scan; open <code>pos_pipe</code> before each <code>4000</code>. On exit it sends <code>-1</code> (stops the servo daemon).</p>
 <h1><a class="anchor" id="autotoc_md7"></a>
 Detection design (why calibrate ≠ measure)</h1>
-<p>Illumination on the chip is uneven, so measurement never re-runs OpenCV. <code>detect_boxes_cv</code> flattens the frame, multi-threshold dark blobs, rejects crosses, refines ellipses, and stores a <b>smaller inscribed box</b> so <code>roi_means</code> stays cheap and OpenCV-free during the sweep. Recalibrate after any lens move — see <a class="el" href="RECALIBRATE_8md.html">RECALIBRATE.md</a>.</p>
+<p>Illumination on the chip is uneven, so measurement never re-runs OpenCV. <code>detect_boxes_cv</code> flattens the frame, multi-threshold dark blobs, rejects crosses, refines ellipses, and stores the <b>fitted elliptical blobs</b> so <code>roi_means</code> averages the disc mask (still OpenCV-free during the sweep). Recalibrate after any lens move — see <a class="el" href="RECALIBRATE_8md.html">RECALIBRATE.md</a>.</p>
 <h1><a class="anchor" id="autotoc_md8"></a>
 Common pitfalls</h1>
 <table class="markdownTable">
@@ -224,7 +224,7 @@ Common pitfalls</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>no reader (is servo_calib running?)</code>   </td><td class="markdownTableBodyNone">Start the daemon before FIFO tools    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Fewer than 3 marks / boxes on rims   </td><td class="markdownTableBodyNone">Lower exposure; check focus; inspect <code>tmp/calib_frame.png</code>    </td></tr>
+<td class="markdownTableBodyNone">Fewer than 3 marks / ellipses off the discs   </td><td class="markdownTableBodyNone">Lower exposure; check focus; inspect <code>tmp/calib_frame.png</code>    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Saturation warnings   </td><td class="markdownTableBodyNone">Shorten exposure or reduce laser <code>bN</code>    </td></tr>
 <tr class="markdownTableRowOdd">

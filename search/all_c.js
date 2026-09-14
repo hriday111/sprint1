@@ -1,7 +1,7 @@
 var searchData=
 [
   ['laser_0',['laser',['../structstepper__t.html#a89a8ee78e179dfb771e9a225a26e61fb',1,'stepper_t']]],
-  ['laser_5fon_1',['laser_on',['../calibrate_8cpp.html#ae5616eee74bbcdefa939c45316421429',1,'calibrate.cpp']]],
+  ['laser_5fon_1',['laser_on',['../calibrate_8cpp.html#ae5616eee74bbcdefa939c45316421429',1,'laser_on(void):&#160;calibrate.cpp'],['../calibrate2_8cpp.html#ae5616eee74bbcdefa939c45316421429',1,'laser_on(void):&#160;calibrate2.cpp']]],
   ['laser_5fpwm_5fclock_2',['LASER_PWM_CLOCK',['../gpio__pins_8h.html#ae9ab529fe5cfcf2b1b3357d1e48ea23d',1,'gpio_pins.h']]],
   ['laser_5fpwm_5frange_3',['LASER_PWM_RANGE',['../gpio__pins_8h.html#ace0e5c8f032bcf10fac57d352dbcb15b',1,'gpio_pins.h']]],
   ['laser_5fset_5funlocked_4',['laser_set_unlocked',['../stepper_8c.html#a4e8db551bae7b11bf98cd14c10413077',1,'stepper.c']]],

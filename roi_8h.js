@@ -10,7 +10,9 @@ var roi_8h =
     [ "roi_inscribe", "roi_8h.html#a542bd9b74b13a68f79841c7809035d5e", null ],
     [ "roi_load_json", "roi_8h.html#a309e7a8ffd015915aef3fa67fa37c2f7", null ],
     [ "roi_means", "roi_8h.html#ac32f8bf57d217827c9f81e7c13261e11", null ],
+    [ "roi_parse_json", "roi_8h.html#a7e51a69c900dde731f180a76aa9b625d", null ],
     [ "roi_sat_frac", "roi_8h.html#ad77c1ad09dc2290e9527e778540370e4", null ],
     [ "roi_save_json", "roi_8h.html#a2421057cf7a103d23806e5757b3992a2", null ],
+    [ "roi_sync_aabb", "roi_8h.html#acf627e073041706173b9acb24d0618a5", null ],
     [ "write_pgm", "roi_8h.html#a924039bd4457f1aa342e3f93264422d0", null ]
 ];

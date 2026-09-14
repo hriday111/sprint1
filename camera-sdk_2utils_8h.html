@@ -128,11 +128,14 @@ Macros</h2></td></tr>
 <tr class="memdesc:a35547b35e98a74c8879cf6c360388139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position FIFO: servo_calib writes after CMD_GETPOS.  <br /></td></tr>
 <tr class="separator:a35547b35e98a74c8879cf6c360388139"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2446b2861d5e0835cfa469c51be60e78" id="r_a2446b2861d5e0835cfa469c51be60e78"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="camera-sdk_2utils_8h.html#a2446b2861d5e0835cfa469c51be60e78">DETECTED_OUTPUT</a>&#160;&#160;&#160;&quot;./tmp/detected.png&quot;</td></tr>
-<tr class="memdesc:a2446b2861d5e0835cfa469c51be60e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overlay PNG written by <code>calibrate</code> (green boxes on the crop).  <br /></td></tr>
+<tr class="memdesc:a2446b2861d5e0835cfa469c51be60e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overlay PNG written by <code>calibrate</code> (green ellipses on the crop).  <br /></td></tr>
 <tr class="separator:a2446b2861d5e0835cfa469c51be60e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fdb493285b5518ce3f78a44149301ec" id="r_a4fdb493285b5518ce3f78a44149301ec"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="camera-sdk_2utils_8h.html#a4fdb493285b5518ce3f78a44149301ec">GRAB_OUTPUT</a>&#160;&#160;&#160;&quot;./tmp/calib_frame.png&quot;</td></tr>
 <tr class="memdesc:a4fdb493285b5518ce3f78a44149301ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw grayscale crop written by <code>calibrate</code> before detection.  <br /></td></tr>
 <tr class="separator:a4fdb493285b5518ce3f78a44149301ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fe83ac76edc595f6b98cd4a4127aed5" id="r_a8fe83ac76edc595f6b98cd4a4127aed5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="camera-sdk_2utils_8h.html#a8fe83ac76edc595f6b98cd4a4127aed5">ERROR</a>&#160;&#160;&#160;0.3</td></tr>
+<tr class="memdesc:a8fe83ac76edc595f6b98cd4a4127aed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">By how much to decrease the oval size in rois.  <br /></td></tr>
+<tr class="separator:a8fe83ac76edc595f6b98cd4a4127aed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -193,7 +196,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Overlay PNG written by <code>calibrate</code> (green boxes on the crop). </p>
+<p>Overlay PNG written by <code>calibrate</code> (green ellipses on the crop). </p>
 
 <p class="definition">Definition at line <a class="el" href="camera-sdk_2utils_8h_source.html#l00045">45</a> of file <a class="el" href="camera-sdk_2utils_8h_source.html">utils.h</a>.</p>
 
@@ -231,6 +234,24 @@ Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="camera-sdk_2utils_8h_source.html#l00026">26</a> of file <a class="el" href="camera-sdk_2utils_8h_source.html">utils.h</a>.</p>
+
+</div>
+</div>
+<a id="a8fe83ac76edc595f6b98cd4a4127aed5" name="a8fe83ac76edc595f6b98cd4a4127aed5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fe83ac76edc595f6b98cd4a4127aed5">&#9670;&#160;</a></span>ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR&#160;&#160;&#160;0.3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>By how much to decrease the oval size in rois. </p>
+
+<p class="definition">Definition at line <a class="el" href="camera-sdk_2utils_8h_source.html#l00051">51</a> of file <a class="el" href="camera-sdk_2utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>

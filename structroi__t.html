@@ -97,34 +97,106 @@ $(document).ready(function(){initNavTree('structroi__t.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 
-<p>One named rectangle in crop coordinates.  
+<p>One named elliptical blob in crop coordinates.  
  <a href="structroi__t.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="roi_8h_source.html">roi.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a2b3b5d1b1d2d7151bc50c391783d8ca1" id="r_a2b3b5d1b1d2d7151bc50c391783d8ca1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a2b3b5d1b1d2d7151bc50c391783d8ca1">x</a></td></tr>
+<tr class="memitem:ae2a4ebbe45b713e218cf28d5d04fdd3b" id="r_ae2a4ebbe45b713e218cf28d5d04fdd3b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#ae2a4ebbe45b713e218cf28d5d04fdd3b">cx</a></td></tr>
+<tr class="separator:ae2a4ebbe45b713e218cf28d5d04fdd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eb59d836f93338945ed47b9ab9c3135" id="r_a1eb59d836f93338945ed47b9ab9c3135"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a1eb59d836f93338945ed47b9ab9c3135">cy</a></td></tr>
+<tr class="memdesc:a1eb59d836f93338945ed47b9ab9c3135"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ellipse centre (crop pixels).  <br /></td></tr>
+<tr class="separator:a1eb59d836f93338945ed47b9ab9c3135"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf195fb90d78d724aabae47a1dec9714" id="r_acf195fb90d78d724aabae47a1dec9714"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#acf195fb90d78d724aabae47a1dec9714">rx</a></td></tr>
+<tr class="separator:acf195fb90d78d724aabae47a1dec9714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06bf31714adbdd71cfc9d5f1e8d71ee5" id="r_a06bf31714adbdd71cfc9d5f1e8d71ee5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a06bf31714adbdd71cfc9d5f1e8d71ee5">ry</a></td></tr>
+<tr class="memdesc:a06bf31714adbdd71cfc9d5f1e8d71ee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Semi-axes in pixels.  <br /></td></tr>
+<tr class="separator:a06bf31714adbdd71cfc9d5f1e8d71ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f80995098e51274b6208bba9c1fe405" id="r_a8f80995098e51274b6208bba9c1fe405"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a8f80995098e51274b6208bba9c1fe405">angle</a></td></tr>
+<tr class="memdesc:a8f80995098e51274b6208bba9c1fe405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotation in degrees (OpenCV fitEllipse convention).  <br /></td></tr>
+<tr class="separator:a8f80995098e51274b6208bba9c1fe405"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3b5d1b1d2d7151bc50c391783d8ca1" id="r_a2b3b5d1b1d2d7151bc50c391783d8ca1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a2b3b5d1b1d2d7151bc50c391783d8ca1">x</a></td></tr>
 <tr class="separator:a2b3b5d1b1d2d7151bc50c391783d8ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a953fa16a66e0520a2790a89ce091725c" id="r_a953fa16a66e0520a2790a89ce091725c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a953fa16a66e0520a2790a89ce091725c">y</a></td></tr>
+<tr class="memitem:a953fa16a66e0520a2790a89ce091725c" id="r_a953fa16a66e0520a2790a89ce091725c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a953fa16a66e0520a2790a89ce091725c">y</a></td></tr>
 <tr class="separator:a953fa16a66e0520a2790a89ce091725c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51d424a31fd1d5943e94378c63c830a0" id="r_a51d424a31fd1d5943e94378c63c830a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a51d424a31fd1d5943e94378c63c830a0">w</a></td></tr>
+<tr class="memitem:a51d424a31fd1d5943e94378c63c830a0" id="r_a51d424a31fd1d5943e94378c63c830a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a51d424a31fd1d5943e94378c63c830a0">w</a></td></tr>
 <tr class="separator:a51d424a31fd1d5943e94378c63c830a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8ec40a9db5c02f9e44c3b98b0ce525f" id="r_ad8ec40a9db5c02f9e44c3b98b0ce525f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">h</a></td></tr>
-<tr class="memdesc:ad8ec40a9db5c02f9e44c3b98b0ce525f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Top-left and size in pixels.  <br /></td></tr>
+<tr class="memdesc:ad8ec40a9db5c02f9e44c3b98b0ce525f"><td class="mdescLeft">&#160;</td><td class="mdescRight">AABB of the ellipse (iteration / diagnostics).  <br /></td></tr>
 <tr class="separator:ad8ec40a9db5c02f9e44c3b98b0ce525f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dcf3a955177698ff30db76670f90d8a" id="r_a9dcf3a955177698ff30db76670f90d8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">char</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a9dcf3a955177698ff30db76670f90d8a">name</a> [32]</td></tr>
+<tr class="memitem:a9dcf3a955177698ff30db76670f90d8a" id="r_a9dcf3a955177698ff30db76670f90d8a"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a9dcf3a955177698ff30db76670f90d8a">name</a> [32]</td></tr>
 <tr class="memdesc:a9dcf3a955177698ff30db76670f90d8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Label (e.g.  <br /></td></tr>
 <tr class="separator:a9dcf3a955177698ff30db76670f90d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c34594b1ed9abc91f607753c519e5a2" id="r_a0c34594b1ed9abc91f607753c519e5a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a0c34594b1ed9abc91f607753c519e5a2">pixels</a></td></tr>
-<tr class="memdesc:a0c34594b1ed9abc91f607753c519e5a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">w*h after clipping (for diagnostics).  <br /></td></tr>
+<tr class="memitem:a0c34594b1ed9abc91f607753c519e5a2" id="r_a0c34594b1ed9abc91f607753c519e5a2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structroi__t.html#a0c34594b1ed9abc91f607753c519e5a2">pixels</a></td></tr>
+<tr class="memdesc:a0c34594b1ed9abc91f607753c519e5a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask pixel count after clipping (for diagnostics).  <br /></td></tr>
 <tr class="separator:a0c34594b1ed9abc91f607753c519e5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>One named rectangle in crop coordinates. </p>
+<div class="textblock"><p>One named elliptical blob in crop coordinates. </p>
+<p><code>cx</code>,cy,rx,ry,<code>angle</code> define the measurement mask. <code>x</code>,y,w,h is the axis-aligned bounding box of that ellipse (updated by <code>roi_sync_aabb</code> / <code>roi_clip</code>). </p>
 
-<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00020">20</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00024">24</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="a8f80995098e51274b6208bba9c1fe405" name="a8f80995098e51274b6208bba9c1fe405"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f80995098e51274b6208bba9c1fe405">&#9670;&#160;</a></span>angle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double roi_t::angle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rotation in degrees (OpenCV fitEllipse convention). </p>
+
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00027">27</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00059">draw_overlay()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00087">point_in_ellipse()</a>, <a class="el" href="roi_8c_source.html#l00367">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, <a class="el" href="roi__interp_8c_source.html#l00091">roi_interp_at()</a>, <a class="el" href="roi_8c_source.html#l00154">roi_parse_json()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>, and <a class="el" href="roi__interp_8c_source.html#l00077">write_rois_array()</a>.</p>
+
+</div>
+</div>
+<a id="ae2a4ebbe45b713e218cf28d5d04fdd3b" name="ae2a4ebbe45b713e218cf28d5d04fdd3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2a4ebbe45b713e218cf28d5d04fdd3b">&#9670;&#160;</a></span>cx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double roi_t::cx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00025">25</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00059">draw_overlay()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00087">point_in_ellipse()</a>, <a class="el" href="roi_8c_source.html#l00367">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, <a class="el" href="roi__interp_8c_source.html#l00091">roi_interp_at()</a>, <a class="el" href="roi_8c_source.html#l00154">roi_parse_json()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00117">write_interp_check_csv()</a>, and <a class="el" href="roi__interp_8c_source.html#l00077">write_rois_array()</a>.</p>
+
+</div>
+</div>
+<a id="a1eb59d836f93338945ed47b9ab9c3135" name="a1eb59d836f93338945ed47b9ab9c3135"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eb59d836f93338945ed47b9ab9c3135">&#9670;&#160;</a></span>cy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double roi_t::cy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ellipse centre (crop pixels). </p>
+
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00025">25</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00059">draw_overlay()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00087">point_in_ellipse()</a>, <a class="el" href="roi_8c_source.html#l00367">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, <a class="el" href="roi__interp_8c_source.html#l00091">roi_interp_at()</a>, <a class="el" href="roi_8c_source.html#l00154">roi_parse_json()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00117">write_interp_check_csv()</a>, and <a class="el" href="roi__interp_8c_source.html#l00077">write_rois_array()</a>.</p>
+
+</div>
+</div>
 <a id="ad8ec40a9db5c02f9e44c3b98b0ce525f" name="ad8ec40a9db5c02f9e44c3b98b0ce525f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad8ec40a9db5c02f9e44c3b98b0ce525f">&#9670;&#160;</a></span>h</h2>
 
@@ -137,11 +209,11 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Top-left and size in pixels. </p>
+<p>AABB of the ellipse (iteration / diagnostics). </p>
 
-<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00021">21</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00028">28</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00240">accum_box()</a>, <a class="el" href="detect_8cpp_source.html#l00262">detect_boxes_cv()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00213">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00289">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00081">roi_inscribe()</a>, <a class="el" href="roi_8c_source.html#l00103">roi_load_json()</a>, and <a class="el" href="roi_8c_source.html#l00188">roi_save_json()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00313">accum_blob()</a>, <a class="el" href="detect__test_8cpp_source.html#l00020">main()</a>, <a class="el" href="roi_8c_source.html#l00277">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00367">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, and <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>.</p>
 
 </div>
 </div>
@@ -152,7 +224,7 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">char</a> roi_t::name[32]</td>
+          <td class="memname">char roi_t::name[32]</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -160,9 +232,9 @@ Data Fields</h2></td></tr>
 <p>Label (e.g. </p>
 <p>ring1); used as CSV column header. </p>
 
-<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00022">22</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00029">29</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="detect_8cpp_source.html#l00262">detect_boxes_cv()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00103">roi_load_json()</a>, and <a class="el" href="roi_8c_source.html#l00188">roi_save_json()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00059">draw_overlay()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi__interp_8c_source.html#l00091">roi_interp_at()</a>, <a class="el" href="roi_8c_source.html#l00154">roi_parse_json()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00117">write_interp_check_csv()</a>, and <a class="el" href="roi__interp_8c_source.html#l00077">write_rois_array()</a>.</p>
 
 </div>
 </div>
@@ -173,16 +245,54 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">int</a> roi_t::pixels</td>
+          <td class="memname">int roi_t::pixels</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>w*h after clipping (for diagnostics). </p>
+<p>Mask pixel count after clipping (for diagnostics). </p>
 
-<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00023">23</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00030">30</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="detect_8cpp_source.html#l00262">detect_boxes_cv()</a>, <a class="el" href="test__roi_8c_source.html#l00018">main()</a>, <a class="el" href="roi_8c_source.html#l00213">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00081">roi_inscribe()</a>, and <a class="el" href="roi_8c_source.html#l00103">roi_load_json()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="test__roi_8c_source.html#l00018">main()</a>, <a class="el" href="roi_8c_source.html#l00277">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, and <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>.</p>
+
+</div>
+</div>
+<a id="acf195fb90d78d724aabae47a1dec9714" name="acf195fb90d78d724aabae47a1dec9714"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf195fb90d78d724aabae47a1dec9714">&#9670;&#160;</a></span>rx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double roi_t::rx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00026">26</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00313">accum_blob()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00059">draw_overlay()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00087">point_in_ellipse()</a>, <a class="el" href="roi_8c_source.html#l00367">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, <a class="el" href="roi__interp_8c_source.html#l00091">roi_interp_at()</a>, <a class="el" href="roi_8c_source.html#l00154">roi_parse_json()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>, and <a class="el" href="roi__interp_8c_source.html#l00077">write_rois_array()</a>.</p>
+
+</div>
+</div>
+<a id="a06bf31714adbdd71cfc9d5f1e8d71ee5" name="a06bf31714adbdd71cfc9d5f1e8d71ee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06bf31714adbdd71cfc9d5f1e8d71ee5">&#9670;&#160;</a></span>ry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double roi_t::ry</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Semi-axes in pixels. </p>
+
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00026">26</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00313">accum_blob()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00059">draw_overlay()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00087">point_in_ellipse()</a>, <a class="el" href="roi_8c_source.html#l00367">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, <a class="el" href="roi__interp_8c_source.html#l00091">roi_interp_at()</a>, <a class="el" href="roi_8c_source.html#l00154">roi_parse_json()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>, and <a class="el" href="roi__interp_8c_source.html#l00077">write_rois_array()</a>.</p>
 
 </div>
 </div>
@@ -193,14 +303,14 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">int</a> roi_t::w</td>
+          <td class="memname">int roi_t::w</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00021">21</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00028">28</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00240">accum_box()</a>, <a class="el" href="detect_8cpp_source.html#l00262">detect_boxes_cv()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00213">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00289">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00081">roi_inscribe()</a>, <a class="el" href="roi_8c_source.html#l00103">roi_load_json()</a>, and <a class="el" href="roi_8c_source.html#l00188">roi_save_json()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00313">accum_blob()</a>, <a class="el" href="detect__test_8cpp_source.html#l00020">main()</a>, <a class="el" href="roi_8c_source.html#l00277">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00367">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, and <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>.</p>
 
 </div>
 </div>
@@ -211,14 +321,14 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">int</a> roi_t::x</td>
+          <td class="memname">int roi_t::x</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00021">21</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00028">28</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00240">accum_box()</a>, <a class="el" href="detect_8cpp_source.html#l00262">detect_boxes_cv()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00213">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00289">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00081">roi_inscribe()</a>, <a class="el" href="roi_8c_source.html#l00103">roi_load_json()</a>, and <a class="el" href="roi_8c_source.html#l00188">roi_save_json()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00313">accum_blob()</a>, <a class="el" href="detect__test_8cpp_source.html#l00020">main()</a>, <a class="el" href="roi_8c_source.html#l00277">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00367">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, and <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>.</p>
 
 </div>
 </div>
@@ -229,14 +339,14 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structroi__t.html#ad8ec40a9db5c02f9e44c3b98b0ce525f">int</a> roi_t::y</td>
+          <td class="memname">int roi_t::y</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00021">21</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="roi_8h_source.html#l00028">28</a> of file <a class="el" href="roi_8h_source.html">roi.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00240">accum_box()</a>, <a class="el" href="detect_8cpp_source.html#l00262">detect_boxes_cv()</a>, <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>, <a class="el" href="roi_8c_source.html#l00213">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00289">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00081">roi_inscribe()</a>, <a class="el" href="roi_8c_source.html#l00103">roi_load_json()</a>, and <a class="el" href="roi_8c_source.html#l00188">roi_save_json()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="roi_8c_source.html#l00313">accum_blob()</a>, <a class="el" href="detect__test_8cpp_source.html#l00020">main()</a>, <a class="el" href="roi_8c_source.html#l00277">roi_clip()</a>, <a class="el" href="roi_8c_source.html#l00367">roi_draw()</a>, <a class="el" href="roi_8c_source.html#l00127">roi_inscribe()</a>, and <a class="el" href="roi_8c_source.html#l00101">roi_sync_aabb()</a>.</p>
 
 </div>
 </div>

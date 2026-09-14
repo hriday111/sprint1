@@ -94,12 +94,12 @@ $(document).ready(function(){initNavTree('recalibrate.html',''); initResizable()
   <div class="headertitle"><div class="title">Recalibrate chip marks after moving the lens</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The intensity sweep does <b>not</b> re-detect discs. It averages fixed boxes from <code>rois.json</code>. After moving the lens (or remounting optics):</p>
+<div class="textblock"><p>The intensity sweep does <b>not</b> re-detect discs. It averages fixed elliptical blob masks from <code>rois.json</code>. After moving the lens (or remounting optics):</p>
 <div class="fragment"><div class="line">cd camera-sdk</div>
 <div class="line">make</div>
 <div class="line">mkdir -p tmp</div>
 <div class="line">./build/bin/calibrate 0.1    # servo_calib already running (laser)</div>
-</div><!-- fragment --><p>Open <code>tmp/detected.png</code>. Green squares must sit <b>inside</b> the three dark discs. If not, fix focus/lighting or try another exposure (e.g. <code>./build/bin/calibrate 0.14</code>).</p>
+</div><!-- fragment --><p>Open <code>tmp/detected.png</code>. Green ellipses must sit on the three dark discs. If not, fix focus/lighting or try another exposure (e.g. <code>./build/bin/calibrate 0.14</code>).</p>
 <p>Avoid long exposures with a bright laser — clipped discs break detection. Check <code>logs/calibrate-*.log</code> for saturation and mark-count warnings.</p>
 <p>Full API and tool reference: <a class="el" href="README_8md.html">README.md</a>. </p>
 </div></div><!-- contents -->

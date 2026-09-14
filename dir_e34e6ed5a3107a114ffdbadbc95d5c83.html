@@ -100,6 +100,9 @@ Files</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="calibrate_8cpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="calibrate_8cpp.html">calibrate.cpp</a></td></tr>
 <tr class="memdesc:calibrate_8cpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">One-shot ROI recalibration after optical changes (lens move, remount). <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="calibrate2_8cpp_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="calibrate2_8cpp.html">calibrate2.cpp</a></td></tr>
+<tr class="memdesc:calibrate2_8cpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Two-point blob calibration + linear ROI interpolation check. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="cam_8c_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8c.html">cam.c</a></td></tr>
 <tr class="memdesc:cam_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">IDS uEye camera open/close, exposure, and cropped grab. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,10 +122,22 @@ Files</h2></td></tr>
 <tr class="memdesc:grab__check_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal camera smoke test: open, set exposure, grab one crop, print stats. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="roi_8c_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="roi_8c.html">roi.c</a></td></tr>
-<tr class="memdesc:roi_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROI JSON parsing, clipping, means, saturation, and PGM export. <br /></td></tr>
+<tr class="memdesc:roi_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elliptical blob ROI JSON parsing, clipping, means, saturation, and PGM export. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="roi_8h_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="roi_8h.html">roi.h</a></td></tr>
-<tr class="memdesc:roi_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Axis-aligned ROI boxes, JSON I/O, and intensity statistics. <br /></td></tr>
+<tr class="memdesc:roi_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elliptical blob ROIs, JSON I/O, and intensity statistics. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="roi__interp_8c_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="roi__interp_8c.html">roi_interp.c</a></td></tr>
+<tr class="memdesc:roi__interp_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save/load and evaluate two-point elliptical ROI interpolation. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="roi__interp_8h_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="roi__interp_8h.html">roi_interp.h</a></td></tr>
+<tr class="memdesc:roi__interp_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Two-point linear interpolation of elliptical blob ROIs vs servo position. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="servo__fifo_8c_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="servo__fifo_8c.html">servo_fifo.c</a></td></tr>
+<tr class="memdesc:servo__fifo_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Named-FIFO client for servo_calib (move / getpos). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="servo__fifo_8h_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="servo__fifo_8h.html">servo_fifo.h</a></td></tr>
+<tr class="memdesc:servo__fifo_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command/position FIFO helpers for camera-sdk tools talking to servo_calib. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top"><a href="sweep__run_8c_source.html"><span class="icondoc"></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__run_8c.html">sweep_run.c</a></td></tr>
 <tr class="memdesc:sweep__run_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Step-by-step intensity sweep over the scan window in <code>saved.prm</code>. <br /></td></tr>
