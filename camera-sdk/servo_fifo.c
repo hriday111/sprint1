@@ -77,7 +77,7 @@ static int position_once(int timeout_ms)
         return -1;
     }
 
-    char buf[64];
+    char buf[64]={};
     size_t len = 0;
     while (memchr(buf, '\n', len) == NULL) {
         struct pollfd pfd = {.fd = fd, .events = POLLIN};

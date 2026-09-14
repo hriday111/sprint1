@@ -11,14 +11,10 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <time.h>
-#if defined(_WIN32) || defined(_WIN64)
- #include <winsock2.h>
-#else
- #include <pthread.h>
- #include <sys/time.h>
- #include <sys/syscall.h>
- #include <unistd.h>
-#endif /* defined(_WIN32) || defined(_WIN64) */
+#include <pthread.h>
+#include <sys/time.h>
+#include <sys/syscall.h>
+#include <unistd.h>
 
 enum {
     kConsoleLogger = 1 << 0,
@@ -46,81 +42,36 @@ static volatile int s_logger;
 static volatile LogLevel s_logLevel = LogLevel_INFO;
 static volatile long s_flushInterval = 0;
 static volatile int s_initialized = 0;
-#if defined(_WIN32) || defined(_WIN64)
-static CRITICAL_SECTION s_mutex;
-#else
+
 static pthread_mutex_t s_mutex;
-#endif
+
 
 static void init(void)
 {
     if (s_initialized) {
         return;
     }
-#if defined(_WIN32) || defined(_WIN64)
-    InitializeCriticalSection(&s_mutex);
-#else
+
     pthread_mutex_init(&s_mutex, NULL);
-#endif
+
     s_initialized = 1;
 }
 
 static void lock(void)
 {
-#if defined(_WIN32) || defined(_WIN64)
-    EnterCriticalSection(&s_mutex);
-#else
     pthread_mutex_lock(&s_mutex);
-#endif
 }
 
 static void unlock(void)
 {
-#if defined(_WIN32) || defined(_WIN64)
-    LeaveCriticalSection(&s_mutex);
-#else
     pthread_mutex_unlock(&s_mutex);
-#endif
 }
 
-#if defined(_WIN32) || defined(_WIN64)
-static int gettimeofday(struct timeval* tv, void* tz)
-{
-    const UINT64 epochFileTime = 116444736000000000ULL;
-    FILETIME ft;
-    ULARGE_INTEGER li;
-    UINT64 t;
-
-    if (tv == NULL) {
-        return -1;
-    }
-    GetSystemTimeAsFileTime(&ft);
-    li.LowPart = ft.dwLowDateTime;
-    li.HighPart = ft.dwHighDateTime;
-    t = (li.QuadPart - epochFileTime) / 10;
-    tv->tv_sec = (long) (t / 1000000);
-    tv->tv_usec = t % 1000000;
-    return 0;
-}
-
-static struct tm* localtime_r(const time_t* timep, struct tm* result)
-{
-    localtime_s(result, timep);
-    return result;
-}
-#endif
 
 static long getCurrentThreadID(void)
 {
-#if defined(_WIN32) || defined(_WIN64)
-    return GetCurrentThreadId();
-#elif __linux__
+
     return syscall(SYS_gettid);
-#elif defined(__APPLE__) && defined(__MACH__)
-    return syscall(SYS_thread_selfid);
-#else
-    return (long) pthread_self();
-#endif
 }
 
 
@@ -328,7 +279,6 @@ void logger_log(LogLevel level, const char* file, int line, const char* fmt, ...
     char levelc;
     char timestamp[32];
     long threadID;
-    va_list carg, farg;
 
     if (s_logger == 0 || !s_initialized) {
         assert(0 && "logger is not initialized");
@@ -345,6 +295,7 @@ void logger_log(LogLevel level, const char* file, int line, const char* fmt, ...
     threadID = getCurrentThreadID();
     lock();
     if (hasFlag(s_logger, kConsoleLogger)) {
+        va_list carg;
         va_start(carg, fmt);
         vflog(s_clog.output, levelc, timestamp, threadID,
                 file, line, fmt, carg, currentTime, &s_clog.flushedTime);
@@ -352,6 +303,8 @@ void logger_log(LogLevel level, const char* file, int line, const char* fmt, ...
     }
     if (hasFlag(s_logger, kFileLogger)) {
         if (rotateLogFiles()) {
+            
+            va_list farg;
             va_start(farg, fmt);
             s_flog.currentFileSize += vflog(s_flog.output, levelc, timestamp, threadID,
                     file, line, fmt, farg, currentTime, &s_flog.flushedTime);

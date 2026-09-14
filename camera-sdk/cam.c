@@ -174,7 +174,7 @@ int cam_grab(cam_t *cam, unsigned char **pixels, int *width, int *height, int *p
     int y = CAM_CROP_Y;
     int w = CAM_CROP_W;
     int h = CAM_CROP_H;
-    if (x < 0 || y < 0 || w < 1 || h < 1 || x + w > cam->width || y + h > cam->height) {
+    if (  x + w > cam->width || y + h > cam->height) {
         LOG_ERROR("cam_grab: crop (%d,%d %dx%d) outside %dx%d sensor", x, y, w, h,
                   cam->width, cam->height);
         return -1;
