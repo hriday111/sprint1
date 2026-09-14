@@ -17,14 +17,14 @@ extern "C" {
 #include <opencv2/core.hpp>
 
 /**
- * @brief Find dark filled marks and store an inscribed axis-aligned box per mark.
+ * @brief Find dark filled marks and store one elliptical blob ROI per mark.
  *
- * Boxes are sized inside the fitted ellipse (not the full ellipse extent).
- * Names follow spatial order: ring1 top-left, ring2 top-right, then lower marks.
+ * Each ROI is the fitted disc ellipse (slightly inset), used as the intensity
+ * mask by @c sweep_run. Names: ring1 top-left, ring2 top-right, then lower marks.
  *
  * @param gray Mono8 crop (CAM_CROP_* geometry).
  * @param nwant Desired number of marks (clamped to 1..ROI_MAX).
- * @param out Cleared and filled with detected boxes.
+ * @param out Cleared and filled with detected blobs.
  * @return 0 on success (including fewer marks than requested), -1 if @p gray is invalid.
  */
 int detect_boxes_cv(const cv::Mat &gray, int nwant, rois_t *out);

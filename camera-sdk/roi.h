@@ -3,10 +3,10 @@
 
 /**
  * @file roi.h
- * @brief Axis-aligned ROI boxes, JSON I/O, and intensity statistics.
+ * @brief Elliptical blob ROIs, JSON I/O, and intensity statistics.
  *
- * Intensity is the mean of pixels inside each rectangle — there is no
- * ellipse mask at measurement time.
+ * Intensity is the mean of pixels inside each fitted ellipse (blob mask).
+ * Axis-aligned @c x,y,w,h is only the bounding box used for iteration/clip.
  */
 
 #define ROI_MAX 8
@@ -15,12 +15,19 @@
 #define ROI_PATH "/var/lib/sprint1/rois.json"
 
 /**
- * @brief One named rectangle in crop coordinates.
+ * @brief One named elliptical blob in crop coordinates.
+ *
+ * @c cx,cy,rx,ry,@c angle define the measurement mask. @c x,y,w,h is the
+ * axis-aligned bounding box of that ellipse (updated by @c roi_sync_aabb /
+ * @c roi_clip).
  */
 typedef struct {
-    int x, y, w, h; /**< Top-left and size in pixels. */
+    double cx, cy;  /**< Ellipse centre (crop pixels). */
+    double rx, ry;  /**< Semi-axes in pixels. */
+    double angle;   /**< Rotation in degrees (OpenCV fitEllipse convention). */
+    int x, y, w, h; /**< AABB of the ellipse (iteration / diagnostics). */
     char name[32];  /**< Label (e.g. ring1); used as CSV column header. */
-    int pixels;     /**< w*h after clipping (for diagnostics). */
+    int pixels;     /**< Mask pixel count after clipping (for diagnostics). */
 } roi_t;
 
 /**
@@ -32,7 +39,13 @@ typedef struct {
 } rois_t;
 
 /**
- * @brief Load ROIs from JSON (box fields or legacy ellipse cx/cy/rx/ry).
+ * @brief Refresh @c x,y,w,h from ellipse parameters (rotated AABB).
+ * @param r ROI to update.
+ */
+void roi_sync_aabb(roi_t *r);
+
+/**
+ * @brief Load ROIs from JSON (ellipse cx/cy/rx/ry[/angle] or legacy box x/y/w/h).
  * @param path File path.
  * @param out Cleared and filled on success.
  * @return 0 on success, -1 on failure.
@@ -40,7 +53,7 @@ typedef struct {
 int roi_load_json(const char *path, rois_t *out);
 
 /**
- * @brief Write ROIs as a JSON array of {name,x,y,w,h} objects.
+ * @brief Write ROIs as a JSON array of {name,cx,cy,rx,ry,angle} objects.
  * @param path Destination path.
  * @param rois Source list.
  * @return 0 on success, -1 on failure.
@@ -54,7 +67,7 @@ int roi_save_json(const char *path, const rois_t *rois);
 void roi_free(rois_t *rois);
 
 /**
- * @brief Clip each box to [0,width) x [0,height) and refresh @c pixels.
+ * @brief Clip each AABB to [0,width) x [0,height) and recount mask pixels.
  * @param rois In/out list.
  * @param width Frame width.
  * @param height Frame height.
@@ -62,7 +75,7 @@ void roi_free(rois_t *rois);
 void roi_clip(rois_t *rois, int width, int height);
 
 /**
- * @brief Mean intensity 0..255 for each ROI rectangle.
+ * @brief Mean intensity 0..255 for each elliptical blob mask.
  * @param pixels Frame buffer.
  * @param width Frame width (unused for indexing; pitch is authoritative).
  * @param height Frame height.
@@ -75,7 +88,7 @@ int roi_means(const unsigned char *pixels, int width, int height, int pitch,
               const rois_t *rois, double *means);
 
 /**
- * @brief Fraction of pixels at or above @p sat_level in each ROI.
+ * @brief Fraction of pixels at or above @p sat_level in each blob mask.
  * @param pixels Frame buffer.
  * @param width Frame width.
  * @param height Frame height.
@@ -89,12 +102,12 @@ int roi_sat_frac(const unsigned char *pixels, int width, int height, int pitch,
                  const rois_t *rois, int sat_level, double *frac);
 
 /**
- * @brief Draw white (255) box outlines onto @p pixels in place.
+ * @brief Draw white (255) ellipse outlines onto @p pixels in place.
  * @param pixels Mutable frame.
  * @param width Frame width.
  * @param height Frame height.
  * @param pitch Bytes per row.
- * @param rois Boxes to outline.
+ * @param rois Blobs to outline.
  */
 void roi_draw(unsigned char *pixels, int width, int height, int pitch,
               const rois_t *rois);
@@ -117,7 +130,7 @@ int write_pgm(const char *path, const unsigned char *pixels,
  * @param by Ellipse bounding-box top.
  * @param bw Ellipse bounding-box width.
  * @param bh Ellipse bounding-box height.
- * @param out Filled with the inscribed rectangle.
+ * @param out Filled with the inscribed rectangle (ellipse fields also set).
  */
 void roi_inscribe(int bx, int by, int bw, int bh, roi_t *out);
 

@@ -111,9 +111,9 @@ int main(int argc, char **argv)
     roi_means(pix, w, h, pitch, &rois, means);
     roi_sat_frac(pix, w, h, pitch, &rois, 250, sat);
     for (int i = 0; i < rois.n; i++) {
-        LOG_INFO("%s box=(%d,%d %dx%d) mean=%.1f sat=%.0f%%", rois.item[i].name,
-                 rois.item[i].x, rois.item[i].y, rois.item[i].w, rois.item[i].h,
-                 means[i], sat[i] * 100.0);
+        LOG_INFO("%s blob=(cx=%.1f,cy=%.1f rx=%.1f,ry=%.1f ang=%.1f) mean=%.1f sat=%.0f%%",
+                 rois.item[i].name, rois.item[i].cx, rois.item[i].cy, rois.item[i].rx,
+                 rois.item[i].ry, rois.item[i].angle, means[i], sat[i] * 100.0);
         if (sat[i] > 0.05)
             LOG_WARN("%s clipped; lower exposure (now %.3f ms)", rois.item[i].name,
                      actual);
@@ -123,8 +123,13 @@ int main(int argc, char **argv)
     cv::cvtColor(gray, vis, cv::COLOR_GRAY2BGR);
     for (int i = 0; i < rois.n; i++) {
         const roi_t *r = &rois.item[i];
-        cv::rectangle(vis, cv::Rect(r->x, r->y, r->w, r->h), cv::Scalar(0, 255, 0), 2);
-        cv::putText(vis, r->name, cv::Point(r->x, std::max(12, r->y - 4)),
+        cv::ellipse(vis, cv::Point((int)std::lround(r->cx), (int)std::lround(r->cy)),
+                    cv::Size(std::max(1, (int)std::lround(r->rx)),
+                             std::max(1, (int)std::lround(r->ry))),
+                    r->angle, 0, 360, cv::Scalar(0, 255, 0), 2);
+        cv::putText(vis, r->name,
+                    cv::Point((int)std::lround(r->cx - r->rx),
+                              std::max(12, (int)std::lround(r->cy - r->ry) - 4)),
                     cv::FONT_HERSHEY_SIMPLEX, 0.6, cv::Scalar(0, 255, 255), 2);
     }
     cv::imwrite(overlay_path, vis);

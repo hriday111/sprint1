@@ -18,7 +18,7 @@ mkdir -p tmp
 
 # Optional: place ROIs (servo_calib already running for laser)
 ./build/bin/calibrate 0.1
-# Check tmp/detected.png — green squares inside the three dark discs
+# Check tmp/detected.png — green ellipses on the three dark discs
 # Logs: logs/calibrate-<epoch>.log
 
 # Intensity sweep → CSV
@@ -36,8 +36,8 @@ Offline ROI parse check (no camera):
 | Module | Responsibility |
 |--------|----------------|
 | `cam.c` / `cam.h` | Open uEye, set exposure, grab cropped mono8 |
-| `roi.c` / `roi.h` | JSON boxes, means, saturation fraction, PGM |
-| `detect.cpp` | Find dark discs; emit inscribed boxes |
+| `roi.c` / `roi.h` | Ellipse JSON blobs, means, saturation fraction, PGM |
+| `detect.cpp` | Find dark discs; emit elliptical blob ROIs |
 | `calibrate` | One-shot detect → `rois.json` + overlays |
 | `sweep_run` | FIFO motion + ROI means → CSV |
 | `test_roi` | Load JSON and mean a synthetic frame |
@@ -74,21 +74,21 @@ Exposure uses `is_SetExposureTime` (required on UI-154x); auto shutter/gain are 
 
 | Function | Role |
 |----------|------|
-| `roi_load_json` / `roi_save_json` | Box JSON `{name,x,y,w,h}`; also loads legacy `{cx,cy,rx,ry}` via `roi_inscribe` |
-| `roi_clip` | Clamp boxes to frame; set `pixels = w*h` |
-| `roi_means` | Mean intensity 0–255 per box |
+| `roi_load_json` / `roi_save_json` | Ellipse JSON `{name,cx,cy,rx,ry,angle}`; also loads legacy `{x,y,w,h}` as an axis-aligned ellipse |
+| `roi_clip` | Clamp AABB to frame; set `pixels` = mask count |
+| `roi_means` | Mean intensity 0–255 inside each ellipse mask |
 | `roi_sat_frac` | Fraction of pixels ≥ `sat_level` (tools use 250) |
 | `roi_draw` / `write_pgm` | Debug overlays / PGM export |
-| `detect_boxes_cv` | OpenCV disc finder → up to `ROI_MAX` (8) named `ringN` |
+| `detect_boxes_cv` | OpenCV disc finder → up to `ROI_MAX` (8) named `ringN` blobs |
 | `frame_mat` | Contiguous `CV_8UC1` Mat from a pitched buffer |
 
 `rois.json` example:
 
 ```json
 [
-  {"name": "ring1", "x": 140, "y": 114, "w": 67, "h": 67},
-  {"name": "ring2", "x": 447, "y": 149, "w": 60, "h": 60},
-  {"name": "ring3", "x": 276, "y": 429, "w": 61, "h": 61}
+  {"name": "ring1", "cx": 173.5, "cy": 147.5, "rx": 47.5, "ry": 45.0, "angle": 12.0},
+  {"name": "ring2", "cx": 477.0, "cy": 179.0, "rx": 42.0, "ry": 40.0, "angle": -5.0},
+  {"name": "ring3", "cx": 306.5, "cy": 459.5, "rx": 43.0, "ry": 41.0, "angle": 3.0}
 ]
 ```
 
@@ -104,7 +104,7 @@ Exposure uses `is_SetExposureTime` (required on UI-154x); auto shutter/gain are 
 
 ## Detection design (why calibrate ≠ measure)
 
-Illumination on the chip is uneven, so measurement never re-runs OpenCV. `detect_boxes_cv` flattens the frame, multi-threshold dark blobs, rejects crosses, refines ellipses, and stores a **smaller inscribed box** so `roi_means` stays cheap and OpenCV-free during the sweep. Recalibrate after any lens move — see [RECALIBRATE.md](RECALIBRATE.md).
+Illumination on the chip is uneven, so measurement never re-runs OpenCV. `detect_boxes_cv` flattens the frame, multi-threshold dark blobs, rejects crosses, refines ellipses, and stores the **fitted elliptical blobs** so `roi_means` averages the disc mask (still OpenCV-free during the sweep). Recalibrate after any lens move — see [RECALIBRATE.md](RECALIBRATE.md).
 
 ## Common pitfalls
 
@@ -112,7 +112,7 @@ Illumination on the chip is uneven, so measurement never re-runs OpenCV. `detect
 |---------|------------|
 | `no uEye camera` | Start `ueyeusbd`; confirm `lsusb` shows `1409` |
 | `no reader (is servo_calib running?)` | Start the daemon before FIFO tools |
-| Fewer than 3 marks / boxes on rims | Lower exposure; check focus; inspect `tmp/calib_frame.png` |
+| Fewer than 3 marks / ellipses off the discs | Lower exposure; check focus; inspect `tmp/calib_frame.png` |
 | Saturation warnings | Shorten exposure or reduce laser `bN` |
 | `EPIPE` / broken pipe | Do not open/close the command FIFO per step |
 | Wrong scan range | Edit `/var/lib/sprint1/saved.prm` (`start stop prep`, 0–999) |

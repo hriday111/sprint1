@@ -26,8 +26,10 @@ int main(int argc, char **argv)
     if (roi_load_json(path, &rois) != 0)
         return 1;
     for (int i = 0; i < rois.n; i++)
-        LOG_INFO("  %s (%d,%d %dx%d)", rois.item[i].name, rois.item[i].x,
-                 rois.item[i].y, rois.item[i].w, rois.item[i].h);
+        LOG_INFO("  %s ellipse=(cx=%.1f,cy=%.1f rx=%.1f,ry=%.1f) aabb=(%d,%d %dx%d)",
+                 rois.item[i].name, rois.item[i].cx, rois.item[i].cy, rois.item[i].rx,
+                 rois.item[i].ry, rois.item[i].x, rois.item[i].y, rois.item[i].w,
+                 rois.item[i].h);
 
     int w = 1280, h = 1024, pitch = 1280;
     roi_clip(&rois, w, h);
@@ -50,7 +52,7 @@ int main(int argc, char **argv)
     }
     free(img);
     if (!ok) {
-        LOG_ERROR("box/mean sanity check failed");
+        LOG_ERROR("blob/mean sanity check failed");
         return 1;
     }
     LOG_INFO("ok");

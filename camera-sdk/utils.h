@@ -41,12 +41,14 @@
 /** Position FIFO: servo_calib writes after CMD_GETPOS. */
 #define POS_PIPE "/run/sprint1/pos_pipe"
 
-/** Overlay PNG written by @c calibrate (green boxes on the crop). */
+/** Overlay PNG written by @c calibrate (green ellipses on the crop). */
 #define DETECTED_OUTPUT "./tmp/detected.png"
 
 /** Raw grayscale crop written by @c calibrate before detection. */
 #define GRAB_OUTPUT "./tmp/calib_frame.png"
 
+/** By how much to decrease the oval size in rois */
+#define ERROR 0.3
 /**
  * @brief Sleep for @p milli milliseconds.
  *

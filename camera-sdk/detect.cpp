@@ -19,7 +19,7 @@
 #include <cstdio>
 #include <cstring>
 #include <vector>
-
+#include "utils.h"
 #include <opencv2/imgproc.hpp>
 
 extern "C" {
@@ -28,9 +28,6 @@ extern "C" {
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
-#endif
-#ifndef M_SQRT2
-#define M_SQRT2 1.41421356237309504880
 #endif
 
 /** @brief Intermediate ellipse candidate before conversion to @c roi_t. */
@@ -374,7 +371,7 @@ int detect_boxes_cv(const cv::Mat &gray, int nwant, rois_t *out)
 
     for (size_t i = 0; i < kept.size() && out->n < ROI_MAX; i++) {
         EllipseCand e = kept[i];
-        /* Recenter on dark pixels so streaky discs do not leave the box on the rim. */
+        /* Recenter on dark pixels so streaky discs keep the blob on the mark. */
         {
             cv::Mat m = cv::Mat::zeros(sm.size(), CV_8U);
             draw_ellipse_mask(m, e.cx, e.cy, e.rx, e.ry, e.angle, 0.85);
@@ -396,19 +393,19 @@ int detect_boxes_cv(const cv::Mat &gray, int nwant, rois_t *out)
                 e.cy = sy / n;
             }
         }
-        double r = std::min(e.rx, e.ry);
-        int side = std::max(1, (int)std::lround(r * M_SQRT2 * 0.50));
-        roi_t box;
-        std::memset(&box, 0, sizeof(box));
-        box.w = side+30;
-        box.h = side+30;
-        box.x = (int)std::lround(e.cx - side * 0.5);
-        box.y = (int)std::lround(e.cy - side * 0.5)-30;
-        box.pixels = box.w * box.h;
-        std::snprintf(box.name, sizeof(box.name), "ring%zu", i + 1);
-        out->item[out->n++] = box;
+        /* Store the fitted disc blob (slightly inset)*/
+        roi_t blob;
+        std::memset(&blob, 0, sizeof(blob));
+        blob.cx = e.cx;
+        blob.cy = e.cy;
+        blob.rx = std::max(1.0, e.rx * (1-ERROR));
+        blob.ry = std::max(1.0, e.ry * (1-ERROR));
+        blob.angle = e.angle;
+        std::snprintf(blob.name, sizeof(blob.name), "ring%zu", i + 1);
+        roi_sync_aabb(&blob);
+        out->item[out->n++] = blob;
     }
     roi_clip(out, w, h);
-    LOG_INFO("detect_boxes_cv: kept %d mark(s)", out->n);
+    LOG_INFO("detect_boxes_cv: kept %d blob(s)", out->n);
     return 0;
 }
