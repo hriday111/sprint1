@@ -45,6 +45,14 @@ typedef struct {
 void roi_sync_aabb(roi_t *r);
 
 /**
+ * @brief Parse ROIs from a JSON array/object string (ellipse or legacy box).
+ * @param buf NUL-terminated JSON text containing @c {...} ROI objects.
+ * @param out Cleared and filled on success.
+ * @return 0 on success, -1 if no ROIs found.
+ */
+int roi_parse_json(const char *buf, rois_t *out);
+
+/**
  * @brief Load ROIs from JSON (ellipse cx/cy/rx/ry[/angle] or legacy box x/y/w/h).
  * @param path File path.
  * @param out Cleared and filled on success.

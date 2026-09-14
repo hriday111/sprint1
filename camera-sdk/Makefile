@@ -13,13 +13,18 @@ LOGGER_OBJS = $(OBJDIR)/logger.o $(OBJDIR)/loggerconf.o $(OBJDIR)/crash.o
 
 .PHONY: all clean
 
-all: $(BINDIR)/sweep_run $(BINDIR)/test_roi $(BINDIR)/calibrate
+all: $(BINDIR)/sweep_run $(BINDIR)/test_roi $(BINDIR)/calibrate $(BINDIR)/calibrate2
 
 $(BINDIR)/sweep_run: $(OBJDIR)/sweep_run.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 $(BINDIR)/calibrate: $(OBJDIR)/calibrate.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/detect.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
+	@mkdir -p $(BINDIR)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS) $(OPENCV_LIBS)
+
+$(BINDIR)/calibrate2: $(OBJDIR)/calibrate2.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/roi_interp.o \
+		$(OBJDIR)/servo_fifo.o $(OBJDIR)/detect.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS) $(OPENCV_LIBS)
 
@@ -51,6 +56,18 @@ $(OBJDIR)/detect.o: detect.cpp detect.hpp roi.h utils.h
 $(OBJDIR)/calibrate.o: calibrate.cpp detect.hpp cam.h roi.h utils.h
 	@mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c calibrate.cpp -o $@
+
+$(OBJDIR)/calibrate2.o: calibrate2.cpp detect.hpp cam.h roi.h roi_interp.h servo_fifo.h utils.h
+	@mkdir -p $(OBJDIR)
+	$(CXX) $(CXXFLAGS) -c calibrate2.cpp -o $@
+
+$(OBJDIR)/roi_interp.o: roi_interp.c roi_interp.h roi.h
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c roi_interp.c -o $@
+
+$(OBJDIR)/servo_fifo.o: servo_fifo.c servo_fifo.h utils.h
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c servo_fifo.c -o $@
 
 clean:
 	rm -rf $(BUILDDIR)

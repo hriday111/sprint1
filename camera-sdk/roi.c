@@ -151,41 +151,11 @@ void roi_inscribe(int bx, int by, int bw, int bh, roi_t *out)
     out->pixels = w * h;
 }
 
-int roi_load_json(const char *path, rois_t *out)
+int roi_parse_json(const char *buf, rois_t *out)
 {
     memset(out, 0, sizeof(*out));
-    FILE *f = fopen(path, "rb");
-    if (!f) {
-        LOG_ERROR("roi_load_json: open(%s): %s", path, strerror(errno));
+    if (!buf)
         return -1;
-    }
-    if (fseek(f, 0, SEEK_END) != 0) {
-        LOG_ERROR("roi_load_json: fseek(%s): %s", path, strerror(errno));
-        fclose(f);
-        return -1;
-    }
-    long sz = ftell(f);
-    if (sz < 2) {
-        fclose(f);
-        LOG_ERROR("%s: empty", path);
-        return -1;
-    }
-    rewind(f);
-    char *buf = malloc((size_t)sz + 1);
-    if (!buf) {
-        fclose(f);
-        LOG_ERROR("roi_load_json: out of memory");
-        return -1;
-    }
-    if (fread(buf, 1, (size_t)sz, f) != (size_t)sz) {
-        LOG_ERROR("roi_load_json: fread(%s): %s", path, strerror(errno));
-        free(buf);
-        fclose(f);
-        return -1;
-    }
-    fclose(f);
-    buf[sz] = '\0';
-
     const char *p = buf;
     while (out->n < ROI_MAX) {
         const char *start = strchr(p, '{');
@@ -230,8 +200,46 @@ int roi_load_json(const char *path, rois_t *out)
         out->n++;
         p = stop + 1;
     }
+    return out->n > 0 ? 0 : -1;
+}
+
+int roi_load_json(const char *path, rois_t *out)
+{
+    FILE *f = fopen(path, "rb");
+    if (!f) {
+        LOG_ERROR("roi_load_json: open(%s): %s", path, strerror(errno));
+        return -1;
+    }
+    if (fseek(f, 0, SEEK_END) != 0) {
+        LOG_ERROR("roi_load_json: fseek(%s): %s", path, strerror(errno));
+        fclose(f);
+        return -1;
+    }
+    long sz = ftell(f);
+    if (sz < 2) {
+        fclose(f);
+        LOG_ERROR("%s: empty", path);
+        return -1;
+    }
+    rewind(f);
+    char *buf = malloc((size_t)sz + 1);
+    if (!buf) {
+        fclose(f);
+        LOG_ERROR("roi_load_json: out of memory");
+        return -1;
+    }
+    if (fread(buf, 1, (size_t)sz, f) != (size_t)sz) {
+        LOG_ERROR("roi_load_json: fread(%s): %s", path, strerror(errno));
+        free(buf);
+        fclose(f);
+        return -1;
+    }
+    fclose(f);
+    buf[sz] = '\0';
+
+    int rc = roi_parse_json(buf, out);
     free(buf);
-    if (out->n == 0) {
+    if (rc != 0) {
         LOG_ERROR("%s: no ROIs found", path);
         return -1;
     }
