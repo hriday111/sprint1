@@ -249,7 +249,7 @@ static bool overlaps(const EllipseCand &a, const EllipseCand &b)
 cv::Mat frame_mat(const unsigned char *pixels, int width, int height, int pitch)
 {
     if (pitch == width)
-        return cv::Mat(height, width, CV_8UC1, (void *)pixels).clone();
+        return cv::Mat(height, width, CV_8UC1, const_cast<unsigned char *>(pixels)).clone();
     cv::Mat out(height, width, CV_8UC1);
     for (int y = 0; y < height; y++)
         std::memcpy(out.ptr(y), pixels + (size_t)y * (size_t)pitch, (size_t)width);
@@ -258,7 +258,8 @@ cv::Mat frame_mat(const unsigned char *pixels, int width, int height, int pitch)
 
 int detect_boxes_cv(const cv::Mat &gray, int nwant, rois_t *out)
 {
-    std::memset(out, 0, sizeof(*out));
+    *out =  {};
+    //std::memset(out, 0, sizeof(*out)); // dont use c-style zero initalizer since it might afffect portability
     if (gray.empty() || gray.type() != CV_8UC1) {
         LOG_ERROR("detect_boxes_cv: empty or non-gray frame");
         return -1;
@@ -347,13 +348,10 @@ int detect_boxes_cv(const cv::Mat &gray, int nwant, rois_t *out)
 
     std::vector<EllipseCand> kept;
     for (const auto &e : filtered) {
-        bool hit = false;
-        for (const auto &k2 : kept) {
-            if (overlaps(e, k2)) {
-                hit = true;
-                break;
-            }
-        }
+        bool hit = std::any_of(kept.begin(), kept.end(), [&e](const auto &k2) {
+            return overlaps(e, k2);
+        });
+        
         if (!hit)
             kept.push_back(e);
         if ((int)kept.size() >= nwant)
@@ -394,8 +392,8 @@ int detect_boxes_cv(const cv::Mat &gray, int nwant, rois_t *out)
             }
         }
         /* Store the fitted disc blob (slightly inset)*/
-        roi_t blob;
-        std::memset(&blob, 0, sizeof(blob));
+        roi_t blob={};
+        //std::memset(&blob, 0, sizeof(blob));
         blob.cx = e.cx;
         blob.cy = e.cy;
         blob.rx = std::max(1.0, e.rx * (1-ERROR));
