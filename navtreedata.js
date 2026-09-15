@@ -32,12 +32,14 @@ var NAVTREE =
       [ "What it does", "camera_sdk.html#autotoc_md2", [
         [ "Camera crop", "camera_sdk.html#autotoc_md3", null ],
         [ "Camera API", "camera_sdk.html#autotoc_md4", null ],
-        [ "ROI API", "camera_sdk.html#autotoc_md5", null ]
+        [ "ROI API", "camera_sdk.html#autotoc_md5", null ],
+        [ "Interpolation API (<tt>roi_interp</tt>)", "camera_sdk.html#autotoc_md6", null ],
+        [ "Servo FIFO API (<tt>servo_fifo</tt>)", "camera_sdk.html#autotoc_md7", null ]
       ] ],
-      [ "Tool CLI", "camera_sdk.html#autotoc_md6", null ],
-      [ "Detection design (why calibrate ≠ measure)", "camera_sdk.html#autotoc_md7", null ],
-      [ "Common pitfalls", "camera_sdk.html#autotoc_md8", null ],
-      [ "Build", "camera_sdk.html#autotoc_md9", null ]
+      [ "Tool CLI", "camera_sdk.html#autotoc_md8", null ],
+      [ "Detection design", "camera_sdk.html#autotoc_md9", null ],
+      [ "Common pitfalls", "camera_sdk.html#autotoc_md10", null ],
+      [ "Build", "camera_sdk.html#autotoc_md11", null ]
     ] ],
     [ "Recalibrate chip marks after moving the lens", "recalibrate.html", null ],
     [ "Data Structures", "annotated.html", [
@@ -65,7 +67,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"main_8c.html"
+"loggerconf_8h.html#ade315543151ea7e388ebeae408562685"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

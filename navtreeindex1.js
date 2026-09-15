@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"loggerconf_8h.html#ade315543151ea7e388ebeae408562685":[4,0,10,0],
+"loggerconf_8h_source.html":[4,0,10],
 "main_8c.html":[4,0,11],
 "main_8c.html#a37cf620dcec6eef0507798d7b9729b61":[4,0,11,5],
 "main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627":[4,0,11,2],
@@ -201,9 +203,6 @@ var NAVTREEINDEX1 =
 "sweep__run_8c.html#ab86b8648d7d34030b9344b376894d377":[4,0,0,14,5],
 "sweep__run_8c.html#ad75ef4176f4e6b97328e2305e420a14a":[4,0,0,14,1],
 "sweep__run_8c_source.html":[4,0,0,14],
-"test__roi_8c.html":[4,0,0,15],
-"test__roi_8c.html#a3c04138a5bfe5d72780bb7e82a18e627":[4,0,0,15,0],
-"test__roi_8c_source.html":[4,0,0,15],
 "utils_8c.html":[4,0,1],
 "utils_8c.html#a470bb66110f905195b035cd40a0ffb28":[4,0,1,0],
 "utils_8c_source.html":[4,0,1],

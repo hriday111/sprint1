@@ -94,14 +94,14 @@ $(document).ready(function(){initNavTree('camera_sdk.html',''); initResizable();
   <div class="headertitle"><div class="title">camera-sdk</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Library and tools for the Thorlabs DCC1545M (IDS uEye): capture a fixed mono8 crop, calibrate disc-mark ROIs with OpenCV, and sweep intensities without OpenCV. Clients drive the prism motor through FIFOs owned by <code>servo_calib</code> (see the <a class="el" href="README_8md.html">project README</a>).</p>
+<div class="textblock"><p>Library and tools for the Thorlabs DCC1545M (IDS uEye): capture a fixed mono8 crop, calibrate elliptical disc-mark ROIs with OpenCV, optionally build a two-point interpolation model, and sweep intensities without OpenCV. Clients drive the prism motor through FIFOs owned by <code>servo_calib</code> (see the <a class="el" href="README_8md.html">project README</a>).</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 Prerequisites</h1>
 <ul>
 <li>IDS uEye SDK (<code>libueye_api</code>); <code>ueyeusbd</code> running; camera visible as USB vendor <code>1409</code></li>
-<li>OpenCV 4 (<code>pkg-config opencv4</code>) for <code>calibrate</code> only</li>
+<li>OpenCV 4 (<code>pkg-config opencv4</code>) for <code>calibrate</code> and <code>calibrate2</code></li>
 <li><code>servo_calib</code> running when you need laser control or motion</li>
-<li>Writable <code>/var/lib/sprint1/</code> for shared <code>rois.json</code> / <code>saved.prm</code>, <code>./tmp/</code> for diagnostics, and <code>logs/</code> in the process cwd</li>
+<li>Writable <code>/var/lib/sprint1/</code> for shared ROI/prm files, <code>./tmp/</code> for diagnostics, and <code>logs/</code> in the process cwd</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Quickstart</h1>
@@ -109,15 +109,17 @@ Quickstart</h1>
 <div class="line">make</div>
 <div class="line">mkdir -p tmp</div>
 <div class="line"> </div>
-<div class="line"># Optional: place ROIs (servo_calib already running for laser)</div>
+<div class="line"># Single-pose ROIs (servo_calib running for laser)</div>
 <div class="line">./build/bin/calibrate 0.1</div>
 <div class="line"># Check tmp/detected.png — green ellipses on the three dark discs</div>
-<div class="line"># Logs: logs/calibrate-&lt;epoch&gt;.log</div>
 <div class="line"> </div>
-<div class="line"># Intensity sweep → CSV</div>
+<div class="line"># Two-point interp + intensity check (daemon left running)</div>
+<div class="line">./build/bin/calibrate2 0.1 400 420</div>
+<div class="line"># → /var/lib/sprint1/rois_interp.json, tmp/interp_intensity.csv,</div>
+<div class="line">#   tmp/detected_400.png, tmp/detected_420.png</div>
+<div class="line"> </div>
+<div class="line"># Intensity sweep</div>
 <div class="line">./build/bin/sweep_run /var/lib/sprint1/rois.json 0.1 ../sensor_data.csv</div>
-</div><!-- fragment --><p>Offline ROI parse check (no camera):</p>
-<div class="fragment"><div class="line">./build/bin/test_roi /var/lib/sprint1/rois.json</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
 What it does</h1>
 <table class="markdownTable">
@@ -126,19 +128,23 @@ What it does</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code><a class="el" href="cam_8c.html" title="IDS uEye camera open/close, exposure, and cropped grab.">cam.c</a></code> / <code><a class="el" href="cam_8h.html" title="Thin C wrapper around the IDS uEye API for the Thorlabs DCC1545M (mono8).">cam.h</a></code>   </td><td class="markdownTableBodyNone">Open uEye, set exposure, grab cropped mono8    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code><a class="el" href="roi_8c.html" title="Elliptical blob ROI JSON parsing, clipping, means, saturation, and PGM export.">roi.c</a></code> / <code><a class="el" href="roi_8h.html" title="Elliptical blob ROIs, JSON I/O, and intensity statistics.">roi.h</a></code>   </td><td class="markdownTableBodyNone">Ellipse JSON blobs, means, saturation fraction, PGM    </td></tr>
+<td class="markdownTableBodyNone"><code><a class="el" href="roi_8c.html" title="Elliptical blob ROI JSON parsing, clipping, means, saturation, and PGM export.">roi.c</a></code> / <code><a class="el" href="roi_8h.html" title="Elliptical blob ROIs, JSON I/O, and intensity statistics.">roi.h</a></code>   </td><td class="markdownTableBodyNone">Ellipse JSON blobs, mask means, saturation, PGM    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>roi_interp.*</code>   </td><td class="markdownTableBodyNone">Two-point lerp of ellipse geometry vs servo step    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>servo_fifo.*</code>   </td><td class="markdownTableBodyNone">Shared command/position FIFO client    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code><a class="el" href="detect_8cpp.html" title="Disc-mark detector for calibrate.">detect.cpp</a></code>   </td><td class="markdownTableBodyNone">Find dark discs; emit elliptical blob ROIs    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>calibrate</code>   </td><td class="markdownTableBodyNone">One-shot detect → <code>rois.json</code> + overlays    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>sweep_run</code>   </td><td class="markdownTableBodyNone">FIFO motion + ROI means → CSV    </td></tr>
+<td class="markdownTableBodyNone"><code>calibrate2</code>   </td><td class="markdownTableBodyNone">Detect at pos0 &amp; pos1 → interp model + check CSV    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>test_roi</code>   </td><td class="markdownTableBodyNone">Load JSON and mean a synthetic frame    </td></tr>
+<td class="markdownTableBodyNone"><code>sweep_run</code>   </td><td class="markdownTableBodyNone">FIFO motion + ROI means → CSV (sends <code>-1</code> on exit)    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>../logger.c</code>, <code>../crash.c</code>   </td><td class="markdownTableBodyNone">Shared logging + crash/core-dump hooks   </td></tr>
 </table>
-<p>Tools call <code>sprint1_logging_init("&lt;tool&gt;", …)</code> at startup (DEBUG to stderr and <code>logs/&lt;tool&gt;-&lt;epoch&gt;.log</code>). <code><a class="el" href="camera-sdk_2utils_8h.html#a32be982f3e299af7e5c574f80bc2c80c" title="Log + perror + file:line and terminate the process.">ERR()</a></code> in camera-sdk utils also emits <code>LOG_FATAL</code> before exiting.</p>
+<p>Tools call <code>sprint1_logging_init("&lt;tool&gt;", …)</code> at startup. <code><a class="el" href="camera-sdk_2utils_8h.html#a32be982f3e299af7e5c574f80bc2c80c" title="Log + perror + file:line and terminate the process.">ERR()</a></code> emits <code>LOG_FATAL</code> before exiting.</p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Camera crop</h2>
 <p>Every grab returns a <b>view</b> into sensor memory (no copy) clipped to:</p>
@@ -165,7 +171,7 @@ Camera API</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>cam_close</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="structcam__t.html" title="Open camera session and image memory.">cam_t</a> *cam</code>   </td><td class="markdownTableBodyNone">void    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>cam_set_exposure_ms</code>   </td><td class="markdownTableBodyNone"><code>cam</code>, <code>ms</code>, <code>actual</code> (nullable)   </td><td class="markdownTableBodyNone"><code>0</code> / <code>-1</code> (clamps to sensor range)    </td></tr>
+<td class="markdownTableBodyNone"><code>cam_set_exposure_ms</code>   </td><td class="markdownTableBodyNone"><code>cam</code>, <code>ms</code>, <code>actual</code> (nullable)   </td><td class="markdownTableBodyNone"><code>0</code> / <code>-1</code>    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>cam_get_exposure_ms</code>   </td><td class="markdownTableBodyNone"><code>cam</code>, <code>ms</code> out   </td><td class="markdownTableBodyNone"><code>0</code> / <code>-1</code>    </td></tr>
 <tr class="markdownTableRowOdd">
@@ -178,19 +184,45 @@ ROI API</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function   </th><th class="markdownTableHeadNone">Role    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>roi_load_json</code> / <code>roi_save_json</code>   </td><td class="markdownTableBodyNone">Ellipse JSON <code>{name,cx,cy,rx,ry,angle}</code>; also loads legacy <code>{x,y,w,h}</code> as an axis-aligned ellipse    </td></tr>
+<td class="markdownTableBodyNone"><code>roi_load_json</code> / <code>roi_save_json</code>   </td><td class="markdownTableBodyNone">Ellipse JSON <code>{name,cx,cy,rx,ry,angle}</code>; legacy <code>{x,y,w,h}</code> → axis-aligned ellipse    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>roi_clip</code>   </td><td class="markdownTableBodyNone">Clamp AABB to frame; set <code>pixels</code> = mask count    </td></tr>
+<td class="markdownTableBodyNone"><code>roi_parse_json</code>   </td><td class="markdownTableBodyNone">Same parse from an in-memory string    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>roi_means</code>   </td><td class="markdownTableBodyNone">Mean intensity 0–255 inside each ellipse mask    </td></tr>
+<td class="markdownTableBodyNone"><code>roi_sync_aabb</code>   </td><td class="markdownTableBodyNone">Refresh AABB <code>x,y,w,h</code> from ellipse fields    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>roi_sat_frac</code>   </td><td class="markdownTableBodyNone">Fraction of pixels ≥ <code>sat_level</code> (tools use 250)    </td></tr>
+<td class="markdownTableBodyNone"><code>roi_clip</code>   </td><td class="markdownTableBodyNone">Clamp AABB; recount mask pixels    </td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>roi_means</code> / <code>roi_sat_frac</code>   </td><td class="markdownTableBodyNone">Stats inside the ellipse mask    </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>roi_draw</code> / <code>write_pgm</code>   </td><td class="markdownTableBodyNone">Debug overlays / PGM export    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>detect_boxes_cv</code>   </td><td class="markdownTableBodyNone">OpenCV disc finder → up to <code>ROI_MAX</code> (8) named <code>ringN</code> blobs    </td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>detect_boxes_cv</code>   </td><td class="markdownTableBodyNone">OpenCV disc finder → up to <code>ROI_MAX</code> (8) named <code>ringN</code>    </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>frame_mat</code>   </td><td class="markdownTableBodyNone">Contiguous <code>CV_8UC1</code> Mat from a pitched buffer   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Interpolation API (&lt;tt&gt;roi_interp&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Function   </th><th class="markdownTableHeadNone">Role    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>roi_interp_at</code>   </td><td class="markdownTableBodyNone">Lerp <code>cx,cy,rx,ry,angle</code> for step <code>pos</code> (extrapolates outside endpoints)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>roi_interp_save</code> / <code>roi_interp_load</code>   </td><td class="markdownTableBodyNone">JSON model at <code>ROI_INTERP_PATH</code> (<code>/var/lib/sprint1/rois_interp.json</code>)   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Servo FIFO API (&lt;tt&gt;servo_fifo&lt;/tt&gt;)</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Function   </th><th class="markdownTableHeadNone">Role    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>servo_fifo_open</code> / <code>servo_fifo_send</code>   </td><td class="markdownTableBodyNone">Keep one write fd; send integer commands    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>servo_fifo_position</code> / <code>servo_fifo_move_and_wait</code>   </td><td class="markdownTableBodyNone">GETPOS (<code>4000</code>) + poll until target    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>servo_fifo_close</code>   </td><td class="markdownTableBodyNone">Close <b>without</b> <code>-1</code> (daemon keeps running)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>servo_fifo_shutdown</code>   </td><td class="markdownTableBodyNone">Send <code>-1</code> then close (stops daemon)   </td></tr>
 </table>
 <p><code>rois.json</code> example:</p>
 <div class="fragment"><div class="line">[</div>
@@ -198,23 +230,26 @@ ROI API</h2>
 <div class="line">  {&quot;name&quot;: &quot;ring2&quot;, &quot;cx&quot;: 477.0, &quot;cy&quot;: 179.0, &quot;rx&quot;: 42.0, &quot;ry&quot;: 40.0, &quot;angle&quot;: -5.0},</div>
 <div class="line">  {&quot;name&quot;: &quot;ring3&quot;, &quot;cx&quot;: 306.5, &quot;cy&quot;: 459.5, &quot;rx&quot;: 43.0, &quot;ry&quot;: 41.0, &quot;angle&quot;: 3.0}</div>
 <div class="line">]</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
 Tool CLI</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Tool   </th><th class="markdownTableHeadNone">Args (defaults)   </th><th class="markdownTableHeadNone">Notes    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>calibrate</code>   </td><td class="markdownTableBodyNone"><code>[exposure_ms=0.1] [n_blobs=3] [roi_path=/var/lib/sprint1/rois.json]</code>   </td><td class="markdownTableBodyNone">Writes <code>rois.json</code>, <code>tmp/detected.png</code>, <code>tmp/calib_frame.png</code>    </td></tr>
+<td class="markdownTableBodyNone"><code>calibrate</code>   </td><td class="markdownTableBodyNone"><code>[exposure_ms=0.1] [n_blobs=3] [roi_path]</code>   </td><td class="markdownTableBodyNone">Writes <code>rois.json</code>, <code>tmp/detected.png</code>, <code>tmp/calib_frame.png</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>sweep_run</code>   </td><td class="markdownTableBodyNone"><code>[rois.json] [exposure_ms=0.1] [out.csv=../sensor_data.csv]</code>   </td><td class="markdownTableBodyNone">Scans <code>start</code>…<code>stop</code> from <code>/var/lib/sprint1/saved.prm</code>; angle = <code>pos * 0.1125</code>    </td></tr>
+<td class="markdownTableBodyNone"><code>calibrate2</code>   </td><td class="markdownTableBodyNone"><code>[exposure_ms=0.1] [pos0=400] [pos1=420] [n_blobs=3] [interp_path] [csv_path]</code>   </td><td class="markdownTableBodyNone">Detects at both poses; writes interp JSON + <code>tmp/interp_intensity.csv</code>; leaves daemon running    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>test_roi</code>   </td><td class="markdownTableBodyNone"><code>[rois.json]</code>   </td><td class="markdownTableBodyNone">No camera   </td></tr>
+<td class="markdownTableBodyNone"><code>sweep_run</code>   </td><td class="markdownTableBodyNone"><code>[rois.json] [exposure_ms=0.1] [out.csv=../sensor_data.csv]</code>   </td><td class="markdownTableBodyNone">Scans <code>saved.prm</code> start…stop; angle = <code>pos * 0.1125</code>; <b>exits</b> daemon   </td></tr>
 </table>
-<p><b>FIFO contract for <code>sweep_run</code>:</b> keep one write fd on <code>/run/sprint1/data_pipe</code> for the whole scan; open <code>pos_pipe</code> before each <code>4000</code>. On exit it sends <code>-1</code> (stops the servo daemon).</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
-Detection design (why calibrate ≠ measure)</h1>
-<p>Illumination on the chip is uneven, so measurement never re-runs OpenCV. <code>detect_boxes_cv</code> flattens the frame, multi-threshold dark blobs, rejects crosses, refines ellipses, and stores the <b>fitted elliptical blobs</b> so <code>roi_means</code> averages the disc mask (still OpenCV-free during the sweep). Recalibrate after any lens move — see <a class="el" href="RECALIBRATE_8md.html">RECALIBRATE.md</a>.</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<p>**Check CSV columns (<code>calibrate2</code>):** <code>pos</code>, <code>&lt;name&gt;_interp</code>, <code>&lt;name&gt;_fixed</code>, <code>&lt;name&gt;_cx</code>, <code>&lt;name&gt;_cy</code>. Flat <code>_interp</code> intensity vs pos suggests the lerp tracks the discs; rising <code>_fixed</code> drift shows why a single pose is not enough.</p>
+<blockquote class="doxtable">
+<p>&zwj;<b>Note:</b> <code>calibrate2</code> may print a hint to run <code>plot_interp_check.py</code> — that helper is illustrative and may not be in the tree; plot the CSV with any tool you prefer. </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md9"></a>
+Detection design</h1>
+<p>Illumination on the chip is uneven, so measurement never re-runs OpenCV mid-sweep. <code>detect_boxes_cv</code> flattens the frame, multi-threshold dark blobs, rejects crosses, refines ellipses, and stores fitted elliptical blobs for <code>roi_means</code>. Recalibrate after any lens move — see <a class="el" href="RECALIBRATE_8md.html">RECALIBRATE.md</a>.</p>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Common pitfalls</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -224,7 +259,7 @@ Common pitfalls</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>no reader (is servo_calib running?)</code>   </td><td class="markdownTableBodyNone">Start the daemon before FIFO tools    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Fewer than 3 marks / ellipses off the discs   </td><td class="markdownTableBodyNone">Lower exposure; check focus; inspect <code>tmp/calib_frame.png</code>    </td></tr>
+<td class="markdownTableBodyNone">Fewer than 3 marks / ellipses off the discs   </td><td class="markdownTableBodyNone">Lower exposure; check focus; inspect <code>tmp/calib_frame_*.png</code>    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Saturation warnings   </td><td class="markdownTableBodyNone">Shorten exposure or reduce laser <code>bN</code>    </td></tr>
 <tr class="markdownTableRowOdd">
@@ -232,15 +267,17 @@ Common pitfalls</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Wrong scan range   </td><td class="markdownTableBodyNone">Edit <code>/var/lib/sprint1/saved.prm</code> (<code>start stop prep</code>, 0–999)    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Undefined <code>sprint1_logging_init</code> at link   </td><td class="markdownTableBodyNone">Build via the Makefile (links <code>../logger.c</code> and <code>../crash.c</code>)   </td></tr>
+<td class="markdownTableBodyNone">Daemon dies after calibrate2   </td><td class="markdownTableBodyNone">Should not — use <code>servo_fifo_close</code>; if you called shutdown, restart servo    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Undefined <code>sprint1_logging_init</code> at link   </td><td class="markdownTableBodyNone">Build via the Makefile (links logger + crash)   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md11"></a>
 Build</h1>
-<div class="fragment"><div class="line">make          # sweep_run, calibrate, test_roi → build/bin/</div>
+<div class="fragment"><div class="line">make          # sweep_run, calibrate, calibrate2 → build/bin/</div>
 <div class="line">make clean</div>
-</div><!-- fragment --><p>Optional helpers not in the default Makefile: <code><a class="el" href="grab__check_8c.html" title="Minimal camera smoke test: open, set exposure, grab one crop, print stats.">grab_check.c</a></code> (camera smoke test), <code><a class="el" href="detect__test_8cpp.html" title="Offline test of detect_boxes_cv on a PNG/PGM (no camera).">detect_test.cpp</a></code> (offline PNG detection). Both expect the shared logger/crash objects if you compile them by hand.</p>
+</div><!-- fragment --><p>Optional (not default targets): <code><a class="el" href="grab__check_8c.html" title="Minimal camera smoke test: open, set exposure, grab one crop, print stats.">grab_check.c</a></code>, <code><a class="el" href="detect__test_8cpp.html" title="Offline test of detect_boxes_cv on a PNG/PGM (no camera).">detect_test.cpp</a></code>.</p>
 <blockquote class="doxtable">
-<p>&zwj;<b>Verify on hardware:</b> crop constants vs your sensor AOI, default paths under <code>/var/lib/sprint1/</code>, and that <code>is_SetExposureTime</code> matches your uEye SDK headers. </p>
+<p>&zwj;<b>Verify on hardware:</b> crop constants vs sensor AOI, <code>/var/lib/sprint1/</code> paths, and <code>is_SetExposureTime</code> vs your uEye SDK headers. </p>
 </blockquote>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

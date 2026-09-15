@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['test_5froi_2ec_0',['test_roi.c',['../test__roi_8c.html',1,'']]],
-  ['the_20lens_1',['Recalibrate chip marks after moving the lens',['../recalibrate.html',1,'']]],
-  ['tool_20cli_2',['Tool CLI',['../camera_sdk.html#autotoc_md6',1,'']]],
-  ['trim_3',['trim',['../loggerconf_8c.html#a6b21b3f128c91055d8784740fcf05519',1,'loggerconf.c']]]
+  ['the_20lens_0',['Recalibrate chip marks after moving the lens',['../recalibrate.html',1,'']]],
+  ['tool_20cli_1',['Tool CLI',['../camera_sdk.html#autotoc_md8',1,'']]],
+  ['trim_2',['trim',['../loggerconf_8c.html#a6b21b3f128c91055d8784740fcf05519',1,'loggerconf.c']]],
+  ['tt_20roi_5finterp_20tt_3',['Interpolation API (&lt;tt&gt;roi_interp&lt;/tt&gt;)',['../camera_sdk.html#autotoc_md6',1,'']]],
+  ['tt_20servo_5ffifo_20tt_4',['Servo FIFO API (&lt;tt&gt;servo_fifo&lt;/tt&gt;)',['../camera_sdk.html#autotoc_md7',1,'']]]
 ];
