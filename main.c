@@ -59,6 +59,11 @@ static void loadParams(char *filename, stepper_t *stepper)
         LOG_FATAL("loadParams: expected 3 integers, got %d", n);
         exit(EXIT_FAILURE);
     }
+
+    /*
+    this if statement looks like it can be removed, but need to make sure the user doesn't input some random values. 
+    In production it can be removed. But then agian need to make sure the read isn't dirty. So maybe keep it for now. 
+    */
     if (stepper->start < 0 || stepper->stop < 0 || stepper->prep < 0 ||
         stepper->start > 999 || stepper->stop > 999 || stepper->prep > 999) {
         LOG_FATAL("loadParams: unsupported values start=%d stop=%d prep=%d",

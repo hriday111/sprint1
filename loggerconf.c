@@ -120,8 +120,7 @@ static LogLevel parseLevel(const char* s);
 
 static void parseLine(char* line)
 {
-    char *key, *val;
-    int nfiles;
+    const char *key, *val;
 
     key = strtok(line, "=");
     val = strtok(NULL, "=");
@@ -153,7 +152,7 @@ static void parseLine(char* line)
     } else if (strcmp(key, "logger.file.maxFileSize") == 0) {
         s_flog.maxFileSize = atol(val);
     } else if (strcmp(key, "logger.file.maxBackupFiles") == 0) {
-        nfiles = atoi(val);
+        int nfiles = atoi(val);
         if (nfiles < 0) {
             fprintf(stderr, "ERROR: loggerconf: Invalid logger.file.maxBackupFiles: `%s`\n", val);
             nfiles = 0;
