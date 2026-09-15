@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Prism scan controller and camera-sdk (uEye + ROI sweep)</div>
+   <div id="projectbrief">Prism scan controller, elliptical ROI camera-sdk, and two-point ROI interpolation</div>
   </td>
  </tr>
  </tbody>
@@ -94,20 +94,20 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Sprint1 — Prism scan controller </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="mainpage"></a></p>
-<p>Sprint1 runs a Raspberry Pi–mounted A4988 stepper, laser, and endstop (“the black box”) while <code>camera-sdk/</code> grabs frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The two processes talk over named FIFOs under <code>/run/sprint1/</code>. This guide is for engineers operating the rig on a Pi 4 with WiringPi and the uEye SDK.</p>
+<div class="textblock"><p><a class="anchor" id="mainpage"></a> Sprint1 runs a Raspberry Pi–mounted A4988 stepper, laser, and endstop (“the black box”) while <code>camera-sdk/</code> grabs frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The two processes talk over named FIFOs under <code>/run/sprint1/</code>. This guide is for engineers operating the rig on a Pi 4 with WiringPi and the uEye SDK.</p>
 <h1><a class="anchor" id="autotoc_md12"></a>
 Documentation</h1>
-<p><a href="https://hriday111.github.io/sprint1">Documentation uploaded to GH pages</a> </p>
+<p>Published API docs: <a href="https://hriday111.github.io/sprint1">https://hriday111.github.io/sprint1</a></p>
+<p>Local HTML: <code>./docs/generate.sh</code> then open <code>docs/html/index.html</code>.</p>
 <h1><a class="anchor" id="autotoc_md13"></a>
 Prerequisites</h1>
 <ul>
 <li>Raspberry Pi 4 with WiringPi (<code>-lwiringPi</code>)</li>
 <li>Root (or equivalent GPIO) privileges for <code>servo_calib</code> (hardware PWM on BCM 18)</li>
-<li>IDS uEye SDK (<code>libueye_api</code>); OpenCV 4 for <code>calibrate</code> only</li>
+<li>IDS uEye SDK (<code>libueye_api</code>); OpenCV 4 for <code>calibrate</code> / <code>calibrate2</code></li>
 <li>Hardware wired per the pin table below</li>
-<li>Writable <code>/run/sprint1/</code> (FIFOs), <code>/var/lib/sprint1/</code> (<code>rois.json</code>, <code>saved.prm</code>), and a local <code>logs/</code> directory (created on start)</li>
-<li>A sample <code>saved.prm</code> lives in the repo; <code>rois.json</code> is produced by <code>calibrate</code></li>
+<li>Writable <code>/run/sprint1/</code> (FIFOs), <code>/var/lib/sprint1/</code> (<code>rois.json</code>, <code>rois_interp.json</code>, <code>saved.prm</code>), and a local <code>logs/</code> directory (created on start)</li>
+<li>A sample <code>saved.prm</code> lives in the repo; ROI files are produced by the calibrate tools</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md14"></a>
 Quickstart</h1>
@@ -116,16 +116,20 @@ Quickstart</h1>
 <div class="line">sudo ./build/servo_calib</div>
 <div class="line"># Logs: logs/servo_calib-&lt;epoch&gt;.log (+ stderr)</div>
 <div class="line"> </div>
-<div class="line"># Terminal 2 — recalibrate ROIs after moving the lens (optional)</div>
+<div class="line"># Terminal 2 — place ROIs (after lens moves)</div>
 <div class="line">cd camera-sdk &amp;&amp; make</div>
 <div class="line">mkdir -p tmp</div>
 <div class="line">./build/bin/calibrate 0.1</div>
-<div class="line"># Inspect tmp/detected.png — green boxes must sit inside the dark discs</div>
+<div class="line"># Inspect tmp/detected.png — green ellipses on the three dark discs</div>
 <div class="line"> </div>
-<div class="line"># Terminal 2 — intensity sweep (servo_calib still running)</div>
+<div class="line"># Optional — two-point interp model (leaves servo_calib running)</div>
+<div class="line">./build/bin/calibrate2 0.1 400 420</div>
+<div class="line"># Writes /var/lib/sprint1/rois_interp.json and tmp/interp_intensity.csv</div>
+<div class="line"> </div>
+<div class="line"># Intensity sweep (servo_calib still running)</div>
 <div class="line">./build/bin/sweep_run /var/lib/sprint1/rois.json 0.1 ../sensor_data.csv</div>
-</div><!-- fragment --><p>On success, <code>sensor_data.csv</code> has one row per step: <code>Angle_deg</code> plus one mean column per ROI.</p>
-<p><b>Note:</b> When <code>sweep_run</code> finishes it sends <code>-1</code> on the command FIFO, which <b>exits</b> <code>servo_calib</code>. Restart the daemon before another sweep.</p>
+</div><!-- fragment --><p>On success, <code>sensor_data.csv</code> has one row per step: <code>Angle_deg</code> plus one mean column per ROI (ellipse mask).</p>
+<p><b>Note:</b> <code>sweep_run</code> sends <code>-1</code> on the command FIFO when it finishes, which <b>exits</b> <code>servo_calib</code>. <code>calibrate2</code> closes the FIFO <b>without</b> <code>-1</code> and leaves the daemon running.</p>
 <h1><a class="anchor" id="autotoc_md15"></a>
 Architecture</h1>
 <table class="markdownTable">
@@ -134,10 +138,16 @@ Architecture</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>build/servo_calib</code>   </td><td class="markdownTableBodyNone">GPIO, home on endstop, serve commands, publish position, logging/crash hooks    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>camera-sdk/sweep_run</code>   </td><td class="markdownTableBodyNone">Move start→stop, grab crop, average ROIs, write CSV (no OpenCV)    </td></tr>
+<td class="markdownTableBodyNone"><code>camera-sdk/sweep_run</code>   </td><td class="markdownTableBodyNone">Move start→stop, grab crop, average elliptical ROIs, write CSV    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>camera-sdk/calibrate</code>   </td><td class="markdownTableBodyNone">Detect discs once; write boxes to <code>rois.json</code>    </td></tr>
+<td class="markdownTableBodyNone"><code>camera-sdk/calibrate</code>   </td><td class="markdownTableBodyNone">Detect discs once at current pose; write <code>rois.json</code>    </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>camera-sdk/calibrate2</code>   </td><td class="markdownTableBodyNone">Detect at two servo positions; write interp model + check CSV    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>camera-sdk/servo_fifo.*</code>   </td><td class="markdownTableBodyNone">Shared FIFO client (open/send/move; close vs shutdown)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>camera-sdk/roi_interp.*</code>   </td><td class="markdownTableBodyNone">Linear lerp of ellipse geometry vs step    </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code><a class="el" href="logger_8c.html" title="Implementation of the thread-safe console/file logger.">logger.c</a></code> / <code><a class="el" href="crash_8c.html" title="File-logger bootstrap and fatal-signal / core-dump handling.">crash.c</a></code>   </td><td class="markdownTableBodyNone">Shared file+console logging and fatal-signal / core-dump setup   </td></tr>
 </table>
 <table class="markdownTable">
@@ -212,7 +222,8 @@ Config files</h1>
 <li>The loader reads at most <b>31</b> bytes before a NUL; keep the line short.</li>
 <li>Both <code>servo_calib</code> and <code>sweep_run</code> use this path.</li>
 </ul>
-<p>**<code>/var/lib/sprint1/rois.json</code>** — up to 8 boxes in crop coordinates (<code>CAM_CROP_*</code>: 600×740 at origin (350, 60) on the sensor). Intensity is the rectangle mean (no ellipse mask at scan time).</p>
+<p>**<code>/var/lib/sprint1/rois.json</code>** — up to 8 elliptical blobs in crop coordinates (<code>CAM_CROP_*</code>: 600×740 at (350, 60)). Fields: <code>name</code>, <code>cx</code>, <code>cy</code>, <code>rx</code>, <code>ry</code>, <code>angle</code>. Intensity is the <b>ellipse mask</b> mean (legacy <code>{x,y,w,h}</code> still loads as an axis-aligned ellipse).</p>
+<p>**<code>/var/lib/sprint1/rois_interp.json</code>** — two-point model from <code>calibrate2</code> (<code>pos0</code>/<code>pos1</code> + <code>at0</code>/<code>at1</code> ellipse arrays). Used to lerp blob geometry vs step; <code>sweep_run</code> still reads a single <code>rois.json</code> today.</p>
 <h1><a class="anchor" id="autotoc_md20"></a>
 Common pitfalls</h1>
 <table class="markdownTable">
@@ -225,7 +236,7 @@ Common pitfalls</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>position: no reply after retries</code>   </td><td class="markdownTableBodyNone">Open <code>pos_pipe</code> for read <b>before</b> sending <code>4000</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Boxes miss the discs   </td><td class="markdownTableBodyNone">Run <code>./calibrate</code> after any lens move    </td></tr>
+<td class="markdownTableBodyNone">Ellipses miss the discs   </td><td class="markdownTableBodyNone">Run <code>./calibrate</code> or <code>./calibrate2</code> after any lens move    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">ROI saturation warning   </td><td class="markdownTableBodyNone">Lower exposure or <code>b</code> brightness    </td></tr>
 <tr class="markdownTableRowEven">
@@ -233,16 +244,15 @@ Common pitfalls</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Goto fails after boot   </td><td class="markdownTableBodyNone">Confirm endstop on GPIO 17; enable before absolute moves    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Daemon gone after sweep   </td><td class="markdownTableBodyNone">Expected: <code>sweep_run</code> sends <code>-1</code> on exit    </td></tr>
+<td class="markdownTableBodyNone">Daemon gone after sweep   </td><td class="markdownTableBodyNone">Expected for <code>sweep_run</code>; use <code>calibrate2</code> if you need the daemon to stay up    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">No <code>logs/</code> file   </td><td class="markdownTableBodyNone">Process must start in a writable cwd (creates <code>logs/</code>)   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md21"></a>
-Why fixed ROIs?</h1>
-<p>Detection runs only at calibration time. Measurement is a cheap mean over boxes so <code>sweep_run</code> stays OpenCV-free and keeps up with step-by-step motion. After any optical change, recalibrate once. See <a class="el" href="camera-sdk_2README_8md.html">camera-sdk/README.md</a> for the full camera API and tool reference.</p>
-<p>API HTML (Doxygen): run <code>./docs/generate.sh</code>, then open <code>docs/html/index.html</code>.</p>
+Why calibrate once (or twice)?</h1>
+<p>Detection runs only in the calibrate tools. Measurement averages ellipse masks so <code>sweep_run</code> stays OpenCV-free. After any optical change, recalibrate. For pose-dependent drift across a scan window, use <code>calibrate2</code> and inspect <code>tmp/interp_intensity.csv</code> (interp vs fixed means). Full camera API: <a class="el" href="camera-sdk_2README_8md.html">camera-sdk/README.md</a>.</p>
 <blockquote class="doxtable">
-<p>&zwj;<b>Verify on hardware:</b> uEye device permissions, whether <code>/var/lib/sprint1/</code> is provisioned on your image, and that sharing value <code>1003</code> for disable/reset matches intended behavior. </p>
+<p>&zwj;<b>Verify on hardware:</b> uEye device permissions, <code>/var/lib/sprint1/</code> provisioning, and that <code>CMD_DISABLE</code>/<code>CMD_RESET</code> both being <code>1003</code> matches intended behavior. </p>
 </blockquote>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->

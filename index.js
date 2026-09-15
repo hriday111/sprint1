@@ -9,5 +9,5 @@ var index =
     [ "Command protocol", "index.html#autotoc_md18", null ],
     [ "Config files", "index.html#autotoc_md19", null ],
     [ "Common pitfalls", "index.html#autotoc_md20", null ],
-    [ "Why fixed ROIs?", "index.html#autotoc_md21", null ]
+    [ "Why calibrate once (or twice)?", "index.html#autotoc_md21", null ]
 ];

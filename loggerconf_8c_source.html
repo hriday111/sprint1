@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Prism scan controller and camera-sdk (uEye + ROI sweep)</div>
+   <div id="projectbrief">Prism scan controller, elliptical ROI camera-sdk, and two-point ROI interpolation</div>
   </td>
  </tr>
  </tbody>
@@ -254,7 +254,7 @@ $(document).ready(function(){initNavTree('loggerconf_8c_source.html',''); initRe
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <a class="code hl_variable" href="loggerconf_8c.html#ac34a051515e9c912983065959f4d21d0">s_clog</a>.output = NULL;</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        }</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(key, <span class="stringliteral">&quot;logger.file.filename&quot;</span>) == 0) {</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        strncpy(<a class="code hl_variable" href="loggerconf_8c.html#ab5cb91be57c2ade507049ec99985ff5d">s_flog</a>.filename, val, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="loggerconf_8c.html#ab5cb91be57c2ade507049ec99985ff5d">s_flog</a>.filename));</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        snprintf(<a class="code hl_variable" href="loggerconf_8c.html#ab5cb91be57c2ade507049ec99985ff5d">s_flog</a>.filename, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="loggerconf_8c.html#ab5cb91be57c2ade507049ec99985ff5d">s_flog</a>.filename), <span class="stringliteral">&quot;%s&quot;</span>, val);</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(key, <span class="stringliteral">&quot;logger.file.maxFileSize&quot;</span>) == 0) {</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <a class="code hl_variable" href="loggerconf_8c.html#ab5cb91be57c2ade507049ec99985ff5d">s_flog</a>.maxFileSize = atol(val);</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(key, <span class="stringliteral">&quot;logger.file.maxBackupFiles&quot;</span>) == 0) {</div>
