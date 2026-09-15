@@ -113,7 +113,7 @@ int logger_initFileLogger(const char* filename, long maxFileSize, unsigned char 
         goto cleanup;
     }
     s_flog.currentFileSize = getFileSize(filename);
-    strncpy(s_flog.filename, filename, sizeof(s_flog.filename));
+    snprintf(s_flog.filename, sizeof(s_flog.filename), "%s", filename);
     s_flog.maxFileSize = (maxFileSize > 0) ? maxFileSize : kDefaultMaxFileSize;
     s_flog.maxBackupFiles = maxBackupFiles;
     s_logger |= kFileLogger;
@@ -211,7 +211,9 @@ static void getBackupFileName(const char* basename, unsigned char index,
     strncpy(backupname, basename, size);
     if (index > 0) {
         sprintf(indexname, ".%d", index);
-        strncat(backupname, indexname, strlen(indexname));
+        size_t current_len = strlen(backupname);
+        size_t space_left = sizeof(backupname) - current_len - 1; // -1 for the null terminator
+        strncat(backupname, indexname, space_left);
     }
 }
 /** @brief Rotate @c filename → @c .1 .. @c .N when size exceeds the limit. */

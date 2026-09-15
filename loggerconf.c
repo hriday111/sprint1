@@ -148,7 +148,7 @@ static void parseLine(char* line)
             s_clog.output = NULL;
         }
     } else if (strcmp(key, "logger.file.filename") == 0) {
-        strncpy(s_flog.filename, val, sizeof(s_flog.filename));
+        snprintf(s_flog.filename, sizeof(s_flog.filename), "%s", val);
     } else if (strcmp(key, "logger.file.maxFileSize") == 0) {
         s_flog.maxFileSize = atol(val);
     } else if (strcmp(key, "logger.file.maxBackupFiles") == 0) {

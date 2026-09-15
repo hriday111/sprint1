@@ -1,18 +1,21 @@
 # Sprint1 — Prism scan controller {#mainpage}
 
-
 Sprint1 runs a Raspberry Pi–mounted A4988 stepper, laser, and endstop (“the black box”) while `camera-sdk/` grabs frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The two processes talk over named FIFOs under `/run/sprint1/`. This guide is for engineers operating the rig on a Pi 4 with WiringPi and the uEye SDK.
 
 ## Documentation
-[Documentation uploaded to GH pages](https://hriday111.github.io/sprint1)
+
+Published API docs: [https://hriday111.github.io/sprint1](https://hriday111.github.io/sprint1)
+
+Local HTML: `./docs/generate.sh` then open `docs/html/index.html`.
+
 ## Prerequisites
 
 - Raspberry Pi 4 with WiringPi (`-lwiringPi`)
 - Root (or equivalent GPIO) privileges for `servo_calib` (hardware PWM on BCM 18)
-- IDS uEye SDK (`libueye_api`); OpenCV 4 for `calibrate` only
+- IDS uEye SDK (`libueye_api`); OpenCV 4 for `calibrate` / `calibrate2`
 - Hardware wired per the pin table below
-- Writable `/run/sprint1/` (FIFOs), `/var/lib/sprint1/` (`rois.json`, `saved.prm`), and a local `logs/` directory (created on start)
-- A sample `saved.prm` lives in the repo; `rois.json` is produced by `calibrate`
+- Writable `/run/sprint1/` (FIFOs), `/var/lib/sprint1/` (`rois.json`, `rois_interp.json`, `saved.prm`), and a local `logs/` directory (created on start)
+- A sample `saved.prm` lives in the repo; ROI files are produced by the calibrate tools
 
 ## Quickstart
 
@@ -22,27 +25,34 @@ sudo make
 sudo ./build/servo_calib
 # Logs: logs/servo_calib-<epoch>.log (+ stderr)
 
-# Terminal 2 — recalibrate ROIs after moving the lens (optional)
+# Terminal 2 — place ROIs (after lens moves)
 cd camera-sdk && make
 mkdir -p tmp
 ./build/bin/calibrate 0.1
-# Inspect tmp/detected.png — green boxes must sit inside the dark discs
+# Inspect tmp/detected.png — green ellipses on the three dark discs
 
-# Terminal 2 — intensity sweep (servo_calib still running)
+# Optional — two-point interp model (leaves servo_calib running)
+./build/bin/calibrate2 0.1 400 420
+# Writes /var/lib/sprint1/rois_interp.json and tmp/interp_intensity.csv
+
+# Intensity sweep (servo_calib still running)
 ./build/bin/sweep_run /var/lib/sprint1/rois.json 0.1 ../sensor_data.csv
 ```
 
-On success, `sensor_data.csv` has one row per step: `Angle_deg` plus one mean column per ROI.
+On success, `sensor_data.csv` has one row per step: `Angle_deg` plus one mean column per ROI (ellipse mask).
 
-**Note:** When `sweep_run` finishes it sends `-1` on the command FIFO, which **exits** `servo_calib`. Restart the daemon before another sweep.
+**Note:** `sweep_run` sends `-1` on the command FIFO when it finishes, which **exits** `servo_calib`. `calibrate2` closes the FIFO **without** `-1` and leaves the daemon running.
 
 ## Architecture
 
 | Component | Role |
 |-----------|------|
 | `build/servo_calib` | GPIO, home on endstop, serve commands, publish position, logging/crash hooks |
-| `camera-sdk/sweep_run` | Move start→stop, grab crop, average ROIs, write CSV (no OpenCV) |
-| `camera-sdk/calibrate` | Detect discs once; write boxes to `rois.json` |
+| `camera-sdk/sweep_run` | Move start→stop, grab crop, average elliptical ROIs, write CSV |
+| `camera-sdk/calibrate` | Detect discs once at current pose; write `rois.json` |
+| `camera-sdk/calibrate2` | Detect at two servo positions; write interp model + check CSV |
+| `camera-sdk/servo_fifo.*` | Shared FIFO client (open/send/move; close vs shutdown) |
+| `camera-sdk/roi_interp.*` | Linear lerp of ellipse geometry vs step |
 | `logger.c` / `crash.c` | Shared file+console logging and fatal-signal / core-dump setup |
 
 | Path | Direction | Purpose |
@@ -109,7 +119,9 @@ Angle conversion uses **0.1125° per step**. Homing lands near step `400 + 34` w
 - The loader reads at most **31** bytes before a NUL; keep the line short.
 - Both `servo_calib` and `sweep_run` use this path.
 
-**`/var/lib/sprint1/rois.json`** — up to 8 boxes in crop coordinates (`CAM_CROP_*`: 600×740 at origin (350, 60) on the sensor). Intensity is the rectangle mean (no ellipse mask at scan time).
+**`/var/lib/sprint1/rois.json`** — up to 8 elliptical blobs in crop coordinates (`CAM_CROP_*`: 600×740 at (350, 60)). Fields: `name`, `cx`, `cy`, `rx`, `ry`, `angle`. Intensity is the **ellipse mask** mean (legacy `{x,y,w,h}` still loads as an axis-aligned ellipse).
+
+**`/var/lib/sprint1/rois_interp.json`** — two-point model from `calibrate2` (`pos0`/`pos1` + `at0`/`at1` ellipse arrays). Used to lerp blob geometry vs step; `sweep_run` still reads a single `rois.json` today.
 
 ## Common pitfalls
 
@@ -118,17 +130,15 @@ Angle conversion uses **0.1125° per step**. Homing lands near step `400 + 34` w
 | `no reader (is servo_calib running?)` | Start `sudo ./build/servo_calib` first |
 | `EPIPE` mid-sweep | Keep one `O_WRONLY` fd open for the whole scan |
 | `position: no reply after retries` | Open `pos_pipe` for read **before** sending `4000` |
-| Boxes miss the discs | Run `./calibrate` after any lens move |
+| Ellipses miss the discs | Run `./calibrate` or `./calibrate2` after any lens move |
 | ROI saturation warning | Lower exposure or `b` brightness |
 | `loadParams: unsupported values` | Keep start/stop/prep in 0–999 |
 | Goto fails after boot | Confirm endstop on GPIO 17; enable before absolute moves |
-| Daemon gone after sweep | Expected: `sweep_run` sends `-1` on exit |
+| Daemon gone after sweep | Expected for `sweep_run`; use `calibrate2` if you need the daemon to stay up |
 | No `logs/` file | Process must start in a writable cwd (creates `logs/`) |
 
-## Why fixed ROIs?
+## Why calibrate once (or twice)?
 
-Detection runs only at calibration time. Measurement is a cheap mean over boxes so `sweep_run` stays OpenCV-free and keeps up with step-by-step motion. After any optical change, recalibrate once. See [camera-sdk/README.md](camera-sdk/README.md) for the full camera API and tool reference.
+Detection runs only in the calibrate tools. Measurement averages ellipse masks so `sweep_run` stays OpenCV-free. After any optical change, recalibrate. For pose-dependent drift across a scan window, use `calibrate2` and inspect `tmp/interp_intensity.csv` (interp vs fixed means). Full camera API: [camera-sdk/README.md](camera-sdk/README.md).
 
-API HTML (Doxygen): run `./docs/generate.sh`, then open `docs/html/index.html`.
-
-> **Verify on hardware:** uEye device permissions, whether `/var/lib/sprint1/` is provisioned on your image, and that sharing value `1003` for disable/reset matches intended behavior.
+> **Verify on hardware:** uEye device permissions, `/var/lib/sprint1/` provisioning, and that `CMD_DISABLE`/`CMD_RESET` both being `1003` matches intended behavior.

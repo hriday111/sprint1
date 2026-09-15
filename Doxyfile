@@ -2,7 +2,7 @@
 # Generated for local documentation builds.
 
 PROJECT_NAME           = "Sprint1"
-PROJECT_BRIEF          = "Prism scan controller and camera-sdk (uEye + ROI sweep)"
+PROJECT_BRIEF          = "Prism scan controller, elliptical ROI camera-sdk, and two-point ROI interpolation"
 PROJECT_NUMBER         =
 
 OUTPUT_DIRECTORY       = docs

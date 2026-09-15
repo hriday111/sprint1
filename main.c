@@ -61,9 +61,9 @@ static void loadParams(char *filename, stepper_t *stepper)
     }
 
     /*
-    this if statement looks like it can be removed, but need to make sure the user doesn't input some random values. 
-    In production it can be removed. But then agian need to make sure the read isn't dirty. So maybe keep it for now. 
-    */
+     * Guard against nonsense / truncated reads. Keep in production until the
+     * loader is hardened (longer buffer, stricter parsing).
+     */
     if (stepper->start < 0 || stepper->stop < 0 || stepper->prep < 0 ||
         stepper->start > 999 || stepper->stop > 999 || stepper->prep > 999) {
         LOG_FATAL("loadParams: unsupported values start=%d stop=%d prep=%d",
@@ -286,7 +286,7 @@ int main(int argc, char **argv)
     ms_sleep(100);
     LOG_INFO("Homing (drive toward endstop)...");
     homed = stepperInit(&stepper);
-    if (homed < 0) {
+        if (homed < 0) {
         LOG_FATAL("Homing failed");
         logger_flush();
         stepperClose(&stepper);
