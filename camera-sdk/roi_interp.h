@@ -26,8 +26,8 @@ typedef struct {
 /**
  * @brief Linearly interpolate blob ROIs for servo step @p pos.
  *
- * @f$ t = (pos - pos0) / (pos1 - pos0) @f$; each of cx,cy,rx,ry,angle is lerped.
- * Extrapolation outside [pos0,pos1] is allowed.
+ * t = (pos - pos0) / (pos1 - pos0); each of cx, cy, rx, ry, angle is lerped.
+ * Extrapolation outside [pos0, pos1] is allowed.
  *
  * @param model Two-point calibration.
  * @param pos Servo step.

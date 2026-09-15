@@ -3,7 +3,7 @@
 
 /**
  * @file detect.hpp
- * @brief OpenCV disc-mark detection used by @c calibrate.
+ * @brief OpenCV disc-mark detection used by @c calibrate and @c calibrate2.
  */
 
 #ifdef __cplusplus

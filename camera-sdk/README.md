@@ -1,13 +1,13 @@
 # camera-sdk {#camera_sdk}
 
-Library and tools for the Thorlabs DCC1545M (IDS uEye): capture a fixed mono8 crop, calibrate disc-mark ROIs with OpenCV, and sweep intensities without OpenCV. Clients drive the prism motor through FIFOs owned by `servo_calib` (see the [project README](../README.md)).
+Library and tools for the Thorlabs DCC1545M (IDS uEye): capture a fixed mono8 crop, calibrate elliptical disc-mark ROIs with OpenCV, optionally build a two-point interpolation model, and sweep intensities without OpenCV. Clients drive the prism motor through FIFOs owned by `servo_calib` (see the [project README](../README.md)).
 
 ## Prerequisites
 
 - IDS uEye SDK (`libueye_api`); `ueyeusbd` running; camera visible as USB vendor `1409`
-- OpenCV 4 (`pkg-config opencv4`) for `calibrate` only
+- OpenCV 4 (`pkg-config opencv4`) for `calibrate` and `calibrate2`
 - `servo_calib` running when you need laser control or motion
-- Writable `/var/lib/sprint1/` for shared `rois.json` / `saved.prm`, `./tmp/` for diagnostics, and `logs/` in the process cwd
+- Writable `/var/lib/sprint1/` for shared ROI/prm files, `./tmp/` for diagnostics, and `logs/` in the process cwd
 
 ## Quickstart
 
@@ -16,19 +16,17 @@ cd camera-sdk
 make
 mkdir -p tmp
 
-# Optional: place ROIs (servo_calib already running for laser)
+# Single-pose ROIs (servo_calib running for laser)
 ./build/bin/calibrate 0.1
 # Check tmp/detected.png — green ellipses on the three dark discs
-# Logs: logs/calibrate-<epoch>.log
 
-# Intensity sweep → CSV
+# Two-point interp + intensity check (daemon left running)
+./build/bin/calibrate2 0.1 400 420
+# → /var/lib/sprint1/rois_interp.json, tmp/interp_intensity.csv,
+#   tmp/detected_400.png, tmp/detected_420.png
+
+# Intensity sweep
 ./build/bin/sweep_run /var/lib/sprint1/rois.json 0.1 ../sensor_data.csv
-```
-
-Offline ROI parse check (no camera):
-
-```bash
-./build/bin/test_roi /var/lib/sprint1/rois.json
 ```
 
 ## What it does
@@ -36,14 +34,16 @@ Offline ROI parse check (no camera):
 | Module | Responsibility |
 |--------|----------------|
 | `cam.c` / `cam.h` | Open uEye, set exposure, grab cropped mono8 |
-| `roi.c` / `roi.h` | Ellipse JSON blobs, means, saturation fraction, PGM |
+| `roi.c` / `roi.h` | Ellipse JSON blobs, mask means, saturation, PGM |
+| `roi_interp.*` | Two-point lerp of ellipse geometry vs servo step |
+| `servo_fifo.*` | Shared command/position FIFO client |
 | `detect.cpp` | Find dark discs; emit elliptical blob ROIs |
 | `calibrate` | One-shot detect → `rois.json` + overlays |
-| `sweep_run` | FIFO motion + ROI means → CSV |
-| `test_roi` | Load JSON and mean a synthetic frame |
+| `calibrate2` | Detect at pos0 & pos1 → interp model + check CSV |
+| `sweep_run` | FIFO motion + ROI means → CSV (sends `-1` on exit) |
 | `../logger.c`, `../crash.c` | Shared logging + crash/core-dump hooks |
 
-Tools call `sprint1_logging_init("<tool>", …)` at startup (DEBUG to stderr and `logs/<tool>-<epoch>.log`). `ERR()` in camera-sdk utils also emits `LOG_FATAL` before exiting.
+Tools call `sprint1_logging_init("<tool>", …)` at startup. `ERR()` emits `LOG_FATAL` before exiting.
 
 ### Camera crop
 
@@ -64,7 +64,7 @@ ROI coordinates are relative to this crop. Index pixels as `pixels[y * pitch + x
 |----------|------------|---------|
 | `cam_open` | `cam_t *cam` | `0` / `-1` |
 | `cam_close` | `cam_t *cam` | void |
-| `cam_set_exposure_ms` | `cam`, `ms`, `actual` (nullable) | `0` / `-1` (clamps to sensor range) |
+| `cam_set_exposure_ms` | `cam`, `ms`, `actual` (nullable) | `0` / `-1` |
 | `cam_get_exposure_ms` | `cam`, `ms` out | `0` / `-1` |
 | `cam_grab` | `cam`, `**pixels`, `*width`, `*height`, `*pitch` | `0` / `-1` |
 
@@ -74,13 +74,30 @@ Exposure uses `is_SetExposureTime` (required on UI-154x); auto shutter/gain are 
 
 | Function | Role |
 |----------|------|
-| `roi_load_json` / `roi_save_json` | Ellipse JSON `{name,cx,cy,rx,ry,angle}`; also loads legacy `{x,y,w,h}` as an axis-aligned ellipse |
-| `roi_clip` | Clamp AABB to frame; set `pixels` = mask count |
-| `roi_means` | Mean intensity 0–255 inside each ellipse mask |
-| `roi_sat_frac` | Fraction of pixels ≥ `sat_level` (tools use 250) |
+| `roi_load_json` / `roi_save_json` | Ellipse JSON `{name,cx,cy,rx,ry,angle}`; legacy `{x,y,w,h}` → axis-aligned ellipse |
+| `roi_parse_json` | Same parse from an in-memory string |
+| `roi_sync_aabb` | Refresh AABB `x,y,w,h` from ellipse fields |
+| `roi_clip` | Clamp AABB; recount mask pixels |
+| `roi_means` / `roi_sat_frac` | Stats inside the ellipse mask |
 | `roi_draw` / `write_pgm` | Debug overlays / PGM export |
-| `detect_boxes_cv` | OpenCV disc finder → up to `ROI_MAX` (8) named `ringN` blobs |
+| `detect_boxes_cv` | OpenCV disc finder → up to `ROI_MAX` (8) named `ringN` |
 | `frame_mat` | Contiguous `CV_8UC1` Mat from a pitched buffer |
+
+### Interpolation API (`roi_interp`)
+
+| Function | Role |
+|----------|------|
+| `roi_interp_at` | Lerp `cx,cy,rx,ry,angle` for step `pos` (extrapolates outside endpoints) |
+| `roi_interp_save` / `roi_interp_load` | JSON model at `ROI_INTERP_PATH` (`/var/lib/sprint1/rois_interp.json`) |
+
+### Servo FIFO API (`servo_fifo`)
+
+| Function | Role |
+|----------|------|
+| `servo_fifo_open` / `servo_fifo_send` | Keep one write fd; send integer commands |
+| `servo_fifo_position` / `servo_fifo_move_and_wait` | GETPOS (`4000`) + poll until target |
+| `servo_fifo_close` | Close **without** `-1` (daemon keeps running) |
+| `servo_fifo_shutdown` | Send `-1` then close (stops daemon) |
 
 `rois.json` example:
 
@@ -96,15 +113,17 @@ Exposure uses `is_SetExposureTime` (required on UI-154x); auto shutter/gain are 
 
 | Tool | Args (defaults) | Notes |
 |------|-----------------|-------|
-| `calibrate` | `[exposure_ms=0.1] [n_blobs=3] [roi_path=/var/lib/sprint1/rois.json]` | Writes `rois.json`, `tmp/detected.png`, `tmp/calib_frame.png` |
-| `sweep_run` | `[rois.json] [exposure_ms=0.1] [out.csv=../sensor_data.csv]` | Scans `start`…`stop` from `/var/lib/sprint1/saved.prm`; angle = `pos * 0.1125` |
-| `test_roi` | `[rois.json]` | No camera |
+| `calibrate` | `[exposure_ms=0.1] [n_blobs=3] [roi_path]` | Writes `rois.json`, `tmp/detected.png`, `tmp/calib_frame.png` |
+| `calibrate2` | `[exposure_ms=0.1] [pos0=400] [pos1=420] [n_blobs=3] [interp_path] [csv_path]` | Detects at both poses; writes interp JSON + `tmp/interp_intensity.csv`; leaves daemon running |
+| `sweep_run` | `[rois.json] [exposure_ms=0.1] [out.csv=../sensor_data.csv]` | Scans `saved.prm` start…stop; angle = `pos * 0.1125`; **exits** daemon |
 
-**FIFO contract for `sweep_run`:** keep one write fd on `/run/sprint1/data_pipe` for the whole scan; open `pos_pipe` before each `4000`. On exit it sends `-1` (stops the servo daemon).
+**Check CSV columns (`calibrate2`):** `pos`, `<name>_interp`, `<name>_fixed`, `<name>_cx`, `<name>_cy`. Flat `_interp` intensity vs pos suggests the lerp tracks the discs; rising `_fixed` drift shows why a single pose is not enough.
 
-## Detection design (why calibrate ≠ measure)
+> **Note:** `calibrate2` may print a hint to run `plot_interp_check.py` — that helper is illustrative and may not be in the tree; plot the CSV with any tool you prefer.
 
-Illumination on the chip is uneven, so measurement never re-runs OpenCV. `detect_boxes_cv` flattens the frame, multi-threshold dark blobs, rejects crosses, refines ellipses, and stores the **fitted elliptical blobs** so `roi_means` averages the disc mask (still OpenCV-free during the sweep). Recalibrate after any lens move — see [RECALIBRATE.md](RECALIBRATE.md).
+## Detection design
+
+Illumination on the chip is uneven, so measurement never re-runs OpenCV mid-sweep. `detect_boxes_cv` flattens the frame, multi-threshold dark blobs, rejects crosses, refines ellipses, and stores fitted elliptical blobs for `roi_means`. Recalibrate after any lens move — see [RECALIBRATE.md](RECALIBRATE.md).
 
 ## Common pitfalls
 
@@ -112,19 +131,20 @@ Illumination on the chip is uneven, so measurement never re-runs OpenCV. `detect
 |---------|------------|
 | `no uEye camera` | Start `ueyeusbd`; confirm `lsusb` shows `1409` |
 | `no reader (is servo_calib running?)` | Start the daemon before FIFO tools |
-| Fewer than 3 marks / ellipses off the discs | Lower exposure; check focus; inspect `tmp/calib_frame.png` |
+| Fewer than 3 marks / ellipses off the discs | Lower exposure; check focus; inspect `tmp/calib_frame_*.png` |
 | Saturation warnings | Shorten exposure or reduce laser `bN` |
 | `EPIPE` / broken pipe | Do not open/close the command FIFO per step |
 | Wrong scan range | Edit `/var/lib/sprint1/saved.prm` (`start stop prep`, 0–999) |
-| Undefined `sprint1_logging_init` at link | Build via the Makefile (links `../logger.c` and `../crash.c`) |
+| Daemon dies after calibrate2 | Should not — use `servo_fifo_close`; if you called shutdown, restart servo |
+| Undefined `sprint1_logging_init` at link | Build via the Makefile (links logger + crash) |
 
 ## Build
 
 ```bash
-make          # sweep_run, calibrate, test_roi → build/bin/
+make          # sweep_run, calibrate, calibrate2 → build/bin/
 make clean
 ```
 
-Optional helpers not in the default Makefile: `grab_check.c` (camera smoke test), `detect_test.cpp` (offline PNG detection). Both expect the shared logger/crash objects if you compile them by hand.
+Optional (not default targets): `grab_check.c`, `detect_test.cpp`.
 
-> **Verify on hardware:** crop constants vs your sensor AOI, default paths under `/var/lib/sprint1/`, and that `is_SetExposureTime` matches your uEye SDK headers.
+> **Verify on hardware:** crop constants vs sensor AOI, `/var/lib/sprint1/` paths, and `is_SetExposureTime` vs your uEye SDK headers.

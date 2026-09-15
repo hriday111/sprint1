@@ -13,7 +13,7 @@ LOGGER_OBJS = $(OBJDIR)/logger.o $(OBJDIR)/loggerconf.o $(OBJDIR)/crash.o
 
 .PHONY: all clean
 
-all: $(BINDIR)/sweep_run $(BINDIR)/test_roi $(BINDIR)/calibrate $(BINDIR)/calibrate2
+all: $(BINDIR)/sweep_run  $(BINDIR)/calibrate $(BINDIR)/calibrate2
 
 $(BINDIR)/sweep_run: $(OBJDIR)/sweep_run.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
@@ -28,11 +28,7 @@ $(BINDIR)/calibrate2: $(OBJDIR)/calibrate2.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(O
 	@mkdir -p $(BINDIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS) $(OPENCV_LIBS)
 
-$(BINDIR)/test_roi: $(OBJDIR)/test_roi.o $(OBJDIR)/roi.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
-	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) -o $@ $^ -lm -lpthread
 
-# Added utils.h dependency: any C file rebuilds if utils.h is updated
 $(OBJDIR)/%.o: %.c utils.h
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
