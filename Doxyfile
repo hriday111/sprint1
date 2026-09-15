@@ -92,6 +92,7 @@ FILE_PATTERNS          = *.c \
                          *.md
 RECURSIVE              = YES
 EXCLUDE                = tuibox.h \
+                         vt100utils.h \
                          .tools \
                          .ua \
                          .cursor-plugin \

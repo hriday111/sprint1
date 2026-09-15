@@ -16,6 +16,7 @@
 #include <unistd.h>
 
 static int g_cmd_fd = -1;
+static int g_motor_enabled = 0;
 
 int servo_fifo_open(void)
 {
@@ -137,6 +138,23 @@ int servo_fifo_move_and_wait(int pos)
     }
     LOG_ERROR("servo_fifo_move_and_wait(%d): timed out", pos);
     return -1;
+}
+
+int servo_fifo_is_enabled(void)
+{
+    return g_motor_enabled;
+}
+
+int servo_fifo_enable(void)
+{
+    long cmd = g_motor_enabled ? SERVO_CMD_DISABLE : SERVO_CMD_ENABLE;
+
+    if (servo_fifo_send(cmd) != 0)
+        return -1;
+
+    g_motor_enabled = !g_motor_enabled;
+    LOG_INFO("Motor %s", g_motor_enabled ? "enabled" : "disabled");
+    return 0;
 }
 
 void servo_fifo_close(void)

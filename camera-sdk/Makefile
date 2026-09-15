@@ -15,7 +15,8 @@ LOGGER_OBJS = $(OBJDIR)/logger.o $(OBJDIR)/loggerconf.o $(OBJDIR)/crash.o
 
 all: $(BINDIR)/sweep_run  $(BINDIR)/calibrate $(BINDIR)/calibrate2
 
-$(BINDIR)/sweep_run: $(OBJDIR)/sweep_run.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
+$(BINDIR)/sweep_run: $(OBJDIR)/sweep_run.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/utils.o \
+		$(OBJDIR)/servo_fifo.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 

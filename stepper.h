@@ -26,6 +26,7 @@ typedef struct {
     int laser;   /**< Current PWM duty 0..LASER_PWM_RANGE. */
     int error;   /**< Non-zero if last goto was rejected (e.g. not initialized). */
     int lid;     /**< Cached lid-switch state (0 if PIN_LID unused). */
+    int was_disabled; /**< Non-zero if the motor was disabled by a previous CMD_DISABLE. */
 } stepper_t;
 
 /**

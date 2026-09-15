@@ -12,6 +12,9 @@
 #include <termios.h>
 #include <sys/ioctl.h>
 
+/* Content-aware ANSI text (wrap / visible length). Same directory as tuibox.h. */
+#include "vt100utils.h"
+
 /** BEGIN vec.h **/
 
 /** 
@@ -503,7 +506,7 @@ int ui_add(
 
   b->cache = malloc(MAXCACHESIZE);
   draw(b, b->cache);
-  b->cache = realloc(b->cache, strlen(b->cache) * 2);
+  /* Keep full MAXCACHESIZE so later wraps/status updates cannot overflow. */
 
   vec_push(&(u->b), b);
 
@@ -523,6 +526,13 @@ void ui_key(char *c, func f, ui_t *u){
 }
 
 /*
+ * Refresh cached terminal size (e.g. after a resize).
+ */
+void ui_refresh_size(ui_t *u){
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &(u->ws));
+}
+
+/*
  * Clears all elements from
  *   the UI.
  */
@@ -531,6 +541,33 @@ void ui_clear(ui_t *u){
 
   ui_free(u);
   ui_new(tmp, u);
+}
+
+/*
+ * Drop all boxes/keys without leaving raw mode (for live relayout).
+ */
+void ui_reset(ui_t *u){
+  ui_box_t *val;
+  ui_evt_t *evt;
+  int i;
+
+  vec_foreach(&(u->b), val, i){
+    free(val->cache);
+    free(val);
+  }
+  vec_deinit(&(u->b));
+  vec_init(&(u->b));
+
+  vec_foreach(&(u->e), evt, i){
+    free(evt);
+  }
+  vec_deinit(&(u->e));
+  vec_init(&(u->e));
+
+  u->click = NULL;
+  u->id = 0;
+  u->force = 1;
+  ui_refresh_size(u);
 }
 
 /*
@@ -543,17 +580,18 @@ void ui_draw_one(ui_box_t *tmp, int flush, ui_t *u){
 
   if(tmp->screen != u->screen) return;
   
-  buf = calloc(1, strlen(tmp->cache) * 2);
+  buf = calloc(1, MAXCACHESIZE);
   if(u->force ||
      tmp->watch == NULL ||
      *(tmp->watch) != tmp->last
   ){
     tmp->draw(tmp, buf);
     if(tmp->watch != NULL) tmp->last = *(tmp->watch);
-    strcpy(tmp->cache, buf);
+    strncpy(tmp->cache, buf, MAXCACHESIZE - 1);
+    tmp->cache[MAXCACHESIZE - 1] = '\0';
   } else {
-    /* buf is allocated proportionally to tmp->cache, so strcpy is safe */
-    strcpy(buf, tmp->cache);
+    strncpy(buf, tmp->cache, MAXCACHESIZE - 1);
+    buf[MAXCACHESIZE - 1] = '\0';
   }
   tok = strtok(buf, "\n");
   while(tok != NULL){
@@ -652,10 +690,102 @@ void _ui_update(char *c, int n, ui_t *u){
 /*
  * HELPERS
  */
+
+/*
+ * Visible (cell) length of an ANSI-colored string, ignoring escape codes.
+ */
+int ui_visible_len(char *str){
+  struct vt100_node_t *head, *tmp;
+  int n = 0;
+
+  if(str == NULL || *str == '\0') return 0;
+
+  head = vt100_decode(str);
+  for(tmp = head; tmp != NULL; tmp = tmp->next){
+    if(tmp->str == NULL || tmp->str[0] == '\0') continue;
+    /* vt100_decode stores strlen+1 in len when it copies text */
+    n += (tmp->len > 1) ? (tmp->len - 1) : (int)strlen(tmp->str);
+  }
+  vt100_free(head);
+  return n;
+}
+
+/*
+ * Wrap an ANSI-colored string to `width` terminal columns.
+ * Writes newline-separated lines into `out` (NUL-terminated).
+ * Returns the number of lines produced (at least 1 for non-empty input).
+ *
+ * Colors are preserved across wrap boundaries via vt100_sgr.
+ */
+int ui_wrap_text(char *str, int width, char *out, int outsz){
+  struct vt100_node_t *head, *tmp;
+  int x = 0, off = 0, len = 0, lines = 1;
+  char *sgr;
+  int vis, chunk;
+
+  if(outsz < 1) return 0;
+  out[0] = '\0';
+  if(str == NULL || *str == '\0') return 0;
+  if(width < 4) width = 4;
+
+  head = vt100_decode(str);
+  if(head == NULL) return 0;
+  tmp = head;
+
+  while(tmp != NULL){
+    if(tmp->str == NULL || tmp->str[0] == '\0'){
+      tmp = tmp->next;
+      continue;
+    }
+    vis = (tmp->len > 1) ? (tmp->len - 1) : (int)strlen(tmp->str);
+    off = 0;
+
+    while(off < vis){
+      if(x >= width){
+        if(len + 2 >= outsz) goto done;
+        out[len++] = '\n';
+        out[len] = '\0';
+        lines++;
+        x = 0;
+      }
+      chunk = width - x;
+      if(chunk > vis - off) chunk = vis - off;
+      if(chunk < 1) break;
+      if(len >= outsz - 1) goto done;
+
+      sgr = vt100_sgr(tmp, NULL);
+      len += snprintf(
+        out + len, (size_t)(outsz - len),
+        "%s%.*s", sgr, chunk, tmp->str + off
+      );
+      free(sgr);
+      if(len >= outsz - 1){
+        len = outsz - 1;
+        out[len] = '\0';
+        goto done;
+      }
+
+      off += chunk;
+      x += chunk;
+    }
+    tmp = tmp->next;
+  }
+
+  if(len + 5 < outsz)
+    len += sprintf(out + len, "\x1b[0m");
+
+done:
+  vt100_free(head);
+  return lines;
+}
+
 void _ui_text(ui_box_t *b, char *out){
   sprintf(out, "%s", (char*)b->data1);
 }
 
+/*
+ * Like ui_text, but box width is the visible length (escape-aware).
+ */
 int ui_text(
   int x, int y, char *str,
   int screen,
@@ -664,7 +794,7 @@ int ui_text(
 ){
   return ui_add(
     x, y,
-    strlen(str), 1,
+    ui_visible_len(str), 1,
     screen,
     NULL, 0,
     _ui_text,
@@ -672,6 +802,49 @@ int ui_text(
     hover,
     str,
     NULL,
+    u
+  );
+}
+
+/*
+ * Add a wrapping text box. `data2` may hold an int* max width override;
+ * when NULL, wraps to the terminal width minus `x`.
+ * Height is set from the wrapped line count.
+ */
+void _ui_text_wrap(ui_box_t *b, char *out){
+  ui_t *u = (ui_t*)b->data2;
+  int width = b->w;
+  if(u != NULL && width < 4)
+    width = u->ws.ws_col - b->x;
+  if(width < 4) width = 4;
+  (void)ui_wrap_text((char*)b->data1, width, out, MAXCACHESIZE);
+}
+
+int ui_text_wrap(
+  int x, int y, int width, char *str,
+  int screen,
+  func click, func hover,
+  ui_t *u
+){
+  char scratch[MAXCACHESIZE];
+  int lines;
+
+  if(width < 4) width = u->ws.ws_col - ((x > 0) ? x : 1);
+  if(width < 4) width = 4;
+
+  lines = ui_wrap_text(str, width, scratch, (int)sizeof(scratch));
+  if(lines < 1) lines = 1;
+
+  return ui_add(
+    x, y,
+    width, lines,
+    screen,
+    NULL, 0,
+    _ui_text_wrap,
+    click,
+    hover,
+    str,
+    u,
     u
   );
 }

@@ -167,6 +167,7 @@ static void enable_motor(stepper_t *stepper)
     gpio_write(PIN_ENABLE, LOW);
     stepper->error = 0;
     stepper->ena = 1;
+    
 }
 
 /**
@@ -330,8 +331,13 @@ int stepperSend(int cmd, stepper_t *stepper)
     } else if (cmd == CMD_LASER_ON) {
         laser_set_unlocked(stepper, LASER_PWM_RANGE);
     } else if (cmd == CMD_DISABLE) {
+        stepper->was_disabled=1;
         disable_motor(stepper);
     } else if (cmd == CMD_ENABLE) {
+        if(stepper->was_disabled==1){
+            stepper->init=1;
+        }
+       // stepper->init = 1;
         enable_motor(stepper);
     } else if (cmd == CMD_RESET) {
         /* Unreachable while CMD_RESET == CMD_DISABLE (both 1003). */

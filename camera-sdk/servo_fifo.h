@@ -10,6 +10,8 @@
  */
 
 #define SERVO_CMD_GETPOS 4000
+#define SERVO_CMD_DISABLE 1003
+#define SERVO_CMD_ENABLE 1004
 
 /**
  * @brief Open the command FIFO for writing (retries while no reader).
@@ -23,6 +25,18 @@ int servo_fifo_open(void);
  * @return 0 on success, -1 on failure.
  */
 int servo_fifo_send(long cmd);
+
+/**
+ * @brief Toggle the motor enable state on the servo daemon.
+ * @return 0 on success, -1 on failure.
+ */
+int servo_fifo_enable(void);
+
+/**
+ * @brief Check whether the servo motor is currently enabled in this client.
+ * @return 1 when enabled, 0 when disabled.
+ */
+int servo_fifo_is_enabled(void);
 
 /**
  * @brief Read position with retries (open pos_pipe before sending GETPOS).
