@@ -10,7 +10,6 @@ var searchData=
   ['maxfilesize_7',['maxfilesize',['../logger_8c.html#af1a27a84697d62ca640a488079e80195',1,'maxFileSize:&#160;logger.c'],['../loggerconf_8c.html#af1a27a84697d62ca640a488079e80195',1,'maxFileSize:&#160;loggerconf.c']]],
   ['mem_8',['mem',['../structcam__t.html#aed98baecf06b652e280c277062288bcf',1,'cam_t']]],
   ['mem_5fid_9',['mem_id',['../structcam__t.html#a23fef1c839cba2eb9cabd838389dc861',1,'cam_t']]],
-  ['move_5fand_5fwait_10',['move_and_wait',['../sweep__run_8c.html#a1d31162a77ccd81b2634aab3d9d412e4',1,'sweep_run.c']]],
-  ['moving_20the_20lens_11',['Recalibrate chip marks after moving the lens',['../recalibrate.html',1,'']]],
-  ['ms_5fsleep_12',['ms_sleep',['../camera-sdk_2utils_8c.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../camera-sdk_2utils_8h.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../utils_8c.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../utils_8h.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c']]]
+  ['moving_20the_20lens_10',['Recalibrate chip marks after moving the lens',['../recalibrate.html',1,'']]],
+  ['ms_5fsleep_11',['ms_sleep',['../camera-sdk_2utils_8c.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../camera-sdk_2utils_8h.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../utils_8c.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../utils_8h.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c']]]
 ];

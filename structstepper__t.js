@@ -12,5 +12,6 @@ var structstepper__t =
     [ "start", "structstepper__t.html#a2e892761f96d24610e3e81e29099fb65", null ],
     [ "steps", "structstepper__t.html#a37913ddbb738f79c26948bc9a83a569c", null ],
     [ "stop", "structstepper__t.html#ab0e383ef3af4e81a6fdded1baf5a60d8", null ],
+    [ "was_disabled", "structstepper__t.html#a84621a92c57a12865a6b8850fa8ef949", null ],
     [ "zero", "structstepper__t.html#ab1753f5ff4e31126d1e72406e7548611", null ]
 ];

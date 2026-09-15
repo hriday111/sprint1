@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "app_t", "structapp__t.html", "structapp__t" ],
     [ "cam_t", "structcam__t.html", "structcam__t" ],
     [ "EllipseCand", "structEllipseCand.html", "structEllipseCand" ],
     [ "roi_interp_t", "structroi__interp__t.html", "structroi__interp__t" ],

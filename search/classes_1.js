@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ellipsecand_0',['EllipseCand',['../structEllipseCand.html',1,'']]]
+  ['cam_5ft_0',['cam_t',['../structcam__t.html',1,'']]]
 ];

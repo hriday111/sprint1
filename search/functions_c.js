@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['parselevel_0',['parseLevel',['../loggerconf_8c.html#a98ff4e8e9f381fd27ae85c45123a673e',1,'loggerconf.c']]],
-  ['parseline_1',['parseLine',['../loggerconf_8c.html#a4b9fee262d8117fda358e976b4865752',1,'loggerconf.c']]],
-  ['point_5fin_5fellipse_2',['point_in_ellipse',['../roi_8c.html#a68e9a8c89bcf90a51cf768ce329f0969',1,'roi.c']]],
-  ['position_5fonce_3',['position_once',['../servo__fifo_8c.html#a1bf17e618a04b6237c316b34d4c52caf',1,'servo_fifo.c']]],
-  ['pulse_5fgpio_4',['pulse_gpio',['../stepper_8c.html#ab29246891164b83b782688312fbb7474',1,'stepper.c']]],
-  ['pulse_5fstep_5',['pulse_step',['../stepper_8c.html#a9688ebf1b177acdd4fb9e22d28aa5a9c',1,'stepper.c']]]
+  ['on_5fenable_0',['on_enable',['../sweep__run_8c.html#a1f47f06459187a7fc6bee591ee197cdb',1,'sweep_run.c']]],
+  ['on_5fkey_5freset_1',['on_key_reset',['../sweep__run_8c.html#ab0fd744e26b3fdb8dd9356a508519d49',1,'sweep_run.c']]],
+  ['on_5fkey_5fstart_2',['on_key_start',['../sweep__run_8c.html#a275a0cef145da5ec21c59b60985cfa02',1,'sweep_run.c']]],
+  ['on_5fquit_3',['on_quit',['../sweep__run_8c.html#a2cd074aefe4244f7e076ab3487c4919d',1,'sweep_run.c']]],
+  ['on_5freset_4',['on_reset',['../sweep__run_8c.html#a2e574a12a93b7e19b377c891f0af686c',1,'sweep_run.c']]],
+  ['on_5fstart_5',['on_start',['../sweep__run_8c.html#a44394cd703e3391269e4307e04a6dbce',1,'sweep_run.c']]],
+  ['overlaps_6',['overlaps',['../detect_8cpp.html#a73a806f53fc087a5d0465320a0110d97',1,'detect.cpp']]]
 ];

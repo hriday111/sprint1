@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['getbackupfilename_0',['getBackupFileName',['../logger_8c.html#add1d825698e2b0eded012c5dad6f1515',1,'logger.c']]],
-  ['getcurrentthreadid_1',['getCurrentThreadID',['../logger_8c.html#afbe16e531630cb4bba3856e11b812c88',1,'logger.c']]],
-  ['getfilesize_2',['getFileSize',['../logger_8c.html#a9e7ab1cba8b2883943ec52875583fc03',1,'logger.c']]],
-  ['getlevelchar_3',['getLevelChar',['../logger_8c.html#ac1844d406e77b7fd443b3f3b1a184c11',1,'logger.c']]],
-  ['gettimestamp_4',['getTimestamp',['../logger_8c.html#acdab680ff248b1252822d4c2eccf82aa',1,'logger.c']]],
-  ['gpio_5fread_5',['gpio_read',['../stepper_8c.html#a27f39318a9efa6badf86ceae098d9bc3',1,'stepper.c']]],
-  ['gpio_5fwrite_6',['gpio_write',['../stepper_8c.html#a59c6507b8dce3ad529fead21b824be79',1,'stepper.c']]]
+  ['find_5farray_0',['find_array',['../roi__interp_8c.html#a2db7ca37c515ae33f340eb83ebbe18f5',1,'roi_interp.c']]],
+  ['flatten_1',['flatten',['../detect_8cpp.html#a67b79d2a98e4df4104a68b38e4b171a2',1,'detect.cpp']]],
+  ['frame_5fmat_2',['frame_mat',['../detect_8cpp.html#a2f7553a9284623da397151376def8650',1,'frame_mat(const unsigned char *pixels, int width, int height, int pitch):&#160;detect.cpp'],['../detect_8hpp.html#a2f7553a9284623da397151376def8650',1,'frame_mat(const unsigned char *pixels, int width, int height, int pitch):&#160;detect.cpp']]]
 ];

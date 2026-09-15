@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['json_5fkey_5fdouble_0',['json_key_double',['../roi_8c.html#a02a5f0fb7550611ab3b73afed70de3ab',1,'json_key_double(const char *obj, const char *end, const char *key, double *out):&#160;roi.c'],['../roi__interp_8c.html#a02a5f0fb7550611ab3b73afed70de3ab',1,'json_key_double(const char *obj, const char *end, const char *key, double *out):&#160;roi_interp.c']]],
-  ['json_5fkey_5fstring_1',['json_key_string',['../roi_8c.html#a26e3532b73692df661905e64090e4380',1,'roi.c']]]
+  ['init_0',['init',['../logger_8c.html#a17fb021b480a1f220d2579807fa2e398',1,'logger.c']]],
+  ['is_5fsetexposuretime_1',['is_SetExposureTime',['../cam_8c.html#a72c8c76907507d5dccdc93e5f9955cf8',1,'cam.c']]],
+  ['isfileexist_2',['isFileExist',['../logger_8c.html#a291f387e451774670c2f9622166dc97f',1,'logger.c']]]
 ];
