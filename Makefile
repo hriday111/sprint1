@@ -25,7 +25,7 @@ $(TARGET): $(OBJS) | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDLIBS)
 
 # Compile C objects directly into the build folder
-$(BUILD_DIR)/%.o: %.c stepper.h gpio_pins.h commands.h tuibox.h vt100utils.h logger.h loggerconf.h crash.h | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: %.c stepper.h gpio_pins.h commands.h logger.h loggerconf.h crash.h | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean removes the entire build directory

@@ -5,20 +5,34 @@ CXXFLAGS = -std=c++17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. $(shell 
 LDLIBS = -lueye_api -lm -lpthread
 OPENCV_LIBS = -lopencv_imgcodecs -lopencv_imgproc -lopencv_core
 
+# Raspberry Pi: build once with OpenGL ES2 (generic linux_arm64 release uses desktop GL/GLX).
+RAYLIB_SRC ?= ../../raylib-try/raylib-src/src
+RAYLIB_CFLAGS = -I$(RAYLIB_SRC)
+RAYLIB_LIBS = $(RAYLIB_SRC)/libraylib.a -lGLESv2 -lEGL -lX11 -lm -lpthread -ldl -lrt
+
 BUILDDIR = build
 BINDIR = $(BUILDDIR)/bin
 OBJDIR = $(BUILDDIR)/obj
 
 LOGGER_OBJS = $(OBJDIR)/logger.o $(OBJDIR)/loggerconf.o $(OBJDIR)/crash.o
 
-.PHONY: all clean
+.PHONY: all clean raylib sweep_run
 
 all: $(BINDIR)/sweep_run  $(BINDIR)/calibrate $(BINDIR)/calibrate2
 
+sweep_run: $(BINDIR)/sweep_run
+
+# One-time on Pi: needs libgles2-mesa-dev libx11-dev libxrandr-dev (see raylib wiki).
+raylib: $(RAYLIB_SRC)/libraylib.a
+
+$(RAYLIB_SRC)/libraylib.a:
+	@test -d $(RAYLIB_SRC) || (echo "Clone raylib: git clone https://github.com/raysan5/raylib.git $(RAYLIB_SRC)/.." && exit 1)
+	$(MAKE) -C $(RAYLIB_SRC) PLATFORM=PLATFORM_DESKTOP GRAPHICS=GRAPHICS_API_OPENGL_ES2
+
 $(BINDIR)/sweep_run: $(OBJDIR)/sweep_run.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/utils.o \
-		$(OBJDIR)/servo_fifo.o $(LOGGER_OBJS)
+		$(OBJDIR)/servo_fifo.o $(LOGGER_OBJS) $(RAYLIB_SRC)/libraylib.a
 	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+	$(CC) $(CFLAGS) -o $@ $(filter-out $(RAYLIB_SRC)/libraylib.a,$^) $(LDLIBS) $(RAYLIB_LIBS)
 
 $(BINDIR)/calibrate: $(OBJDIR)/calibrate.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/detect.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
@@ -33,6 +47,10 @@ $(BINDIR)/calibrate2: $(OBJDIR)/calibrate2.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(O
 $(OBJDIR)/%.o: %.c utils.h
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/sweep_run.o: sweep_run.c $(RAYLIB_SRC)/libraylib.a
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) $(RAYLIB_CFLAGS) -c $< -o $@
 
 $(OBJDIR)/logger.o: ../logger.c ../logger.h
 	@mkdir -p $(OBJDIR)
