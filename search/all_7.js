@@ -15,10 +15,12 @@ var searchData=
   ['getfilesize_12',['getFileSize',['../logger_8c.html#a9e7ab1cba8b2883943ec52875583fc03',1,'logger.c']]],
   ['getlevelchar_13',['getLevelChar',['../logger_8c.html#ac1844d406e77b7fd443b3f3b1a184c11',1,'logger.c']]],
   ['gettimestamp_14',['getTimestamp',['../logger_8c.html#acdab680ff248b1252822d4c2eccf82aa',1,'logger.c']]],
-  ['go_5frun_5fscreen_15',['go_run_screen',['../sweep__tui_8c.html#a85f299c55d808d9a3bb8de673b3e3427',1,'sweep_tui.c']]],
-  ['gpio_5fpins_2eh_16',['gpio_pins.h',['../gpio__pins_8h.html',1,'']]],
-  ['gpio_5fread_17',['gpio_read',['../stepper_8c.html#a27f39318a9efa6badf86ceae098d9bc3',1,'stepper.c']]],
-  ['gpio_5fwrite_18',['gpio_write',['../stepper_8c.html#a59c6507b8dce3ad529fead21b824be79',1,'stepper.c']]],
-  ['grab_5fcheck_2ec_19',['grab_check.c',['../grab__check_8c.html',1,'']]],
-  ['grab_5foutput_20',['GRAB_OUTPUT',['../camera-sdk_2utils_8h.html#a4fdb493285b5518ce3f78a44149301ec',1,'utils.h']]]
+  ['getting_20started_15',['Getting started',['../camera_sdk.html#autotoc_md0',1,'']]],
+  ['getting_20started_20normal_20run_16',['Getting started (normal run)',['../index.html#autotoc_md12',1,'']]],
+  ['go_5frun_5fscreen_17',['go_run_screen',['../sweep__tui_8c.html#a85f299c55d808d9a3bb8de673b3e3427',1,'sweep_tui.c']]],
+  ['gpio_5fpins_2eh_18',['gpio_pins.h',['../gpio__pins_8h.html',1,'']]],
+  ['gpio_5fread_19',['gpio_read',['../stepper_8c.html#a27f39318a9efa6badf86ceae098d9bc3',1,'stepper.c']]],
+  ['gpio_5fwrite_20',['gpio_write',['../stepper_8c.html#a59c6507b8dce3ad529fead21b824be79',1,'stepper.c']]],
+  ['grab_5fcheck_2ec_21',['grab_check.c',['../grab__check_8c.html',1,'']]],
+  ['grab_5foutput_22',['GRAB_OUTPUT',['../camera-sdk_2utils_8h.html#a4fdb493285b5518ce3f78a44149301ec',1,'utils.h']]]
 ];

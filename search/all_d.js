@@ -11,5 +11,6 @@ var searchData=
   ['mem_8',['mem',['../structcam__t.html#aed98baecf06b652e280c277062288bcf',1,'cam_t']]],
   ['mem_5fid_9',['mem_id',['../structcam__t.html#a23fef1c839cba2eb9cabd838389dc861',1,'cam_t']]],
   ['moving_20the_20lens_10',['Recalibrate chip marks after moving the lens',['../recalibrate.html',1,'']]],
-  ['ms_5fsleep_11',['ms_sleep',['../camera-sdk_2utils_8c.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../camera-sdk_2utils_8h.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../utils_8c.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../utils_8h.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c']]]
+  ['ms_5fsleep_11',['ms_sleep',['../camera-sdk_2utils_8c.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../camera-sdk_2utils_8h.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../utils_8c.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../utils_8h.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c']]],
+  ['must_20recalibrate_12',['If you must recalibrate',['../index.html#autotoc_md13',1,'']]]
 ];

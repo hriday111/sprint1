@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Prism scan controller, elliptical ROI camera-sdk, and two-point ROI interpolation</div>
+   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
   </td>
  </tr>
  </tbody>
@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('sweep__run_8c.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 
-<p>Intensity sweep with disease assignment TUI (tuibox).  
+<p>Main measurement tool: disease-assignment TUI + intensity sweep.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;errno.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
@@ -141,10 +141,14 @@ Functions</h2></td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Intensity sweep with disease assignment TUI (tuibox). </p>
+<div class="textblock"><p>Main measurement tool: disease-assignment TUI + intensity sweep. </p>
+<p>Normal workflow (ROI calibration is already done for the current optics):</p><ol type="1">
+<li>Start the driver: <code></code>./build/servo_calib</li>
+<li>Run this tool: <code></code>./camera-sdk/build/bin/sweep_run</li>
+</ol>
 <p>Flow: pick D1–D10 for blob 1 and blob 2 → Start/Reset screen → CSV. Requires <code>servo_calib</code> already running.</p>
 <p>Usage: <code></code>./sweep_run [rois.json] [exposure_ms] [out.csv]</p>
-<p>Exit leaves the servo daemon running (FIFO closed without <code>-1</code>). </p>
+<p>Exit leaves the servo daemon running (FIFO closed without <code>-1</code>). Recalibrate with <code>calibrate2</code> only after lens moves; try exposures 0.20, 0.14, and 0.10 if detection looks wrong. </p>
 
 <p class="definition">Definition in file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -160,7 +164,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00013">13</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00019">19</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
 
 </div>
 </div>
@@ -176,7 +180,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00028">28</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00034">34</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
 
 </div>
 </div>
@@ -192,7 +196,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00027">27</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00033">33</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
 
 </div>
 </div>
@@ -221,11 +225,11 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00056">56</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00062">62</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__run_8c_source.html#l00036">sweep_ctx_t::prep</a>, <a class="el" href="servo__fifo_8c_source.html#l00147">servo_fifo_move_and_wait()</a>, <a class="el" href="sweep__tui_8c_source.html#l00483">sweep_tui_set_error()</a>, <a class="el" href="sweep__tui_8c_source.html#l00489">sweep_tui_set_progress()</a>, <a class="el" href="sweep__tui_8c_source.html#l00470">sweep_tui_set_ready()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00464">sweep_tui_set_running()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__run_8c_source.html#l00042">sweep_ctx_t::prep</a>, <a class="el" href="servo__fifo_8c_source.html#l00147">servo_fifo_move_and_wait()</a>, <a class="el" href="sweep__tui_8c_source.html#l00483">sweep_tui_set_error()</a>, <a class="el" href="sweep__tui_8c_source.html#l00489">sweep_tui_set_progress()</a>, <a class="el" href="sweep__tui_8c_source.html#l00470">sweep_tui_set_ready()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00464">sweep_tui_set_running()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00177">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00183">main()</a>.</p>
 
 </div>
 </div>
@@ -253,11 +257,11 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00074">74</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00080">80</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__run_8c_source.html#l00033">sweep_ctx_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00021">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00022">disease_assign_t::blob2</a>, <a class="el" href="sweep__run_8c_source.html#l00031">sweep_ctx_t::cam</a>, <a class="el" href="cam_8c_source.html#l00168">cam_grab()</a>, <a class="el" href="sweep__run_8c_source.html#l00037">sweep_ctx_t::csv_path</a>, <a class="el" href="sweep__run_8c_source.html#l00028">DEG_PER_STEP</a>, <a class="el" href="sweep__tui_8c_source.html#l00051">disease_label()</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi_8c_source.html#l00277">roi_clip()</a>, <a class="el" href="roi_8h_source.html#l00012">ROI_MAX</a>, <a class="el" href="roi_8c_source.html#l00342">roi_means()</a>, <a class="el" href="roi_8c_source.html#l00354">roi_sat_frac()</a>, <a class="el" href="sweep__run_8c_source.html#l00032">sweep_ctx_t::rois</a>, <a class="el" href="servo__fifo_8c_source.html#l00147">servo_fifo_move_and_wait()</a>, <a class="el" href="sweep__run_8c_source.html#l00034">sweep_ctx_t::start</a>, <a class="el" href="sweep__run_8c_source.html#l00035">sweep_ctx_t::stop</a>, <a class="el" href="sweep__tui_8c_source.html#l00476">sweep_tui_set_done()</a>, <a class="el" href="sweep__tui_8c_source.html#l00483">sweep_tui_set_error()</a>, <a class="el" href="sweep__tui_8c_source.html#l00489">sweep_tui_set_progress()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00464">sweep_tui_set_running()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__run_8c_source.html#l00039">sweep_ctx_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__run_8c_source.html#l00037">sweep_ctx_t::cam</a>, <a class="el" href="cam_8c_source.html#l00168">cam_grab()</a>, <a class="el" href="sweep__run_8c_source.html#l00043">sweep_ctx_t::csv_path</a>, <a class="el" href="sweep__run_8c_source.html#l00034">DEG_PER_STEP</a>, <a class="el" href="sweep__tui_8c_source.html#l00051">disease_label()</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi_8c_source.html#l00277">roi_clip()</a>, <a class="el" href="roi_8h_source.html#l00012">ROI_MAX</a>, <a class="el" href="roi_8c_source.html#l00342">roi_means()</a>, <a class="el" href="roi_8c_source.html#l00354">roi_sat_frac()</a>, <a class="el" href="sweep__run_8c_source.html#l00038">sweep_ctx_t::rois</a>, <a class="el" href="servo__fifo_8c_source.html#l00147">servo_fifo_move_and_wait()</a>, <a class="el" href="sweep__run_8c_source.html#l00040">sweep_ctx_t::start</a>, <a class="el" href="sweep__run_8c_source.html#l00041">sweep_ctx_t::stop</a>, <a class="el" href="sweep__tui_8c_source.html#l00476">sweep_tui_set_done()</a>, <a class="el" href="sweep__tui_8c_source.html#l00483">sweep_tui_set_error()</a>, <a class="el" href="sweep__tui_8c_source.html#l00489">sweep_tui_set_progress()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00464">sweep_tui_set_running()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00177">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00183">main()</a>.</p>
 
 </div>
 </div>
@@ -307,11 +311,11 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00040">40</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00046">46</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
 
 <p class="reference">References <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00177">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00183">main()</a>.</p>
 
 </div>
 </div>
@@ -341,9 +345,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00177">177</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sweep__run_8c_source.html#l00183">183</a> of file <a class="el" href="sweep__run_8c_source.html">sweep_run.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__run_8c_source.html#l00033">sweep_ctx_t::assign</a>, <a class="el" href="sweep__run_8c_source.html#l00031">sweep_ctx_t::cam</a>, <a class="el" href="cam_8c_source.html#l00120">cam_close()</a>, <a class="el" href="cam_8c_source.html#l00045">cam_open()</a>, <a class="el" href="cam_8c_source.html#l00141">cam_set_exposure_ms()</a>, <a class="el" href="sweep__run_8c_source.html#l00037">sweep_ctx_t::csv_path</a>, <a class="el" href="sweep__run_8c_source.html#l00056">do_reset()</a>, <a class="el" href="sweep__run_8c_source.html#l00074">do_sweep()</a>, <a class="el" href="sweep__run_8c_source.html#l00040">load_prm()</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8c_source.html#l00344">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00170">logger_flush()</a>, <a class="el" href="sweep__tui_8h_source.html#l00030">sweep_tui_hooks_t::on_reset</a>, <a class="el" href="sweep__tui_8h_source.html#l00029">sweep_tui_hooks_t::on_start</a>, <a class="el" href="sweep__run_8c_source.html#l00036">sweep_ctx_t::prep</a>, <a class="el" href="sweep__run_8c_source.html#l00027">PRM_FILE</a>, <a class="el" href="roi_8c_source.html#l00206">roi_load_json()</a>, <a class="el" href="roi_8h_source.html#l00015">ROI_PATH</a>, <a class="el" href="sweep__run_8c_source.html#l00032">sweep_ctx_t::rois</a>, <a class="el" href="sweep__tui_8h_source.html#l00034">sweep_tui_hooks_t::scan_prep</a>, <a class="el" href="sweep__tui_8h_source.html#l00032">sweep_tui_hooks_t::scan_start</a>, <a class="el" href="sweep__tui_8h_source.html#l00033">sweep_tui_hooks_t::scan_stop</a>, <a class="el" href="servo__fifo_8c_source.html#l00181">servo_fifo_close()</a>, <a class="el" href="servo__fifo_8c_source.html#l00022">servo_fifo_open()</a>, <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>, <a class="el" href="sweep__run_8c_source.html#l00034">sweep_ctx_t::start</a>, <a class="el" href="sweep__run_8c_source.html#l00035">sweep_ctx_t::stop</a>, <a class="el" href="sweep__tui_8c_source.html#l00605">sweep_tui_run()</a>, and <a class="el" href="sweep__tui_8h_source.html#l00031">sweep_tui_hooks_t::userdata</a>.</p>
+<p class="reference">References <a class="el" href="sweep__run_8c_source.html#l00039">sweep_ctx_t::assign</a>, <a class="el" href="sweep__run_8c_source.html#l00037">sweep_ctx_t::cam</a>, <a class="el" href="cam_8c_source.html#l00120">cam_close()</a>, <a class="el" href="cam_8c_source.html#l00045">cam_open()</a>, <a class="el" href="cam_8c_source.html#l00141">cam_set_exposure_ms()</a>, <a class="el" href="sweep__run_8c_source.html#l00043">sweep_ctx_t::csv_path</a>, <a class="el" href="sweep__run_8c_source.html#l00062">do_reset()</a>, <a class="el" href="sweep__run_8c_source.html#l00080">do_sweep()</a>, <a class="el" href="sweep__run_8c_source.html#l00046">load_prm()</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8c_source.html#l00344">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00170">logger_flush()</a>, <a class="el" href="sweep__tui_8h_source.html#l00032">sweep_tui_hooks_t::on_reset</a>, <a class="el" href="sweep__tui_8h_source.html#l00031">sweep_tui_hooks_t::on_start</a>, <a class="el" href="sweep__run_8c_source.html#l00042">sweep_ctx_t::prep</a>, <a class="el" href="sweep__run_8c_source.html#l00033">PRM_FILE</a>, <a class="el" href="roi_8c_source.html#l00206">roi_load_json()</a>, <a class="el" href="roi_8h_source.html#l00015">ROI_PATH</a>, <a class="el" href="sweep__run_8c_source.html#l00038">sweep_ctx_t::rois</a>, <a class="el" href="sweep__tui_8h_source.html#l00036">sweep_tui_hooks_t::scan_prep</a>, <a class="el" href="sweep__tui_8h_source.html#l00034">sweep_tui_hooks_t::scan_start</a>, <a class="el" href="sweep__tui_8h_source.html#l00035">sweep_tui_hooks_t::scan_stop</a>, <a class="el" href="servo__fifo_8c_source.html#l00181">servo_fifo_close()</a>, <a class="el" href="servo__fifo_8c_source.html#l00022">servo_fifo_open()</a>, <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>, <a class="el" href="sweep__run_8c_source.html#l00040">sweep_ctx_t::start</a>, <a class="el" href="sweep__run_8c_source.html#l00041">sweep_ctx_t::stop</a>, <a class="el" href="sweep__tui_8c_source.html#l00605">sweep_tui_run()</a>, and <a class="el" href="sweep__tui_8h_source.html#l00033">sweep_tui_hooks_t::userdata</a>.</p>
 
 </div>
 </div>

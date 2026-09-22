@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Prism scan controller, elliptical ROI camera-sdk, and two-point ROI interpolation</div>
+   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
   </td>
  </tr>
  </tbody>
@@ -94,19 +94,22 @@ $(document).ready(function(){initNavTree('recalibrate.html',''); initResizable()
   <div class="headertitle"><div class="title">Recalibrate chip marks after moving the lens</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The intensity sweep does <b>not</b> re-detect discs. It averages ellipse masks from <code>rois.json</code> (or, for experiments, interpolated ellipses from <code>rois_interp.json</code>). After moving the lens (or remounting optics):</p>
+<div class="textblock"><p><b>Day-to-day:</b> calibration is already done. Start <code>./build/servo_calib</code>, then run <code>./camera-sdk/build/bin/sweep_run</code> for measurements.</p>
+<p>The intensity sweep does <b>not</b> re-detect discs; it averages ellipse masks from <code>rois.json</code>. Recalibrate only after moving the lens (or remounting optics).</p>
 <div class="fragment"><div class="line">cd camera-sdk</div>
 <div class="line">make</div>
 <div class="line">mkdir -p tmp</div>
 <div class="line"> </div>
-<div class="line"># Single pose (fast)</div>
-<div class="line">./build/bin/calibrate 0.1</div>
+<div class="line"># Prefer two-point calibration; try several exposures if detection fails</div>
+<div class="line">./build/bin/calibrate2 0.20 400 420</div>
+<div class="line">./build/bin/calibrate2 0.14 400 420</div>
+<div class="line">./build/bin/calibrate2 0.10 400 420</div>
 <div class="line"> </div>
-<div class="line"># Or two poses if blobs drift across the scan window</div>
-<div class="line">./build/bin/calibrate2 0.1 400 420</div>
-</div><!-- fragment --><p>Open <code>tmp/detected.png</code> (or <code>tmp/detected_&lt;pos&gt;.png</code>). Green ellipses must sit on the three dark discs. If not, fix focus/lighting or try another exposure.</p>
+<div class="line"># Optional single-pose fallback</div>
+<div class="line">./build/bin/calibrate 0.1</div>
+</div><!-- fragment --><p>Open <code>tmp/detected_&lt;pos&gt;.png</code> (or <code>tmp/detected.png</code>). Green ellipses must sit on the three dark discs — pick the exposure that looks best.</p>
 <p>Avoid long exposures with a bright laser — clipped discs break detection. Check <code>logs/calibrate*.log</code> for saturation and mark-count warnings.</p>
-<p>Full API and tool reference: <a class="el" href="README_8md.html">README.md</a>. </p>
+<p>Full API: <a class="el" href="README_8md.html">README.md</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

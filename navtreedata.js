@@ -27,19 +27,19 @@ var NAVTREE =
   [ "Sprint1", "index.html", [
     [ "Sprint1 — Prism scan controller", "index.html", "index" ],
     [ "camera-sdk", "camera_sdk.html", [
-      [ "Prerequisites", "camera_sdk.html#autotoc_md0", null ],
-      [ "Quickstart", "camera_sdk.html#autotoc_md1", null ],
-      [ "What it does", "camera_sdk.html#autotoc_md2", [
-        [ "Camera crop", "camera_sdk.html#autotoc_md3", null ],
-        [ "Camera API", "camera_sdk.html#autotoc_md4", null ],
-        [ "ROI API", "camera_sdk.html#autotoc_md5", null ],
-        [ "Interpolation API (<tt>roi_interp</tt>)", "camera_sdk.html#autotoc_md6", null ],
-        [ "Servo FIFO API (<tt>servo_fifo</tt>)", "camera_sdk.html#autotoc_md7", null ]
+      [ "Getting started", "camera_sdk.html#autotoc_md0", [
+        [ "Recalibration (only if needed)", "camera_sdk.html#autotoc_md1", null ]
       ] ],
-      [ "Tool CLI", "camera_sdk.html#autotoc_md8", null ],
-      [ "Detection design", "camera_sdk.html#autotoc_md9", null ],
-      [ "Common pitfalls", "camera_sdk.html#autotoc_md10", null ],
-      [ "Build", "camera_sdk.html#autotoc_md11", null ]
+      [ "Prerequisites", "camera_sdk.html#autotoc_md2", null ],
+      [ "What it does", "camera_sdk.html#autotoc_md3", [
+        [ "Camera crop", "camera_sdk.html#autotoc_md4", null ],
+        [ "Camera API", "camera_sdk.html#autotoc_md5", null ],
+        [ "ROI / interp / FIFO APIs", "camera_sdk.html#autotoc_md6", null ]
+      ] ],
+      [ "Tool CLI", "camera_sdk.html#autotoc_md7", null ],
+      [ "Detection design", "camera_sdk.html#autotoc_md8", null ],
+      [ "Common pitfalls", "camera_sdk.html#autotoc_md9", null ],
+      [ "Build", "camera_sdk.html#autotoc_md10", null ]
     ] ],
     [ "Recalibrate chip marks after moving the lens", "recalibrate.html", null ],
     [ "Data Structures", "annotated.html", [
@@ -67,8 +67,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"logger_8h.html#aca1fd1d8935433e6ba2e3918214e07f9aa79393c382a07b0e848582286ad0ef98",
-"sweep__run_8c.html#a3c04138a5bfe5d72780bb7e82a18e627"
+"logger_8h.html#aca1fd1d8935433e6ba2e3918214e07f9af364851ea406ecc6816a73c83c51773d",
+"sweep__run_8c.html#a779711beb191a6dc1df7e8061c6b216a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

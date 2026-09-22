@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Prism scan controller, elliptical ROI camera-sdk, and two-point ROI interpolation</div>
+   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
   </td>
  </tr>
  </tbody>
@@ -142,9 +142,10 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Two-point blob calibration + linear ROI interpolation check. </p>
-<p>Moves the servo to <code>pos0</code> (default 400) and <code>pos1</code> (default 420), detects the three disc blobs at each end, and writes an interpolation model. Then steps through every position in between, evaluates the linear formula for blob centres, measures intensity, and writes a CSV so you can plot whether intensity stays flat (good tracking) before wiring this into <code>sweep_run</code>.</p>
+<p>Moves the servo to <code>pos0</code> (default 400) and <code>pos1</code> (default 420), detects the three disc blobs at each end, and writes an interpolation model. Then steps through every position in between, evaluates the linear formula for blob centres, measures intensity, and writes a CSV for plotting.</p>
 <p>Usage: ./calibrate2 [exposure_ms=0.1] [pos0=400] [pos1=420] [n_blobs=3] [interp_path] [csv_path]</p>
-<p>Does not stop <code>servo_calib</code> (FIFO closed without sending -1). </p>
+<p>If detection fails or ellipses miss the discs, retry with several exposures (for example 0.20, 0.14, and 0.10) and keep the run whose <code>tmp/detected_*</code>.png overlays look best.</p>
+<p>Does not stop <code>servo_calib</code> (FIFO closed without sending -1). Day-to-day measurements use <code>servo_calib</code> + <code>sweep_run</code>; recalibrate only after optical changes (ROI calibration is normally already done). </p>
 
 <p class="definition">Definition in file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -160,7 +161,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00019">19</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00024">24</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
 
 </div>
 </div>
@@ -225,11 +226,11 @@ Functions</h2></td></tr>
 
 <p>Move to <code>pos</code>, grab, detect <code>nwant</code> blobs into <code>out</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00081">81</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00086">86</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="roi_8h_source.html#l00027">roi_t::angle</a>, <a class="el" href="cam_8c_source.html#l00168">cam_grab()</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00059">draw_overlay()</a>, <a class="el" href="detect_8cpp_source.html#l00249">frame_mat()</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::rx</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::ry</a>, and <a class="el" href="servo__fifo_8c_source.html#l00147">servo_fifo_move_and_wait()</a>.</p>
+<p class="reference">References <a class="el" href="roi_8h_source.html#l00027">roi_t::angle</a>, <a class="el" href="cam_8c_source.html#l00168">cam_grab()</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="calibrate2_8cpp_source.html#l00064">draw_overlay()</a>, <a class="el" href="detect_8cpp_source.html#l00249">frame_mat()</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::rx</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::ry</a>, and <a class="el" href="servo__fifo_8c_source.html#l00147">servo_fifo_move_and_wait()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00185">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00190">main()</a>.</p>
 
 </div>
 </div>
@@ -273,11 +274,11 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00059">59</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00064">64</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="roi_8h_source.html#l00027">roi_t::angle</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::rx</a>, and <a class="el" href="roi_8h_source.html#l00026">roi_t::ry</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00086">detect_at_pos()</a>.</p>
 
 </div>
 </div>
@@ -305,11 +306,11 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00044">44</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00049">49</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="camera-sdk_2utils_8h_source.html#l00039">CMD_PIPE</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, and <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00185">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00190">main()</a>.</p>
 
 </div>
 </div>
@@ -339,9 +340,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00185">185</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00190">190</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="roi__interp_8h_source.html#l00022">roi_interp_t::at0</a>, <a class="el" href="roi__interp_8h_source.html#l00023">roi_interp_t::at1</a>, <a class="el" href="cam_8c_source.html#l00120">cam_close()</a>, <a class="el" href="cam_8c_source.html#l00045">cam_open()</a>, <a class="el" href="cam_8c_source.html#l00141">cam_set_exposure_ms()</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="calibrate2_8cpp_source.html#l00044">laser_on()</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8c_source.html#l00344">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00170">logger_flush()</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi__interp_8h_source.html#l00020">roi_interp_t::pos0</a>, <a class="el" href="roi__interp_8h_source.html#l00021">roi_interp_t::pos1</a>, <a class="el" href="roi__interp_8c_source.html#l00091">roi_interp_at()</a>, <a class="el" href="roi__interp_8h_source.html#l00012">ROI_INTERP_PATH</a>, <a class="el" href="roi__interp_8c_source.html#l00121">roi_interp_save()</a>, <a class="el" href="roi_8h_source.html#l00015">ROI_PATH</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="cam_8h_source.html#l00027">cam_t::sensor</a>, <a class="el" href="servo__fifo_8c_source.html#l00181">servo_fifo_close()</a>, <a class="el" href="servo__fifo_8c_source.html#l00022">servo_fifo_open()</a>, <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>, and <a class="el" href="calibrate2_8cpp_source.html#l00117">write_interp_check_csv()</a>.</p>
+<p class="reference">References <a class="el" href="roi__interp_8h_source.html#l00022">roi_interp_t::at0</a>, <a class="el" href="roi__interp_8h_source.html#l00023">roi_interp_t::at1</a>, <a class="el" href="cam_8c_source.html#l00120">cam_close()</a>, <a class="el" href="cam_8c_source.html#l00045">cam_open()</a>, <a class="el" href="cam_8c_source.html#l00141">cam_set_exposure_ms()</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="calibrate2_8cpp_source.html#l00086">detect_at_pos()</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="calibrate2_8cpp_source.html#l00049">laser_on()</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8c_source.html#l00344">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00170">logger_flush()</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi__interp_8h_source.html#l00020">roi_interp_t::pos0</a>, <a class="el" href="roi__interp_8h_source.html#l00021">roi_interp_t::pos1</a>, <a class="el" href="roi__interp_8c_source.html#l00091">roi_interp_at()</a>, <a class="el" href="roi__interp_8h_source.html#l00012">ROI_INTERP_PATH</a>, <a class="el" href="roi__interp_8c_source.html#l00121">roi_interp_save()</a>, <a class="el" href="roi_8h_source.html#l00015">ROI_PATH</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="cam_8h_source.html#l00027">cam_t::sensor</a>, <a class="el" href="servo__fifo_8c_source.html#l00181">servo_fifo_close()</a>, <a class="el" href="servo__fifo_8c_source.html#l00022">servo_fifo_open()</a>, <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>, and <a class="el" href="calibrate2_8cpp_source.html#l00122">write_interp_check_csv()</a>.</p>
 
 </div>
 </div>
@@ -387,11 +388,11 @@ Functions</h2></td></tr>
 
 <p>Step pos0..pos1, measure with interpolated ROIs (+ fixed-at-pos0 for compare). </p>
 
-<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00117">117</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate2_8cpp_source.html#l00122">122</a> of file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="roi__interp_8h_source.html#l00022">roi_interp_t::at0</a>, <a class="el" href="cam_8c_source.html#l00168">cam_grab()</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi__interp_8h_source.html#l00020">roi_interp_t::pos0</a>, <a class="el" href="roi__interp_8h_source.html#l00021">roi_interp_t::pos1</a>, <a class="el" href="roi_8c_source.html#l00277">roi_clip()</a>, <a class="el" href="roi__interp_8c_source.html#l00091">roi_interp_at()</a>, <a class="el" href="roi_8h_source.html#l00012">ROI_MAX</a>, <a class="el" href="roi_8c_source.html#l00342">roi_means()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00147">servo_fifo_move_and_wait()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00185">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00190">main()</a>.</p>
 
 </div>
 </div>

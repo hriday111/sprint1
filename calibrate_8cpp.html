@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Prism scan controller, elliptical ROI camera-sdk, and two-point ROI interpolation</div>
+   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
   </td>
  </tr>
  </tbody>
@@ -133,6 +133,7 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>One-shot ROI recalibration after optical changes (lens move, remount). </p>
+<p>Day-to-day measurements do not need this: start <code>servo_calib</code>, then <code>sweep_run</code>. Prefer <code>calibrate2</code> when recalibrating; if detection fails, try exposures 0.20, 0.14, and 0.10 and keep the best overlay.</p>
 <p>Grabs a single crop, runs <code>detect_boxes_cv</code>, writes <code>rois.json</code> and diagnostic images under <code>tmp/</code>. Does not stop <code>servo_calib</code>.</p>
 <p>Usage: <code></code>./calibrate [exposure_ms=0.1] [n_blobs=3] [roi_path] </p>
 
@@ -150,7 +151,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00012">12</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00016">16</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
 
 </div>
 </div>
@@ -182,11 +183,11 @@ Functions</h2></td></tr>
 <p>Request full laser brightness via the command FIFO if a reader exists. </p>
 <p>If the FIFO cannot be opened, prints a note and continues (laser may already be on from <code>servo_calib</code>). </p>
 
-<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00040">40</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00044">44</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="camera-sdk_2utils_8h_source.html#l00039">CMD_PIPE</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00026">ERR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, and <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate_8cpp_source.html#l00064">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate_8cpp_source.html#l00068">main()</a>.</p>
 
 </div>
 </div>
@@ -219,9 +220,9 @@ Functions</h2></td></tr>
 <p>Capture, detect marks, save overlay + JSON, print saturation warnings. </p>
 <dl class="section return"><dt>Returns</dt><dd>0 if at least one ROI was written, else non-zero. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00064">64</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00068">68</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="roi_8h_source.html#l00027">roi_t::angle</a>, <a class="el" href="cam_8c_source.html#l00120">cam_close()</a>, <a class="el" href="cam_8h_source.html#l00064">CAM_CROP_X</a>, <a class="el" href="cam_8h_source.html#l00065">CAM_CROP_Y</a>, <a class="el" href="cam_8c_source.html#l00168">cam_grab()</a>, <a class="el" href="cam_8c_source.html#l00045">cam_open()</a>, <a class="el" href="cam_8c_source.html#l00141">cam_set_exposure_ms()</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00045">DETECTED_OUTPUT</a>, <a class="el" href="detect_8cpp_source.html#l00249">frame_mat()</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00048">GRAB_OUTPUT</a>, <a class="el" href="cam_8h_source.html#l00024">cam_t::height</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="calibrate_8cpp_source.html#l00040">laser_on()</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="logger_8c_source.html#l00344">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00170">logger_flush()</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi_8h_source.html#l00012">ROI_MAX</a>, <a class="el" href="roi_8c_source.html#l00342">roi_means()</a>, <a class="el" href="roi_8h_source.html#l00015">ROI_PATH</a>, <a class="el" href="roi_8c_source.html#l00354">roi_sat_frac()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::rx</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::ry</a>, <a class="el" href="cam_8h_source.html#l00027">cam_t::sensor</a>, <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>, and <a class="el" href="cam_8h_source.html#l00023">cam_t::width</a>.</p>
+<p class="reference">References <a class="el" href="roi_8h_source.html#l00027">roi_t::angle</a>, <a class="el" href="cam_8c_source.html#l00120">cam_close()</a>, <a class="el" href="cam_8h_source.html#l00064">CAM_CROP_X</a>, <a class="el" href="cam_8h_source.html#l00065">CAM_CROP_Y</a>, <a class="el" href="cam_8c_source.html#l00168">cam_grab()</a>, <a class="el" href="cam_8c_source.html#l00045">cam_open()</a>, <a class="el" href="cam_8c_source.html#l00141">cam_set_exposure_ms()</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00045">DETECTED_OUTPUT</a>, <a class="el" href="detect_8cpp_source.html#l00249">frame_mat()</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00048">GRAB_OUTPUT</a>, <a class="el" href="cam_8h_source.html#l00024">cam_t::height</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="calibrate_8cpp_source.html#l00044">laser_on()</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="logger_8c_source.html#l00344">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00170">logger_flush()</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi_8h_source.html#l00012">ROI_MAX</a>, <a class="el" href="roi_8c_source.html#l00342">roi_means()</a>, <a class="el" href="roi_8h_source.html#l00015">ROI_PATH</a>, <a class="el" href="roi_8c_source.html#l00354">roi_sat_frac()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::rx</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::ry</a>, <a class="el" href="cam_8h_source.html#l00027">cam_t::sensor</a>, <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>, and <a class="el" href="cam_8h_source.html#l00023">cam_t::width</a>.</p>
 
 </div>
 </div>

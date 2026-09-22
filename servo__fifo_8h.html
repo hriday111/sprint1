@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Prism scan controller, elliptical ROI camera-sdk, and two-point ROI interpolation</div>
+   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
   </td>
  </tr>
  </tbody>
@@ -141,7 +141,7 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Command/position FIFO helpers for camera-sdk tools talking to servo_calib. </p>
-<p>Keep one write fd open for the whole session. Closing without <code>servo_fifo_shutdown</code> does not send <code>-1</code> (daemon keeps running). </p>
+<p>Keep one write fd open for the whole session. Closing without <code>servo_fifo_shutdown</code> does not send <code>-1</code> (daemon keeps running). Used by <code>sweep_run</code> and <code>calibrate2</code>. </p>
 
 <p class="definition">Definition in file <a class="el" href="servo__fifo_8h_source.html">servo_fifo.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -216,7 +216,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, <a class="el" href="servo__fifo_8c_source.html#l00019">g_pos_fd</a>, and <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00185">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00190">main()</a>.</p>
 
 </div>
 </div>
@@ -299,7 +299,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="servo__fifo_8c_source.html#l00135">servo_fifo_position()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00065">servo_fifo_send()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="sweep__run_8c_source.html#l00056">do_reset()</a>, <a class="el" href="sweep__run_8c_source.html#l00074">do_sweep()</a>, and <a class="el" href="calibrate2_8cpp_source.html#l00117">write_interp_check_csv()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00086">detect_at_pos()</a>, <a class="el" href="sweep__run_8c_source.html#l00062">do_reset()</a>, <a class="el" href="sweep__run_8c_source.html#l00080">do_sweep()</a>, and <a class="el" href="calibrate2_8cpp_source.html#l00122">write_interp_check_csv()</a>.</p>
 
 </div>
 </div>
@@ -326,7 +326,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="camera-sdk_2utils_8h_source.html#l00039">CMD_PIPE</a>, <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, <a class="el" href="servo__fifo_8c_source.html#l00019">g_pos_fd</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, and <a class="el" href="camera-sdk_2utils_8h_source.html#l00042">POS_PIPE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00185">main()</a>, <a class="el" href="servo__fifo_8c_source.html#l00091">position_once()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00065">servo_fifo_send()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00190">main()</a>, <a class="el" href="servo__fifo_8c_source.html#l00091">position_once()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00065">servo_fifo_send()</a>.</p>
 
 </div>
 </div>

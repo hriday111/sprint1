@@ -21,9 +21,8 @@ var searchData=
   ['on_5fquit_18',['on_quit',['../sweep__tui_8c.html#a2cd074aefe4244f7e076ab3487c4919d',1,'sweep_tui.c']]],
   ['on_5freset_19',['on_reset',['../sweep__tui_8c.html#a2e574a12a93b7e19b377c891f0af686c',1,'on_reset():&#160;sweep_tui.c'],['../structsweep__tui__hooks__t.html#ac2ec0647015e48688ebaaf031758c7cd',1,'sweep_tui_hooks_t::on_reset']]],
   ['on_5fstart_20',['on_start',['../sweep__tui_8c.html#a44394cd703e3391269e4307e04a6dbce',1,'on_start():&#160;sweep_tui.c'],['../structsweep__tui__hooks__t.html#aa211971caed2040dc571c801fe4fbfd5',1,'sweep_tui_hooks_t::on_start']]],
-  ['once_20or_20twice_21',['Why calibrate once (or twice)?',['../index.html#autotoc_md21',1,'']]],
+  ['only_20if_20needed_21',['Recalibration (only if needed)',['../camera_sdk.html#autotoc_md1',1,'']]],
   ['open_22',['open',['../structcam__t.html#ae806436c8f7b7c524c813499db66cc66',1,'cam_t']]],
-  ['or_20twice_23',['Why calibrate once (or twice)?',['../index.html#autotoc_md21',1,'']]],
-  ['output_24',['output',['../logger_8c.html#ab41bf19330e50c3c7bf3544c53f30971',1,'output:&#160;logger.c'],['../loggerconf_8c.html#ab41bf19330e50c3c7bf3544c53f30971',1,'output:&#160;loggerconf.c']]],
-  ['overlaps_25',['overlaps',['../detect_8cpp.html#a73a806f53fc087a5d0465320a0110d97',1,'detect.cpp']]]
+  ['output_23',['output',['../logger_8c.html#ab41bf19330e50c3c7bf3544c53f30971',1,'output:&#160;logger.c'],['../loggerconf_8c.html#ab41bf19330e50c3c7bf3544c53f30971',1,'output:&#160;loggerconf.c']]],
+  ['overlaps_24',['overlaps',['../detect_8cpp.html#a73a806f53fc087a5d0465320a0110d97',1,'detect.cpp']]]
 ];
