@@ -33,10 +33,25 @@ If a lens move invalidates ROIs and a single `calibrate` / `calibrate2` pass fai
 
 ## Prerequisites
 
-- IDS uEye SDK (`libueye_api`); `ueyeusbd` running; camera visible as USB vendor `1409`
-- OpenCV 4 for `calibrate` / `calibrate2` only
+- IDS uEye SDK (`libueye_api`); `ueyeusbdrc` running; camera USB vendor `1409`
+- OpenCV 4 (`pkg-config opencv4`) for `calibrate` / `calibrate2` only
 - `servo_calib` running for laser/motion
 - Writable `/var/lib/sprint1/`, `./tmp/`, and `logs/`
+
+**Install:**
+
+```bash
+# OpenCV from apt
+sudo apt-get install -y libopencv-dev
+
+# IDS uEye + udev from vendored debs (repo root)
+sudo dpkg -i vendor/debs/ueye/*.deb
+sudo apt-get install -y -f
+sudo udevadm control --reload-rules && sudo udevadm trigger
+sudo systemctl enable --now ueyeusbdrc
+```
+
+Full project prerequisites (including WiringPi): [README.md](../README.md#prerequisites).
 
 ## What it does
 

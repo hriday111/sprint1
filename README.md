@@ -42,11 +42,44 @@ Green ellipses must sit on the three dark discs. Avoid long exposures with a bri
 
 ## Prerequisites
 
-- Raspberry Pi 4 with WiringPi (`-lwiringPi`)
-- Root (or equivalent GPIO) privileges for `servo_calib` (hardware PWM on BCM 18)
-- IDS uEye SDK (`libueye_api`); OpenCV 4 for `calibrate` / `calibrate2`
-- Hardware wired per the pin table below
-- Writable `/run/sprint1/` (FIFOs), `/var/lib/sprint1/` (`rois.json`, `rois_interp.json`, `saved.prm`), and a local `logs/` directory (created on start)
+Hardware: Raspberry Pi 4, WiringPi, root (or GPIO) for `servo_calib` (PWM on BCM 18), and the pinout below. Shared paths: `/run/sprint1/`, `/var/lib/sprint1/`, and a writable `logs/` in the process cwd.
+
+### Library installation
+
+**OpenCV** (apt only — needed for `calibrate` / `calibrate2`):
+
+```bash
+sudo apt-get install -y libopencv-dev
+```
+
+**IDS uEye + udev** (vendored `.deb`s under `vendor/debs/ueye/`):
+
+```bash
+sudo dpkg -i vendor/debs/ueye/*.deb
+sudo apt-get install -y -f
+sudo udevadm control --reload-rules && sudo udevadm trigger
+sudo systemctl enable --now ueyeusbdrc
+```
+
+Add your user to group `ueye` if needed (`sudo usermod -aG ueye "$USER"`), then re-login. Confirm `lsusb` shows vendor `1409`.
+
+**WiringPi** (build a `.deb` from upstream if not already installed):
+
+```bash
+sudo apt install git
+git clone https://github.com/WiringPi/WiringPi.git
+cd WiringPi
+./build debian
+mv debian-template/wiringpi-3.x.deb .
+sudo apt install ./wiringpi-3.x.deb
+```
+
+| Dependency | Source |
+|------------|--------|
+| **OpenCV 4** | `sudo apt-get install -y libopencv-dev` |
+| **IDS uEye + udev** | `vendor/debs/ueye/*.deb` (`ueye-driver-usb` ships `/lib/udev/rules.d/90-ueyeusbd.rules`) |
+| **WiringPi** | Build/install from [WiringPi](https://github.com/WiringPi/WiringPi) as above (`-lwiringPi`) |
+
 
 ## Architecture
 
