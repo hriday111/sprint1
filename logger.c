@@ -44,7 +44,22 @@ static volatile long s_flushInterval = 0;
 static volatile int s_initialized = 0;
 
 static pthread_mutex_t s_mutex;
+static pthread_t s_flushThread;
+static volatile int s_flushThreadRun = 0;
 
+static void* flush_worker(void* arg)
+{
+    (void)arg;
+    while (s_flushThreadRun) {
+        long interval = s_flushInterval;
+        if (interval <= 0)
+            interval = 1000;
+        usleep((useconds_t)interval * 1000);
+        if (s_flushThreadRun)
+            logger_flush();
+    }
+    return NULL;
+}
 
 static void init(void)
 {
@@ -54,6 +69,10 @@ static void init(void)
 
     pthread_mutex_init(&s_mutex, NULL);
 
+    s_flushThreadRun = 1;
+    if (pthread_create(&s_flushThread, NULL, flush_worker, NULL) != 0) {
+        s_flushThreadRun = 0;
+    }
     s_initialized = 1;
 }
 
@@ -178,14 +197,17 @@ static char getLevelChar(LogLevel level)
 
 static void getTimestamp(const struct timeval* time, char* timestamp, size_t size)
 {
-    time_t sec = time->tv_sec;
-    struct tm calendar;
 
-    assert(size >= 25);
 
-    localtime_r(&sec, &calendar);
-    strftime(timestamp, size, "%y-%m-%d %H:%M:%S", &calendar);
-    sprintf(&timestamp[17], ".%06ld", (long) time->tv_usec);
+
+
+
+
+
+
+    assert(size >= 32);
+    unsigned long long ms = (unsigned long long)time->tv_sec * 1000ULL + time->tv_usec / 1000ULL;
+    snprintf(timestamp, size, "%llu.%03llu", ms, (unsigned long long)(time->tv_usec % 1000ULL));
 }
 
 
@@ -267,7 +289,6 @@ static long vflog(FILE* fp, char levelc, const char* timestamp, long threadID,
     }
     if (s_flushInterval > 0) {
         if (currentTime - *flushedTime > (unsigned long long)s_flushInterval) {
-            fflush(fp);
             *flushedTime = currentTime;
         }
     }
@@ -281,6 +302,7 @@ void logger_log(LogLevel level, const char* file, int line, const char* fmt, ...
     char levelc;
     char timestamp[32];
     long threadID;
+    int need_rotate = 0;
 
     if (s_logger == 0 || !s_initialized) {
         assert(0 && "logger is not initialized");
@@ -304,8 +326,8 @@ void logger_log(LogLevel level, const char* file, int line, const char* fmt, ...
         va_end(carg);
     }
     if (hasFlag(s_logger, kFileLogger)) {
+        need_rotate = s_flog.currentFileSize >= s_flog.maxFileSize;
         if (rotateLogFiles()) {
-            
             va_list farg;
             va_start(farg, fmt);
             s_flog.currentFileSize += vflog(s_flog.output, levelc, timestamp, threadID,
@@ -314,10 +336,17 @@ void logger_log(LogLevel level, const char* file, int line, const char* fmt, ...
         }
     }
     unlock();
+    if (need_rotate) {
+        rotateLogFiles();
+    }
 }
 
 void logger_exitFileLogger(void)
 {
+    if (s_flushThreadRun) {
+        s_flushThreadRun = 0;
+        pthread_join(s_flushThread, NULL);
+    }
     if (s_flog.output)
         fclose(s_flog.output);
 }

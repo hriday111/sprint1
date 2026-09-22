@@ -16,6 +16,7 @@
 #include <unistd.h>
 
 static int g_cmd_fd = -1;
+static int g_pos_fd = -1;
 static int g_motor_enabled = 0;
 
 int servo_fifo_open(void)
@@ -27,7 +28,7 @@ int servo_fifo_open(void)
         g_cmd_fd = open(CMD_PIPE, O_WRONLY);
         if (g_cmd_fd >= 0) {
             LOG_INFO("Opened command FIFO %s", CMD_PIPE);
-            return 0;
+            break;
         }
         if (errno != EINTR && errno != ENXIO) {
             LOG_ERROR("%s: %s", CMD_PIPE, strerror(errno));
@@ -35,8 +36,30 @@ int servo_fifo_open(void)
         }
         usleep(50000);
     }
-    LOG_ERROR("%s: no reader (is servo_calib running?)", CMD_PIPE);
-    return -1;
+    if (g_cmd_fd < 0) {
+        LOG_ERROR("%s: no reader (is servo_calib running?)", CMD_PIPE);
+        return -1;
+    }
+    if (g_pos_fd < 0) {
+        for (int attempt = 0; attempt < 50; attempt++) {
+            g_pos_fd = open(POS_PIPE, O_RDONLY | O_NONBLOCK);
+            if (g_pos_fd >= 0) break;
+            if (errno != EINTR && errno != ENXIO && errno != EBADF) {
+                LOG_ERROR("%s: %s", POS_PIPE, strerror(errno));
+                close(g_cmd_fd);
+                g_cmd_fd = -1;
+                return -1;
+            }
+            usleep(50000);
+        }
+        if (g_pos_fd < 0) {
+            LOG_ERROR("%s: no reader", POS_PIPE);
+            close(g_cmd_fd);
+            g_cmd_fd = -1;
+            return -1;
+        }
+    }
+    return 0;
 }
 
 int servo_fifo_send(long cmd)
@@ -67,33 +90,33 @@ int servo_fifo_send(long cmd)
 
 static int position_once(int timeout_ms)
 {
-    int fd = open(POS_PIPE, O_RDONLY | O_NONBLOCK);
-    if (fd < 0) {
-        if (errno != ENXIO)
-            LOG_ERROR("%s: %s", POS_PIPE, strerror(errno));
-        return -1;
+    if (g_pos_fd < 0) {
+        if (servo_fifo_open() != 0)
+            return -1;
+    }
+    char junk[256];
+    for (;;) {
+        ssize_t n = read(g_pos_fd, junk, sizeof(junk));
+        if (n <= 0) break;
     }
     if (servo_fifo_send(SERVO_CMD_GETPOS) != 0) {
-        close(fd);
         return -1;
     }
 
     char buf[64]={};
     size_t len = 0;
     while (memchr(buf, '\n', len) == NULL) {
-        struct pollfd pfd = {.fd = fd, .events = POLLIN};
+        struct pollfd pfd = {.fd = g_pos_fd, .events = POLLIN};
         int pr = poll(&pfd, 1, timeout_ms);
         if (pr <= 0) {
-            close(fd);
             return -1;
         }
-        ssize_t n = read(fd, buf + len, sizeof(buf) - 1 - len);
+        ssize_t n = read(g_pos_fd, buf + len, sizeof(buf) - 1 - len);
         if (n < 0) {
             if (errno == EAGAIN || errno == EWOULDBLOCK) {
                 usleep(5000);
                 continue;
             }
-            close(fd);
             return -1;
         }
         if (n == 0) {
@@ -102,11 +125,9 @@ static int position_once(int timeout_ms)
         }
         len += (size_t)n;
         if (len >= sizeof(buf) - 1) {
-            close(fd);
             return -1;
         }
     }
-    close(fd);
     buf[len] = '\0';
     return atoi(buf);
 }
@@ -162,8 +183,12 @@ void servo_fifo_close(void)
     if (g_cmd_fd >= 0) {
         close(g_cmd_fd);
         g_cmd_fd = -1;
-        LOG_INFO("Closed command FIFO (daemon left running)");
     }
+    if (g_pos_fd >= 0) {
+        close(g_pos_fd);
+        g_pos_fd = -1;
+    }
+    LOG_INFO("Closed command FIFO (daemon left running)");
 }
 
 void servo_fifo_shutdown(void)
@@ -171,7 +196,13 @@ void servo_fifo_shutdown(void)
     if (g_cmd_fd >= 0) {
         LOG_INFO("Shutting down servo_calib via -1");
         (void)servo_fifo_send(-1);
+    }
+    if (g_cmd_fd >= 0) {
         close(g_cmd_fd);
         g_cmd_fd = -1;
+    }
+    if (g_pos_fd >= 0) {
+        close(g_pos_fd);
+        g_pos_fd = -1;
     }
 }

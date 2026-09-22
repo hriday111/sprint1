@@ -15,8 +15,8 @@ LOGGER_OBJS = $(OBJDIR)/logger.o $(OBJDIR)/loggerconf.o $(OBJDIR)/crash.o
 
 all: $(BINDIR)/sweep_run  $(BINDIR)/calibrate $(BINDIR)/calibrate2
 
-$(BINDIR)/sweep_run: $(OBJDIR)/sweep_run.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/utils.o \
-		$(OBJDIR)/servo_fifo.o $(LOGGER_OBJS)
+$(BINDIR)/sweep_run: $(OBJDIR)/sweep_run.o $(OBJDIR)/sweep_tui.o $(OBJDIR)/cam.o \
+		$(OBJDIR)/roi.o $(OBJDIR)/utils.o $(OBJDIR)/servo_fifo.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
@@ -27,7 +27,7 @@ $(BINDIR)/calibrate: $(OBJDIR)/calibrate.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJ
 $(BINDIR)/calibrate2: $(OBJDIR)/calibrate2.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/roi_interp.o \
 		$(OBJDIR)/servo_fifo.o $(OBJDIR)/detect.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS) $(OPENCV_LIBS)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(OPENCV_LIBS)
 
 
 $(OBJDIR)/%.o: %.c utils.h
@@ -61,6 +61,10 @@ $(OBJDIR)/calibrate2.o: calibrate2.cpp detect.hpp cam.h roi.h roi_interp.h servo
 $(OBJDIR)/roi_interp.o: roi_interp.c roi_interp.h roi.h
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c roi_interp.c -o $@
+
+$(OBJDIR)/sweep_tui.o: sweep_tui.c sweep_tui.h ../tuibox.h ../vt100utils.h
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c sweep_tui.c -o $@
 
 $(OBJDIR)/servo_fifo.o: servo_fifo.c servo_fifo.h utils.h
 	@mkdir -p $(OBJDIR)

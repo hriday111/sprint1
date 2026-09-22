@@ -215,7 +215,7 @@ int sprint1_logging_init(const char *app_name, char *path_out, size_t path_sz)
     }
     
     logger_setLevel(LogLevel_DEBUG);
-    logger_autoFlush(100);
+    logger_autoFlush(1000);
 
     if (path_out && path_sz > 0)
         snprintf(path_out, path_sz, "%s", path);

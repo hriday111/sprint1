@@ -255,7 +255,7 @@ cv::Mat frame_mat(const unsigned char *pixels, int width, int height, int pitch)
         std::memcpy(out.ptr(y), pixels + (size_t)y * (size_t)pitch, (size_t)width);
     return out;
 }
-
+///cv::Mat frame_m    
 int detect_boxes_cv(const cv::Mat &gray, int nwant, rois_t *out)
 {
     *out =  {};

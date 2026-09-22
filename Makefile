@@ -1,5 +1,6 @@
-override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Wno-unused-parameter -Wno-unused-const-variable -g -O0 --coverage
+override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Wno-unused-parameter -Wno-unused-const-variable -g -O2
 override LDLIBS=-lpthread -latomic -lwiringPi
+override LDFLAGS=-Wl,-z,now,-z,relro -Wl,-s
 
 ifdef CI
 override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Werror -Wno-unused-parameter -Wno-unused-const-variable

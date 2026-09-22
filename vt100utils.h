@@ -176,7 +176,15 @@ vt100_encode(struct vt100_node_t *node)
 
   while (tmp != NULL) {
     while (len + tmp->len + 64 > size) {
-      out = realloc(out, (size *= 2));
+      size = size*2;
+      void *new_out  = realloc(out, size);
+      if(new_out==NULL)
+      {
+        free(out);
+        return NULL;
+      }
+
+      out = new_out;
     }
 
     buf = vt100_sgr(tmp, prev);
