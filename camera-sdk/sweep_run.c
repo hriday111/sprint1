@@ -1,6 +1,10 @@
 /**
  * @file sweep_run.c
- * @brief Intensity sweep with disease assignment TUI (tuibox).
+ * @brief Main measurement tool: disease-assignment TUI + intensity sweep.
+ *
+ * Normal workflow (ROI calibration is already done for the current optics):
+ *   1. Start the driver: @c ./build/servo_calib
+ *   2. Run this tool: @c ./camera-sdk/build/bin/sweep_run
  *
  * Flow: pick D1–D10 for blob 1 and blob 2 → Start/Reset screen → CSV.
  * Requires @c servo_calib already running.
@@ -8,6 +12,8 @@
  * Usage: @c ./sweep_run [rois.json] [exposure_ms] [out.csv]
  *
  * Exit leaves the servo daemon running (FIFO closed without @c -1).
+ * Recalibrate with @c calibrate2 only after lens moves; try exposures
+ * 0.20, 0.14, and 0.10 if detection looks wrong.
  */
 
 #define _DEFAULT_SOURCE

@@ -1,21 +1,25 @@
 # Recalibrate chip marks after moving the lens {#recalibrate}
 
-The intensity sweep does **not** re-detect discs. It averages ellipse masks from `rois.json` (or, for experiments, interpolated ellipses from `rois_interp.json`). After moving the lens (or remounting optics):
+**Day-to-day:** calibration is already done. Start `./build/servo_calib`, then run `./camera-sdk/build/bin/sweep_run` for measurements.
+
+The intensity sweep does **not** re-detect discs; it averages ellipse masks from `rois.json`. Recalibrate only after moving the lens (or remounting optics).
 
 ```bash
 cd camera-sdk
 make
 mkdir -p tmp
 
-# Single pose (fast)
-./build/bin/calibrate 0.1
+# Prefer two-point calibration; try several exposures if detection fails
+./build/bin/calibrate2 0.20 400 420
+./build/bin/calibrate2 0.14 400 420
+./build/bin/calibrate2 0.10 400 420
 
-# Or two poses if blobs drift across the scan window
-./build/bin/calibrate2 0.1 400 420
+# Optional single-pose fallback
+./build/bin/calibrate 0.1
 ```
 
-Open `tmp/detected.png` (or `tmp/detected_<pos>.png`). Green ellipses must sit on the three dark discs. If not, fix focus/lighting or try another exposure.
+Open `tmp/detected_<pos>.png` (or `tmp/detected.png`). Green ellipses must sit on the three dark discs — pick the exposure that looks best.
 
 Avoid long exposures with a bright laser — clipped discs break detection. Check `logs/calibrate*.log` for saturation and mark-count warnings.
 
-Full API and tool reference: [README.md](README.md).
+Full API: [README.md](README.md).

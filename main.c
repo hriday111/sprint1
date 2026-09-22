@@ -1,6 +1,10 @@
 /**
  * @file main.c
- * @brief @c servo_calib entry point: home the prism, then serve FIFO commands.
+ * @brief @c servo_calib — stepper/laser driver for the prism scan rig.
+ *
+ * Start this first for normal operation, then run
+ * @c camera-sdk/build/bin/sweep_run for the main intensity measurements.
+ * ROI calibration is already done; use @c calibrate2 only after optical changes.
  *
  * Initializes file+console logging under @c logs/, enables core-dump handlers,
  * creates world-writable FIFOs under /run/sprint1/, loads scan parameters from

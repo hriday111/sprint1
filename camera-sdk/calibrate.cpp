@@ -2,6 +2,10 @@
  * @file calibrate.cpp
  * @brief One-shot ROI recalibration after optical changes (lens move, remount).
  *
+ * Day-to-day measurements do not need this: start @c servo_calib, then
+ * @c sweep_run. Prefer @c calibrate2 when recalibrating; if detection fails,
+ * try exposures 0.20, 0.14, and 0.10 and keep the best overlay.
+ *
  * Grabs a single crop, runs @c detect_boxes_cv, writes @c rois.json and
  * diagnostic images under @c tmp/. Does not stop @c servo_calib.
  *

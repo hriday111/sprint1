@@ -2,7 +2,7 @@
 # Generated for local documentation builds.
 
 PROJECT_NAME           = "Sprint1"
-PROJECT_BRIEF          = "Prism scan controller, elliptical ROI camera-sdk, and two-point ROI interpolation"
+PROJECT_BRIEF          = "Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk"
 PROJECT_NUMBER         =
 
 OUTPUT_DIRECTORY       = docs

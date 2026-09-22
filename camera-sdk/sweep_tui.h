@@ -5,6 +5,8 @@
  * @file sweep_tui.h
  * @brief tuibox UI for disease assignment + Start/Reset sweep controls.
  *
+ * Used by the main measurement binary @c sweep_run after @c servo_calib is up.
+ *
  * Screen 0: pick D1–D10 for blob 1, then blob 2 (left list).
  * Screen 1: Start / Reset / progress; footer shows Blob → disease.
  *

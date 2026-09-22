@@ -5,14 +5,19 @@
  * Moves the servo to @c pos0 (default 400) and @c pos1 (default 420), detects
  * the three disc blobs at each end, and writes an interpolation model. Then
  * steps through every position in between, evaluates the linear formula for
- * blob centres, measures intensity, and writes a CSV so you can plot whether
- * intensity stays flat (good tracking) before wiring this into @c sweep_run.
+ * blob centres, measures intensity, and writes a CSV for plotting.
  *
  * Usage:
  *   ./calibrate2 [exposure_ms=0.1] [pos0=400] [pos1=420] [n_blobs=3]
  *                [interp_path] [csv_path]
  *
+ * If detection fails or ellipses miss the discs, retry with several exposures
+ * (for example 0.20, 0.14, and 0.10) and keep the run whose
+ * @c tmp/detected_*.png overlays look best.
+ *
  * Does not stop @c servo_calib (FIFO closed without sending -1).
+ * Day-to-day measurements use @c servo_calib + @c sweep_run; recalibrate only
+ * after optical changes (ROI calibration is normally already done).
  */
 
 #ifndef _DEFAULT_SOURCE

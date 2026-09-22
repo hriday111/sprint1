@@ -6,7 +6,7 @@
  * @brief Command/position FIFO helpers for camera-sdk tools talking to servo_calib.
  *
  * Keep one write fd open for the whole session. Closing without @c servo_fifo_shutdown
- * does not send @c -1 (daemon keeps running).
+ * does not send @c -1 (daemon keeps running). Used by @c sweep_run and @c calibrate2.
  */
 
 #define SERVO_CMD_GETPOS 4000
