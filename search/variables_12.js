@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ui_0',['ui',['../structapp__t.html#ac8faaed6a295fc69b62a00cabe202367',1,'app_t']]]
+  ['ui_0',['ui',['../structtui__t.html#a4e5fa8ed2194f3adf0e98898709b4d98',1,'tui_t']]],
+  ['userdata_1',['userdata',['../structsweep__tui__hooks__t.html#adad9374fd1cb05c710e56ab9f22ec37a',1,'sweep_tui_hooks_t']]]
 ];

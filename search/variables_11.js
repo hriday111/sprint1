@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tick_0',['tick',['../structapp__t.html#a6d9e754c65ed86b60b603ac2b470fcde',1,'app_t']]]
+  ['tick_0',['tick',['../structtui__t.html#ac9afc825f839b4d61ef6645fa0eedd48',1,'tui_t']]]
 ];

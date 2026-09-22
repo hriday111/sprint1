@@ -8,8 +8,9 @@ var searchData=
   ['api_5',['api',['../camera_sdk.html#autotoc_md4',1,'Camera API'],['../camera_sdk.html#autotoc_md5',1,'ROI API']]],
   ['api_20tt_20roi_5finterp_20tt_6',['Interpolation API (&lt;tt&gt;roi_interp&lt;/tt&gt;)',['../camera_sdk.html#autotoc_md6',1,'']]],
   ['api_20tt_20servo_5ffifo_20tt_7',['Servo FIFO API (&lt;tt&gt;servo_fifo&lt;/tt&gt;)',['../camera_sdk.html#autotoc_md7',1,'']]],
-  ['app_5ft_8',['app_t',['../structapp__t.html',1,'']]],
-  ['architecture_9',['Architecture',['../index.html#autotoc_md15',1,'']]],
-  ['at0_10',['at0',['../structroi__interp__t.html#a5b54d33d45b8da5d619eba227a74bb73',1,'roi_interp_t']]],
-  ['at1_11',['at1',['../structroi__interp__t.html#a5eb1fba1602cad7b45b3afe47a09154c',1,'roi_interp_t']]]
+  ['architecture_8',['Architecture',['../index.html#autotoc_md15',1,'']]],
+  ['assign_9',['assign',['../structsweep__ctx__t.html#a9000eff72158a732cc9615365b024aff',1,'sweep_ctx_t::assign'],['../structtui__t.html#a578476f25e1298b4884428b2b5f3c30c',1,'tui_t::assign']]],
+  ['assignments_5fready_10',['assignments_ready',['../sweep__tui_8c.html#a1452c54bcf1fae99309832fe2832aa64',1,'sweep_tui.c']]],
+  ['at0_11',['at0',['../structroi__interp__t.html#a5b54d33d45b8da5d619eba227a74bb73',1,'roi_interp_t']]],
+  ['at1_12',['at1',['../structroi__interp__t.html#a5eb1fba1602cad7b45b3afe47a09154c',1,'roi_interp_t']]]
 ];

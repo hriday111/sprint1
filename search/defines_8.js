@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['panel_5fmax_0',['PANEL_MAX',['../sweep__run_8c.html#a5f1e708d04dc47f8374a417c3c51737b',1,'sweep_run.c']]],
-  ['panel_5fmin_1',['PANEL_MIN',['../sweep__run_8c.html#ae0549e28f9b2dec94d59275c37136449',1,'sweep_run.c']]],
+  ['panel_5fmax_0',['PANEL_MAX',['../sweep__tui_8c.html#a5f1e708d04dc47f8374a417c3c51737b',1,'sweep_tui.c']]],
+  ['panel_5fmin_1',['PANEL_MIN',['../sweep__tui_8c.html#ae0549e28f9b2dec94d59275c37136449',1,'sweep_tui.c']]],
   ['pin_5fdir_2',['PIN_DIR',['../gpio__pins_8h.html#ad863d37df885f2008e345bacdc255135',1,'gpio_pins.h']]],
   ['pin_5fenable_3',['PIN_ENABLE',['../gpio__pins_8h.html#ae680761fa74600f1c60c1f0282591896',1,'gpio_pins.h']]],
   ['pin_5fendstop_4',['PIN_ENDSTOP',['../gpio__pins_8h.html#a0fce84a9f1cb9f2cbcfdce129dae6baf',1,'gpio_pins.h']]],

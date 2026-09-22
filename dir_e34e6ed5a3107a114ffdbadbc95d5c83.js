@@ -15,6 +15,8 @@ var dir_e34e6ed5a3107a114ffdbadbc95d5c83 =
     [ "servo_fifo.c", "servo__fifo_8c.html", "servo__fifo_8c" ],
     [ "servo_fifo.h", "servo__fifo_8h.html", "servo__fifo_8h" ],
     [ "sweep_run.c", "sweep__run_8c.html", "sweep__run_8c" ],
+    [ "sweep_tui.c", "sweep__tui_8c.html", "sweep__tui_8c" ],
+    [ "sweep_tui.h", "sweep__tui_8h.html", "sweep__tui_8h" ],
     [ "utils.c", "camera-sdk_2utils_8c.html", "camera-sdk_2utils_8c" ],
     [ "utils.h", "camera-sdk_2utils_8h.html", "camera-sdk_2utils_8h" ]
 ];

@@ -3,7 +3,7 @@ var searchData=
   ['calibrate_20once_20or_20twice_0',['Why calibrate once (or twice)?',['../index.html#autotoc_md21',1,'']]],
   ['calibrate_2ecpp_1',['calibrate.cpp',['../calibrate_8cpp.html',1,'']]],
   ['calibrate2_2ecpp_2',['calibrate2.cpp',['../calibrate2_8cpp.html',1,'']]],
-  ['cam_3',['cam',['../structapp__t.html#ad47afa0184b573729aee67dcf902168e',1,'app_t']]],
+  ['cam_3',['cam',['../structsweep__ctx__t.html#afb92b0e4e731cb0cc28e0257370cf7db',1,'sweep_ctx_t']]],
   ['cam_2ec_4',['cam.c',['../cam_8c.html',1,'']]],
   ['cam_2eh_5',['cam.h',['../cam_8h.html',1,'']]],
   ['cam_5fclose_6',['cam_close',['../cam_8h.html#a208eaac1b3e37f4af0506668c85650d1',1,'cam_close(cam_t *cam):&#160;cam.c'],['../cam_8c.html#a208eaac1b3e37f4af0506668c85650d1',1,'cam_close(cam_t *cam):&#160;cam.c']]],
@@ -53,7 +53,7 @@ var searchData=
   ['crash_5fsignal_5fhandler_50',['crash_signal_handler',['../crash_8c.html#a4f89f74bf5cfbea5b63289f6c3377a38',1,'crash.c']]],
   ['crashes_51',['Logging and crashes',['../index.html#autotoc_md16',1,'']]],
   ['crop_52',['Camera crop',['../camera_sdk.html#autotoc_md3',1,'']]],
-  ['csv_5fpath_53',['csv_path',['../structapp__t.html#ab4375343464ee5873a46fef111b18b77',1,'app_t']]],
+  ['csv_5fpath_53',['csv_path',['../structsweep__ctx__t.html#a12831b177a35ca3f789702563995380e',1,'sweep_ctx_t']]],
   ['currentfilesize_54',['currentFileSize',['../logger_8c.html#a17bb573f7263ab4ac7afbc78f10e0183',1,'logger.c']]],
   ['cx_55',['cx',['../structroi__t.html#ae2a4ebbe45b713e218cf28d5d04fdd3b',1,'roi_t::cx'],['../structEllipseCand.html#a65b74d8a35addbe7813a67dbf5115455',1,'EllipseCand::cx']]],
   ['cy_56',['cy',['../structEllipseCand.html#a79b332169cc6bdf309449f4aa342a0b3',1,'EllipseCand::cy'],['../structroi__t.html#a1eb59d836f93338945ed47b9ab9c3135',1,'roi_t::cy']]]

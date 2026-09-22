@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cam_5ft_0',['cam_t',['../structcam__t.html',1,'']]]
+  ['disease_5fassign_5ft_0',['disease_assign_t',['../structdisease__assign__t.html',1,'']]]
 ];

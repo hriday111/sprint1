@@ -10,5 +10,6 @@ var servo__fifo_8c =
     [ "servo_fifo_send", "servo__fifo_8c.html#a1a8b28bf776d79de53b9021c0da949fb", null ],
     [ "servo_fifo_shutdown", "servo__fifo_8c.html#a0e49bd24be931102af6257ddb2f3cec7", null ],
     [ "g_cmd_fd", "servo__fifo_8c.html#a1060d1f961bd0a78bbe1a268a0b52cac", null ],
-    [ "g_motor_enabled", "servo__fifo_8c.html#a225d049cb1efca9002c994095c94af0a", null ]
+    [ "g_motor_enabled", "servo__fifo_8c.html#a225d049cb1efca9002c994095c94af0a", null ],
+    [ "g_pos_fd", "servo__fifo_8c.html#aeed940cfcbb96f97c9fc6f7b7b8f884e", null ]
 ];

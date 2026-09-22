@@ -1,5 +1,6 @@
 var logger_8c =
 [
+    [ "flush_worker", "logger_8c.html#a0417f3ff7d72a7ea3743ebbc4a4559ba", null ],
     [ "getBackupFileName", "logger_8c.html#add1d825698e2b0eded012c5dad6f1515", null ],
     [ "getCurrentThreadID", "logger_8c.html#afbe16e531630cb4bba3856e11b812c88", null ],
     [ "getFileSize", "logger_8c.html#a9e7ab1cba8b2883943ec52875583fc03", null ],
@@ -29,6 +30,8 @@ var logger_8c =
     [ "s_clog", "logger_8c.html#a710d4e2e2f27f6add971887b06900631", null ],
     [ "s_flog", "logger_8c.html#ae47adc758c2d6a63ab9b1941efad1bf9", null ],
     [ "s_flushInterval", "logger_8c.html#a0e3aa0ff3c5e4fa09ee2926d86a79368", null ],
+    [ "s_flushThread", "logger_8c.html#a9d8d3d55d2fd3f731c7209889022376c", null ],
+    [ "s_flushThreadRun", "logger_8c.html#a87d0546d64106746d92937ff9f94c4af", null ],
     [ "s_initialized", "logger_8c.html#a3d88a52262502fbcc1de5220e4367bfc", null ],
     [ "s_logger", "logger_8c.html#a68e68762e588083fac82f7592160ba75", null ],
     [ "s_logLevel", "logger_8c.html#a2de1ee16c46372f83737a00a84c89abb", null ],

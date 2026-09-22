@@ -146,6 +146,8 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a1060d1f961bd0a78bbe1a268a0b52cac" id="r_a1060d1f961bd0a78bbe1a268a0b52cac"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="servo__fifo_8c.html#a1060d1f961bd0a78bbe1a268a0b52cac">g_cmd_fd</a> = -1</td></tr>
 <tr class="separator:a1060d1f961bd0a78bbe1a268a0b52cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed940cfcbb96f97c9fc6f7b7b8f884e" id="r_aeed940cfcbb96f97c9fc6f7b7b8f884e"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="servo__fifo_8c.html#aeed940cfcbb96f97c9fc6f7b7b8f884e">g_pos_fd</a> = -1</td></tr>
+<tr class="separator:aeed940cfcbb96f97c9fc6f7b7b8f884e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a225d049cb1efca9002c994095c94af0a" id="r_a225d049cb1efca9002c994095c94af0a"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="servo__fifo_8c.html#a225d049cb1efca9002c994095c94af0a">g_motor_enabled</a> = 0</td></tr>
 <tr class="separator:a225d049cb1efca9002c994095c94af0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -178,11 +180,11 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00068">68</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00091">91</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">References <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00042">POS_PIPE</a>, <a class="el" href="servo__fifo_8h_source.html#l00012">SERVO_CMD_GETPOS</a>, and <a class="el" href="servo__fifo_8c_source.html#l00042">servo_fifo_send()</a>.</p>
+<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00019">g_pos_fd</a>, <a class="el" href="servo__fifo_8h_source.html#l00012">SERVO_CMD_GETPOS</a>, <a class="el" href="servo__fifo_8c_source.html#l00022">servo_fifo_open()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00065">servo_fifo_send()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00114">servo_fifo_position()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00135">servo_fifo_position()</a>.</p>
 
 </div>
 </div>
@@ -204,9 +206,9 @@ Variables</h2></td></tr>
 
 <p>Close the command FIFO without sending <code>-1</code> (leave daemon running). </p>
 
-<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00160">160</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00181">181</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, and <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>.</p>
+<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, <a class="el" href="servo__fifo_8c_source.html#l00019">g_pos_fd</a>, and <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00185">main()</a>.</p>
 
@@ -231,11 +233,9 @@ Variables</h2></td></tr>
 <p>Toggle the motor enable state on the servo daemon. </p>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00148">148</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00169">169</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00019">g_motor_enabled</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="servo__fifo_8h_source.html#l00013">SERVO_CMD_DISABLE</a>, <a class="el" href="servo__fifo_8h_source.html#l00014">SERVO_CMD_ENABLE</a>, and <a class="el" href="servo__fifo_8c_source.html#l00042">servo_fifo_send()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00408">on_enable()</a>.</p>
+<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00020">g_motor_enabled</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="servo__fifo_8h_source.html#l00013">SERVO_CMD_DISABLE</a>, <a class="el" href="servo__fifo_8h_source.html#l00014">SERVO_CMD_ENABLE</a>, and <a class="el" href="servo__fifo_8c_source.html#l00065">servo_fifo_send()</a>.</p>
 
 </div>
 </div>
@@ -258,11 +258,9 @@ Variables</h2></td></tr>
 <p>Check whether the servo motor is currently enabled in this client. </p>
 <dl class="section return"><dt>Returns</dt><dd>1 when enabled, 0 when disabled. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00143">143</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00164">164</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00019">g_motor_enabled</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00408">on_enable()</a>.</p>
+<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00020">g_motor_enabled</a>.</p>
 
 </div>
 </div>
@@ -291,11 +289,11 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on arrival, -1 on failure/timeout. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00126">126</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00147">147</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">References <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="servo__fifo_8c_source.html#l00114">servo_fifo_position()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00042">servo_fifo_send()</a>.</p>
+<p class="reference">References <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="servo__fifo_8c_source.html#l00135">servo_fifo_position()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00065">servo_fifo_send()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="sweep__run_8c_source.html#l00112">do_reset()</a>, <a class="el" href="sweep__run_8c_source.html#l00132">do_sweep()</a>, and <a class="el" href="calibrate2_8cpp_source.html#l00117">write_interp_check_csv()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00081">detect_at_pos()</a>, <a class="el" href="sweep__run_8c_source.html#l00056">do_reset()</a>, <a class="el" href="sweep__run_8c_source.html#l00074">do_sweep()</a>, and <a class="el" href="calibrate2_8cpp_source.html#l00117">write_interp_check_csv()</a>.</p>
 
 </div>
 </div>
@@ -318,11 +316,11 @@ Variables</h2></td></tr>
 <p>Open the command FIFO for writing (retries while no reader). </p>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00021">21</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00022">22</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">References <a class="el" href="camera-sdk_2utils_8h_source.html#l00039">CMD_PIPE</a>, <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, and <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>.</p>
+<p class="reference">References <a class="el" href="camera-sdk_2utils_8h_source.html#l00039">CMD_PIPE</a>, <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, <a class="el" href="servo__fifo_8c_source.html#l00019">g_pos_fd</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, and <a class="el" href="camera-sdk_2utils_8h_source.html#l00042">POS_PIPE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00185">main()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00042">servo_fifo_send()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00185">main()</a>, <a class="el" href="servo__fifo_8c_source.html#l00091">position_once()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00065">servo_fifo_send()</a>.</p>
 
 </div>
 </div>
@@ -345,11 +343,11 @@ Variables</h2></td></tr>
 <p>Read position with retries (open pos_pipe before sending GETPOS). </p>
 <dl class="section return"><dt>Returns</dt><dd>Position &gt;= 0, or -1 after exhausting retries. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00114">114</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00135">135</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">References <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, and <a class="el" href="servo__fifo_8c_source.html#l00068">position_once()</a>.</p>
+<p class="reference">References <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, and <a class="el" href="servo__fifo_8c_source.html#l00091">position_once()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00126">servo_fifo_move_and_wait()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00147">servo_fifo_move_and_wait()</a>.</p>
 
 </div>
 </div>
@@ -378,11 +376,11 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00042">42</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00065">65</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, and <a class="el" href="servo__fifo_8c_source.html#l00021">servo_fifo_open()</a>.</p>
+<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, and <a class="el" href="servo__fifo_8c_source.html#l00022">servo_fifo_open()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00068">position_once()</a>, <a class="el" href="servo__fifo_8c_source.html#l00148">servo_fifo_enable()</a>, <a class="el" href="servo__fifo_8c_source.html#l00126">servo_fifo_move_and_wait()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00169">servo_fifo_shutdown()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00091">position_once()</a>, <a class="el" href="servo__fifo_8c_source.html#l00169">servo_fifo_enable()</a>, <a class="el" href="servo__fifo_8c_source.html#l00147">servo_fifo_move_and_wait()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00194">servo_fifo_shutdown()</a>.</p>
 
 </div>
 </div>
@@ -405,9 +403,9 @@ Variables</h2></td></tr>
 <p>Send <code>-1</code> then close (stops servo_calib). </p>
 <p>Prefer <code>servo_fifo_close</code> for tools. </p>
 
-<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00169">169</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00194">194</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, and <a class="el" href="servo__fifo_8c_source.html#l00042">servo_fifo_send()</a>.</p>
+<p class="reference">References <a class="el" href="servo__fifo_8c_source.html#l00018">g_cmd_fd</a>, <a class="el" href="servo__fifo_8c_source.html#l00019">g_pos_fd</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, and <a class="el" href="servo__fifo_8c_source.html#l00065">servo_fifo_send()</a>.</p>
 
 </div>
 </div>
@@ -434,7 +432,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00018">18</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00160">servo_fifo_close()</a>, <a class="el" href="servo__fifo_8c_source.html#l00021">servo_fifo_open()</a>, <a class="el" href="servo__fifo_8c_source.html#l00042">servo_fifo_send()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00169">servo_fifo_shutdown()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00181">servo_fifo_close()</a>, <a class="el" href="servo__fifo_8c_source.html#l00022">servo_fifo_open()</a>, <a class="el" href="servo__fifo_8c_source.html#l00065">servo_fifo_send()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00194">servo_fifo_shutdown()</a>.</p>
 
 </div>
 </div>
@@ -458,9 +456,35 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00020">20</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00169">servo_fifo_enable()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00164">servo_fifo_is_enabled()</a>.</p>
+
+</div>
+</div>
+<a id="aeed940cfcbb96f97c9fc6f7b7b8f884e" name="aeed940cfcbb96f97c9fc6f7b7b8f884e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeed940cfcbb96f97c9fc6f7b7b8f884e">&#9670;&#160;</a></span>g_pos_fd</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int g_pos_fd = -1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 <p class="definition">Definition at line <a class="el" href="servo__fifo_8c_source.html#l00019">19</a> of file <a class="el" href="servo__fifo_8c_source.html">servo_fifo.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00148">servo_fifo_enable()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00143">servo_fifo_is_enabled()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="servo__fifo_8c_source.html#l00091">position_once()</a>, <a class="el" href="servo__fifo_8c_source.html#l00181">servo_fifo_close()</a>, <a class="el" href="servo__fifo_8c_source.html#l00022">servo_fifo_open()</a>, and <a class="el" href="servo__fifo_8c_source.html#l00194">servo_fifo_shutdown()</a>.</p>
 
 </div>
 </div>
