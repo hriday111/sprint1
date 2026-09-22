@@ -1,6 +1,7 @@
 var files_dup =
 [
     [ "camera-sdk", "dir_e34e6ed5a3107a114ffdbadbc95d5c83.html", "dir_e34e6ed5a3107a114ffdbadbc95d5c83" ],
+    [ "vendor", "dir_c5da75fdc1d6c57999112ed830c87a3c.html", "dir_c5da75fdc1d6c57999112ed830c87a3c" ],
     [ "utils.c", "utils_8c.html", "utils_8c" ],
     [ "utils.h", "utils_8h.html", "utils_8h" ],
     [ "commands.h", "commands_8h.html", "commands_8h" ],

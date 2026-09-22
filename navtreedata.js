@@ -42,6 +42,9 @@ var NAVTREE =
       [ "Build", "camera_sdk.html#autotoc_md10", null ]
     ] ],
     [ "Recalibrate chip marks after moving the lens", "recalibrate.html", null ],
+    [ "Vendored IDS uEye <tt>.deb</tt> packages", "md_vendor_2debs_2README.html", [
+      [ "Install uEye + udev", "md_vendor_2debs_2README.html#autotoc_md23", null ]
+    ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -67,8 +70,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"logger_8h.html#aca1fd1d8935433e6ba2e3918214e07f9af364851ea406ecc6816a73c83c51773d",
-"sweep__run_8c.html#a779711beb191a6dc1df7e8061c6b216a"
+"logger_8h.html#aca1fd1d8935433e6ba2e3918214e07f9a38182a13b5a026feffe5fb1f7d0aec79",
+"structtui__t.html#ac5b0106865141a611833cd4f1f489b84"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

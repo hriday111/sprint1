@@ -1,7 +1,7 @@
 var searchData=
 [
   ['read_5fcore_5fpattern_0',['read_core_pattern',['../crash_8c.html#a0f82d03409ded3d182f220cec28aede7',1,'crash.c']]],
-  ['readme_2emd_1',['readme.md',['../camera-sdk_2README_8md.html',1,'(Global Namespace)'],['../README_8md.html',1,'(Global Namespace)']]],
+  ['readme_2emd_1',['readme.md',['../vendor_2debs_2README_8md.html',1,'(Global Namespace)'],['../camera-sdk_2README_8md.html',1,'(Global Namespace)'],['../README_8md.html',1,'(Global Namespace)']]],
   ['recalibrate_2',['If you must recalibrate',['../index.html#autotoc_md13',1,'']]],
   ['recalibrate_20chip_20marks_20after_20moving_20the_20lens_3',['Recalibrate chip marks after moving the lens',['../recalibrate.html',1,'']]],
   ['recalibrate_2emd_4',['RECALIBRATE.md',['../RECALIBRATE_8md.html',1,'']]],
@@ -13,7 +13,7 @@ var searchData=
   ['roi_20interp_20fifo_20apis_10',['ROI / interp / FIFO APIs',['../camera_sdk.html#autotoc_md6',1,'']]],
   ['roi_2ec_11',['roi.c',['../roi_8c.html',1,'']]],
   ['roi_2eh_12',['roi.h',['../roi_8h.html',1,'']]],
-  ['roi_5fclip_13',['roi_clip',['../roi_8h.html#a3dc717e571859e8b33097bd0948d9502',1,'roi_clip(rois_t *rois, int width, int height):&#160;roi.c'],['../roi_8c.html#a3dc717e571859e8b33097bd0948d9502',1,'roi_clip(rois_t *rois, int width, int height):&#160;roi.c']]],
+  ['roi_5fclip_13',['roi_clip',['../roi_8c.html#a3dc717e571859e8b33097bd0948d9502',1,'roi_clip(rois_t *rois, int width, int height):&#160;roi.c'],['../roi_8h.html#a3dc717e571859e8b33097bd0948d9502',1,'roi_clip(rois_t *rois, int width, int height):&#160;roi.c']]],
   ['roi_5fdraw_14',['roi_draw',['../roi_8c.html#a56587fac63dc720639cf1e290de24ab9',1,'roi_draw(unsigned char *pixels, int width, int height, int pitch, const rois_t *rois):&#160;roi.c'],['../roi_8h.html#a56587fac63dc720639cf1e290de24ab9',1,'roi_draw(unsigned char *pixels, int width, int height, int pitch, const rois_t *rois):&#160;roi.c']]],
   ['roi_5ffree_15',['roi_free',['../roi_8c.html#aa92fb3c2625a8f91fc75bd7eff21c580',1,'roi_free(rois_t *rois):&#160;roi.c'],['../roi_8h.html#aa92fb3c2625a8f91fc75bd7eff21c580',1,'roi_free(rois_t *rois):&#160;roi.c']]],
   ['roi_5finscribe_16',['roi_inscribe',['../roi_8c.html#a542bd9b74b13a68f79841c7809035d5e',1,'roi_inscribe(int bx, int by, int bw, int bh, roi_t *out):&#160;roi.c'],['../roi_8h.html#a542bd9b74b13a68f79841c7809035d5e',1,'roi_inscribe(int bx, int by, int bw, int bh, roi_t *out):&#160;roi.c']]],

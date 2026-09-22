@@ -8,7 +8,7 @@ var indexSectionsWithContent =
   5: "lps",
   6: "klps",
   7: "_bcdeglmprs",
-  8: "aclmprst—"
+  8: "acdilmprstuv—"
 };
 
 var indexSectionNames =

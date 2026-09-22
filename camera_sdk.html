@@ -119,11 +119,21 @@ Recalibration (only if needed)</h2>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
 Prerequisites</h1>
 <ul>
-<li>IDS uEye SDK (<code>libueye_api</code>); <code>ueyeusbd</code> running; camera visible as USB vendor <code>1409</code></li>
-<li>OpenCV 4 for <code>calibrate</code> / <code>calibrate2</code> only</li>
+<li>IDS uEye SDK (<code>libueye_api</code>); <code>ueyeusbdrc</code> running; camera USB vendor <code>1409</code></li>
+<li>OpenCV 4 (<code>pkg-config opencv4</code>) for <code>calibrate</code> / <code>calibrate2</code> only</li>
 <li><code>servo_calib</code> running for laser/motion</li>
 <li>Writable <code>/var/lib/sprint1/</code>, <code>./tmp/</code>, and <code>logs/</code></li>
 </ul>
+<p><b>Install:</b></p>
+<div class="fragment"><div class="line"># OpenCV from apt</div>
+<div class="line">sudo apt-get install -y libopencv-dev</div>
+<div class="line"> </div>
+<div class="line"># IDS uEye + udev from vendored debs (repo root)</div>
+<div class="line">sudo dpkg -i vendor/debs/ueye/*.deb</div>
+<div class="line">sudo apt-get install -y -f</div>
+<div class="line">sudo udevadm control --reload-rules &amp;&amp; sudo udevadm trigger</div>
+<div class="line">sudo systemctl enable --now ueyeusbdrc</div>
+</div><!-- fragment --><p>Full project prerequisites (including WiringPi): <a href="../README.md#prerequisites">README.md</a>.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 What it does</h1>
 <table class="markdownTable">

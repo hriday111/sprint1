@@ -123,14 +123,35 @@ If you must recalibrate</h2>
 </div><!-- fragment --><p>Green ellipses must sit on the three dark discs. Avoid long exposures with a bright laser — clipped discs break detection. See <a class="el" href="RECALIBRATE_8md.html">camera-sdk/RECALIBRATE.md</a>.</p>
 <h1><a class="anchor" id="autotoc_md14"></a>
 Prerequisites</h1>
-<ul>
-<li>Raspberry Pi 4 with WiringPi (<code>-lwiringPi</code>)</li>
-<li>Root (or equivalent GPIO) privileges for <code>servo_calib</code> (hardware PWM on BCM 18)</li>
-<li>IDS uEye SDK (<code>libueye_api</code>); OpenCV 4 for <code>calibrate</code> / <code>calibrate2</code></li>
-<li>Hardware wired per the pin table below</li>
-<li>Writable <code>/run/sprint1/</code> (FIFOs), <code>/var/lib/sprint1/</code> (<code>rois.json</code>, <code>rois_interp.json</code>, <code>saved.prm</code>), and a local <code>logs/</code> directory (created on start)</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<p>Hardware: Raspberry Pi 4, WiringPi, root (or GPIO) for <code>servo_calib</code> (PWM on BCM 18), and the pinout below. Shared paths: <code>/run/sprint1/</code>, <code>/var/lib/sprint1/</code>, and a writable <code>logs/</code> in the process cwd.</p>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Library installation</h2>
+<p><b>OpenCV</b> (apt only — needed for <code>calibrate</code> / <code>calibrate2</code>):</p>
+<div class="fragment"><div class="line">sudo apt-get install -y libopencv-dev</div>
+</div><!-- fragment --><p><b>IDS uEye + udev</b> (vendored <code>.deb</code>s under <code>vendor/debs/ueye/</code>):</p>
+<div class="fragment"><div class="line">sudo dpkg -i vendor/debs/ueye/*.deb</div>
+<div class="line">sudo apt-get install -y -f</div>
+<div class="line">sudo udevadm control --reload-rules &amp;&amp; sudo udevadm trigger</div>
+<div class="line">sudo systemctl enable --now ueyeusbdrc</div>
+</div><!-- fragment --><p>Add your user to group <code>ueye</code> if needed (<code>sudo usermod -aG ueye "$USER"</code>), then re-login. Confirm <code>lsusb</code> shows vendor <code>1409</code>.</p>
+<p><b>WiringPi</b> (build a <code>.deb</code> from upstream if not already installed):</p>
+<div class="fragment"><div class="line">sudo apt install git</div>
+<div class="line">git clone https://github.com/WiringPi/WiringPi.git</div>
+<div class="line">cd WiringPi</div>
+<div class="line">./build debian</div>
+<div class="line">mv debian-template/wiringpi-3.x.deb .</div>
+<div class="line">sudo apt install ./wiringpi-3.x.deb</div>
+</div><!-- fragment --><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Dependency   </th><th class="markdownTableHeadNone">Source    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>OpenCV 4</b>   </td><td class="markdownTableBodyNone"><code>sudo apt-get install -y libopencv-dev</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>IDS uEye + udev</b>   </td><td class="markdownTableBodyNone"><code>vendor/debs/ueye/*.deb</code> (<code>ueye-driver-usb</code> ships <code>/lib/udev/rules.d/90-ueyeusbd.rules</code>)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>WiringPi</b>   </td><td class="markdownTableBodyNone">Build/install from <a href="https://github.com/WiringPi/WiringPi">WiringPi</a> as above (<code>-lwiringPi</code>)   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Architecture</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -161,7 +182,7 @@ Architecture</h1>
 <td class="markdownTableBodyNone"><code>/run/sprint1/pos_pipe</code>   </td><td class="markdownTableBodyNone">servo → client   </td><td class="markdownTableBodyNone">position after command <code>4000</code>   </td></tr>
 </table>
 <p>Keep the command FIFO open for the whole sweep. Opening and closing per command races with <code>servo_calib</code>’s reopen and can cause <code>EPIPE</code>.</p>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 Logging and crashes</h1>
 <p>Every binary that calls <code>sprint1_logging_init</code> writes:</p>
 <ul>
@@ -170,7 +191,7 @@ Logging and crashes</h1>
 <li><b>Auto-flush:</b> every 100 ms while logging</li>
 </ul>
 <p>On SIGSEGV/SIGABRT/SIGBUS/SIGFPE/SIGILL/SIGQUIT/SIGSYS/SIGTRAP, the process logs where the core dump is expected (from <code>/proc/sys/kernel/core_pattern</code>), flushes, then re-raises for a kernel dump.</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 Pinout</h1>
 <p>BCM pins are defined in <code><a class="el" href="gpio__pins_8h.html" title="BCM GPIO mapping for Raspberry Pi 4 to A4988 driver and laser PWM.">gpio_pins.h</a></code>. Enable is active LOW; endstop is active HIGH; laser uses hardware PWM on GPIO 18.</p>
 <table class="markdownTable">
@@ -186,7 +207,7 @@ Pinout</h1>
 <td class="markdownTableBodyNone">Laser / Endstop   </td><td class="markdownTableBodyNone">18 / 17   </td><td class="markdownTableBodyNone">Blue→White / Grey   </td></tr>
 </table>
 <p>Microstepping is fixed at 1/16. Step half-period: <code>STEP_DELAY_US</code> (20 ms).</p>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 Command protocol</h1>
 <p>Send ASCII lines on <code>data_pipe</code>. Integer lines are commands; <code>bN</code> sets laser brightness (0–255).</p>
 <table class="markdownTable">
@@ -216,12 +237,12 @@ Command protocol</h1>
 <div class="line">printf &#39;b255\n1001\n4000\n&#39; &gt;&amp;3</div>
 <div class="line">timeout 1 cat /run/sprint1/pos_pipe</div>
 </div><!-- fragment --><p>Angle conversion uses <b>0.1125° per step</b>. Homing lands near step <code>400 + 34</code> when the endstop trips (<code>CMD_POS_ZERO</code> + <code>DELTA</code>).</p>
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md20"></a>
 Config files</h1>
 <p>**<code>/var/lib/sprint1/saved.prm</code>** — three integers <code>start stop prep</code> (example: <code>345 395 373</code>). Each value must be in <b>0–999</b>. Both <code>servo_calib</code> and <code>sweep_run</code> use this path.</p>
 <p>**<code>/var/lib/sprint1/rois.json</code>** — elliptical blobs (<code>name</code>, <code>cx</code>, <code>cy</code>, <code>rx</code>, <code>ry</code>, <code>angle</code>) in crop coords (<code>CAM_CROP_*</code>: 600×740 at (350, 60)). Intensity is the ellipse-mask mean.</p>
 <p>**<code>/var/lib/sprint1/rois_interp.json</code>** — two-point model from <code>calibrate2</code> (<code>pos0</code>/<code>pos1</code> + <code>at0</code>/<code>at1</code>).</p>
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md21"></a>
 Common pitfalls</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
