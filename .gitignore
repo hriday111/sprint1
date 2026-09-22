@@ -137,3 +137,5 @@ Testing/
 .cache/
 
 camera-sdk/tmp/
+
+.continue
