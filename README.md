@@ -115,6 +115,8 @@ On SIGSEGV/SIGABRT/SIGBUS/SIGFPE/SIGILL/SIGQUIT/SIGSYS/SIGTRAP, the process logs
 
 BCM pins are defined in `gpio_pins.h`. Enable is active LOW; endstop is active HIGH; laser uses hardware PWM on GPIO 18.
 
+![Wiring diagram](circuit_image.png)
+
 | Signal | GPIO | Typical wire |
 |--------|------|--------------|
 | Enable | 20 | Green |
