@@ -1,6 +1,6 @@
 CC = gcc
 CXX = g++
-CFLAGS = -std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -g
+CFLAGS = -std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -g -I../logging
 CXXFLAGS = -std=c++17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. $(shell pkg-config --cflags opencv4) -g
 LDLIBS = -lueye_api -lm -lpthread
 OPENCV_LIBS = -lopencv_imgcodecs -lopencv_imgproc -lopencv_core

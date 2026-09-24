@@ -1,6 +1,6 @@
 /**
  * @file main.c
- * @brief @c servo_calib — stepper/laser driver for the prism scan rig.
+ * @brief @c servo_calib — motor + illumination driver for the prism scan rig.
  *
  * Start this first for normal operation, then run
  * @c camera-sdk/build/bin/sweep_run for the main intensity measurements.
@@ -22,7 +22,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "stepper.h"
+#include "motor_api.h"
+#include "illumination_api.h"
+#include "gpio_pins.h"
 #include "utils.h"
 #include "commands.h"
 #include "logger.h"
@@ -30,18 +32,14 @@
 
 /**
  * @brief Load @c start, @c stop, and @c prep from a parameter file.
- *
- * Expects three integers in 0–999. The read buffer is 32 bytes; longer lines
- * are truncated before parsing.
- * @param filename Path to a file containing three integers.
- * @param stepper Destination for the three fields.
  */
-static void loadParams(char *filename, stepper_t *stepper)
+static void loadParams(char *filename, motor_t *motor)
 {
     int fd = open(filename, O_RDONLY);
     char buffer[32];
     int count;
     int n;
+    int start, stop, prep;
 
     if (fd == -1) {
         LOG_ERROR("loadParams: open(%s) failed: %s", filename, strerror(errno));
@@ -58,33 +56,22 @@ static void loadParams(char *filename, stepper_t *stepper)
     }
 
     buffer[count] = '\0';
-    n = sscanf(buffer, "%d %d %d", &stepper->start, &stepper->stop, &stepper->prep);
+    n = sscanf(buffer, "%d %d %d", &start, &stop, &prep);
     if (n != 3) {
         LOG_FATAL("loadParams: expected 3 integers, got %d", n);
         exit(EXIT_FAILURE);
     }
 
-    /*
-     * Guard against nonsense / truncated reads. Keep in production until the
-     * loader is hardened (longer buffer, stricter parsing).
-     */
-    if (stepper->start < 0 || stepper->stop < 0 || stepper->prep < 0 ||
-        stepper->start > 999 || stepper->stop > 999 || stepper->prep > 999) {
+    if (start < 0 || stop < 0 || prep < 0 ||
+        start > 999 || stop > 999 || prep > 999) {
         LOG_FATAL("loadParams: unsupported values start=%d stop=%d prep=%d",
-                  stepper->start, stepper->stop, stepper->prep);
+                  start, stop, prep);
         exit(EXIT_FAILURE);
     }
-    LOG_INFO("Params: start=%d stop=%d prep=%d", stepper->start, stepper->stop,
-             stepper->prep);
+    motor_api.set_scan_params(motor, start, stop, prep);
+    LOG_INFO("Params: start=%d stop=%d prep=%d", start, stop, prep);
 }
 
-/**
- * @brief Ensure @c BASE exists and create a FIFO at @p path with mode 0666.
- *
- * The daemon typically runs as root; chmod keeps camera-sdk clients usable
- * without elevated privileges.
- * @param path Absolute FIFO path.
- */
 static void make_fifo(const char *path)
 {
     struct stat st = {0};
@@ -104,12 +91,6 @@ static void make_fifo(const char *path)
     LOG_DEBUG("FIFO ready: %s", path);
 }
 
-/**
- * @brief Publish @p pos on @c POS_PIPE if a reader is present.
- *
- * Opens non-blocking so a missing reader does not stall the command loop.
- * @param pos Step position to write as ASCII plus newline.
- */
 static void write_position(int pos)
 {
     char buf[16];
@@ -132,16 +113,12 @@ static void write_position(int pos)
 /**
  * @brief Parse and execute one trimmed command line.
  *
- * Supported forms:
- * - @c bN / @c BN — laser brightness 0..255
- * - integer — protocol command or absolute goto (see commands.h)
+ * - @c bN / @c BN — illumination brightness 0..255
+ * - @c CMD_LASER_ON / @c CMD_LASER_OFF — illumination on/off
+ * - other integers — motor protocol / absolute goto
  * - @c -1 — request daemon exit
- *
- * @param line Mutable NUL-terminated line (no trailing newline required).
- * @param stepper Driver state.
- * @return 1 if the process should exit, 0 otherwise.
  */
-static int handle_command(char *line, stepper_t *stepper)
+static int handle_command(char *line, motor_t *motor, illumination_t *illum)
 {
     char *end;
     long value;
@@ -162,7 +139,7 @@ static int handle_command(char *line, stepper_t *stepper)
             return 0;
         }
         LOG_INFO("Brightness -> %ld", value);
-        stepper_setBrightness(stepper, (int)value);
+        illumination_api.set_brightness(illum, (int)value);
         return 0;
     }
 
@@ -177,31 +154,31 @@ static int handle_command(char *line, stepper_t *stepper)
         LOG_INFO("Exit command received");
         return 1;
     }
+    if (value == CMD_LASER_ON) {
+        illumination_api.on(illum);
+        LOG_INFO("Illumination on");
+        return 0;
+    }
+    if (value == CMD_LASER_OFF) {
+        illumination_api.off(illum);
+        LOG_INFO("Illumination off");
+        return 0;
+    }
     if (value == CMD_LOADFILE) {
         LOG_INFO("Reloading params from %s", PRM_FILE);
-        loadParams(PRM_FILE, stepper);
+        loadParams(PRM_FILE, motor);
     } else if (value == CMD_GETPOS) {
-        int pos = stepper_getPos(stepper);
+        int pos = motor_api.get_pos(motor);
         LOG_INFO("Current position: %d", pos);
         write_position(pos);
     } else {
-        stepperSend((int)value, stepper);
-        LOG_INFO("Command %ld sent (position %d)", value, stepper_getPos(stepper));
+        motor_api.send(motor, (int)value);
+        LOG_INFO("Command %ld sent (position %d)", value, motor_api.get_pos(motor));
     }
     return 0;
 }
 
-/**
- * @brief Create FIFOs and serve newline-delimited commands until exit.
- *
- * @c open(O_RDONLY) blocks until a writer connects. A zero-length @c read means
- * all writers closed; the loop reopens and waits. Partial lines are buffered
- * across reads so split writes still parse correctly.
- *
- * @param path Command FIFO path (typically @c CMD_PIPE).
- * @param stepper Driver state.
- */
-static void serve_fifo(const char *path, stepper_t *stepper)
+static void serve_fifo(const char *path, motor_t *motor, illumination_t *illum)
 {
     char buf[128];
     size_t len = 0;
@@ -239,7 +216,7 @@ static void serve_fifo(const char *path, stepper_t *stepper)
             char *nl;
             while ((nl = strchr(start, '\n')) != NULL) {
                 *nl = '\0';
-                if (handle_command(start, stepper)) {
+                if (handle_command(start, motor, illum)) {
                     done = 1;
                     break;
                 }
@@ -259,16 +236,12 @@ static void serve_fifo(const char *path, stepper_t *stepper)
     }
 }
 
-/**
- * @brief Boot logging, GPIO, home, load params, park at prep, then serve commands.
- * @param argc Extra argv entries are ignored (warned); no CLI options.
- * @param argv Unused beyond program name.
- * @return EXIT_SUCCESS, or EXIT_FAILURE on logger/open/homing failure.
- */
 int main(int argc, char **argv)
 {
-    stepper_t stepper;
+    motor_t *motor = NULL;
+    illumination_t *illum = NULL;
     int homed;
+    int prep;
 
     if (sprint1_logging_init("servo_calib", NULL, 0) != 0)
         return EXIT_FAILURE;
@@ -276,36 +249,44 @@ int main(int argc, char **argv)
     if (argc != 1)
         LOG_WARN("Invalid usage. Additional arguments are not supported. Being ignored.");
 
-    memset(&stepper, 0, sizeof(stepper));
-    stepper.fd = -1;
-    stepper.zero = 400;
+    LOG_INFO("Opening motor driver...");
+    if (motor_api.open(&motor, NULL) != 0) {
+        LOG_FATAL("Failed to open motor");
+        logger_flush();
+        return EXIT_FAILURE;
+    }
 
-    LOG_INFO("Opening GPIO stepper driver (WiringPi)...");
-    if (!stepperOpen(NULL, &stepper)) {
-        LOG_FATAL("Failed to open stepper");
+    LOG_INFO("Opening illumination on pin %d...", PIN_LASER);
+    if (illumination_api.open(&illum, PIN_LASER) != 0) {
+        LOG_FATAL("Failed to open illumination");
+        motor_api.close(motor);
         logger_flush();
         return EXIT_FAILURE;
     }
 
     ms_sleep(100);
     LOG_INFO("Homing (drive toward endstop)...");
-    homed = stepperInit(&stepper);
-        if (homed < 0) {
+    homed = motor_api.init(motor);
+    if (homed < 0) {
         LOG_FATAL("Homing failed");
         logger_flush();
-        stepperClose(&stepper);
+        illumination_api.close(illum);
+        motor_api.close(motor);
         return EXIT_FAILURE;
     }
     LOG_INFO("Homed position: %d (angle %.2f deg)", homed,
-             stepper_prismAngle(&stepper));
-    loadParams(PRM_FILE, &stepper);
-    stepper_setBrightness(&stepper, 255);
-    stepperSend(stepper.prep, &stepper);
-    LOG_INFO("Parked at prep=%d", stepper.prep);
+             motor_api.prism_angle(motor));
+    loadParams(PRM_FILE, motor);
+    illumination_api.set_brightness(illum, 255);
+    illumination_api.on(illum);
+    prep = motor_api.get_prep(motor);
+    motor_api.send(motor, prep);
+    LOG_INFO("Parked at prep=%d", prep);
 
-    serve_fifo(CMD_PIPE, &stepper);
+    serve_fifo(CMD_PIPE, motor, illum);
 
-    stepperClose(&stepper);
+    illumination_api.close(illum);
+    motor_api.close(motor);
     LOG_INFO("Exiting");
     logger_flush();
     logger_exitFileLogger();

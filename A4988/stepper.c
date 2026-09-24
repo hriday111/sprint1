@@ -1,15 +1,18 @@
 /**
  * @file stepper.c
- * @brief GPIO motor thread, laser PWM, and command dispatch for the A4988.
+ * @brief A4988 motor backend: GPIO thread, command dispatch + motor_api.
  */
 
 #include "stepper.h"
+#include "motor_api.h"
 #include "gpio_pins.h"
 #include "utils.h"
 #include "commands.h"
 #include "logger.h"
+
 #include <pthread.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <wiringPi.h>
@@ -17,7 +20,7 @@
 static pthread_mutex_t g_mutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_t g_thread;
 static volatile int g_thread_run;
-static stepper_t *g_stepper;
+static motor_t *g_motor;
 
 /**
  * @brief Write @p level to @p pin; no-op if @p pin is negative.
@@ -30,35 +33,7 @@ static void gpio_write(int pin, int level)
     digitalWrite(pin, level);
 }
 
-/**
- * @brief Clamp brightness and write hardware PWM (caller holds g_mutex or is in open).
- * @param stepper Driver state.
- * @param brightness Desired duty cycle.
- */
-static void laser_set_unlocked(stepper_t *stepper, int brightness)
-{
-    if (brightness < 0) {
-        brightness = 0;
-    }
-    if (brightness > LASER_PWM_RANGE) {
-        brightness = LASER_PWM_RANGE;
-    }
-    pwmWrite(PIN_LASER, brightness);
-    stepper->laser = brightness;
-}
 
-/**
- * @brief Configure mark-space PWM on PIN_LASER with duty starting at 0.
- */
-static void claim_laser_pwm(void)
-{
-    pwmWrite(PIN_LASER, 0);
-    pwmSetMode(PWM_MODE_MS);
-    pwmSetRange(LASER_PWM_RANGE);
-    pwmSetClock(LASER_PWM_CLOCK);
-    pinMode(PIN_LASER, PWM_MS_OUTPUT);
-    pwmWrite(PIN_LASER, 0);
-}
 
 /**
  * @brief Read @p pin, or 0 if the pin is unused (negative).
@@ -86,7 +61,7 @@ static void set_microstep_16(void)
 }
 
 /** @brief Refresh @c stepper->lid from PIN_LID (or clear if unused). */
-static void update_lid(stepper_t *stepper)
+static void update_lid(motor_t *stepper)
 {
     if (PIN_LID >= 0) {
         stepper->lid = gpio_read(PIN_LID) != 0;
@@ -100,7 +75,7 @@ static void update_lid(stepper_t *stepper)
  *
  * Position becomes CMD_POS_ZERO + DELTA when the switch trips during motion.
  */
-static void check_endstop(stepper_t *stepper)
+static void check_endstop(motor_t *stepper)
 {
     if (!stepper->init && gpio_read(PIN_ENDSTOP) != 0) {
         stepper->init = 1;
@@ -128,7 +103,7 @@ static void pulse_gpio(int dir)
  * @param stepper Driver state (caller holds g_mutex).
  * @param dir Direction used for the pulse.
  */
-static void account_step(stepper_t *stepper, int dir)
+static void account_step(motor_t *stepper, int dir)
 {
     if (stepper->init) {
         if (dir) {
@@ -145,14 +120,14 @@ static void account_step(stepper_t *stepper, int dir)
 /**
  * @brief Pulse GPIO and account the step under the caller's lock.
  */
-static void pulse_step(stepper_t *stepper, int dir)
+static void pulse_step(motor_t *stepper, int dir)
 {
     pulse_gpio(dir);
     account_step(stepper, dir);
 }
 
 /** @brief Deassert enable (active HIGH on pin), clear motion state. */
-static void disable_motor(stepper_t *stepper)
+static void disable_motor(motor_t *stepper)
 {
     gpio_write(PIN_ENABLE, HIGH);
     stepper->init = 0;
@@ -162,7 +137,7 @@ static void disable_motor(stepper_t *stepper)
 }
 
 /** @brief Assert enable (pin LOW). Does not home; caller must init separately. */
-static void enable_motor(stepper_t *stepper)
+static void enable_motor(motor_t *stepper)
 {
     gpio_write(PIN_ENABLE, LOW);
     stepper->error = 0;
@@ -175,7 +150,7 @@ static void enable_motor(stepper_t *stepper)
  * @param stepper Driver state (caller holds g_mutex).
  * @param pos Target step position.
  */
-static void queue_goto(stepper_t *stepper, int pos)
+static void queue_goto(motor_t *stepper, int pos)
 {
     int diff;
 
@@ -201,7 +176,7 @@ static void queue_goto(stepper_t *stepper, int pos)
  * @param arg Unused.
  * @return Always NULL.
  */
-static void *stepper_thread(void *arg)
+static void *motor_thread(void *arg)
 {
     (void)arg;
 
@@ -210,9 +185,9 @@ static void *stepper_thread(void *arg)
         int dir = 0;
 
         pthread_mutex_lock(&g_mutex);
-        if (g_stepper != NULL && g_stepper->ena && g_stepper->steps > 0) {
+        if (g_motor != NULL && g_motor->ena && g_motor->steps > 0) {
             do_step = 1;
-            dir = g_stepper->dir;
+            dir = g_motor->dir;
         }
         pthread_mutex_unlock(&g_mutex);
 
@@ -220,10 +195,10 @@ static void *stepper_thread(void *arg)
             pulse_gpio(dir);
 
             pthread_mutex_lock(&g_mutex);
-            if (g_stepper != NULL) {
-                account_step(g_stepper, dir);
-                if (g_stepper->steps > 0) {
-                    g_stepper->steps--;
+            if (g_motor != NULL) {
+                account_step(g_motor, dir);
+                if (g_motor->steps > 0) {
+                    g_motor->steps--;
                 }
             }
             pthread_mutex_unlock(&g_mutex);
@@ -249,26 +224,24 @@ static void claim_input_pullup(int pin)
     pullUpDnControl(pin, PUD_UP);
 }
 
-int stepperOpen(const char *portName, stepper_t *stepper)
+static int a4988_open_session(const char *portName, motor_t *m)
 {
     (void)portName;
 
-    if (g_stepper != NULL) {
-        LOG_ERROR("stepperOpen: already open");
-        return 0;
+    if (g_motor != NULL) {
+        LOG_ERROR("a4988_open: already open");
+        return -1;
     }
 
-    /* Direct register access is required for hardware PWM on GPIO 18. */
     if (wiringPiSetupPinType(WPI_PIN_BCM) < 0) {
-        LOG_ERROR("wiringPiSetupPinType failed (run with sudo for hardware PWM)");
-        return 0;
+        LOG_ERROR("wiringPiSetupPinType failed (run with sudo)");
+        return -1;
     }
     LOG_INFO("WiringPi BCM pin mode ready");
 
     claim_output(PIN_STEP, LOW);
     claim_output(PIN_DIR, LOW);
     claim_output(PIN_ENABLE, HIGH);
-    claim_laser_pwm();
     claim_output(PIN_MS1, LOW);
     claim_output(PIN_MS2, LOW);
     claim_output(PIN_MS3, LOW);
@@ -278,30 +251,29 @@ int stepperOpen(const char *portName, stepper_t *stepper)
     }
 
     set_microstep_16();
-    laser_set_unlocked(stepper, 0);
 
-    stepper->fd = 1;
-    stepper->zero = CMD_POS_ZERO;
-    g_stepper = stepper;
+    m->fd = 1;
+    m->zero = CMD_POS_ZERO;
+    g_motor = m;
 
     g_thread_run = 1;
-    if (pthread_create(&g_thread, NULL, stepper_thread, NULL) != 0) {
+    if (pthread_create(&g_thread, NULL, motor_thread, NULL) != 0) {
         ERR("pthread_create");
     }
 
     pthread_mutex_lock(&g_mutex);
-    disable_motor(stepper);
-    update_lid(stepper);
+    disable_motor(m);
+    update_lid(m);
     pthread_mutex_unlock(&g_mutex);
 
     LOG_INFO("Stepper opened (motor thread running)");
-    return 1;
+    return 0;
 }
 
-void stepperClose(stepper_t *stepper)
+static void a4988_close_session(motor_t *m)
 {
-    if (g_stepper == NULL) {
-        LOG_DEBUG("stepperClose: nothing open");
+    if (g_motor == NULL) {
+        LOG_DEBUG("a4988_close: nothing open");
         return;
     }
 
@@ -310,68 +282,61 @@ void stepperClose(stepper_t *stepper)
     pthread_join(g_thread, NULL);
 
     pthread_mutex_lock(&g_mutex);
-    disable_motor(stepper);
-    laser_set_unlocked(stepper, 0);
-    pinMode(PIN_LASER, PM_OFF);
+    disable_motor(m);
     pthread_mutex_unlock(&g_mutex);
     pthread_mutex_destroy(&g_mutex);
-    stepper->fd = -1;
-    g_stepper = NULL;
+    m->fd = -1;
+    g_motor = NULL;
     LOG_INFO("Stepper closed");
 }
 
-int stepperSend(int cmd, stepper_t *stepper)
+static int a4988_send(motor_t *m, int cmd)
 {
     pthread_mutex_lock(&g_mutex);
 
     if (cmd >= CMD_ANGLE_MIN && cmd <= CMD_ANGLE_MAX) {
-        queue_goto(stepper, cmd);
-    } else if (cmd == CMD_LASER_OFF) {
-        laser_set_unlocked(stepper, 0);
-    } else if (cmd == CMD_LASER_ON) {
-        laser_set_unlocked(stepper, LASER_PWM_RANGE);
+        queue_goto(m, cmd);
     } else if (cmd == CMD_DISABLE) {
-        stepper->was_disabled=1;
-        disable_motor(stepper);
+        m->was_disabled = 1;
+        disable_motor(m);
     } else if (cmd == CMD_ENABLE) {
-        if(stepper->was_disabled==1){
-            stepper->init=1;
+        if (m->was_disabled == 1) {
+            m->init = 1;
         }
-       // stepper->init = 1;
-        enable_motor(stepper);
+        enable_motor(m);
     } else if (cmd == CMD_RESET) {
         /* Unreachable while CMD_RESET == CMD_DISABLE (both 1003). */
-        stepper->steps = 0;
-        stepper->error = 0;
+        m->steps = 0;
+        m->error = 0;
     } else if (cmd == CMD_NEXT) {
-        if (stepper->ena) {
-            pulse_step(stepper, 1);
-            stepper->dir = 1;
+        if (m->ena) {
+            pulse_step(m, 1);
+            m->dir = 1;
         }
     } else if (cmd == CMD_PREV) {
-        if (stepper->ena) {
-            pulse_step(stepper, 0);
-            stepper->dir = 0;
+        if (m->ena) {
+            pulse_step(m, 0);
+            m->dir = 0;
         }
     } else if (cmd == CMD_UPDATE_LID) {
-        update_lid(stepper);
+        update_lid(m);
     } else {
-        LOG_WARN("stepperSend: unknown command %d", cmd);
+        LOG_WARN("a4988_send: unknown command %d", cmd);
     }
 
     pthread_mutex_unlock(&g_mutex);
     return 1;
 }
 
-int stepperRead(stepper_t *stepper)
+static int a4988_read(motor_t *m)
 {
     int result;
 
     pthread_mutex_lock(&g_mutex);
-    update_lid(stepper);
+    update_lid(m);
 
-    if (stepper->init) {
-        result = stepper->pos;
+    if (m->init) {
+        result = m->pos;
     } else {
         result = -1;
     }
@@ -380,26 +345,25 @@ int stepperRead(stepper_t *stepper)
     return result;
 }
 
-
-int stepperInit(stepper_t *stepper)
+static int a4988_init(motor_t *m)
 {
     int pos = -1;
     int attempts = 0;
 
     LOG_INFO("Homing: enable motor and seek endstop");
-    stepperSend(CMD_ENABLE, stepper);
+    a4988_send(m, CMD_ENABLE);
     ms_sleep(100);
 
     while (pos < 0 && attempts < 2000) {
-        stepperSend(CMD_NEXT, stepper);
-        pos = stepperRead(stepper);
+        a4988_send(m, CMD_NEXT);
+        pos = a4988_read(m);
         attempts++;
         if ((attempts % 50) == 0) {
             LOG_DEBUG("Homing... steps=%d endstop=%d", attempts,
                       digitalRead(PIN_ENDSTOP));
         }
     }
-    stepperSend(CMD_NEXT, stepper);
+    a4988_send(m, CMD_NEXT);
     if (pos < 0) {
         LOG_ERROR("Homing failed after %d steps (endstop never HIGH on GPIO %d)",
                   attempts, PIN_ENDSTOP);
@@ -407,31 +371,162 @@ int stepperInit(stepper_t *stepper)
     }
 
     pthread_mutex_lock(&g_mutex);
-    stepper->zero = pos;
+    m->zero = pos;
     pthread_mutex_unlock(&g_mutex);
 
     LOG_INFO("Endstop hit after %d steps, position=%d", attempts, pos);
     return pos;
 }
 
-void stepper_setBrightness(stepper_t *stepper, int brightness)
+static void a4988_go_to(motor_t *m, int pos)
 {
-    LOG_DEBUG("Laser brightness -> %d", brightness);
-    pthread_mutex_lock(&g_mutex);
-    laser_set_unlocked(stepper, brightness);
-    pthread_mutex_unlock(&g_mutex);
+    a4988_send(m, pos);
 }
 
-int stepper_getPos(stepper_t *stepper)
+static void a4988_go_rel(motor_t *m, int rel)
 {
-    return stepperRead(stepper);
+    int pos = a4988_read(m);
+    if (pos < 0)
+        return;
+    a4988_send(m, pos + rel);
 }
 
-double stepper_prismAngle(stepper_t *stepper)
+static void a4988_go_start(motor_t *m)
 {
-    int pos = stepperRead(stepper);
-    if (pos < 0) {
+    a4988_send(m, m->start);
+}
+
+static void a4988_go_stop(motor_t *m)
+{
+    a4988_send(m, m->stop);
+}
+
+static void a4988_go_zero(motor_t *m)
+{
+    a4988_send(m, m->zero);
+}
+
+static void a4988_go_prepare(motor_t *m)
+{
+    a4988_send(m, m->prep);
+}
+
+static int a4988_get_percent(motor_t *m)
+{
+    int pos = a4988_read(m);
+    int span;
+
+    if (pos < 0)
+        return 0;
+    span = m->stop - m->start;
+    if (span == 0)
+        return 0;
+    return (int)((100.0 * (pos - m->start)) / span);
+}
+
+static int a4988_next(motor_t *m)
+{
+    int pos = a4988_read(m);
+    if (pos < 0 || pos >= m->stop)
+        return -1;
+    a4988_send(m, CMD_NEXT);
+    return 1;
+}
+
+static int a4988_prev(motor_t *m)
+{
+    int pos = a4988_read(m);
+    if (pos < 0 || pos <= m->start)
+        return -1;
+    a4988_send(m, CMD_PREV);
+    return 1;
+}
+
+static int a4988_get_pos(motor_t *m)
+{
+    return a4988_read(m);
+}
+
+static double a4988_prism_angle(motor_t *m)
+{
+    int pos = a4988_read(m);
+    if (pos < 0)
         return 0.0;
-    }
     return 0.1125 * pos;
 }
+
+static void a4988_set_scan_params(motor_t *m, int start, int stop, int prep)
+{
+    m->start = start;
+    m->stop = stop;
+    m->prep = prep;
+}
+
+static int a4988_get_start(const motor_t *m)
+{
+    return m->start;
+}
+
+static int a4988_get_stop(const motor_t *m)
+{
+    return m->stop;
+}
+
+static int a4988_get_prep(const motor_t *m)
+{
+    return m->prep;
+}
+
+static int a4988_open(motor_t **out, const char *portName)
+{
+    motor_t *m;
+
+    if (!out)
+        return -1;
+
+    m = calloc(1, sizeof(*m));
+    if (!m)
+        return -1;
+
+    m->fd = -1;
+    m->zero = 400;
+
+    if (a4988_open_session(portName, m) != 0) {
+        free(m);
+        return -1;
+    }
+
+    *out = m;
+    return 0;
+}
+
+static void a4988_close(motor_t *m)
+{
+    if (!m)
+        return;
+    a4988_close_session(m);
+    free(m);
+}
+
+const motor_api_t motor_api = {
+    .open = a4988_open,
+    .close = a4988_close,
+    .send = a4988_send,
+    .read = a4988_read,
+    .init = a4988_init,
+    .go_to = a4988_go_to,
+    .go_rel = a4988_go_rel,
+    .go_start = a4988_go_start,
+    .go_stop = a4988_go_stop,
+    .go_zero = a4988_go_zero,
+    .go_prepare = a4988_go_prepare,
+    .get_percent = a4988_get_percent,
+    .next = a4988_next,
+    .prev = a4988_prev,
+    .get_pos = a4988_get_pos,
+    .prism_angle = a4988_prism_angle,
+    .set_scan_params = a4988_set_scan_params,
+    .get_start = a4988_get_start,
+    .get_stop = a4988_get_stop,
+    .get_prep = a4988_get_prep,
+};

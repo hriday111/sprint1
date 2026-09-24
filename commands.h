@@ -8,8 +8,10 @@
  * Absolute positions use the range [CMD_ANGLE_MIN, CMD_ANGLE_MAX].
  * Values above that range are control commands.
  *
- * @note CMD_DISABLE and CMD_RESET share the value 1003. In @c stepperSend,
+ * @note CMD_DISABLE and CMD_RESET share the value 1003. In motor @c send,
  *       the disable branch is evaluated first, so the reset path is unreachable.
+ * @note CMD_LASER_ON / CMD_LASER_OFF are handled by @c main via illumination_api,
+ *       not by the motor backend.
  */
 
 #define CMD_ANGLE_MIN 0

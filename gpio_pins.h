@@ -3,12 +3,12 @@
 
 /**
  * @file gpio_pins.h
- * @brief BCM GPIO mapping for Raspberry Pi 4 to A4988 driver and laser PWM.
+ * @brief BCM GPIO mapping for Raspberry Pi 4 (A4988 motor + illumination).
  *
  * Wiring summary:
  * - ENABLE is active LOW (motor powered when pin is LOW).
  * - Microstepping MS1/MS2/MS3 all HIGH selects 1/16 step.
- * - PIN_LASER uses hardware PWM on BCM 18 (PWM0).
+ * - PIN_LASER is for illumination backends (Laser/ / Led/), not the motor API.
  * - PIN_ENDSTOP is active HIGH when the switch is pressed.
  *
  * Change these values to match your board before running on hardware.
@@ -24,6 +24,7 @@
  * Approximate frequency: 19.2 MHz / LASER_PWM_CLOCK / LASER_PWM_RANGE (~2.35 kHz).
  */
 #define LASER_PWM_RANGE 255
+#define LED_PWM_RANGE   255
 #define LASER_PWM_CLOCK 32
 
 #define PIN_MS1      13
