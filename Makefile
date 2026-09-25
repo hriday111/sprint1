@@ -1,12 +1,13 @@
-override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Wno-unused-parameter -Wno-unused-const-variable -g -O2 -I. -Ilogging 
+override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Wno-unused-parameter -Wno-unused-const-variable -g -O2 -I. -Ilogging -Icommon
 override LDLIBS=-lpthread -latomic -lwiringPi
 override LDFLAGS=-Wl,-z,now,-z,relro
 ifdef CI
-override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Werror -Wno-unused-parameter -Wno-unused-const-variable -I. -Ilogging 
+override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Werror -Wno-unused-parameter -Wno-unused-const-variable -I. -Ilogging -Icommon
 endif
 
-NAME=main
+NAME=device
 BUILD_DIR=build
+COMMON_DIR=common
 TARGET=$(BUILD_DIR)/$(NAME)
 
 # Select illumination backend: make ILLUMINATION=laser (default) or ILLUMINATION=led
@@ -35,8 +36,9 @@ else
   $(error Unknown MOTOR=$(MOTOR); use a4988 or sg90)
 endif
 
-ROOT_SRCS = main.c utils.c
+ROOT_SRCS = main.c
 OBJS = $(ROOT_SRCS:%.c=$(BUILD_DIR)/%.o) \
+	$(BUILD_DIR)/utils.o \
 	$(BUILD_DIR)/logger.o \
 	$(BUILD_DIR)/loggerconf.o \
 	$(BUILD_DIR)/crash.o \
@@ -56,6 +58,9 @@ $(TARGET): $(OBJS) | $(BUILD_DIR)
 # Root sources (headers live under -I paths; don't list moved headers here)
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/utils.o: $(COMMON_DIR)/utils.c $(COMMON_DIR)/utils.h | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $(COMMON_DIR)/utils.c -o $@
 
 $(BUILD_DIR)/logger.o: logging/logger.c logging/logger.h | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c logging/logger.c -o $@

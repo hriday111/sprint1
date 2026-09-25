@@ -41,6 +41,9 @@
 /** Position FIFO: servo_calib writes after CMD_GETPOS. */
 #define POS_PIPE "/run/sprint1/pos_pipe"
 
+/** Scan window file: three integers `start stop prep`. */
+#define PRM_FILE "/var/lib/sprint1/saved.prm"
+
 /** Overlay PNG written by @c calibrate (green ellipses on the crop). */
 #define DETECTED_OUTPUT "./tmp/detected.png"
 

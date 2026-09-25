@@ -23,7 +23,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "cam.h"
+#include "cam_api.h"
 #include "roi.h"
 #include "servo_fifo.h"
 #include "logger.h"
@@ -115,7 +115,7 @@ static int do_sweep(void *userdata)
         return -1;
     }
 
-    if (cam_grab(ctx->cam, &pix, &w, &h, &pitch) != 0) {
+    if (camera_api.grab(ctx->cam, &pix, &w, &h, &pitch) != 0) {
         fclose(csv);
         sweep_tui_set_error("Camera grab failed.", "Check the camera connection.");
         return -1;
@@ -145,7 +145,7 @@ static int do_sweep(void *userdata)
                                 "Try Reset, then Start again.");
             return -1;
         }
-        if (cam_grab(ctx->cam, &pix, &w, &h, &pitch) != 0) {
+        if (camera_api.grab(ctx->cam, &pix, &w, &h, &pitch) != 0) {
             fclose(csv);
             sweep_tui_set_error("Camera grab failed during the scan.",
                                 "Try Reset, then Start again.");
@@ -186,7 +186,7 @@ int main(int argc, char **argv)
     double exposure = argc > 2 ? strtod(argv[2], NULL) : 0.1;
     const char *csv_path = argc > 3 ? argv[3] : "../sensor_data.csv";
 
-    cam_t cam;
+    cam_t *cam = NULL;
     rois_t rois;
     disease_assign_t assign;
     sweep_ctx_t ctx;
@@ -209,20 +209,20 @@ int main(int argc, char **argv)
     LOG_INFO("scan %d .. %d (prep %d) from %s", ctx.start, ctx.stop, ctx.prep,
              PRM_FILE);
 
-    if (cam_open(&cam) != 0)
+    if (camera_api.open(&cam) != 0)
         return 1;
 
-    if (cam_set_exposure_ms(&cam, exposure, &actual) != 0) {
-        cam_close(&cam);
+    if (camera_api.set_exposure_ms(cam, exposure, &actual) != 0) {
+        camera_api.close(cam);
         return 1;
     }
 
     if (servo_fifo_open() != 0) {
-        cam_close(&cam);
+        camera_api.close(cam);
         return 1;
     }
 
-    ctx.cam = &cam;
+    ctx.cam = cam;
     ctx.rois = &rois;
     ctx.assign = &assign;
     ctx.csv_path = csv_path;
@@ -237,7 +237,7 @@ int main(int argc, char **argv)
     rc = sweep_tui_run(&assign, &hooks);
 
     servo_fifo_close();
-    cam_close(&cam);
+    camera_api.close(cam);
     LOG_INFO("TUI exit (servo daemon left running)");
     logger_flush();
     logger_exitFileLogger();

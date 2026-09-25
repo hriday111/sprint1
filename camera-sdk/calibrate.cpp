@@ -27,7 +27,7 @@
 #include <opencv2/imgproc.hpp>
 
 extern "C" {
-#include "cam.h"
+#include "cam_api.h"
 #include "roi.h"
 #include "utils.h"
 #include "logger.h"
@@ -78,24 +78,24 @@ int main(int argc, char **argv)
 
     laser_on();
 
-    cam_t cam;
-    if (cam_open(&cam) != 0)
+    cam_t *cam = NULL;
+    if (camera_api.open(&cam) != 0)
         return 1;
     double actual = 0.0;
-    if (cam_set_exposure_ms(&cam, exposure, &actual) != 0) {
-        cam_close(&cam);
+    if (camera_api.set_exposure_ms(cam, exposure, &actual) != 0) {
+        camera_api.close(cam);
         return 1;
     }
-    LOG_INFO("camera %s %dx%d exposure %.3f ms", cam.sensor, cam.width, cam.height,
-             actual);
+    LOG_INFO("camera %s %dx%d exposure %.3f ms", camera_api.sensor(cam),
+             camera_api.width(cam), camera_api.height(cam), actual);
 
     unsigned char *pix;
     int w, h, pitch;
-    if (cam_grab(&cam, &pix, &w, &h, &pitch) != 0) {
-        cam_close(&cam);
+    if (camera_api.grab(cam, &pix, &w, &h, &pitch) != 0) {
+        camera_api.close(cam);
         return 1;
     }
-    LOG_INFO("crop %dx%d at (%d,%d)", w, h, CAM_CROP_X, CAM_CROP_Y);
+    LOG_INFO("crop %dx%d", w, h);
 
     cv::Mat gray = frame_mat(pix, w, h, pitch);
     cv::imwrite(frame_path, gray);
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
     rois_t rois;
     if (detect_boxes_cv(gray, nwant, &rois) != 0) {
         LOG_ERROR("detect_boxes_cv failed");
-        cam_close(&cam);
+        camera_api.close(cam);
         return 1;
     }
     LOG_INFO("found %d mark(s)", rois.n);
@@ -142,7 +142,7 @@ int main(int argc, char **argv)
     roi_save_json(roi_path, &rois);
     LOG_INFO("wrote %s and %s", roi_path, frame_path);
 
-    cam_close(&cam);
+    camera_api.close(cam);
     logger_flush();
     logger_exitFileLogger();
     return rois.n > 0 ? 0 : 1;

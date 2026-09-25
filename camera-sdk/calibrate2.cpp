@@ -36,7 +36,7 @@
 #include <opencv2/imgproc.hpp>
 
 extern "C" {
-#include "cam.h"
+#include "cam_api.h"
 #include "roi.h"
 #include "roi_interp.h"
 #include "servo_fifo.h"
@@ -94,7 +94,7 @@ static int detect_at_pos(cam_t *cam, int pos, int nwant, rois_t *out,
 
     unsigned char *pix;
     int w, h, pitch;
-    if (cam_grab(cam, &pix, &w, &h, &pitch) != 0)
+    if (camera_api.grab(cam, &pix, &w, &h, &pitch) != 0)
         return -1;
 
     cv::Mat gray = frame_mat(pix, w, h, pitch);
@@ -149,7 +149,7 @@ static int write_interp_check_csv(cam_t *cam, const roi_interp_t *model, const c
 
         unsigned char *pix;
         int w, h, pitch;
-        if (cam_grab(cam, &pix, &w, &h, &pitch) != 0) {
+        if (camera_api.grab(cam, &pix, &w, &h, &pitch) != 0) {
             fclose(csv);
             return -1;
         }
@@ -209,19 +209,19 @@ int main(int argc, char **argv)
     if (servo_fifo_open() != 0)
         return 1;
 
-    cam_t cam;
-    if (cam_open(&cam) != 0) {
+    cam_t *cam = NULL;
+    if (camera_api.open(&cam) != 0) {
         servo_fifo_close();
         return 1;
     }
     double actual = 0.0;
-    if (cam_set_exposure_ms(&cam, exposure, &actual) != 0) {
-        cam_close(&cam);
+    if (camera_api.set_exposure_ms(cam, exposure, &actual) != 0) {
+        camera_api.close(cam);
         servo_fifo_close();
         return 1;
     }
-    LOG_INFO("camera %s exposure %.3f ms; calibrate2 at %d and %d", cam.sensor, actual,
-             pos0, pos1);
+    LOG_INFO("camera %s exposure %.3f ms; calibrate2 at %d and %d",
+             camera_api.sensor(cam), actual, pos0, pos1);
 
     roi_interp_t model;
     memset(&model, 0, sizeof(model));
@@ -234,20 +234,20 @@ int main(int argc, char **argv)
     snprintf(frame0, sizeof(frame0), "./tmp/calib_frame_%d.png", pos0);
     snprintf(frame1, sizeof(frame1), "./tmp/calib_frame_%d.png", pos1);
 
-    if (detect_at_pos(&cam, pos0, nwant, &model.at0, overlay0, frame0) != 0) {
-        cam_close(&cam);
+    if (detect_at_pos(cam, pos0, nwant, &model.at0, overlay0, frame0) != 0) {
+        camera_api.close(cam);
         servo_fifo_close();
         return 1;
     }
-    if (detect_at_pos(&cam, pos1, nwant, &model.at1, overlay1, frame1) != 0) {
-        cam_close(&cam);
+    if (detect_at_pos(cam, pos1, nwant, &model.at1, overlay1, frame1) != 0) {
+        camera_api.close(cam);
         servo_fifo_close();
         return 1;
     }
     if (model.at0.n != model.at1.n) {
         LOG_ERROR("blob count mismatch: %d at %d vs %d at %d", model.at0.n, pos0,
                   model.at1.n, pos1);
-        cam_close(&cam);
+        camera_api.close(cam);
         servo_fifo_close();
         return 1;
     }
@@ -263,7 +263,7 @@ int main(int argc, char **argv)
     }
 
     if (roi_interp_save(interp_path, &model) != 0) {
-        cam_close(&cam);
+        camera_api.close(cam);
         servo_fifo_close();
         return 1;
     }
@@ -277,9 +277,9 @@ int main(int argc, char **argv)
 
     LOG_INFO("Sampling intensities pos %d..%d with interpolated ROIs (CSV for plot)",
              pos0 < pos1 ? pos0 : pos1, pos0 < pos1 ? pos1 : pos0);
-    int rc = write_interp_check_csv(&cam, &model, csv_path);
+    int rc = write_interp_check_csv(cam, &model, csv_path);
 
-    cam_close(&cam);
+    camera_api.close(cam);
     servo_fifo_close();
     logger_flush();
     logger_exitFileLogger();

@@ -11,7 +11,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "../tuibox.h"
+#include "tuibox.h"
 
 #define PANEL_MAX 56
 #define PANEL_MIN 28
