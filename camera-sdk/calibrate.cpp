@@ -32,6 +32,7 @@ extern "C" {
 #include "utils.h"
 #include "logger.h"
 #include "crash.h"
+#include "ipc_client.h"
 }
 #include "detect.hpp"
 
@@ -41,24 +42,15 @@ extern "C" {
  * If the FIFO cannot be opened, prints a note and continues (laser may already
  * be on from @c servo_calib).
  */
-static void laser_on(void)
+static void illum_on(void)
 {
-    int fd;
-
-    if ((fd = open(CMD_PIPE, O_WRONLY | O_NONBLOCK)) == -1) {
-        LOG_WARN("no command FIFO; assuming the laser is already on");
+    if (fifo_open() != 0) {
+        LOG_WARN("no command FIFO; assuming illumination already on");
         return;
     }
-
-    const char cmd[] = "b255\n1001\n";
-
-    if (write(fd, cmd, sizeof(cmd) - 1) < 0 && errno != EAGAIN && errno != EPIPE) {
-        ERR("write");
-    }
-
-    close(fd);
-    usleep(30000);
-    LOG_INFO("Requested laser on via FIFO");
+    fifo_set_brightness(255);
+    fifo_illum_on();
+    fifo_close();
 }
 
 /**
@@ -76,7 +68,7 @@ int main(int argc, char **argv)
     if (sprint1_logging_init("calibrate", NULL, 0) != 0)
         return 1;
 
-    laser_on();
+    illum_on();
 
     cam_t *cam = NULL;
     if (camera_api.open(&cam) != 0)

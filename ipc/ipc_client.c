@@ -1,12 +1,7 @@
-/**
- * @file servo_fifo.c
- * @brief Named-FIFO client for servo_calib (move / getpos).
- */
-
-#include "servo_fifo.h"
+#include "ipc_client.h"
 #include "utils.h"
 #include "logger.h"
-
+#include "commands.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <poll.h>
@@ -19,7 +14,33 @@ static int g_cmd_fd = -1;
 static int g_pos_fd = -1;
 static int g_motor_enabled = 0;
 
-int servo_fifo_open(void)
+/**
+ * @brief Write one already-formatted command line with open/retry on EPIPE.
+ */
+static int fifo_write_line(const char *buf, int n)
+{
+    for (int attempt = 0; attempt < 20; attempt++) {
+        if (fifo_open() != 0)
+            return -1;
+        ssize_t w = write(g_cmd_fd, buf, (size_t)n);
+        if (w == (ssize_t)n) {
+            LOG_DEBUG("FIFO write %.*s", n - (n > 0 && buf[n - 1] == '\n'), buf);
+            return 0;
+        }
+        if (w < 0 && (errno == EPIPE || errno == EINTR || errno == EAGAIN)) {
+            close(g_cmd_fd);
+            g_cmd_fd = -1;
+            usleep(20000);
+            continue;
+        }
+        LOG_ERROR("write cmd: %s", strerror(errno));
+        return -1;
+    }
+    LOG_ERROR("write cmd: giving up after retries");
+    return -1;
+}
+
+int fifo_open(void)
 {
     if (g_cmd_fd >= 0)
         return 0;
@@ -61,37 +82,17 @@ int servo_fifo_open(void)
     }
     return 0;
 }
-
-int servo_fifo_send(long cmd)
+int fifo_send(long cmd)
 {
     char buf[32];
     int n = snprintf(buf, sizeof(buf), "%ld\n", cmd);
-
-    for (int attempt = 0; attempt < 20; attempt++) {
-        if (servo_fifo_open() != 0)
-            return -1;
-        ssize_t w = write(g_cmd_fd, buf, (size_t)n);
-        if (w == (ssize_t)n) {
-            LOG_DEBUG("FIFO send %ld", cmd);
-            return 0;
-        }
-        if (w < 0 && (errno == EPIPE || errno == EINTR || errno == EAGAIN)) {
-            close(g_cmd_fd);
-            g_cmd_fd = -1;
-            usleep(20000);
-            continue;
-        }
-        LOG_ERROR("write cmd: %s", strerror(errno));
-        return -1;
-    }
-    LOG_ERROR("write cmd: giving up after retries (cmd=%ld)", cmd);
-    return -1;
+    return fifo_write_line(buf, n);
 }
 
 static int position_once(int timeout_ms)
 {
     if (g_pos_fd < 0) {
-        if (servo_fifo_open() != 0)
+        if (fifo_open() != 0)
             return -1;
     }
     char junk[256];
@@ -99,7 +100,7 @@ static int position_once(int timeout_ms)
         ssize_t n = read(g_pos_fd, junk, sizeof(junk));
         if (n <= 0) break;
     }
-    if (servo_fifo_send(SERVO_CMD_GETPOS) != 0) {
+    if (fifo_send(CMD_GETPOS) != 0) {
         return -1;
     }
 
@@ -132,7 +133,7 @@ static int position_once(int timeout_ms)
     return atoi(buf);
 }
 
-int servo_fifo_position(void)
+int fifo_get_position(void)
 {
     for (int attempt = 0; attempt < 10; attempt++) {
         int cur = position_once(500);
@@ -143,34 +144,33 @@ int servo_fifo_position(void)
     LOG_ERROR("position: no reply after retries");
     return -1;
 }
-
-int servo_fifo_move_and_wait(int pos)
+int fifo_move_and_wait(int pos)
 {
-    LOG_DEBUG("servo_fifo_move_and_wait(%d)", pos);
-    if (servo_fifo_send(pos) != 0)
+    LOG_DEBUG("fifo_move_and_wait(%d)", pos);
+    if (fifo_send(pos) != 0)
         return -1;
     for (int spins = 0; spins < 6000; spins++) {
-        int cur = servo_fifo_position();
+        int cur = fifo_get_position();
         if (cur < 0)
             return -1;
         if (cur == pos)
             return 0;
         usleep(20000);
     }
-    LOG_ERROR("servo_fifo_move_and_wait(%d): timed out", pos);
+    LOG_ERROR("fifo_move_and_wait(%d): timed out", pos);
     return -1;
 }
 
-int servo_fifo_is_enabled(void)
+int fifo_is_enabled(void)
 {
     return g_motor_enabled;
 }
 
-int servo_fifo_enable(void)
+int fifo_enable(void)
 {
-    long cmd = g_motor_enabled ? SERVO_CMD_DISABLE : SERVO_CMD_ENABLE;
+    long cmd = g_motor_enabled ? CMD_DISABLE : CMD_ENABLE;
 
-    if (servo_fifo_send(cmd) != 0)
+    if (fifo_send(cmd) != 0)
         return -1;
 
     g_motor_enabled = !g_motor_enabled;
@@ -178,7 +178,48 @@ int servo_fifo_enable(void)
     return 0;
 }
 
-void servo_fifo_close(void)
+int fifo_illum_on(void)
+{
+    if (fifo_send(CMD_LASER_ON) != 0)
+        return -1;
+    LOG_INFO("Illumination on");
+    return 0;
+}
+
+int fifo_illum_off(void)
+{
+    if (fifo_send(CMD_LASER_OFF) != 0)
+        return -1;
+    LOG_INFO("Illumination off");
+    return 0;
+}
+
+/**
+ * @brief Set illumination brightness.
+ *
+ * Daemon parses lines starting with @c b / @c B (see main handle_command),
+ * e.g. @c "b255\\n". A bare integer would be treated as a motor goto — do not
+ * use @c fifo_send for brightness.
+ */
+int fifo_set_brightness(int brightness)
+{
+    char buf[32];
+    int n;
+
+    if (brightness < 0)
+        brightness = 0;
+    if (brightness > 255)
+        brightness = 255;
+
+    n = snprintf(buf, sizeof(buf), "b%d\n", brightness);
+    if (fifo_write_line(buf, n) != 0)
+        return -1;
+
+    LOG_INFO("Brightness -> %d", brightness);
+    return 0;
+}
+
+void fifo_close(void)
 {
     if (g_cmd_fd >= 0) {
         close(g_cmd_fd);
@@ -188,14 +229,13 @@ void servo_fifo_close(void)
         close(g_pos_fd);
         g_pos_fd = -1;
     }
-    LOG_INFO("Closed command FIFO (daemon left running)");
 }
 
-void servo_fifo_shutdown(void)
+void fifo_shutdown(void)
 {
     if (g_cmd_fd >= 0) {
-        LOG_INFO("Shutting down servo_calib via -1");
-        (void)servo_fifo_send(-1);
+        LOG_INFO("Shutting down calib via -1");
+        (void)fifo_send(-1);
     }
     if (g_cmd_fd >= 0) {
         close(g_cmd_fd);

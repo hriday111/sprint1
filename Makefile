@@ -1,8 +1,8 @@
-override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Wno-unused-parameter -Wno-unused-const-variable -g -O2 -I. -Ilogging -Icommon
+override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Wno-unused-parameter -Wno-unused-const-variable -g -O2 -I. -Ilogging -Icommon -Iipc
 override LDLIBS=-lpthread -latomic -lwiringPi
 override LDFLAGS=-Wl,-z,now,-z,relro
 ifdef CI
-override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Werror -Wno-unused-parameter -Wno-unused-const-variable -I. -Ilogging -Icommon
+override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Werror -Wno-unused-parameter -Wno-unused-const-variable -I. -Ilogging -Icommon -Iipc
 endif
 
 NAME=device
@@ -10,6 +10,7 @@ BUILD_DIR=build
 COMMON_DIR=common
 TARGET=$(BUILD_DIR)/$(NAME)
 
+IPC_BASE = ipc
 # Select illumination backend: make ILLUMINATION=laser (default) or ILLUMINATION=led
 ILLUMINATION ?= laser
 
@@ -43,7 +44,9 @@ OBJS = $(ROOT_SRCS:%.c=$(BUILD_DIR)/%.o) \
 	$(BUILD_DIR)/loggerconf.o \
 	$(BUILD_DIR)/crash.o \
 	$(BUILD_DIR)/illumination.o \
-	$(BUILD_DIR)/motor.o
+	$(BUILD_DIR)/motor.o \
+	$(BUILD_DIR)/ipc_server.o \
+	$(BUILD_DIR)/device.o
 
 .PHONY: clean all
 
@@ -58,6 +61,12 @@ $(TARGET): $(OBJS) | $(BUILD_DIR)
 # Root sources (headers live under -I paths; don't list moved headers here)
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/device.o: device.c device.h motor_api.h illumination_api.h ipc/ipc_server.h | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c device.c -o $@
+
+$(BUILD_DIR)/ipc_server.o: $(IPC_BASE)/ipc_server.c $(IPC_BASE)/ipc_server.h | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $(IPC_BASE)/ipc_server.c -o $@
 
 $(BUILD_DIR)/utils.o: $(COMMON_DIR)/utils.c $(COMMON_DIR)/utils.h | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $(COMMON_DIR)/utils.c -o $@

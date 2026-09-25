@@ -25,7 +25,7 @@
 
 #include "cam_api.h"
 #include "roi.h"
-#include "servo_fifo.h"
+#include "ipc_client.h"
 #include "logger.h"
 #include "crash.h"
 #include "sweep_tui.h"
@@ -66,7 +66,7 @@ static int do_reset(void *userdata)
     sweep_tui_set_running("Resetting…", "Moving back to the ready position.");
     sweep_tui_set_progress(0, NULL);
 
-    if (servo_fifo_move_and_wait(ctx->prep) != 0) {
+    if (fifo_move_and_wait(ctx->prep) != 0) {
         sweep_tui_set_error("Could not reset.",
                             "Is the motor controller (servo_calib) running?");
         return -1;
@@ -107,7 +107,7 @@ static int do_sweep(void *userdata)
     fprintf(csv, ",blob1_disease,blob2_disease\n");
     fflush(csv);
 
-    if (servo_fifo_move_and_wait(ctx->start) != 0) {
+    if (fifo_move_and_wait(ctx->start) != 0) {
         LOG_ERROR("move_and_wait(%d) failed", ctx->start);
         fclose(csv);
         sweep_tui_set_error("Could not move into place.",
@@ -138,7 +138,7 @@ static int do_sweep(void *userdata)
     for (int pos = ctx->start; pos <= ctx->stop; pos++) {
         char detail[160];
 
-        if (servo_fifo_move_and_wait(pos) != 0) {
+        if (fifo_move_and_wait(pos) != 0) {
             LOG_ERROR("move_and_wait(%d) failed", pos);
             fclose(csv);
             sweep_tui_set_error("Scan stopped — motor did not arrive.",
@@ -217,7 +217,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    if (servo_fifo_open() != 0) {
+    if (fifo_open() != 0) {
         camera_api.close(cam);
         return 1;
     }
@@ -236,7 +236,7 @@ int main(int argc, char **argv)
 
     rc = sweep_tui_run(&assign, &hooks);
 
-    servo_fifo_close();
+    fifo_close();
     camera_api.close(cam);
     LOG_INFO("TUI exit (servo daemon left running)");
     logger_flush();

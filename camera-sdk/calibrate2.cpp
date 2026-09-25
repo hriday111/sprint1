@@ -39,28 +39,23 @@ extern "C" {
 #include "cam_api.h"
 #include "roi.h"
 #include "roi_interp.h"
-#include "servo_fifo.h"
+#include "ipc_client.h"
 #include "utils.h"
 #include "logger.h"
 #include "crash.h"
 }
 #include "detect.hpp"
 
-static void laser_on(void)
+static void illum_on(void)
 {
-    int fd = open(CMD_PIPE, O_WRONLY | O_NONBLOCK);
-    if (fd < 0) {
-        LOG_WARN("no command FIFO; assuming the laser is already on");
+    if (fifo_open() != 0) {
+        LOG_WARN("no command FIFO; assuming illumination already on");
         return;
     }
-    const char cmd[] = "b255\n1001\n";
-    if (write(fd, cmd, sizeof(cmd) - 1) < 0 && errno != EAGAIN && errno != EPIPE)
-        LOG_WARN("laser_on write failed: %s", strerror(errno));
-    close(fd);
-    usleep(30000);
-    LOG_INFO("Requested laser on via FIFO");
+    fifo_set_brightness(255);
+    fifo_illum_on();
+    fifo_close();
 }
-
 static void draw_overlay(const cv::Mat &gray, const rois_t &rois, const char *path)
 {
     cv::Mat vis;
@@ -86,7 +81,7 @@ static void draw_overlay(const cv::Mat &gray, const rois_t &rois, const char *pa
 static int detect_at_pos(cam_t *cam, int pos, int nwant, rois_t *out,
                          const char *overlay_path, const char *frame_path)
 {
-    if (servo_fifo_move_and_wait(pos) != 0) {
+    if (fifo_move_and_wait(pos) != 0) {
         LOG_ERROR("move to %d failed", pos);
         return -1;
     }
@@ -140,7 +135,7 @@ static int write_interp_check_csv(cam_t *cam, const roi_interp_t *model, const c
     int hi = model->pos0 < model->pos1 ? model->pos1 : model->pos0;
 
     for (int pos = lo; pos <= hi; pos++) {
-        if (servo_fifo_move_and_wait(pos) != 0) {
+        if (fifo_move_and_wait(pos) != 0) {
             LOG_ERROR("move to %d failed during check", pos);
             fclose(csv);
             return -1;
@@ -204,20 +199,20 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    laser_on();
+    illum_on();
 
-    if (servo_fifo_open() != 0)
+    if (fifo_open() != 0)
         return 1;
 
     cam_t *cam = NULL;
     if (camera_api.open(&cam) != 0) {
-        servo_fifo_close();
+        fifo_close();
         return 1;
     }
     double actual = 0.0;
     if (camera_api.set_exposure_ms(cam, exposure, &actual) != 0) {
         camera_api.close(cam);
-        servo_fifo_close();
+        fifo_close();
         return 1;
     }
     LOG_INFO("camera %s exposure %.3f ms; calibrate2 at %d and %d",
@@ -236,19 +231,19 @@ int main(int argc, char **argv)
 
     if (detect_at_pos(cam, pos0, nwant, &model.at0, overlay0, frame0) != 0) {
         camera_api.close(cam);
-        servo_fifo_close();
+        fifo_close();
         return 1;
     }
     if (detect_at_pos(cam, pos1, nwant, &model.at1, overlay1, frame1) != 0) {
         camera_api.close(cam);
-        servo_fifo_close();
+        fifo_close();
         return 1;
     }
     if (model.at0.n != model.at1.n) {
         LOG_ERROR("blob count mismatch: %d at %d vs %d at %d", model.at0.n, pos0,
                   model.at1.n, pos1);
         camera_api.close(cam);
-        servo_fifo_close();
+        fifo_close();
         return 1;
     }
 
@@ -264,7 +259,7 @@ int main(int argc, char **argv)
 
     if (roi_interp_save(interp_path, &model) != 0) {
         camera_api.close(cam);
-        servo_fifo_close();
+        fifo_close();
         return 1;
     }
     /* Also write a mid-point rois.json snapshot for manual inspection (not used by sweep yet). */
@@ -280,7 +275,7 @@ int main(int argc, char **argv)
     int rc = write_interp_check_csv(cam, &model, csv_path);
 
     camera_api.close(cam);
-    servo_fifo_close();
+    fifo_close();
     logger_flush();
     logger_exitFileLogger();
 

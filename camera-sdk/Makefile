@@ -1,7 +1,7 @@
 CC = gcc
 CXX = g++
-CFLAGS = -std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -I../logging -I../TUI -I../common -g
-CXXFLAGS = -std=c++17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -I../logging -I../TUI -I../common $(shell pkg-config --cflags opencv4) -g
+CFLAGS = -std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -I../logging -I../TUI -I../common -I../ipc -g
+CXXFLAGS = -std=c++17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -I../logging -I../TUI -I../common -I../ipc $(shell pkg-config --cflags opencv4) -g
 OPENCV_LIBS = -lopencv_imgcodecs -lopencv_imgproc -lopencv_core
 
 BUILDDIR = build
@@ -9,6 +9,7 @@ BINDIR = $(BUILDDIR)/bin
 OBJDIR = $(BUILDDIR)/obj
 LOGGER_OBJS = $(OBJDIR)/logger.o $(OBJDIR)/loggerconf.o $(OBJDIR)/crash.o
 COMMON_DIR = ../common
+IPC_BASE = ../ipc
 # Select camera backend: make CAMERA=ueye (default)
 CAMERA ?= ueye
 
@@ -25,16 +26,16 @@ endif
 all: $(BINDIR)/sweep_run $(BINDIR)/calibrate $(BINDIR)/calibrate2
 
 $(BINDIR)/sweep_run: $(OBJDIR)/sweep_run.o $(OBJDIR)/sweep_tui.o $(OBJDIR)/cam.o \
-		$(OBJDIR)/roi.o $(OBJDIR)/utils.o $(OBJDIR)/servo_fifo.o $(LOGGER_OBJS)
+		$(OBJDIR)/roi.o $(OBJDIR)/utils.o $(OBJDIR)/ipc_client.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
-$(BINDIR)/calibrate: $(OBJDIR)/calibrate.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/detect.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
+$(BINDIR)/calibrate: $(OBJDIR)/calibrate.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/detect.o $(OBJDIR)/utils.o $(LOGGER_OBJS) $(OBJDIR)/ipc_client.o
 	@mkdir -p $(BINDIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS) $(OPENCV_LIBS)
 
 $(BINDIR)/calibrate2: $(OBJDIR)/calibrate2.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/roi_interp.o \
-		$(OBJDIR)/servo_fifo.o $(OBJDIR)/detect.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
+		$(OBJDIR)/ipc_client.o $(OBJDIR)/detect.o $(OBJDIR)/utils.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(OPENCV_LIBS)
 
@@ -71,7 +72,7 @@ $(OBJDIR)/calibrate.o: calibrate.cpp detect.hpp cam_api.h roi.h $(COMMON_DIR)/ut
 	@mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c calibrate.cpp -o $@
 
-$(OBJDIR)/calibrate2.o: calibrate2.cpp detect.hpp cam_api.h roi.h roi_interp.h servo_fifo.h $(COMMON_DIR)/utils.h
+$(OBJDIR)/calibrate2.o: calibrate2.cpp detect.hpp cam_api.h roi.h roi_interp.h $(IPC_BASE)/ipc_client.h $(COMMON_DIR)/utils.h
 	@mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c calibrate2.cpp -o $@
 
@@ -83,9 +84,9 @@ $(OBJDIR)/sweep_tui.o: sweep_tui.c sweep_tui.h ../TUI/tuibox.h ../TUI/vt100utils
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c sweep_tui.c -o $@
 
-$(OBJDIR)/servo_fifo.o: servo_fifo.c servo_fifo.h $(COMMON_DIR)/utils.h
+$(OBJDIR)/ipc_client.o: $(IPC_BASE)/ipc_client.c $(IPC_BASE)/ipc_client.h $(COMMON_DIR)/utils.h
 	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c servo_fifo.c -o $@
+	$(CC) $(CFLAGS) -c $(IPC_BASE)/ipc_client.c -o $@
 
 clean:
 	rm -rf $(BUILDDIR)
