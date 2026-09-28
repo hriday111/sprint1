@@ -20,6 +20,11 @@ jobs:
       - name: Generate Documentation
         run: doxygen Doxyfile
 
+      # IMAGE_PATH=docs makes Doxygen rewrite README images to architecture.svg etc.
+      # Copy explicitly so Pages still works if a Doxygen version skips the copy.
+      - name: Include architecture diagrams
+        run: cp -v docs/*.svg docs/html/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:

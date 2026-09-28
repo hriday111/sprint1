@@ -40,6 +40,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No diagram changes"
           else
-            git commit -m "docs: render PlantUML diagrams [skip ci]"
+            git commit -m "docs: render PlantUML diagrams"
             git push
           fi
