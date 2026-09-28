@@ -12,7 +12,17 @@ Hardware backends are selected at build time (`MOTOR`, `ILLUMINATION`, `CAMERA`)
 
 ## Getting started (normal run)
 
-**ROI calibration is already done** for the current optics (`/var/lib/sprint1/rois.json`). Day-to-day:
+**ROI calibration is already done** for the current optics (`/var/lib/sprint1/rois.json`). Day-to-day you can use `sprint1.sh` to build and/or run:
+
+```bash
+./sprint1.sh build      # make all (driver + camera-sdk)
+./sprint1.sh driver     # build driver only
+./sprint1.sh camera-sdk # build camera-sdk only
+./sprint1.sh rebuild    # make clean && make all
+./sprint1.sh run        # start driver, then sweep_run (stops driver on exit)
+```
+
+Or run the two processes yourself:
 
 ```bash
 # Terminal 1 — device driver (motor + illumination + FIFO server)
@@ -24,7 +34,7 @@ cd camera-sdk && make
 ./build/bin/sweep_run
 ```
 
-`sweep_run` assigns diseases D1–D10 to blob 1 and blob 2, then Start/Reset for the scan. Quitting leaves `./build/driver` running (FIFO closed without `-1`).
+`sweep_run` assigns diseases D1–D10 to blob 1 and blob 2, then Start/Reset for the scan. Quitting leaves `./build/driver` running (FIFO closed without `-1`) unless you used `./sprint1.sh run`, which sends `-1` on exit.
 
 ### If you must recalibrate
 

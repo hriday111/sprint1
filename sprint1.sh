@@ -13,7 +13,7 @@ case "$1" in
         
     camera-sdk)
         echo "Building camera-sdk"
-        make camera-sdk
+        make camera
         ;;
         
     build)

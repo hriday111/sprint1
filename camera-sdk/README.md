@@ -4,7 +4,14 @@ Thorlabs DCC1545M (IDS uEye) tools: mono8 crop, elliptical ROIs, optional two-po
 
 ## Getting started
 
-**Calibration is already done.** Day-to-day:
+**Calibration is already done.** Day-to-day, from the repo root you can build and/or run with `./sprint1.sh` (`build`, `run`, etc. — see the [project README](../README.md#getting-started-normal-run)):
+
+```bash
+./sprint1.sh build
+./sprint1.sh run
+```
+
+Or start the processes yourself:
 
 ```bash
 # Terminal 1 (repo root)
