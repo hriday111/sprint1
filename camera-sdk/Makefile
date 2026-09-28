@@ -1,7 +1,7 @@
 CC = gcc
 CXX = g++
-CFLAGS = -std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -I../logging -I../TUI -I../common -I../ipc -g
-CXXFLAGS = -std=c++17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -I../logging -I../TUI -I../common -I../ipc $(shell pkg-config --cflags opencv4) -g
+CFLAGS = -std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -I../logging -I../TUI -I../common -I../ipc -Ivision -Iapp -g
+CXXFLAGS = -std=c++17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -O2 -I. -I.. -I../logging -I../TUI -I../common -I../ipc -Ivision -Iapp $(shell pkg-config --cflags opencv4) -g
 OPENCV_LIBS = -lopencv_imgcodecs -lopencv_imgproc -lopencv_core
 
 BUILDDIR = build
@@ -10,6 +10,9 @@ OBJDIR = $(BUILDDIR)/obj
 LOGGER_OBJS = $(OBJDIR)/logger.o $(OBJDIR)/loggerconf.o $(OBJDIR)/crash.o
 COMMON_DIR = ../common
 IPC_BASE = ../ipc
+APP_DIR = app
+VISION_DIR = vision
+
 # Select camera backend: make CAMERA=ueye (default)
 CAMERA ?= ueye
 
@@ -30,7 +33,8 @@ $(BINDIR)/sweep_run: $(OBJDIR)/sweep_run.o $(OBJDIR)/sweep_tui.o $(OBJDIR)/cam.o
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
-$(BINDIR)/calibrate: $(OBJDIR)/calibrate.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/detect.o $(OBJDIR)/utils.o $(LOGGER_OBJS) $(OBJDIR)/ipc_client.o
+$(BINDIR)/calibrate: $(OBJDIR)/calibrate.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(OBJDIR)/detect.o \
+		$(OBJDIR)/utils.o $(OBJDIR)/ipc_client.o $(LOGGER_OBJS)
 	@mkdir -p $(BINDIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS) $(OPENCV_LIBS)
 
@@ -39,11 +43,6 @@ $(BINDIR)/calibrate2: $(OBJDIR)/calibrate2.o $(OBJDIR)/cam.o $(OBJDIR)/roi.o $(O
 	@mkdir -p $(BINDIR)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(OPENCV_LIBS)
 
-$(OBJDIR)/%.o: %.c
-	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Shared utils from ../common (not camera-sdk/utils.c)
 $(OBJDIR)/utils.o: $(COMMON_DIR)/utils.c $(COMMON_DIR)/utils.h
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $(COMMON_DIR)/utils.c -o $@
@@ -64,25 +63,34 @@ $(OBJDIR)/crash.o: ../logging/crash.c ../logging/crash.h ../logging/logger.h
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c ../logging/crash.c -o $@
 
-$(OBJDIR)/detect.o: detect.cpp detect.hpp roi.h $(COMMON_DIR)/utils.h
+$(OBJDIR)/detect.o: $(VISION_DIR)/detect.cpp $(VISION_DIR)/detect.hpp $(VISION_DIR)/roi.h $(COMMON_DIR)/utils.h
 	@mkdir -p $(OBJDIR)
-	$(CXX) $(CXXFLAGS) -c detect.cpp -o $@
+	$(CXX) $(CXXFLAGS) -c $(VISION_DIR)/detect.cpp -o $@
 
-$(OBJDIR)/calibrate.o: calibrate.cpp detect.hpp cam_api.h roi.h $(COMMON_DIR)/utils.h
+$(OBJDIR)/roi.o: $(VISION_DIR)/roi.c $(VISION_DIR)/roi.h
 	@mkdir -p $(OBJDIR)
-	$(CXX) $(CXXFLAGS) -c calibrate.cpp -o $@
+	$(CC) $(CFLAGS) -c $(VISION_DIR)/roi.c -o $@
 
-$(OBJDIR)/calibrate2.o: calibrate2.cpp detect.hpp cam_api.h roi.h roi_interp.h $(IPC_BASE)/ipc_client.h $(COMMON_DIR)/utils.h
+$(OBJDIR)/roi_interp.o: $(VISION_DIR)/roi_interp.c $(VISION_DIR)/roi_interp.h $(VISION_DIR)/roi.h
 	@mkdir -p $(OBJDIR)
-	$(CXX) $(CXXFLAGS) -c calibrate2.cpp -o $@
+	$(CC) $(CFLAGS) -c $(VISION_DIR)/roi_interp.c -o $@
 
-$(OBJDIR)/roi_interp.o: roi_interp.c roi_interp.h roi.h
+$(OBJDIR)/calibrate.o: $(APP_DIR)/calibrate.cpp $(VISION_DIR)/detect.hpp cam_api.h $(VISION_DIR)/roi.h $(COMMON_DIR)/utils.h
 	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c roi_interp.c -o $@
+	$(CXX) $(CXXFLAGS) -c $(APP_DIR)/calibrate.cpp -o $@
 
-$(OBJDIR)/sweep_tui.o: sweep_tui.c sweep_tui.h ../TUI/tuibox.h ../TUI/vt100utils.h
+$(OBJDIR)/calibrate2.o: $(APP_DIR)/calibrate2.cpp $(VISION_DIR)/detect.hpp cam_api.h $(VISION_DIR)/roi.h \
+		$(VISION_DIR)/roi_interp.h $(IPC_BASE)/ipc_client.h $(COMMON_DIR)/utils.h
 	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c sweep_tui.c -o $@
+	$(CXX) $(CXXFLAGS) -c $(APP_DIR)/calibrate2.cpp -o $@
+
+$(OBJDIR)/sweep_run.o: $(APP_DIR)/sweep_run.c $(APP_DIR)/sweep_tui.h cam_api.h $(VISION_DIR)/roi.h
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c $(APP_DIR)/sweep_run.c -o $@
+
+$(OBJDIR)/sweep_tui.o: $(APP_DIR)/sweep_tui.c $(APP_DIR)/sweep_tui.h ../TUI/tuibox.h ../TUI/vt100utils.h
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c $(APP_DIR)/sweep_tui.c -o $@
 
 $(OBJDIR)/ipc_client.o: $(IPC_BASE)/ipc_client.c $(IPC_BASE)/ipc_client.h $(COMMON_DIR)/utils.h
 	@mkdir -p $(OBJDIR)

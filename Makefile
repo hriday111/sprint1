@@ -5,7 +5,7 @@ ifdef CI
 override CFLAGS=-std=c17 -D_GNU_SOURCE -Wall -Wextra -Wshadow -Wvla -Werror -Wno-unused-parameter -Wno-unused-const-variable -I. -Ilogging -Icommon -Iipc
 endif
 
-NAME=device
+NAME=driver
 BUILD_DIR=build
 COMMON_DIR=common
 TARGET=$(BUILD_DIR)/$(NAME)
@@ -48,9 +48,14 @@ OBJS = $(ROOT_SRCS:%.c=$(BUILD_DIR)/%.o) \
 	$(BUILD_DIR)/ipc_server.o \
 	$(BUILD_DIR)/device.o
 
-.PHONY: clean all
+.PHONY: all driver camera clean
 
-all: $(TARGET)
+all: driver camera
+
+driver: $(TARGET)
+
+camera:
+	$(MAKE) -C camera-sdk
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -88,3 +93,4 @@ $(BUILD_DIR)/motor.o: $(MOTOR_SRC) $(MOTOR_HDR) motor_api.h | $(BUILD_DIR)
 
 clean:
 	rm -rf $(BUILD_DIR)
+	$(MAKE) -C camera-sdk clean
