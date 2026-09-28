@@ -145,7 +145,7 @@ Functions</h2></td></tr>
 <p>Moves the servo to <code>pos0</code> (default 400) and <code>pos1</code> (default 420), detects the three disc blobs at each end, and writes an interpolation model. Then steps through every position in between, evaluates the linear formula for blob centres, measures intensity, and writes a CSV for plotting.</p>
 <p>Usage: ./calibrate2 [exposure_ms=0.1] [pos0=400] [pos1=420] [n_blobs=3] [interp_path] [csv_path]</p>
 <p>If detection fails or ellipses miss the discs, retry with several exposures (for example 0.20, 0.14, and 0.10) and keep the run whose <code>tmp/detected_*</code>.png overlays look best.</p>
-<p>Does not stop <code>servo_calib</code> (FIFO closed without sending -1). Day-to-day measurements use <code>servo_calib</code> + <code>sweep_run</code>; recalibrate only after optical changes (ROI calibration is normally already done). </p>
+<p>Does not stop <code>build/driver</code> (FIFO closed without sending -1). Day-to-day measurements use <code>build/driver</code> + <code>sweep_run</code>; recalibrate only after optical changes (ROI calibration is normally already done). </p>
 
 <p class="definition">Definition in file <a class="el" href="calibrate2_8cpp_source.html">calibrate2.cpp</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>

@@ -134,8 +134,8 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>One-shot ROI recalibration after optical changes (lens move, remount). </p>
-<p>Day-to-day measurements do not need this: start <code>servo_calib</code>, then <code>sweep_run</code>. Prefer <code>calibrate2</code> when recalibrating; if detection fails, try exposures 0.20, 0.14, and 0.10 and keep the best overlay.</p>
-<p>Grabs a single crop, runs <code>detect_boxes_cv</code>, writes <code>rois.json</code> and diagnostic images under <code>tmp/</code>. Does not stop <code>servo_calib</code>.</p>
+<p>Day-to-day measurements do not need this: start <code>build/driver</code>, then <code>sweep_run</code>. Prefer <code>calibrate2</code> when recalibrating; if detection fails, try exposures 0.20, 0.14, and 0.10 and keep the best overlay.</p>
+<p>Grabs a single crop, runs <code>detect_boxes_cv</code>, writes <code>rois.json</code> and diagnostic images under <code>tmp/</code>. Does not stop <code>build/driver</code>.</p>
 <p>Usage: <code></code>./calibrate [exposure_ms=0.1] [n_blobs=3] [roi_path] </p>
 
 <p class="definition">Definition in file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
@@ -182,7 +182,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Request full laser brightness via the command FIFO if a reader exists. </p>
-<p>If the FIFO cannot be opened, prints a note and continues (laser may already be on from <code>servo_calib</code>). </p>
+<p>If the FIFO cannot be opened, prints a note and continues (laser may already be on from <code>build/driver</code>). </p>
 
 <p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00045">45</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
 

@@ -22,7 +22,7 @@ var searchData=
   ['getlevelchar_19',['getLevelChar',['../logger_8c.html#ac1844d406e77b7fd443b3f3b1a184c11',1,'logger.c']]],
   ['gettimestamp_20',['getTimestamp',['../logger_8c.html#acdab680ff248b1252822d4c2eccf82aa',1,'logger.c']]],
   ['getting_20started_21',['Getting started',['../camera_sdk.html#autotoc_md0',1,'']]],
-  ['getting_20started_20normal_20run_22',['Getting started (normal run)',['../index.html#autotoc_md12',1,'']]],
+  ['getting_20started_20normal_20run_22',['Getting started (normal run)',['../index.html#autotoc_md8',1,'']]],
   ['global_5fbg_23',['global_bg',['../vt100utils_8h.html#a2fc2954c95a08fbd7889d60948e10a6f',1,'vt100utils.h']]],
   ['global_5ffg_24',['global_fg',['../vt100utils_8h.html#a8f42c32dc86fd1118ff09e43c1fb9424',1,'vt100utils.h']]],
   ['global_5fmode_25',['global_mode',['../vt100utils_8h.html#a79e9a712c9ad6aad190070e4cf31bd02',1,'vt100utils.h']]],

@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('recalibrate.html',''); initResizable()
   <div class="headertitle"><div class="title">Recalibrate chip marks after moving the lens</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><b>Day-to-day:</b> calibration is already done. Start <code>./build/servo_calib</code>, then run <code>./camera-sdk/build/bin/sweep_run</code> for measurements.</p>
+<div class="textblock"><p><b>Day-to-day:</b> calibration is already done. Start <code>./build/driver</code>, then run <code>./camera-sdk/build/bin/sweep_run</code>.</p>
 <p>The intensity sweep does <b>not</b> re-detect discs; it averages ellipse masks from <code>rois.json</code>. Recalibrate only after moving the lens (or remounting optics).</p>
 <div class="fragment"><div class="line">cd camera-sdk</div>
 <div class="line">make</div>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('recalibrate.html',''); initResizable()
 <div class="line">./build/bin/calibrate 0.1</div>
 </div><!-- fragment --><p>Open <code>tmp/detected_&lt;pos&gt;.png</code> (or <code>tmp/detected.png</code>). Green ellipses must sit on the three dark discs — pick the exposure that looks best.</p>
 <p>Avoid long exposures with a bright laser — clipped discs break detection. Check <code>logs/calibrate*.log</code> for saturation and mark-count warnings.</p>
-<p>Full API: <a class="el" href="README_8md.html">README.md</a>. </p>
+<p>Full camera API: <a class="el" href="camera-sdk_2README_8md.html">../README.md</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

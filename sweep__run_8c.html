@@ -143,10 +143,10 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main measurement tool: disease-assignment TUI + intensity sweep. </p>
 <p>Normal workflow (ROI calibration is already done for the current optics):</p><ol type="1">
-<li>Start the driver: <code></code>./build/servo_calib</li>
+<li>Start the driver: <code></code>./build/driver</li>
 <li>Run this tool: <code></code>./camera-sdk/build/bin/sweep_run</li>
 </ol>
-<p>Flow: pick D1–D10 for blob 1 and blob 2 → Start/Reset screen → CSV. Requires <code>servo_calib</code> already running.</p>
+<p>Flow: pick D1–D10 for blob 1 and blob 2 → Start/Reset screen → CSV. Requires <code>build/driver</code> already running.</p>
 <p>Usage: <code></code>./sweep_run [rois.json] [exposure_ms] [out.csv]</p>
 <p>Exit leaves the servo daemon running (FIFO closed without <code>-1</code>). Recalibrate with <code>calibrate2</code> only after lens moves; try exposures 0.20, 0.14, and 0.10 if detection looks wrong. </p>
 

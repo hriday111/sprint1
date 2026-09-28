@@ -31,19 +31,14 @@ var NAVTREE =
       [ "Getting started", "camera_sdk.html#autotoc_md0", [
         [ "Recalibration (only if needed)", "camera_sdk.html#autotoc_md1", null ]
       ] ],
-      [ "Prerequisites", "camera_sdk.html#autotoc_md2", null ],
-      [ "What it does", "camera_sdk.html#autotoc_md3", [
-        [ "Camera crop", "camera_sdk.html#autotoc_md4", null ],
-        [ "Camera API", "camera_sdk.html#autotoc_md5", null ],
-        [ "ROI / interp / FIFO APIs", "camera_sdk.html#autotoc_md6", null ]
-      ] ],
-      [ "Tool CLI", "camera_sdk.html#autotoc_md7", null ],
-      [ "Detection design", "camera_sdk.html#autotoc_md8", null ],
-      [ "Common pitfalls", "camera_sdk.html#autotoc_md9", null ],
-      [ "Build", "camera_sdk.html#autotoc_md10", null ]
+      [ "Layout", "camera_sdk.html#autotoc_md2", null ],
+      [ "Prerequisites", "camera_sdk.html#autotoc_md3", null ],
+      [ "APIs (short)", "camera_sdk.html#autotoc_md4", null ],
+      [ "Tool CLI", "camera_sdk.html#autotoc_md5", null ],
+      [ "Build", "camera_sdk.html#autotoc_md6", null ]
     ] ],
     [ "Vendored IDS uEye <tt>.deb</tt> packages", "md_vendor_2debs_2README.html", [
-      [ "Install uEye + udev", "md_vendor_2debs_2README.html#autotoc_md23", null ]
+      [ "Install uEye + udev", "md_vendor_2debs_2README.html#autotoc_md20", null ]
     ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
@@ -72,9 +67,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"ipc__server_8h.html#a58d63fce7b26f4544fc4f0e6be6f4829",
-"structcam.html#a07ff95c166574fab3cdcab9d34813975",
-"sweep__tui_8c.html#ac9a87775b8ca04b9dd7cb43eb55b56d4"
+"ipc__server_8h.html#ae18d7badb9c89c495743692a1c6b01c7",
+"structcam.html#a867b2fe83d7e4e936ccadc7d03a5550c",
+"sweep__tui_8c.html#ad606f1a9614528871ec4339c3eb49426"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

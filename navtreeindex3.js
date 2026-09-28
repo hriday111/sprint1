@@ -1,8 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"sweep__tui_8c.html#ac9a87775b8ca04b9dd7cb43eb55b56d4":[5,0,1,0,3,16],
-"sweep__tui_8c.html#aca2ba94fb55e9f84314c130aa069ac32":[5,0,1,0,3,61],
-"sweep__tui_8c.html#acd4a6c73f708640ddf64210fb7b919c8":[5,0,1,0,3,26],
 "sweep__tui_8c.html#ad606f1a9614528871ec4339c3eb49426":[5,0,1,0,3,52],
 "sweep__tui_8c.html#ad758796f08667a1eef883a17de25ce56":[5,0,1,0,3,4],
 "sweep__tui_8c.html#ada4754014ea69f4babe3a60d078e77ff":[5,0,1,0,3,39],

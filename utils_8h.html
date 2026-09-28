@@ -119,13 +119,13 @@ Macros</h2></td></tr>
 <tr class="memdesc:a32be982f3e299af7e5c574f80bc2c80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log + perror + <a href="file:line">file:line</a> and terminate the process.  <br /></td></tr>
 <tr class="separator:a32be982f3e299af7e5c574f80bc2c80c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79bcfb6bde984f42d1124b068a509af7" id="r_a79bcfb6bde984f42d1124b068a509af7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a79bcfb6bde984f42d1124b068a509af7">BASE</a>&#160;&#160;&#160;&quot;/run/sprint1&quot;</td></tr>
-<tr class="memdesc:a79bcfb6bde984f42d1124b068a509af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime directory for named FIFOs (shared with servo_calib).  <br /></td></tr>
+<tr class="memdesc:a79bcfb6bde984f42d1124b068a509af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime directory for named FIFOs (shared with <code>build/driver</code>).  <br /></td></tr>
 <tr class="separator:a79bcfb6bde984f42d1124b068a509af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bef62b865844dee2f4b233c3a8106a6" id="r_a4bef62b865844dee2f4b233c3a8106a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a4bef62b865844dee2f4b233c3a8106a6">CMD_PIPE</a>&#160;&#160;&#160;&quot;/run/sprint1/data_pipe&quot;</td></tr>
-<tr class="memdesc:a4bef62b865844dee2f4b233c3a8106a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command FIFO: clients write, servo_calib reads.  <br /></td></tr>
+<tr class="memdesc:a4bef62b865844dee2f4b233c3a8106a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command FIFO: clients write, <code>build/driver</code> reads.  <br /></td></tr>
 <tr class="separator:a4bef62b865844dee2f4b233c3a8106a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35547b35e98a74c8879cf6c360388139" id="r_a35547b35e98a74c8879cf6c360388139"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a35547b35e98a74c8879cf6c360388139">POS_PIPE</a>&#160;&#160;&#160;&quot;/run/sprint1/pos_pipe&quot;</td></tr>
-<tr class="memdesc:a35547b35e98a74c8879cf6c360388139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position FIFO: servo_calib writes after CMD_GETPOS.  <br /></td></tr>
+<tr class="memdesc:a35547b35e98a74c8879cf6c360388139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position FIFO: <code>build/driver</code> writes after CMD_GETPOS.  <br /></td></tr>
 <tr class="separator:a35547b35e98a74c8879cf6c360388139"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab86b8648d7d34030b9344b376894d377" id="r_ab86b8648d7d34030b9344b376894d377"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#ab86b8648d7d34030b9344b376894d377">PRM_FILE</a>&#160;&#160;&#160;&quot;/var/lib/sprint1/saved.prm&quot;</td></tr>
 <tr class="memdesc:ab86b8648d7d34030b9344b376894d377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan window file: three integers <code>start stop prep</code>.  <br /></td></tr>
@@ -163,7 +163,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Runtime directory for named FIFOs (shared with servo_calib). </p>
+<p>Runtime directory for named FIFOs (shared with <code>build/driver</code>). </p>
 
 <p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00036">36</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
@@ -181,7 +181,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Command FIFO: clients write, servo_calib reads. </p>
+<p>Command FIFO: clients write, <code>build/driver</code> reads. </p>
 
 <p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00039">39</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
@@ -288,7 +288,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Position FIFO: servo_calib writes after CMD_GETPOS. </p>
+<p>Position FIFO: <code>build/driver</code> writes after CMD_GETPOS. </p>
 
 <p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00042">42</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 

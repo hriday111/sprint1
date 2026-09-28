@@ -22,5 +22,5 @@ var searchData=
   ['mouse_19',['mouse',['../structui__t.html#a36832310da0950d58ed61bf21112e037',1,'ui_t']]],
   ['moving_20the_20lens_20',['Recalibrate chip marks after moving the lens',['../recalibrate.html',1,'']]],
   ['ms_5fsleep_21',['ms_sleep',['../utils_8c.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c'],['../utils_8h.html#a470bb66110f905195b035cd40a0ffb28',1,'ms_sleep(unsigned int milli):&#160;utils.c']]],
-  ['must_20recalibrate_22',['If you must recalibrate',['../index.html#autotoc_md13',1,'']]]
+  ['must_20recalibrate_22',['If you must recalibrate',['../index.html#autotoc_md9',1,'']]]
 ];

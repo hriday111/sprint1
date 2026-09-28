@@ -94,150 +94,78 @@ $(document).ready(function(){initNavTree('camera_sdk.html',''); initResizable();
   <div class="headertitle"><div class="title">camera-sdk</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Library and tools for the Thorlabs DCC1545M (IDS uEye): capture a fixed mono8 crop, use elliptical disc-mark ROIs, optionally rebuild a two-point interpolation model, and run the interactive intensity sweep. Clients drive the prism motor through FIFOs owned by <code>servo_calib</code> (see the <a class="el" href="README_8md.html">project README</a>).</p>
+<div class="textblock"><p>Thorlabs DCC1545M (IDS uEye) tools: mono8 crop, elliptical ROIs, optional two-point interpolation, and an interactive intensity sweep. Motion/illumination go through FIFOs owned by <code>./build/driver</code> (see <a class="el" href="README_8md.html">project README</a>).</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 Getting started</h1>
-<p><b>Calibration is already complete</b> for the current optics. Day-to-day use:</p>
-<ol type="1">
-<li>Start the driver: <code>sudo ./build/servo_calib</code> (from the repo root).</li>
-<li>Run main measurements: <code>./camera-sdk/build/bin/sweep_run</code>.</li>
-</ol>
+<p><b>Calibration is already done.</b> Day-to-day:</p>
 <div class="fragment"><div class="line"># Terminal 1 (repo root)</div>
-<div class="line">sudo ./build/servo_calib</div>
+<div class="line">sudo ./build/driver</div>
 <div class="line"> </div>
 <div class="line"># Terminal 2</div>
-<div class="line">cd camera-sdk</div>
-<div class="line">make</div>
+<div class="line">cd camera-sdk &amp;&amp; make</div>
 <div class="line">./build/bin/sweep_run</div>
-</div><!-- fragment --><p><code>sweep_run</code> presents a TUI: assign diseases D1–D10 to blob 1 and blob 2, then Start/Reset the scan. Quitting leaves <code>servo_calib</code> running.</p>
-<h2><a class="anchor" id="autotoc_md1"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1"></a>
 Recalibration (only if needed)</h2>
-<p>If a lens move invalidates ROIs and a single <code>calibrate</code> / <code>calibrate2</code> pass fails, try <b>several exposures</b> and keep the best <code>tmp/detected_*.png</code>:</p>
 <div class="fragment"><div class="line">./build/bin/calibrate2 0.20 400 420</div>
 <div class="line">./build/bin/calibrate2 0.14 400 420</div>
 <div class="line">./build/bin/calibrate2 0.10 400 420</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
-Prerequisites</h1>
-<ul>
-<li>IDS uEye SDK (<code>libueye_api</code>); <code>ueyeusbdrc</code> running; camera USB vendor <code>1409</code></li>
-<li>OpenCV 4 (<code>pkg-config opencv4</code>) for <code>calibrate</code> / <code>calibrate2</code> only</li>
-<li><code>servo_calib</code> running for laser/motion</li>
-<li>Writable <code>/var/lib/sprint1/</code>, <code>./tmp/</code>, and <code>logs/</code></li>
-</ul>
-<p><b>Install:</b></p>
-<div class="fragment"><div class="line"># OpenCV from apt</div>
-<div class="line">sudo apt-get install -y libopencv-dev</div>
-<div class="line"> </div>
-<div class="line"># IDS uEye + udev from vendored debs (repo root)</div>
-<div class="line">sudo dpkg -i vendor/debs/ueye/*.deb</div>
-<div class="line">sudo apt-get install -y -f</div>
-<div class="line">sudo udevadm control --reload-rules &amp;&amp; sudo udevadm trigger</div>
-<div class="line">sudo systemctl enable --now ueyeusbdrc</div>
-</div><!-- fragment --><p>Full project prerequisites (including WiringPi): <a href="../README.md#prerequisites">README.md</a>.</p>
+</div><!-- fragment --><p>See <a class="el" href="RECALIBRATE_8md.html">app/RECALIBRATE.md</a>.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Layout</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Path   </th><th class="markdownTableHeadNone">Role    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>app/</code>   </td><td class="markdownTableBodyNone"><code>sweep_run</code>, <code>sweep_tui</code>, <code>calibrate</code>, <code>calibrate2</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>vision/</code>   </td><td class="markdownTableBodyNone"><code>roi</code>, <code>roi_interp</code>, <code>detect</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>thorlabs-dcc1545m/</code>   </td><td class="markdownTableBodyNone">uEye backend implementing <code><a class="el" href="cam__api_8h.html" title="Camera driver abstraction (vtable selected at link time via Makefile).">cam_api.h</a></code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>../ipc/ipc_client.*</code>   </td><td class="markdownTableBodyNone">FIFO client (<code>fifo_*</code>)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>../logging/</code>   </td><td class="markdownTableBodyNone">Shared logger / crash hooks   </td></tr>
+</table>
 <h1><a class="anchor" id="autotoc_md3"></a>
-What it does</h1>
+Prerequisites</h1>
+<div class="fragment"><div class="line">sudo apt-get install -y libopencv-dev</div>
+<div class="line">sudo dpkg -i ../vendor/debs/ueye/*.deb &amp;&amp; sudo apt-get install -y -f</div>
+<div class="line">sudo systemctl enable --now ueyeusbdrc</div>
+</div><!-- fragment --><p>Driver must be running for laser/motion. Full install notes: <a href="../README.md#prerequisites">../README.md</a>.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+APIs (short)</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Module   </th><th class="markdownTableHeadNone">Responsibility    </th></tr>
+<th class="markdownTableHeadNone">Area   </th><th class="markdownTableHeadNone">Entry points    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code><a class="el" href="cam_8c.html" title="IDS uEye camera backend: open/close, exposure, cropped grab + vtable.">cam.c</a></code> / <code><a class="el" href="cam_8h.html" title="IDS uEye / Thorlabs DCC1545M backend (private to this directory).">cam.h</a></code>   </td><td class="markdownTableBodyNone">Open uEye, set exposure, grab cropped mono8    </td></tr>
+<td class="markdownTableBodyNone">Camera   </td><td class="markdownTableBodyNone"><code>camera_api.open/close/set_exposure_ms/grab</code> (<code><a class="el" href="cam__api_8h.html" title="Camera driver abstraction (vtable selected at link time via Makefile).">cam_api.h</a></code>)    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code><a class="el" href="roi_8c.html" title="Elliptical blob ROI JSON parsing, clipping, means, saturation, and PGM export.">roi.c</a></code> / <code><a class="el" href="roi_8h.html" title="Elliptical blob ROIs, JSON I/O, and intensity statistics.">roi.h</a></code>   </td><td class="markdownTableBodyNone">Ellipse JSON blobs, mask means, saturation, PGM    </td></tr>
+<td class="markdownTableBodyNone">ROI   </td><td class="markdownTableBodyNone"><code>roi_load_json</code>, <code>roi_means</code>, <code>roi_sat_frac</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>roi_interp.*</code>   </td><td class="markdownTableBodyNone">Two-point lerp of ellipse geometry vs servo step    </td></tr>
+<td class="markdownTableBodyNone">Interp   </td><td class="markdownTableBodyNone"><code>roi_interp_at/save/load</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>servo_fifo.*</code>   </td><td class="markdownTableBodyNone">Shared command/position FIFO client (incl. enable)    </td></tr>
+<td class="markdownTableBodyNone">FIFO   </td><td class="markdownTableBodyNone"><code>fifo_open</code>, <code>fifo_send</code>, <code>fifo_move_and_wait</code>, <code>fifo_illum_on</code>, <code>fifo_close</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code><a class="el" href="detect_8cpp.html" title="Disc-mark detector for calibrate.">detect.cpp</a></code>   </td><td class="markdownTableBodyNone">Find dark discs; emit elliptical blob ROIs    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>calibrate</code>   </td><td class="markdownTableBodyNone">One-shot detect → <code>rois.json</code> + overlays    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>calibrate2</code>   </td><td class="markdownTableBodyNone">Detect at pos0 &amp; pos1 → interp model + check CSV    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>sweep_run</code> + <code>sweep_tui</code>   </td><td class="markdownTableBodyNone">Interactive disease TUI + intensity sweep → CSV    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>../logger.c</code>, <code>../crash.c</code>   </td><td class="markdownTableBodyNone">Shared logging + crash/core-dump hooks   </td></tr>
+<td class="markdownTableBodyNone">Detect   </td><td class="markdownTableBodyNone"><code>detect_boxes_cv</code>, <code>frame_mat</code>   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md4"></a>
-Camera crop</h2>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Macro   </th><th class="markdownTableHeadNone">Value    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>CAM_CROP_X</code>   </td><td class="markdownTableBodyNone">350    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>CAM_CROP_Y</code>   </td><td class="markdownTableBodyNone">60    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>CAM_CROP_W</code>   </td><td class="markdownTableBodyNone">600    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>CAM_CROP_H</code>   </td><td class="markdownTableBodyNone">740   </td></tr>
-</table>
-<p>Index pixels as <code>pixels[y * pitch + x]</code> (full-sensor pitch).</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
-Camera API</h2>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Function   </th><th class="markdownTableHeadNone">Returns    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>cam_open</code> / <code>cam_close</code>   </td><td class="markdownTableBodyNone"><code>0</code> / <code>-1</code> or void    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>cam_set_exposure_ms</code> / <code>cam_get_exposure_ms</code>   </td><td class="markdownTableBodyNone"><code>0</code> / <code>-1</code>    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>cam_grab</code>   </td><td class="markdownTableBodyNone"><code>0</code> / <code>-1</code> (cropped view, no copy)   </td></tr>
-</table>
-<h2><a class="anchor" id="autotoc_md6"></a>
-ROI / interp / FIFO APIs</h2>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Area   </th><th class="markdownTableHeadNone">Key symbols    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ROI   </td><td class="markdownTableBodyNone"><code>roi_load_json</code>, <code>roi_save_json</code>, <code>roi_means</code>, <code>roi_sat_frac</code>, <code>roi_sync_aabb</code>    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Interp   </td><td class="markdownTableBodyNone"><code>roi_interp_at</code>, <code>roi_interp_save</code>, <code>roi_interp_load</code> (<code>ROI_INTERP_PATH</code>)    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">FIFO   </td><td class="markdownTableBodyNone"><code>servo_fifo_open</code>, <code>servo_fifo_send</code>, <code>servo_fifo_move_and_wait</code>, <code>servo_fifo_enable</code>, <code>servo_fifo_close</code>, <code>servo_fifo_shutdown</code>    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Detect   </td><td class="markdownTableBodyNone"><code>detect_boxes_cv</code>, <code>frame_mat</code>    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">TUI   </td><td class="markdownTableBodyNone"><code>sweep_tui_run</code>, <code><a class="el" href="structdisease__assign__t.html" title="Disease ids are 1..SWEEP_DISEASE_COUNT; 0 means unset.">disease_assign_t</a></code>, status helpers   </td></tr>
-</table>
-<p><code>rois.json</code> uses <code>{name,cx,cy,rx,ry,angle}</code> (legacy <code>{x,y,w,h}</code> still loads).</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<p>Crop (sensor coords): <code>CAM_CROP_*</code> = 600×740 at (350, 60).</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Tool CLI</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Tool   </th><th class="markdownTableHeadNone">Args (defaults)   </th><th class="markdownTableHeadNone">Notes    </th></tr>
+<th class="markdownTableHeadNone">Tool   </th><th class="markdownTableHeadNone">Notes    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>sweep_run</code>   </td><td class="markdownTableBodyNone"><code>[rois.json] [exposure_ms=0.1] [out.csv=../sensor_data.csv]</code>   </td><td class="markdownTableBodyNone">Main measurements; TUI; leaves daemon running    </td></tr>
+<td class="markdownTableBodyNone"><code>sweep_run</code>   </td><td class="markdownTableBodyNone">Main measurements; disease TUI; leaves driver running    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>calibrate</code>   </td><td class="markdownTableBodyNone"><code>[exposure_ms=0.1] [n_blobs=3] [roi_path]</code>   </td><td class="markdownTableBodyNone">Single-pose ROIs    </td></tr>
+<td class="markdownTableBodyNone"><code>calibrate</code>   </td><td class="markdownTableBodyNone">Single-pose → <code>rois.json</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>calibrate2</code>   </td><td class="markdownTableBodyNone"><code>[exposure_ms=0.1] [pos0=400] [pos1=420] [n_blobs=3] …</code>   </td><td class="markdownTableBodyNone">Two-point model; try <b>0.20 / 0.14 / 0.10</b> if detection fails   </td></tr>
+<td class="markdownTableBodyNone"><code>calibrate2</code>   </td><td class="markdownTableBodyNone">Two poses → <code>rois_interp.json</code>; try exposures <b>0.20 / 0.14 / 0.10</b>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md8"></a>
-Detection design</h1>
-<p>Measurement never re-runs OpenCV mid-sweep. Recalibrate only after optical changes — see <a class="el" href="RECALIBRATE_8md.html">RECALIBRATE.md</a>.</p>
-<h1><a class="anchor" id="autotoc_md9"></a>
-Common pitfalls</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Symptom   </th><th class="markdownTableHeadNone">Resolution    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>no reader</code>   </td><td class="markdownTableBodyNone">Start <code>./build/servo_calib</code> first    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Bad / missing marks   </td><td class="markdownTableBodyNone"><code>calibrate2</code> at 0.20, 0.14, then 0.10; compare overlays    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Saturation   </td><td class="markdownTableBodyNone">Lower exposure or laser <code>bN</code>    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>EPIPE</code>   </td><td class="markdownTableBodyNone">Keep one command FIFO write fd open   </td></tr>
-</table>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Build</h1>
-<div class="fragment"><div class="line">make          # sweep_run, calibrate, calibrate2 → build/bin/</div>
-<div class="line">make clean</div>
-</div><!-- fragment --><blockquote class="doxtable">
-<p>&zwj;<b>Verify on hardware:</b> crop constants, <code>/var/lib/sprint1/</code> paths, uEye exposure API. </p>
-</blockquote>
+<div class="fragment"><div class="line">make                          # from repo root: make camera</div>
+<div class="line"># or: make CAMERA=ueye</div>
+</div><!-- fragment --><p>Architecture diagrams: <a href="../docs/architecture.puml">../docs/architecture.puml</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
