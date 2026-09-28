@@ -15,8 +15,8 @@
  * (for example 0.20, 0.14, and 0.10) and keep the run whose
  * @c tmp/detected_*.png overlays look best.
  *
- * Does not stop @c servo_calib (FIFO closed without sending -1).
- * Day-to-day measurements use @c servo_calib + @c sweep_run; recalibrate only
+ * Does not stop @c build/driver (FIFO closed without sending -1).
+ * Day-to-day measurements use @c build/driver + @c sweep_run; recalibrate only
  * after optical changes (ROI calibration is normally already done).
  */
 

@@ -1,0 +1,143 @@
+@startuml architecture
+!theme plain
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+title Sprint1 — components and FIFO IPC
+
+package "Host processes" {
+  component "build/driver\n(device façade)" as Driver
+  component "camera-sdk\nsweep_run / calibrate*" as CamTools
+}
+
+package "Driver internals" {
+  component "device.c" as Device
+  component "ipc_server" as IpcSrv
+  component "motor_api\n(A4988 | SG-90)" as Motor
+  component "illumination_api\n(Laser | LED)" as Illum
+}
+
+package "Camera-sdk internals" {
+  component "ipc_client\n(fifo_*)" as IpcCli
+  component "cam_api\n(thorlabs-dcc1545m)" as Cam
+  component "vision\n(roi / detect / interp)" as Vision
+  component "app TUI\n(sweep_tui)" as Tui
+}
+
+cloud "Named FIFOs\n/run/sprint1/" as Fifos {
+  [data_pipe\nclient → driver] as DataPipe
+  [pos_pipe\ndriver → client] as PosPipe
+}
+
+node "Hardware" as HW {
+  [A4988 / SG-90] as MotHw
+  [Laser / LED PWM] as IllHw
+  [Endstop GPIO17] as Endstop
+  [Thorlabs DCC1545M\nuEye USB] as Ueye
+}
+
+CamTools --> IpcCli
+CamTools --> Cam
+CamTools --> Vision
+CamTools --> Tui
+IpcCli --> DataPipe : commands\\n(goto, bN, 1001, 4000, …)
+DataPipe --> IpcSrv
+IpcSrv --> PosPipe : position after 4000
+PosPipe --> IpcCli
+
+Driver --> Device
+Device --> IpcSrv
+Device --> Motor
+Device --> Illum
+Motor --> MotHw
+Motor --> Endstop
+Illum --> IllHw
+Cam --> Ueye
+
+note right of Driver
+  make MOTOR=a4988|sg90
+  make ILLUMINATION=laser|led
+  Binary: ./build/driver
+end note
+
+note right of CamTools
+  make CAMERA=ueye
+  Binaries under
+  camera-sdk/build/bin/
+end note
+
+@enduml
+
+@startuml sweep_sequence
+!theme plain
+skinparam shadowing false
+title Sweep measurement sequence (happy path)
+
+actor Operator
+participant "sweep_run\n(+ TUI)" as Sweep
+participant "ipc_client" as Cli
+participant "build/driver\nipc_server" as Drv
+participant "motor_api" as Mot
+participant "illumination_api" as Ill
+participant "camera_api" as Cam
+participant "vision/roi" as Roi
+database "CSV +\nrois.json" as Files
+
+Operator -> Sweep : assign D1–D10, Start
+Sweep -> Cli : fifo_open()
+Cli -> Drv : open data_pipe (O_WRONLY)
+Sweep -> Cam : open + set_exposure
+Sweep -> Files : load rois.json / saved.prm
+
+loop each step start..stop
+  Sweep -> Cli : fifo_move_and_wait(pos)
+  Cli -> Drv : "<pos>\\n"
+  Drv -> Mot : go_to / queued steps
+  Cli -> Drv : "4000\\n"
+  Drv --> Cli : pos on pos_pipe
+  Sweep -> Cam : grab crop
+  Sweep -> Roi : roi_means(ellipse masks)
+  Sweep -> Files : append CSV row
+end
+
+Sweep -> Cli : fifo_close() (no -1)
+note over Drv : driver keeps running
+Operator -> Sweep : Quit
+
+@enduml
+
+@startuml build_variants
+!theme plain
+skinparam shadowing false
+title Build-time backend selection
+
+rectangle "Root Makefile" as Root {
+  (MOTOR=a4988) as Ma
+  (MOTOR=sg90) as Ms
+  (ILLUMINATION=laser) as Il
+  (ILLUMINATION=led) as Ie
+  (build/driver) as Bin
+}
+
+rectangle "camera-sdk Makefile" as CamMk {
+  (CAMERA=ueye) as Cu
+  (sweep_run) as Sr
+  (calibrate) as C1
+  (calibrate2) as C2
+}
+
+Ma --> Bin
+Ms --> Bin
+Il --> Bin
+Ie --> Bin
+Cu --> Sr
+Cu --> C1
+Cu --> C2
+Root -[hidden]-> CamMk
+
+note bottom of Bin
+  device_open() homes motor,
+  parks at prep, serve_fifo()
+end note
+
+@enduml

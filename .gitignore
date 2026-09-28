@@ -62,7 +62,11 @@ core
 core.*
 *.core
 
-docs/*
+# Doxygen output (keep .puml / .svg diagrams tracked)
+docs/html/
+docs/latex/
+docs/doxygen_warnings.log
+
 build/*
 camera-sdk/logs/*
 logs/*

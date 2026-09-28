@@ -32,13 +32,13 @@
     exit(EXIT_FAILURE);                                                        \
   } while (0)
 
-/** Runtime directory for named FIFOs (shared with servo_calib). */
+/** Runtime directory for named FIFOs (shared with @c build/driver). */
 #define BASE "/run/sprint1"
 
-/** Command FIFO: clients write, servo_calib reads. */
+/** Command FIFO: clients write, @c build/driver reads. */
 #define CMD_PIPE "/run/sprint1/data_pipe"
 
-/** Position FIFO: servo_calib writes after CMD_GETPOS. */
+/** Position FIFO: @c build/driver writes after CMD_GETPOS. */
 #define POS_PIPE "/run/sprint1/pos_pipe"
 
 /** Scan window file: three integers `start stop prep`. */

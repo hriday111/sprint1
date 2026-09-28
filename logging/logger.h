@@ -3,7 +3,7 @@
 
 /**
  * @file logger.h
- * @brief Thread-safe console/file logger used by @c servo_calib and camera-sdk.
+ * @brief Thread-safe console/file logger used by @c build/driver and camera-sdk.
  *
  * Prefer the @c LOG_* macros. Initialize with @c sprint1_logging_init (see crash.h)
  * or call @c logger_initFileLogger / @c logger_initConsoleLogger directly.

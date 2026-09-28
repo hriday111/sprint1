@@ -47,7 +47,7 @@ device_t *device_open(void)
     if (!device)
         return NULL;
 
-    if (sprint1_logging_init("servo_calib", NULL, 0) != 0) {
+    if (sprint1_logging_init("driver", NULL, 0) != 0) {
         free(device);
         return NULL;
     }

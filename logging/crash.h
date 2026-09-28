@@ -22,7 +22,7 @@ void crash_setup(void);
  * @brief Create @c logs/, open a dated log file, set DEBUG, enable crash dumps.
  *
  * Log path pattern: logs/APP-EPOCH.log (APP from @p app_name, EPOCH = unix time).
- * @param app_name Short name used in the log filename (e.g. @c servo_calib).
+ * @param app_name Short name used in the log filename (e.g. @c driver).
  * @param path_out Optional buffer for the chosen log path.
  * @param path_sz Size of @p path_out.
  * @return 0 on success, -1 on failure.

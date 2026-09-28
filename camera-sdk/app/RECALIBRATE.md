@@ -1,6 +1,6 @@
 # Recalibrate chip marks after moving the lens {#recalibrate}
 
-**Day-to-day:** calibration is already done. Start `./build/servo_calib`, then run `./camera-sdk/build/bin/sweep_run` for measurements.
+**Day-to-day:** calibration is already done. Start `./build/driver`, then run `./camera-sdk/build/bin/sweep_run`.
 
 The intensity sweep does **not** re-detect discs; it averages ellipse masks from `rois.json`. Recalibrate only after moving the lens (or remounting optics).
 
@@ -22,4 +22,4 @@ Open `tmp/detected_<pos>.png` (or `tmp/detected.png`). Green ellipses must sit o
 
 Avoid long exposures with a bright laser — clipped discs break detection. Check `logs/calibrate*.log` for saturation and mark-count warnings.
 
-Full API: [README.md](README.md).
+Full camera API: [../README.md](../README.md).

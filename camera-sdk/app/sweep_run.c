@@ -3,11 +3,11 @@
  * @brief Main measurement tool: disease-assignment TUI + intensity sweep.
  *
  * Normal workflow (ROI calibration is already done for the current optics):
- *   1. Start the driver: @c ./build/servo_calib
+ *   1. Start the driver: @c ./build/driver
  *   2. Run this tool: @c ./camera-sdk/build/bin/sweep_run
  *
  * Flow: pick D1–D10 for blob 1 and blob 2 → Start/Reset screen → CSV.
- * Requires @c servo_calib already running.
+ * Requires @c build/driver already running.
  *
  * Usage: @c ./sweep_run [rois.json] [exposure_ms] [out.csv]
  *
@@ -68,7 +68,7 @@ static int do_reset(void *userdata)
 
     if (fifo_move_and_wait(ctx->prep) != 0) {
         sweep_tui_set_error("Could not reset.",
-                            "Is the motor controller (servo_calib) running?");
+                            "Is the motor controller (build/driver) running?");
         return -1;
     }
 
@@ -111,7 +111,7 @@ static int do_sweep(void *userdata)
         LOG_ERROR("move_and_wait(%d) failed", ctx->start);
         fclose(csv);
         sweep_tui_set_error("Could not move into place.",
-                            "Check that servo_calib is running.");
+                            "Check that build/driver is running.");
         return -1;
     }
 

@@ -58,7 +58,7 @@ int fifo_open(void)
         usleep(50000);
     }
     if (g_cmd_fd < 0) {
-        LOG_ERROR("%s: no reader (is servo_calib running?)", CMD_PIPE);
+        LOG_ERROR("%s: no reader (is build/driver running?)", CMD_PIPE);
         return -1;
     }
     if (g_pos_fd < 0) {
