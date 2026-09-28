@@ -14,14 +14,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Doxygen
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install Doxygen + Graphviz
         run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
+
+      - name: Download PlantUML
+        run: |
+          curl -fsSL -o /tmp/plantuml.jar \
+            https://github.com/plantuml/plantuml/releases/download/v1.2024.7/plantuml-1.2024.7.jar
+
+      # Render from .puml into docs/ (no commit back to main — avoids racing local pushes)
+      - name: Render PlantUML diagrams
+        run: java -jar /tmp/plantuml.jar -tsvg docs/*.puml
 
       - name: Generate Documentation
         run: doxygen Doxyfile
 
-      # IMAGE_PATH=docs makes Doxygen rewrite README images to architecture.svg etc.
-      # Copy explicitly so Pages still works if a Doxygen version skips the copy.
       - name: Include architecture diagrams
         run: cp -v docs/*.svg docs/html/
 
