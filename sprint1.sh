@@ -23,7 +23,7 @@ case "$1" in
         
     run)
         echo "Running sprint1 and homeing stepper"
-        
+                                                                                                                
         sudo -v 
     
         sudo ./build/driver > /dev/null 2>&1 &
