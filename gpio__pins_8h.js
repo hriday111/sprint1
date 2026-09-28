@@ -2,6 +2,7 @@ var gpio__pins_8h =
 [
     [ "LASER_PWM_CLOCK", "gpio__pins_8h.html#ae9ab529fe5cfcf2b1b3357d1e48ea23d", null ],
     [ "LASER_PWM_RANGE", "gpio__pins_8h.html#ace0e5c8f032bcf10fac57d352dbcb15b", null ],
+    [ "LED_PWM_RANGE", "gpio__pins_8h.html#ac381d82b0e05993af7f9c83df6acd547", null ],
     [ "PIN_DIR", "gpio__pins_8h.html#ad863d37df885f2008e345bacdc255135", null ],
     [ "PIN_ENABLE", "gpio__pins_8h.html#ae680761fa74600f1c60c1f0282591896", null ],
     [ "PIN_ENDSTOP", "gpio__pins_8h.html#a0fce84a9f1cb9f2cbcfdce129dae6baf", null ],

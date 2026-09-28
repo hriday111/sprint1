@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zero_0',['zero',['../structstepper__t.html#ab1753f5ff4e31126d1e72406e7548611',1,'stepper_t']]]
+  ['zero_0',['zero',['../structmotor.html#a3dce15f50c7c07b2e744b1db0cbcd80d',1,'motor']]]
 ];

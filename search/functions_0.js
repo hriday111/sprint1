@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['account_5fstep_0',['account_step',['../stepper_8c.html#a8d313addde1590af20a0c68cbe59d08b',1,'stepper.c']]],
-  ['accum_5fblob_1',['accum_blob',['../roi_8c.html#a88010e419ea2d8dc860919a4371178ed',1,'roi.c']]],
-  ['assignments_5fready_2',['assignments_ready',['../sweep__tui_8c.html#a1452c54bcf1fae99309832fe2832aa64',1,'sweep_tui.c']]]
+  ['_5fui_5ftext_0',['_ui_text',['../tuibox_8h.html#a445d62be6aeeed10b8ce2f9fedadf9df',1,'tuibox.h']]],
+  ['_5fui_5ftext_5fwrap_1',['_ui_text_wrap',['../tuibox_8h.html#a799562f50de106e7bbcbbb6e80243565',1,'tuibox.h']]],
+  ['_5fui_5fupdate_2',['_ui_update',['../tuibox_8h.html#a438c50e5e4e223447932bd21e06ef886',1,'tuibox.h']]]
 ];

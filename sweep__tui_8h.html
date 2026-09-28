@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: camera-sdk/sweep_tui.h File Reference</title>
+<title>Sprint1: camera-sdk/app/sweep_tui.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -144,7 +144,7 @@ Functions</h2></td></tr>
 <div class="textblock"><p>tuibox UI for disease assignment + Start/Reset sweep controls. </p>
 <p>Used by the main measurement binary <code>sweep_run</code> after <code>servo_calib</code> is up.</p>
 <p>Screen 0: pick D1–D10 for blob 1, then blob 2 (left list). Screen 1: Start / Reset / progress; footer shows Blob → disease.</p>
-<p>Note: do not include tuibox.h here — it is a header-only library and must be compiled into exactly one translation unit (<code><a class="el" href="sweep__tui_8c.html" title="Disease picker (left) + Start/Reset run screen (tuibox).">sweep_tui.c</a></code>). </p>
+<p>Note: do not include <a class="el" href="tuibox_8h.html">tuibox.h</a> here — it is a header-only library and must be compiled into exactly one translation unit (<code><a class="el" href="sweep__tui_8c.html" title="Disease picker (left) + Start/Reset run screen (tuibox).">sweep_tui.c</a></code>). </p>
 
 <p class="definition">Definition in file <a class="el" href="sweep__tui_8h_source.html">sweep_tui.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -258,7 +258,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00605">605</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00589">build_all()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00059">panel_width()</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00040">tui_t::quit</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00025">ST_ERROR</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
+<p class="reference">References <a class="el" href="tuibox_8h_source.html#l00648">_ui_update()</a>, <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00589">build_all()</a>, <a class="el" href="tuibox_8h_source.html#l00395">ui_t::canscroll</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00059">panel_width()</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00040">tui_t::quit</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00025">ST_ERROR</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>, <a class="el" href="tuibox_8h_source.html#l00615">ui_draw()</a>, <a class="el" href="tuibox_8h_source.html#l00441">ui_free()</a>, <a class="el" href="tuibox_8h_source.html#l00408">ui_new()</a>, <a class="el" href="tuibox_8h_source.html#l00531">ui_refresh_size()</a>, and <a class="el" href="tuibox_8h_source.html#l00390">ui_t::ws</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00183">main()</a>.</p>
 
@@ -441,7 +441,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="sweep__tui_8h.html">sweep_tui.h</a></li>
+    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="dir_e9ddf481a9bfc56f37ab1e84b76feea0.html">app</a></li><li class="navelem"><a class="el" href="sweep__tui_8h.html">sweep_tui.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

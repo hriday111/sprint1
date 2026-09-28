@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: utils.h File Reference</title>
+<title>Sprint1: common/utils.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('utils_8h.html',''); initResizable(); }
 </div><!--header-->
 <div class="contents">
 
-<p>Shared helpers and runtime paths for the servo daemon.  
+<p>Shared macros and output paths for camera-sdk tools.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
@@ -109,56 +109,48 @@ $(document).ready(function(){initNavTree('utils_8h.html',''); initResizable(); }
 <code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &lt;ctype.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="logger_8h_source.html">logger.h</a>&quot;</code><br />
 </div>
 <p><a href="utils_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
-<tr class="separator:a369266c24eacffb87046522897a570d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32be982f3e299af7e5c574f80bc2c80c" id="r_a32be982f3e299af7e5c574f80bc2c80c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a32be982f3e299af7e5c574f80bc2c80c">ERR</a>(source)</td></tr>
-<tr class="memdesc:a32be982f3e299af7e5c574f80bc2c80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print perror + <a href="file:line">file:line</a> and terminate the process.  <br /></td></tr>
+<tr class="memdesc:a32be982f3e299af7e5c574f80bc2c80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log + perror + <a href="file:line">file:line</a> and terminate the process.  <br /></td></tr>
 <tr class="separator:a32be982f3e299af7e5c574f80bc2c80c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79bcfb6bde984f42d1124b068a509af7" id="r_a79bcfb6bde984f42d1124b068a509af7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a79bcfb6bde984f42d1124b068a509af7">BASE</a>&#160;&#160;&#160;&quot;/run/sprint1&quot;</td></tr>
-<tr class="memdesc:a79bcfb6bde984f42d1124b068a509af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime directory for named FIFOs.  <br /></td></tr>
+<tr class="memdesc:a79bcfb6bde984f42d1124b068a509af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime directory for named FIFOs (shared with servo_calib).  <br /></td></tr>
 <tr class="separator:a79bcfb6bde984f42d1124b068a509af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bef62b865844dee2f4b233c3a8106a6" id="r_a4bef62b865844dee2f4b233c3a8106a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a4bef62b865844dee2f4b233c3a8106a6">CMD_PIPE</a>&#160;&#160;&#160;&quot;/run/sprint1/data_pipe&quot;</td></tr>
-<tr class="memdesc:a4bef62b865844dee2f4b233c3a8106a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client writes newline-terminated commands here (servo reads).  <br /></td></tr>
+<tr class="memdesc:a4bef62b865844dee2f4b233c3a8106a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command FIFO: clients write, servo_calib reads.  <br /></td></tr>
 <tr class="separator:a4bef62b865844dee2f4b233c3a8106a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35547b35e98a74c8879cf6c360388139" id="r_a35547b35e98a74c8879cf6c360388139"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a35547b35e98a74c8879cf6c360388139">POS_PIPE</a>&#160;&#160;&#160;&quot;/run/sprint1/pos_pipe&quot;</td></tr>
-<tr class="memdesc:a35547b35e98a74c8879cf6c360388139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Servo writes current position here when commanded with CMD_GETPOS.  <br /></td></tr>
+<tr class="memdesc:a35547b35e98a74c8879cf6c360388139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position FIFO: servo_calib writes after CMD_GETPOS.  <br /></td></tr>
 <tr class="separator:a35547b35e98a74c8879cf6c360388139"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab86b8648d7d34030b9344b376894d377" id="r_ab86b8648d7d34030b9344b376894d377"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#ab86b8648d7d34030b9344b376894d377">PRM_FILE</a>&#160;&#160;&#160;&quot;/var/lib/sprint1/saved.prm&quot;</td></tr>
 <tr class="memdesc:ab86b8648d7d34030b9344b376894d377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan window file: three integers <code>start stop prep</code>.  <br /></td></tr>
 <tr class="separator:ab86b8648d7d34030b9344b376894d377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2446b2861d5e0835cfa469c51be60e78" id="r_a2446b2861d5e0835cfa469c51be60e78"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a2446b2861d5e0835cfa469c51be60e78">DETECTED_OUTPUT</a>&#160;&#160;&#160;&quot;./tmp/detected.png&quot;</td></tr>
+<tr class="memdesc:a2446b2861d5e0835cfa469c51be60e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overlay PNG written by <code>calibrate</code> (green ellipses on the crop).  <br /></td></tr>
+<tr class="separator:a2446b2861d5e0835cfa469c51be60e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fdb493285b5518ce3f78a44149301ec" id="r_a4fdb493285b5518ce3f78a44149301ec"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a4fdb493285b5518ce3f78a44149301ec">GRAB_OUTPUT</a>&#160;&#160;&#160;&quot;./tmp/calib_frame.png&quot;</td></tr>
+<tr class="memdesc:a4fdb493285b5518ce3f78a44149301ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw grayscale crop written by <code>calibrate</code> before detection.  <br /></td></tr>
+<tr class="separator:a4fdb493285b5518ce3f78a44149301ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fe83ac76edc595f6b98cd4a4127aed5" id="r_a8fe83ac76edc595f6b98cd4a4127aed5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a8fe83ac76edc595f6b98cd4a4127aed5">ERROR</a>&#160;&#160;&#160;0.3</td></tr>
+<tr class="memdesc:a8fe83ac76edc595f6b98cd4a4127aed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">By how much to decrease the oval size in rois.  <br /></td></tr>
+<tr class="separator:a8fe83ac76edc595f6b98cd4a4127aed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a470bb66110f905195b035cd40a0ffb28" id="r_a470bb66110f905195b035cd40a0ffb28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a470bb66110f905195b035cd40a0ffb28">ms_sleep</a> (unsigned int milli)</td></tr>
-<tr class="memdesc:a470bb66110f905195b035cd40a0ffb28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep for <code>milli</code> milliseconds using nanosleep.  <br /></td></tr>
+<tr class="memdesc:a470bb66110f905195b035cd40a0ffb28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep for <code>milli</code> milliseconds.  <br /></td></tr>
 <tr class="separator:a470bb66110f905195b035cd40a0ffb28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Shared helpers and runtime paths for the servo daemon. </p>
+<div class="textblock"><p>Shared macros and output paths for camera-sdk tools. </p>
 
 <p class="definition">Definition in file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&#160;</a></span>_GNU_SOURCE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define _GNU_SOURCE</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00010">10</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
-
-</div>
-</div>
 <a id="a79bcfb6bde984f42d1124b068a509af7" name="a79bcfb6bde984f42d1124b068a509af7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a79bcfb6bde984f42d1124b068a509af7">&#9670;&#160;</a></span>BASE</h2>
 
@@ -171,9 +163,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Runtime directory for named FIFOs. </p>
+<p>Runtime directory for named FIFOs (shared with servo_calib). </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00032">32</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00036">36</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -189,9 +181,27 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Client writes newline-terminated commands here (servo reads). </p>
+<p>Command FIFO: clients write, servo_calib reads. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00035">35</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00039">39</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+
+</div>
+</div>
+<a id="a2446b2861d5e0835cfa469c51be60e78" name="a2446b2861d5e0835cfa469c51be60e78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2446b2861d5e0835cfa469c51be60e78">&#9670;&#160;</a></span>DETECTED_OUTPUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DETECTED_OUTPUT&#160;&#160;&#160;&quot;./tmp/detected.png&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overlay PNG written by <code>calibrate</code> (green ellipses on the crop). </p>
+
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00048">48</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -210,18 +220,59 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">  (perror(source), fprintf(stderr, <span class="stringliteral">&quot;%s:%d\n&quot;</span>, __FILE__, __LINE__),             \</div>
-<div class="line">   exit(EXIT_FAILURE))</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keywordflow">do</span> {                                                                         \</div>
+<div class="line">    <span class="keywordtype">int</span> _err_errno = errno;                                                    \</div>
+<div class="line">    perror(source);                                                            \</div>
+<div class="line">    LOG_FATAL(<span class="stringliteral">&quot;%s: %s&quot;</span>, (source), strerror(_err_errno));                       \</div>
+<div class="line">    logger_flush();                                                            \</div>
+<div class="line">    exit(EXIT_FAILURE);                                                        \</div>
+<div class="line">  } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
-<p>Print perror + <a href="file:line">file:line</a> and terminate the process. </p>
+<p>Log + perror + <a href="file:line">file:line</a> and terminate the process. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">source</td><td>Label passed to perror (often a syscall or context string). </td></tr>
+    <tr><td class="paramname">source</td><td>Label passed to perror. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00027">27</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00026">26</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+
+</div>
+</div>
+<a id="a8fe83ac76edc595f6b98cd4a4127aed5" name="a8fe83ac76edc595f6b98cd4a4127aed5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fe83ac76edc595f6b98cd4a4127aed5">&#9670;&#160;</a></span>ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR&#160;&#160;&#160;0.3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>By how much to decrease the oval size in rois. </p>
+
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00054">54</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+
+</div>
+</div>
+<a id="a4fdb493285b5518ce3f78a44149301ec" name="a4fdb493285b5518ce3f78a44149301ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fdb493285b5518ce3f78a44149301ec">&#9670;&#160;</a></span>GRAB_OUTPUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GRAB_OUTPUT&#160;&#160;&#160;&quot;./tmp/calib_frame.png&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Raw grayscale crop written by <code>calibrate</code> before detection. </p>
+
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00051">51</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -237,9 +288,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Servo writes current position here when commanded with CMD_GETPOS. </p>
+<p>Position FIFO: servo_calib writes after CMD_GETPOS. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00038">38</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00042">42</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -257,7 +308,7 @@ Functions</h2></td></tr>
 
 <p>Scan window file: three integers <code>start stop prep</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00041">41</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00045">45</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 
 </div>
 </div>
@@ -278,15 +329,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sleep for <code>milli</code> milliseconds using nanosleep. </p>
-<p>Sleep for <code>milli</code> milliseconds.</p>
-<p>Sleep for <code>milli</code> milliseconds using nanosleep.</p>
-<dl class="section note"><dt>Note</dt><dd>Declared for API symmetry with the root utils; implemented in utils.c.</dd></dl>
 <p>Sleep for <code>milli</code> milliseconds. </p>
+<dl class="section note"><dt>Note</dt><dd>Declared for API symmetry with the root utils; implemented in <a class="el" href="utils_8c.html">utils.c</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="camera-sdk_2utils_8c_source.html#l00011">11</a> of file <a class="el" href="camera-sdk_2utils_8c_source.html">utils.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8c_source.html#l00006">6</a> of file <a class="el" href="utils_8c_source.html">utils.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="main_8c_source.html#l00268">main()</a>, and <a class="el" href="stepper_8c_source.html#l00384">stepperInit()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stepper_8c_source.html#l00348">a4988_init()</a>, and <a class="el" href="device_8c_source.html#l00044">device_open()</a>.</p>
 
 </div>
 </div>
@@ -295,7 +343,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="utils_8h.html">utils.h</a></li>
+    <li class="navelem"><a class="el" href="dir_bdd9a5d540de89e9fe90efdfc6973a4f.html">common</a></li><li class="navelem"><a class="el" href="utils_8h.html">utils.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

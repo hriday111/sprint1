@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('gpio__pins_8h.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 
-<p>BCM GPIO mapping for Raspberry Pi 4 to A4988 driver and laser PWM.  
+<p>BCM GPIO mapping for Raspberry Pi 4 (A4988 motor + illumination).  
 <a href="#details">More...</a></p>
 
 <p><a href="gpio__pins_8h_source.html">Go to the source code of this file.</a></p>
@@ -115,6 +115,8 @@ Macros</h2></td></tr>
 <tr class="memitem:ace0e5c8f032bcf10fac57d352dbcb15b" id="r_ace0e5c8f032bcf10fac57d352dbcb15b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__pins_8h.html#ace0e5c8f032bcf10fac57d352dbcb15b">LASER_PWM_RANGE</a>&#160;&#160;&#160;255</td></tr>
 <tr class="memdesc:ace0e5c8f032bcf10fac57d352dbcb15b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hardware PWM duty range is 0..LASER_PWM_RANGE.  <br /></td></tr>
 <tr class="separator:ace0e5c8f032bcf10fac57d352dbcb15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac381d82b0e05993af7f9c83df6acd547" id="r_ac381d82b0e05993af7f9c83df6acd547"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__pins_8h.html#ac381d82b0e05993af7f9c83df6acd547">LED_PWM_RANGE</a>&#160;&#160;&#160;255</td></tr>
+<tr class="separator:ac381d82b0e05993af7f9c83df6acd547"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9ab529fe5cfcf2b1b3357d1e48ea23d" id="r_ae9ab529fe5cfcf2b1b3357d1e48ea23d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__pins_8h.html#ae9ab529fe5cfcf2b1b3357d1e48ea23d">LASER_PWM_CLOCK</a>&#160;&#160;&#160;32</td></tr>
 <tr class="separator:ae9ab529fe5cfcf2b1b3357d1e48ea23d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a443ade7b0d7bb6d9bd45c9673154e60b" id="r_a443ade7b0d7bb6d9bd45c9673154e60b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gpio__pins_8h.html#a443ade7b0d7bb6d9bd45c9673154e60b">PIN_MS1</a>&#160;&#160;&#160;13</td></tr>
@@ -133,11 +135,11 @@ Macros</h2></td></tr>
 <tr class="separator:a6a7fc431b66cb2895788f91d5fa329fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>BCM GPIO mapping for Raspberry Pi 4 to A4988 driver and laser PWM. </p>
+<div class="textblock"><p>BCM GPIO mapping for Raspberry Pi 4 (A4988 motor + illumination). </p>
 <p>Wiring summary:</p><ul>
 <li>ENABLE is active LOW (motor powered when pin is LOW).</li>
 <li>Microstepping MS1/MS2/MS3 all HIGH selects 1/16 step.</li>
-<li>PIN_LASER uses hardware PWM on BCM 18 (PWM0).</li>
+<li>PIN_LASER is for illumination backends (Laser/ / Led/), not the motor API.</li>
 <li>PIN_ENDSTOP is active HIGH when the switch is pressed.</li>
 </ul>
 <p>Change these values to match your board before running on hardware. </p>
@@ -156,7 +158,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00027">27</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00028">28</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
 
 </div>
 </div>
@@ -176,6 +178,22 @@ Macros</h2></td></tr>
 <p>Approximate frequency: 19.2 MHz / LASER_PWM_CLOCK / LASER_PWM_RANGE (~2.35 kHz). </p>
 
 <p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00026">26</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
+
+</div>
+</div>
+<a id="ac381d82b0e05993af7f9c83df6acd547" name="ac381d82b0e05993af7f9c83df6acd547"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac381d82b0e05993af7f9c83df6acd547">&#9670;&#160;</a></span>LED_PWM_RANGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LED_PWM_RANGE&#160;&#160;&#160;255</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00027">27</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
 
 </div>
 </div>
@@ -223,7 +241,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00032">32</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00033">33</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
 
 </div>
 </div>
@@ -257,7 +275,7 @@ Macros</h2></td></tr>
 
 <p>BCM pin for a lid switch, or -1 if unused. </p>
 
-<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00035">35</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00036">36</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
 
 </div>
 </div>
@@ -273,7 +291,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00029">29</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00030">30</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
 
 </div>
 </div>
@@ -289,7 +307,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00030">30</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00031">31</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
 
 </div>
 </div>
@@ -305,7 +323,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00031">31</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00032">32</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
 
 </div>
 </div>
@@ -339,7 +357,7 @@ Macros</h2></td></tr>
 
 <p>Half-period delay per STEP edge, in microseconds (full pulse = 2x this). </p>
 
-<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00038">38</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gpio__pins_8h_source.html#l00039">39</a> of file <a class="el" href="gpio__pins_8h_source.html">gpio_pins.h</a>.</p>
 
 </div>
 </div>

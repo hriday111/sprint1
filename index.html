@@ -120,7 +120,7 @@ If you must recalibrate</h2>
 <div class="line">./build/bin/calibrate2 0.20 400 420</div>
 <div class="line">./build/bin/calibrate2 0.14 400 420</div>
 <div class="line">./build/bin/calibrate2 0.10 400 420</div>
-</div><!-- fragment --><p>Green ellipses must sit on the three dark discs. Avoid long exposures with a bright laser — clipped discs break detection. See <a class="el" href="RECALIBRATE_8md.html">camera-sdk/RECALIBRATE.md</a>.</p>
+</div><!-- fragment --><p>Green ellipses must sit on the three dark discs. Avoid long exposures with a bright laser — clipped discs break detection. See camera-sdk/RECALIBRATE.md.</p>
 <h1><a class="anchor" id="autotoc_md14"></a>
 Prerequisites</h1>
 <p>Hardware: Raspberry Pi 4, WiringPi, root (or GPIO) for <code>servo_calib</code> (PWM on BCM 18), and the pinout below. Shared paths: <code>/run/sprint1/</code>, <code>/var/lib/sprint1/</code>, and a writable <code>logs/</code> in the process cwd.</p>
@@ -193,8 +193,7 @@ Logging and crashes</h1>
 <p>On SIGSEGV/SIGABRT/SIGBUS/SIGFPE/SIGILL/SIGQUIT/SIGSYS/SIGTRAP, the process logs where the core dump is expected (from <code>/proc/sys/kernel/core_pattern</code>), flushes, then re-raises for a kernel dump.</p>
 <h1><a class="anchor" id="autotoc_md18"></a>
 Pinout</h1>
-<p>BCM pins are defined in <code><a class="el" href="gpio__pins_8h.html" title="BCM GPIO mapping for Raspberry Pi 4 to A4988 driver and laser PWM.">gpio_pins.h</a></code>. Enable is active LOW; endstop is active HIGH; laser uses hardware PWM on GPIO 18.</p>
-<p><img src="circuit_image.png" alt="Wiring diagram" class="inline"/></p>
+<p>BCM pins are defined in <code><a class="el" href="gpio__pins_8h.html" title="BCM GPIO mapping for Raspberry Pi 4 (A4988 motor + illumination).">gpio_pins.h</a></code>. Enable is active LOW; endstop is active HIGH; laser uses hardware PWM on GPIO 18.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Signal   </th><th class="markdownTableHeadNone">GPIO   </th><th class="markdownTableHeadNone">Typical wire    </th></tr>

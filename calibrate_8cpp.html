@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: camera-sdk/calibrate.cpp File Reference</title>
+<title>Sprint1: camera-sdk/app/calibrate.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -108,11 +108,12 @@ $(document).ready(function(){initNavTree('calibrate_8cpp.html',''); initResizabl
 <code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &lt;opencv2/imgcodecs.hpp&gt;</code><br />
 <code>#include &lt;opencv2/imgproc.hpp&gt;</code><br />
-<code>#include &quot;<a class="el" href="cam_8h_source.html">cam.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cam__api_8h_source.html">cam_api.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="roi_8h_source.html">roi.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="camera-sdk_2utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="logger_8h_source.html">logger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="crash_8h_source.html">crash.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ipc__client_8h_source.html">ipc_client.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="detect_8hpp_source.html">detect.hpp</a>&quot;</code><br />
 </div>
 <p><a href="calibrate_8cpp_source.html">Go to the source code of this file.</a></p>
@@ -124,9 +125,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae5616eee74bbcdefa939c45316421429" id="r_ae5616eee74bbcdefa939c45316421429"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="calibrate_8cpp.html#ae5616eee74bbcdefa939c45316421429">laser_on</a> (void)</td></tr>
-<tr class="memdesc:ae5616eee74bbcdefa939c45316421429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request full laser brightness via the command FIFO if a reader exists.  <br /></td></tr>
-<tr class="separator:ae5616eee74bbcdefa939c45316421429"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fe3ed2c83914dc6144c894c04a752f9" id="r_a0fe3ed2c83914dc6144c894c04a752f9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="calibrate_8cpp.html#a0fe3ed2c83914dc6144c894c04a752f9">illum_on</a> (void)</td></tr>
+<tr class="memdesc:a0fe3ed2c83914dc6144c894c04a752f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request full laser brightness via the command FIFO if a reader exists.  <br /></td></tr>
+<tr class="separator:a0fe3ed2c83914dc6144c894c04a752f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="calibrate_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capture, detect marks, save overlay + JSON, print saturation warnings.  <br /></td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,8 +157,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ae5616eee74bbcdefa939c45316421429" name="ae5616eee74bbcdefa939c45316421429"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5616eee74bbcdefa939c45316421429">&#9670;&#160;</a></span>laser_on()</h2>
+<a id="a0fe3ed2c83914dc6144c894c04a752f9" name="a0fe3ed2c83914dc6144c894c04a752f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fe3ed2c83914dc6144c894c04a752f9">&#9670;&#160;</a></span>illum_on()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +167,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void laser_on </td>
+          <td class="memname">static void illum_on </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -183,11 +184,11 @@ Functions</h2></td></tr>
 <p>Request full laser brightness via the command FIFO if a reader exists. </p>
 <p>If the FIFO cannot be opened, prints a note and continues (laser may already be on from <code>servo_calib</code>). </p>
 
-<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00044">44</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00045">45</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="camera-sdk_2utils_8h_source.html#l00039">CMD_PIPE</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00026">ERR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, and <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>.</p>
+<p class="reference">References <a class="el" href="ipc__client_8c_source.html#l00222">fifo_close()</a>, <a class="el" href="ipc__client_8c_source.html#l00181">fifo_illum_on()</a>, <a class="el" href="ipc__client_8c_source.html#l00043">fifo_open()</a>, <a class="el" href="ipc__client_8c_source.html#l00204">fifo_set_brightness()</a>, and <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="calibrate_8cpp_source.html#l00068">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="calibrate_8cpp_source.html#l00060">main()</a>.</p>
 
 </div>
 </div>
@@ -220,9 +221,9 @@ Functions</h2></td></tr>
 <p>Capture, detect marks, save overlay + JSON, print saturation warnings. </p>
 <dl class="section return"><dt>Returns</dt><dd>0 if at least one ROI was written, else non-zero. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00068">68</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="calibrate_8cpp_source.html#l00060">60</a> of file <a class="el" href="calibrate_8cpp_source.html">calibrate.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="roi_8h_source.html#l00027">roi_t::angle</a>, <a class="el" href="cam_8c_source.html#l00120">cam_close()</a>, <a class="el" href="cam_8h_source.html#l00064">CAM_CROP_X</a>, <a class="el" href="cam_8h_source.html#l00065">CAM_CROP_Y</a>, <a class="el" href="cam_8c_source.html#l00168">cam_grab()</a>, <a class="el" href="cam_8c_source.html#l00045">cam_open()</a>, <a class="el" href="cam_8c_source.html#l00141">cam_set_exposure_ms()</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00045">DETECTED_OUTPUT</a>, <a class="el" href="detect_8cpp_source.html#l00249">frame_mat()</a>, <a class="el" href="camera-sdk_2utils_8h_source.html#l00048">GRAB_OUTPUT</a>, <a class="el" href="cam_8h_source.html#l00024">cam_t::height</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="calibrate_8cpp_source.html#l00044">laser_on()</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="logger_8c_source.html#l00344">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00170">logger_flush()</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="roi_8h_source.html#l00012">ROI_MAX</a>, <a class="el" href="roi_8c_source.html#l00342">roi_means()</a>, <a class="el" href="roi_8h_source.html#l00015">ROI_PATH</a>, <a class="el" href="roi_8c_source.html#l00354">roi_sat_frac()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::rx</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::ry</a>, <a class="el" href="cam_8h_source.html#l00027">cam_t::sensor</a>, <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>, and <a class="el" href="cam_8h_source.html#l00023">cam_t::width</a>.</p>
+<p class="reference">References <a class="el" href="roi_8h_source.html#l00027">roi_t::angle</a>, <a class="el" href="cam_8c_source.html#l00240">camera_api</a>, <a class="el" href="cam__api_8h_source.html#l00036">cam_api_t::close</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cx</a>, <a class="el" href="roi_8h_source.html#l00025">roi_t::cy</a>, <a class="el" href="detect_8cpp_source.html#l00259">detect_boxes_cv()</a>, <a class="el" href="utils_8h_source.html#l00048">DETECTED_OUTPUT</a>, <a class="el" href="detect_8cpp_source.html#l00249">frame_mat()</a>, <a class="el" href="cam__api_8h_source.html#l00063">cam_api_t::grab</a>, <a class="el" href="utils_8h_source.html#l00051">GRAB_OUTPUT</a>, <a class="el" href="cam__api_8h_source.html#l00070">cam_api_t::height</a>, <a class="el" href="calibrate_8cpp_source.html#l00045">illum_on()</a>, <a class="el" href="roi_8h_source.html#l00037">rois_t::item</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="logger_8c_source.html#l00344">logger_exitFileLogger()</a>, <a class="el" href="logger_8c_source.html#l00170">logger_flush()</a>, <a class="el" href="roi_8h_source.html#l00038">rois_t::n</a>, <a class="el" href="roi_8h_source.html#l00029">roi_t::name</a>, <a class="el" href="cam__api_8h_source.html#l00030">cam_api_t::open</a>, <a class="el" href="roi_8h_source.html#l00012">ROI_MAX</a>, <a class="el" href="roi_8c_source.html#l00342">roi_means()</a>, <a class="el" href="roi_8h_source.html#l00015">ROI_PATH</a>, <a class="el" href="roi_8c_source.html#l00354">roi_sat_frac()</a>, <a class="el" href="roi_8c_source.html#l00250">roi_save_json()</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::rx</a>, <a class="el" href="roi_8h_source.html#l00026">roi_t::ry</a>, <a class="el" href="cam__api_8h_source.html#l00076">cam_api_t::sensor</a>, <a class="el" href="cam__api_8h_source.html#l00045">cam_api_t::set_exposure_ms</a>, <a class="el" href="crash_8c_source.html#l00201">sprint1_logging_init()</a>, and <a class="el" href="cam__api_8h_source.html#l00067">cam_api_t::width</a>.</p>
 
 </div>
 </div>
@@ -231,7 +232,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="calibrate_8cpp.html">calibrate.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="dir_e9ddf481a9bfc56f37ab1e84b76feea0.html">app</a></li><li class="navelem"><a class="el" href="calibrate_8cpp.html">calibrate.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

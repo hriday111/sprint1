@@ -1,5 +1,13 @@
 var searchData=
 [
-  ['m_5fpi_0',['m_pi',['../detect_8cpp.html#ae71449b1cc6e6250b91f539153a7a0d3',1,'M_PI:&#160;detect.cpp'],['../roi_8c.html#ae71449b1cc6e6250b91f539153a7a0d3',1,'M_PI:&#160;roi.c']]],
-  ['m_5fsqrt2_1',['M_SQRT2',['../roi_8c.html#a66b3ab30f1332874326ed93969e496e0',1,'roi.c']]]
+  ['laser_5fpwm_5fclock_0',['LASER_PWM_CLOCK',['../gpio__pins_8h.html#ae9ab529fe5cfcf2b1b3357d1e48ea23d',1,'gpio_pins.h']]],
+  ['laser_5fpwm_5frange_1',['LASER_PWM_RANGE',['../gpio__pins_8h.html#ace0e5c8f032bcf10fac57d352dbcb15b',1,'gpio_pins.h']]],
+  ['led_5fpwm_5frange_2',['LED_PWM_RANGE',['../gpio__pins_8h.html#ac381d82b0e05993af7f9c83df6acd547',1,'gpio_pins.h']]],
+  ['log_5fdebug_3',['LOG_DEBUG',['../logger_8h.html#ac06cfc686322558f590c50eab8622ebd',1,'logger.h']]],
+  ['log_5ferror_4',['LOG_ERROR',['../logger_8h.html#ae6fc70e87e424e7083c63696b8fb9e78',1,'logger.h']]],
+  ['log_5ffatal_5',['LOG_FATAL',['../logger_8h.html#aa842d0e31b246c53e60d17b2d076e193',1,'logger.h']]],
+  ['log_5finfo_6',['LOG_INFO',['../logger_8h.html#ae69d735f8291bd2aff230fe6ffb4d4b3',1,'logger.h']]],
+  ['log_5ftrace_7',['LOG_TRACE',['../logger_8h.html#a20f022b1b58ba62e014b624fdd13572c',1,'logger.h']]],
+  ['log_5fwarn_8',['LOG_WARN',['../logger_8h.html#adba1363ea408060eab75cb5a48dcb907',1,'logger.h']]],
+  ['loop_5fand_5fexecute_9',['LOOP_AND_EXECUTE',['../tuibox_8h.html#a370f768fabdc490d20f024e909ca6bad',1,'tuibox.h']]]
 ];

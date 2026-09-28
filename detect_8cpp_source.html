@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: camera-sdk/detect.cpp Source File</title>
+<title>Sprint1: camera-sdk/vision/detect.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -480,8 +480,8 @@ $(document).ready(function(){initNavTree('detect_8cpp_source.html',''); initResi
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>        <span class="comment">//std::memset(&amp;blob, 0, sizeof(blob));</span></div>
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        blob.<a class="code hl_variable" href="structroi__t.html#ae2a4ebbe45b713e218cf28d5d04fdd3b">cx</a> = e.<a class="code hl_variable" href="structEllipseCand.html#a65b74d8a35addbe7813a67dbf5115455">cx</a>;</div>
 <div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>        blob.<a class="code hl_variable" href="structroi__t.html#a1eb59d836f93338945ed47b9ab9c3135">cy</a> = e.<a class="code hl_variable" href="structEllipseCand.html#a79b332169cc6bdf309449f4aa342a0b3">cy</a>;</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        blob.<a class="code hl_variable" href="structroi__t.html#acf195fb90d78d724aabae47a1dec9714">rx</a> = std::max(1.0, e.<a class="code hl_variable" href="structEllipseCand.html#abf7c96463e4822ee0ec1ba1765714922">rx</a> * (1-<a class="code hl_define" href="camera-sdk_2utils_8h.html#a8fe83ac76edc595f6b98cd4a4127aed5">ERROR</a>));</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>        blob.<a class="code hl_variable" href="structroi__t.html#a06bf31714adbdd71cfc9d5f1e8d71ee5">ry</a> = std::max(1.0, e.<a class="code hl_variable" href="structEllipseCand.html#a2979e757c7d28328bc73b9a075e9b87a">ry</a> * (1-<a class="code hl_define" href="camera-sdk_2utils_8h.html#a8fe83ac76edc595f6b98cd4a4127aed5">ERROR</a>));</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        blob.<a class="code hl_variable" href="structroi__t.html#acf195fb90d78d724aabae47a1dec9714">rx</a> = std::max(1.0, e.<a class="code hl_variable" href="structEllipseCand.html#abf7c96463e4822ee0ec1ba1765714922">rx</a> * (1-<a class="code hl_define" href="utils_8h.html#a8fe83ac76edc595f6b98cd4a4127aed5">ERROR</a>));</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>        blob.<a class="code hl_variable" href="structroi__t.html#a06bf31714adbdd71cfc9d5f1e8d71ee5">ry</a> = std::max(1.0, e.<a class="code hl_variable" href="structEllipseCand.html#a2979e757c7d28328bc73b9a075e9b87a">ry</a> * (1-<a class="code hl_define" href="utils_8h.html#a8fe83ac76edc595f6b98cd4a4127aed5">ERROR</a>));</div>
 <div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>        blob.<a class="code hl_variable" href="structroi__t.html#a8f80995098e51274b6208bba9c1fe405">angle</a> = e.<a class="code hl_variable" href="structEllipseCand.html#ac0215d453acb6b6192f714ce1c68cd91">angle</a>;</div>
 <div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        std::snprintf(blob.<a class="code hl_variable" href="structroi__t.html#a9dcf3a955177698ff30db76670f90d8a">name</a>, <span class="keyword">sizeof</span>(blob.<a class="code hl_variable" href="structroi__t.html#a9dcf3a955177698ff30db76670f90d8a">name</a>), <span class="stringliteral">&quot;ring%zu&quot;</span>, i + 1);</div>
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        <a class="code hl_function" href="roi_8c.html#acf627e073041706173b9acb24d0618a5">roi_sync_aabb</a>(&amp;blob);</div>
@@ -492,7 +492,6 @@ $(document).ready(function(){initNavTree('detect_8cpp_source.html',''); initResi
 <div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>}</div>
 </div>
-<div class="ttc" id="acamera-sdk_2utils_8h_html_a8fe83ac76edc595f6b98cd4a4127aed5"><div class="ttname"><a href="camera-sdk_2utils_8h.html#a8fe83ac76edc595f6b98cd4a4127aed5">ERROR</a></div><div class="ttdeci">#define ERROR</div><div class="ttdoc">By how much to decrease the oval size in rois.</div><div class="ttdef"><b>Definition</b> <a href="camera-sdk_2utils_8h_source.html#l00051">utils.h:51</a></div></div>
 <div class="ttc" id="adetect_8cpp_html_a1242173e85477390b128c596e9af1bb7"><div class="ttname"><a href="detect_8cpp.html#a1242173e85477390b128c596e9af1bb7">detect_boxes_cv</a></div><div class="ttdeci">int detect_boxes_cv(const cv::Mat &amp;gray, int nwant, rois_t *out)</div><div class="ttdoc">cv::Mat frame_m</div><div class="ttdef"><b>Definition</b> <a href="detect_8cpp_source.html#l00259">detect.cpp:259</a></div></div>
 <div class="ttc" id="adetect_8cpp_html_a2f7553a9284623da397151376def8650"><div class="ttname"><a href="detect_8cpp.html#a2f7553a9284623da397151376def8650">frame_mat</a></div><div class="ttdeci">cv::Mat frame_mat(const unsigned char *pixels, int width, int height, int pitch)</div><div class="ttdoc">Wrap a possibly strided buffer as a contiguous CV_8UC1 Mat (copies if needed).</div><div class="ttdef"><b>Definition</b> <a href="detect_8cpp_source.html#l00249">detect.cpp:249</a></div></div>
 <div class="ttc" id="adetect_8cpp_html_a395dac5c29965df5ca42c84bd66e3f17"><div class="ttname"><a href="detect_8cpp.html#a395dac5c29965df5ca42c84bd66e3f17">chip_mask</a></div><div class="ttdeci">static cv::Mat chip_mask(const cv::Mat &amp;small, double frac, bool hull)</div><div class="ttdoc">Build a binary mask of the bright chip region on a downscaled frame.</div><div class="ttdef"><b>Definition</b> <a href="detect_8cpp_source.html#l00046">detect.cpp:46</a></div></div>
@@ -526,13 +525,14 @@ $(document).ready(function(){initNavTree('detect_8cpp_source.html',''); initResi
 <div class="ttc" id="astructrois__t_html"><div class="ttname"><a href="structrois__t.html">rois_t</a></div><div class="ttdoc">Fixed-capacity list of ROIs (at most ROI_MAX).</div><div class="ttdef"><b>Definition</b> <a href="roi_8h_source.html#l00036">roi.h:36</a></div></div>
 <div class="ttc" id="astructrois__t_html_a5ec32d9f11f349651721b1a5539d6704"><div class="ttname"><a href="structrois__t.html#a5ec32d9f11f349651721b1a5539d6704">rois_t::item</a></div><div class="ttdeci">roi_t item[8]</div><div class="ttdef"><b>Definition</b> <a href="roi_8h_source.html#l00037">roi.h:37</a></div></div>
 <div class="ttc" id="astructrois__t_html_a7ffbcbf8a96c6ca6296844ed6a3d5154"><div class="ttname"><a href="structrois__t.html#a7ffbcbf8a96c6ca6296844ed6a3d5154">rois_t::n</a></div><div class="ttdeci">int n</div><div class="ttdoc">Number of valid entries in item.</div><div class="ttdef"><b>Definition</b> <a href="roi_8h_source.html#l00038">roi.h:38</a></div></div>
-<div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">Shared helpers and runtime paths for the servo daemon.</div></div>
+<div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">Shared macros and output paths for camera-sdk tools.</div></div>
+<div class="ttc" id="autils_8h_html_a8fe83ac76edc595f6b98cd4a4127aed5"><div class="ttname"><a href="utils_8h.html#a8fe83ac76edc595f6b98cd4a4127aed5">ERROR</a></div><div class="ttdeci">#define ERROR</div><div class="ttdoc">By how much to decrease the oval size in rois.</div><div class="ttdef"><b>Definition</b> <a href="utils_8h_source.html#l00054">utils.h:54</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="detect_8cpp.html">detect.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="dir_2167893a6558a56e737ba25842803546.html">vision</a></li><li class="navelem"><a class="el" href="detect_8cpp.html">detect.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

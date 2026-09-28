@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: camera-sdk/cam.h File Reference</title>
+<title>Sprint1: camera-sdk/thorlabs-dcc1545m/cam.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,13 +93,12 @@ $(document).ready(function(){initNavTree('cam_8h.html',''); initResizable(); });
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">cam.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Thin C wrapper around the IDS uEye API for the Thorlabs DCC1545M (mono8).  
+<p>IDS uEye / Thorlabs DCC1545M backend (private to this directory).  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;ueye.h&gt;</code><br />
 </div>
@@ -107,14 +106,14 @@ $(document).ready(function(){initNavTree('cam_8h.html',''); initResizable(); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcam__t.html">cam_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open camera session and image memory.  <a href="structcam__t.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcam.html">cam</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backend-private session state (opaque <code>cam_t</code> to the rest of the tree).  <a href="structcam.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:acba56ccad9d299c98779ecb14d797b18" id="r_acba56ccad9d299c98779ecb14d797b18"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#acba56ccad9d299c98779ecb14d797b18">CAM_CROP_X</a>&#160;&#160;&#160;350</td></tr>
-<tr class="memdesc:acba56ccad9d299c98779ecb14d797b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed crop applied by <code>cam_grab</code> (sensor coordinates).  <br /></td></tr>
+<tr class="memdesc:acba56ccad9d299c98779ecb14d797b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed crop applied by grab (sensor coordinates).  <br /></td></tr>
 <tr class="separator:acba56ccad9d299c98779ecb14d797b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0f71d4ea2c6cb41e628f21c3a6a5a0d" id="r_ac0f71d4ea2c6cb41e628f21c3a6a5a0d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#ac0f71d4ea2c6cb41e628f21c3a6a5a0d">CAM_CROP_Y</a>&#160;&#160;&#160;60</td></tr>
 <tr class="separator:ac0f71d4ea2c6cb41e628f21c3a6a5a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,27 +121,10 @@ Macros</h2></td></tr>
 <tr class="separator:aa0a34c5a6c5676493594f78cf96b9f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85ca7a289a7d15d8c2445932cc339849" id="r_a85ca7a289a7d15d8c2445932cc339849"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#a85ca7a289a7d15d8c2445932cc339849">CAM_CROP_H</a>&#160;&#160;&#160;740</td></tr>
 <tr class="separator:a85ca7a289a7d15d8c2445932cc339849"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ab82ddbe0be9b8d6b87805fd0738d1da5" id="r_ab82ddbe0be9b8d6b87805fd0738d1da5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#ab82ddbe0be9b8d6b87805fd0738d1da5">cam_open</a> (<a class="el" href="structcam__t.html">cam_t</a> *cam)</td></tr>
-<tr class="memdesc:ab82ddbe0be9b8d6b87805fd0738d1da5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the first available uEye camera in mono8 DIB mode.  <br /></td></tr>
-<tr class="separator:ab82ddbe0be9b8d6b87805fd0738d1da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a208eaac1b3e37f4af0506668c85650d1" id="r_a208eaac1b3e37f4af0506668c85650d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#a208eaac1b3e37f4af0506668c85650d1">cam_close</a> (<a class="el" href="structcam__t.html">cam_t</a> *cam)</td></tr>
-<tr class="memdesc:a208eaac1b3e37f4af0506668c85650d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free image memory and exit the camera session.  <br /></td></tr>
-<tr class="separator:a208eaac1b3e37f4af0506668c85650d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a6b034197a778a0c315de42ff5f40b0" id="r_a0a6b034197a778a0c315de42ff5f40b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#a0a6b034197a778a0c315de42ff5f40b0">cam_set_exposure_ms</a> (<a class="el" href="structcam__t.html">cam_t</a> *cam, double ms, double *actual)</td></tr>
-<tr class="memdesc:a0a6b034197a778a0c315de42ff5f40b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set exposure in milliseconds, clamped to the sensor range.  <br /></td></tr>
-<tr class="separator:a0a6b034197a778a0c315de42ff5f40b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8df2bcd0f182769586f8a89cd8ff3b5" id="r_ac8df2bcd0f182769586f8a89cd8ff3b5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#ac8df2bcd0f182769586f8a89cd8ff3b5">cam_get_exposure_ms</a> (<a class="el" href="structcam__t.html">cam_t</a> *cam, double *ms)</td></tr>
-<tr class="memdesc:ac8df2bcd0f182769586f8a89cd8ff3b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current exposure in milliseconds.  <br /></td></tr>
-<tr class="separator:ac8df2bcd0f182769586f8a89cd8ff3b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a90989936d57e316da13339a864682c" id="r_a0a90989936d57e316da13339a864682c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#a0a90989936d57e316da13339a864682c">cam_grab</a> (<a class="el" href="structcam__t.html">cam_t</a> *cam, unsigned char **pixels, int *width, int *height, int *pitch)</td></tr>
-<tr class="memdesc:a0a90989936d57e316da13339a864682c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capture one mono8 frame and return a cropped view into camera memory.  <br /></td></tr>
-<tr class="separator:a0a90989936d57e316da13339a864682c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Thin C wrapper around the IDS uEye API for the Thorlabs DCC1545M (mono8). </p>
+<div class="textblock"><p>IDS uEye / Thorlabs DCC1545M backend (private to this directory). </p>
+<p>Utilities should include <code><a class="el" href="cam__api_8h.html" title="Camera driver abstraction (vtable selected at link time via Makefile).">cam_api.h</a></code> and use <code>camera_api</code>, not this header. </p>
 
 <p class="definition">Definition in file <a class="el" href="cam_8h_source.html">cam.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -158,7 +140,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cam_8h_source.html#l00067">67</a> of file <a class="el" href="cam_8h_source.html">cam.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cam_8h_source.html#l00020">20</a> of file <a class="el" href="cam_8h_source.html">cam.h</a>.</p>
 
 </div>
 </div>
@@ -174,7 +156,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cam_8h_source.html#l00066">66</a> of file <a class="el" href="cam_8h_source.html">cam.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cam_8h_source.html#l00019">19</a> of file <a class="el" href="cam_8h_source.html">cam.h</a>.</p>
 
 </div>
 </div>
@@ -190,10 +172,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fixed crop applied by <code>cam_grab</code> (sensor coordinates). </p>
+<p>Fixed crop applied by grab (sensor coordinates). </p>
 <p>Detection and ROI work see only this window; ROI coords are relative to it. </p>
 
-<p class="definition">Definition at line <a class="el" href="cam_8h_source.html#l00064">64</a> of file <a class="el" href="cam_8h_source.html">cam.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cam_8h_source.html#l00017">17</a> of file <a class="el" href="cam_8h_source.html">cam.h</a>.</p>
 
 </div>
 </div>
@@ -209,234 +191,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cam_8h_source.html#l00065">65</a> of file <a class="el" href="cam_8h_source.html">cam.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a208eaac1b3e37f4af0506668c85650d1" name="a208eaac1b3e37f4af0506668c85650d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a208eaac1b3e37f4af0506668c85650d1">&#9670;&#160;</a></span>cam_close()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cam_close </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structcam__t.html">cam_t</a> *&#160;</td>
-          <td class="paramname"><em>cam</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Free image memory and exit the camera session. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cam</td><td>Open camera, or no-op if not open. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="cam_8c_source.html#l00120">120</a> of file <a class="el" href="cam_8c_source.html">cam.c</a>.</p>
-
-<p class="reference">References <a class="el" href="cam_8h_source.html#l00018">cam_t::hcam</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="cam_8h_source.html#l00019">cam_t::mem</a>, <a class="el" href="cam_8h_source.html#l00020">cam_t::mem_id</a>, <a class="el" href="cam_8h_source.html#l00025">cam_t::open</a>, and <a class="el" href="cam_8h_source.html#l00027">cam_t::sensor</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="calibrate_8cpp_source.html#l00068">main()</a>, and <a class="el" href="grab__check_8c_source.html#l00017">main()</a>.</p>
-
-</div>
-</div>
-<a id="ac8df2bcd0f182769586f8a89cd8ff3b5" name="ac8df2bcd0f182769586f8a89cd8ff3b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8df2bcd0f182769586f8a89cd8ff3b5">&#9670;&#160;</a></span>cam_get_exposure_ms()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int cam_get_exposure_ms </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structcam__t.html">cam_t</a> *&#160;</td>
-          <td class="paramname"><em>cam</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>ms</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read the current exposure in milliseconds. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cam</td><td>Open camera. </td></tr>
-    <tr><td class="paramname">ms</td><td>Out parameter for exposure. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="cam_8c_source.html#l00131">131</a> of file <a class="el" href="cam_8c_source.html">cam.c</a>.</p>
-
-<p class="reference">References <a class="el" href="cam_8c_source.html#l00029">check()</a>, and <a class="el" href="cam_8h_source.html#l00018">cam_t::hcam</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="cam_8c_source.html#l00141">cam_set_exposure_ms()</a>.</p>
-
-</div>
-</div>
-<a id="a0a90989936d57e316da13339a864682c" name="a0a90989936d57e316da13339a864682c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a90989936d57e316da13339a864682c">&#9670;&#160;</a></span>cam_grab()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int cam_grab </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structcam__t.html">cam_t</a> *&#160;</td>
-          <td class="paramname"><em>cam</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char **&#160;</td>
-          <td class="paramname"><em>pixels</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>pitch</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Capture one mono8 frame and return a cropped view into camera memory. </p>
-<p><code>pixels</code> remains valid until the next grab or <code>cam_close</code>. <code>pitch</code> is the full sensor row stride (may be greater than <code>width</code>). Index as <code>pixels</code>[y * pitch + x].</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cam</td><td>Open camera. </td></tr>
-    <tr><td class="paramname">pixels</td><td>Out pointer into image memory at the crop origin. </td></tr>
-    <tr><td class="paramname">width</td><td>Out crop width (CAM_CROP_W). </td></tr>
-    <tr><td class="paramname">height</td><td>Out crop height (CAM_CROP_H). </td></tr>
-    <tr><td class="paramname">pitch</td><td>Out bytes per full sensor row. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="cam_8c_source.html#l00168">168</a> of file <a class="el" href="cam_8c_source.html">cam.c</a>.</p>
-
-<p class="reference">References <a class="el" href="cam_8h_source.html#l00067">CAM_CROP_H</a>, <a class="el" href="cam_8h_source.html#l00066">CAM_CROP_W</a>, <a class="el" href="cam_8h_source.html#l00064">CAM_CROP_X</a>, <a class="el" href="cam_8h_source.html#l00065">CAM_CROP_Y</a>, <a class="el" href="cam_8c_source.html#l00029">check()</a>, <a class="el" href="cam_8h_source.html#l00018">cam_t::hcam</a>, <a class="el" href="cam_8h_source.html#l00024">cam_t::height</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00028">LOG_TRACE</a>, <a class="el" href="cam_8h_source.html#l00019">cam_t::mem</a>, <a class="el" href="cam_8h_source.html#l00021">cam_t::pitch</a>, and <a class="el" href="cam_8h_source.html#l00023">cam_t::width</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="calibrate2_8cpp_source.html#l00086">detect_at_pos()</a>, <a class="el" href="sweep__run_8c_source.html#l00080">do_sweep()</a>, <a class="el" href="calibrate_8cpp_source.html#l00068">main()</a>, <a class="el" href="grab__check_8c_source.html#l00017">main()</a>, and <a class="el" href="calibrate2_8cpp_source.html#l00122">write_interp_check_csv()</a>.</p>
-
-</div>
-</div>
-<a id="ab82ddbe0be9b8d6b87805fd0738d1da5" name="ab82ddbe0be9b8d6b87805fd0738d1da5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab82ddbe0be9b8d6b87805fd0738d1da5">&#9670;&#160;</a></span>cam_open()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int cam_open </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structcam__t.html">cam_t</a> *&#160;</td>
-          <td class="paramname"><em>cam</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initialize the first available uEye camera in mono8 DIB mode. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cam</td><td>Out structure (zeroed and filled on success). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure (message on stderr). </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="cam_8c_source.html#l00045">45</a> of file <a class="el" href="cam_8c_source.html">cam.c</a>.</p>
-
-<p class="reference">References <a class="el" href="cam_8h_source.html#l00022">cam_t::bits</a>, <a class="el" href="cam_8c_source.html#l00029">check()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="cam_8h_source.html#l00026">cam_t::has_gain</a>, <a class="el" href="cam_8h_source.html#l00018">cam_t::hcam</a>, <a class="el" href="cam_8h_source.html#l00024">cam_t::height</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="cam_8h_source.html#l00019">cam_t::mem</a>, <a class="el" href="cam_8h_source.html#l00020">cam_t::mem_id</a>, <a class="el" href="cam_8h_source.html#l00025">cam_t::open</a>, <a class="el" href="cam_8h_source.html#l00021">cam_t::pitch</a>, <a class="el" href="cam_8h_source.html#l00027">cam_t::sensor</a>, <a class="el" href="cam_8c_source.html#l00040">supported()</a>, and <a class="el" href="cam_8h_source.html#l00023">cam_t::width</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="calibrate_8cpp_source.html#l00068">main()</a>, and <a class="el" href="grab__check_8c_source.html#l00017">main()</a>.</p>
-
-</div>
-</div>
-<a id="a0a6b034197a778a0c315de42ff5f40b0" name="a0a6b034197a778a0c315de42ff5f40b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a6b034197a778a0c315de42ff5f40b0">&#9670;&#160;</a></span>cam_set_exposure_ms()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int cam_set_exposure_ms </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structcam__t.html">cam_t</a> *&#160;</td>
-          <td class="paramname"><em>cam</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>ms</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>actual</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set exposure in milliseconds, clamped to the sensor range. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cam</td><td>Open camera. </td></tr>
-    <tr><td class="paramname">ms</td><td>Requested exposure. </td></tr>
-    <tr><td class="paramname">actual</td><td>Optional; receives the applied exposure (may be NULL). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on failure. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="cam_8c_source.html#l00141">141</a> of file <a class="el" href="cam_8c_source.html">cam.c</a>.</p>
-
-<p class="reference">References <a class="el" href="cam_8c_source.html#l00131">cam_get_exposure_ms()</a>, <a class="el" href="cam_8c_source.html#l00029">check()</a>, <a class="el" href="cam_8h_source.html#l00018">cam_t::hcam</a>, <a class="el" href="cam_8c.html#a72c8c76907507d5dccdc93e5f9955cf8">is_SetExposureTime()</a>, and <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="calibrate_8cpp_source.html#l00068">main()</a>, and <a class="el" href="grab__check_8c_source.html#l00017">main()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cam_8h_source.html#l00018">18</a> of file <a class="el" href="cam_8h_source.html">cam.h</a>.</p>
 
 </div>
 </div>
@@ -445,7 +200,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="cam_8h.html">cam.h</a></li>
+    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="dir_e4ca440a7f20306fabb590fa7d1134b5.html">thorlabs-dcc1545m</a></li><li class="navelem"><a class="el" href="cam_8h.html">cam.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

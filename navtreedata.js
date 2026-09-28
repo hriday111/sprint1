@@ -26,6 +26,7 @@ var NAVTREE =
 [
   [ "Sprint1", "index.html", [
     [ "Sprint1 — Prism scan controller", "index.html", "index" ],
+    [ "Recalibrate chip marks after moving the lens", "recalibrate.html", null ],
     [ "camera-sdk", "camera_sdk.html", [
       [ "Getting started", "camera_sdk.html#autotoc_md0", [
         [ "Recalibration (only if needed)", "camera_sdk.html#autotoc_md1", null ]
@@ -41,7 +42,6 @@ var NAVTREE =
       [ "Common pitfalls", "camera_sdk.html#autotoc_md9", null ],
       [ "Build", "camera_sdk.html#autotoc_md10", null ]
     ] ],
-    [ "Recalibrate chip marks after moving the lens", "recalibrate.html", null ],
     [ "Vendored IDS uEye <tt>.deb</tt> packages", "md_vendor_2debs_2README.html", [
       [ "Install uEye + udev", "md_vendor_2debs_2README.html#autotoc_md23", null ]
     ] ],
@@ -50,7 +50,8 @@ var NAVTREE =
       [ "Data Structure Index", "classes.html", null ],
       [ "Data Fields", "functions.html", [
         [ "All", "functions.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", null ],
+        [ "Enumerator", "functions_eval.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -59,6 +60,7 @@ var NAVTREE =
         [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", "globals_func" ],
         [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
@@ -70,8 +72,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"logger_8h.html#aca1fd1d8935433e6ba2e3918214e07f9a38182a13b5a026feffe5fb1f7d0aec79",
-"structtui__t.html#ac5b0106865141a611833cd4f1f489b84"
+"ipc__server_8h.html#a58d63fce7b26f4544fc4f0e6be6f4829",
+"structcam.html#a07ff95c166574fab3cdcab9d34813975",
+"sweep__tui_8c.html#ac9a87775b8ca04b9dd7cb43eb55b56d4"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
