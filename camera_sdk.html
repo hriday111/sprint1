@@ -97,7 +97,10 @@ $(document).ready(function(){initNavTree('camera_sdk.html',''); initResizable();
 <div class="textblock"><p>Thorlabs DCC1545M (IDS uEye) tools: mono8 crop, elliptical ROIs, optional two-point interpolation, and an interactive intensity sweep. Motion/illumination go through FIFOs owned by <code>./build/driver</code> (see <a class="el" href="README_8md.html">project README</a>).</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 Getting started</h1>
-<p><b>Calibration is already done.</b> Day-to-day:</p>
+<p><b>Calibration is already done.</b> Day-to-day, from the repo root you can build and/or run with <code>./sprint1.sh</code> (<code>build</code>, <code>run</code>, etc. — see the <a href="../README.md#getting-started-normal-run">project README</a>):</p>
+<div class="fragment"><div class="line">./sprint1.sh build</div>
+<div class="line">./sprint1.sh run</div>
+</div><!-- fragment --><p>Or start the processes yourself:</p>
 <div class="fragment"><div class="line"># Terminal 1 (repo root)</div>
 <div class="line">sudo ./build/driver</div>
 <div class="line"> </div>

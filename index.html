@@ -105,7 +105,13 @@ Documentation</h1>
 </ul>
 <h1><a class="anchor" id="autotoc_md8"></a>
 Getting started (normal run)</h1>
-<p><b>ROI calibration is already done</b> for the current optics (<code>/var/lib/sprint1/rois.json</code>). Day-to-day:</p>
+<p><b>ROI calibration is already done</b> for the current optics (<code>/var/lib/sprint1/rois.json</code>). Day-to-day you can use <code>sprint1.sh</code> to build and/or run:</p>
+<div class="fragment"><div class="line">./sprint1.sh build      # make all (driver + camera-sdk)</div>
+<div class="line">./sprint1.sh driver     # build driver only</div>
+<div class="line">./sprint1.sh camera-sdk # build camera-sdk only</div>
+<div class="line">./sprint1.sh rebuild    # make clean &amp;&amp; make all</div>
+<div class="line">./sprint1.sh run        # start driver, then sweep_run (stops driver on exit)</div>
+</div><!-- fragment --><p>Or run the two processes yourself:</p>
 <div class="fragment"><div class="line"># Terminal 1 — device driver (motor + illumination + FIFO server)</div>
 <div class="line">sudo make driver          # or: sudo make   (also builds camera-sdk)</div>
 <div class="line">sudo ./build/driver</div>
@@ -113,7 +119,7 @@ Getting started (normal run)</h1>
 <div class="line"># Terminal 2 — main intensity measurements (interactive TUI)</div>
 <div class="line">cd camera-sdk &amp;&amp; make</div>
 <div class="line">./build/bin/sweep_run</div>
-</div><!-- fragment --><p><code>sweep_run</code> assigns diseases D1–D10 to blob 1 and blob 2, then Start/Reset for the scan. Quitting leaves <code>./build/driver</code> running (FIFO closed without <code>-1</code>).</p>
+</div><!-- fragment --><p><code>sweep_run</code> assigns diseases D1–D10 to blob 1 and blob 2, then Start/Reset for the scan. Quitting leaves <code>./build/driver</code> running (FIFO closed without <code>-1</code>) unless you used <code>./sprint1.sh run</code>, which sends <code>-1</code> on exit.</p>
 <h2><a class="anchor" id="autotoc_md9"></a>
 If you must recalibrate</h2>
 <p>Only after moving the lens or remounting optics. Prefer <code>calibrate2</code> and try several exposures:</p>
