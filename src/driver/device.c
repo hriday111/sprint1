@@ -19,6 +19,44 @@ struct device {
     motor_t *motor;
     illumination_t *illumination;
 };
+void load_params(char *filename, motor_t *motor)
+{
+    int fd = open(filename, O_RDONLY);
+    char buffer[32];
+    int count;
+    int n;
+    int start, stop, prep;
+
+    if (fd == -1) {
+        LOG_ERROR("load_params: open(%s) failed: %s", filename, strerror(errno));
+        ERR("open");
+    }
+
+    memset(buffer, 0, sizeof(buffer));
+    count = read(fd, buffer, sizeof(buffer) - 1);
+    close(fd);
+
+    if (count <= 0) {
+        LOG_FATAL("load_params: empty or unreadable file %s", filename);
+        exit(EXIT_FAILURE);
+    }
+
+    buffer[count] = '\0';
+    n = sscanf(buffer, "%d %d %d", &start, &stop, &prep);
+    if (n != 3) {
+        LOG_FATAL("load_params: expected 3 integers, got %d", n);
+        exit(EXIT_FAILURE);
+    }
+
+    if (start < 0 || stop < 0 || prep < 0 ||
+        start > 999 || stop > 999 || prep > 999) {
+        LOG_FATAL("load_params: unsupported values start=%d stop=%d prep=%d",
+                  start, stop, prep);
+        exit(EXIT_FAILURE);
+    }
+    motor_api.set_scan_params(motor, start, stop, prep);
+    LOG_INFO("Params: start=%d stop=%d prep=%d", start, stop, prep);
+}
 
 void device_close(device_t *device)
 {
@@ -101,3 +139,4 @@ int device_run(device_t *device)
     serve_fifo(CMD_PIPE, device->motor, device->illumination);
     return 0;
 }
+

@@ -1,13 +1,17 @@
 #ifndef DEVICE_H
 #define DEVICE_H
-
+#include "motor_api.h"
 /**
  * @file device.h
  * @brief Device façade: motor + illumination lifecycle for the daemon binary.
  */
 
 typedef struct device device_t;
-
+ 
+/**
+ * @brief Load Parameters from  .prm file.
+ */
+void load_params(char* filename, motor_t* motor);
 /**
  * @brief Init logging, open motor + illumination, home, load params, park.
  * @return Opaque device, or NULL on failure (resources cleaned up).

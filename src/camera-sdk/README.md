@@ -1,10 +1,10 @@
 # camera-sdk {#camera_sdk}
 
-Thorlabs DCC1545M (IDS uEye) tools: mono8 crop, elliptical ROIs, optional two-point interpolation, and an interactive intensity sweep. Motion/illumination go through FIFOs owned by `./build/driver` (see [project README](../README.md)).
+Thorlabs DCC1545M (IDS uEye) tools: mono8 crop, elliptical ROIs, optional two-point interpolation, and an interactive intensity sweep. Motion/illumination go through FIFOs owned by `build/src/driver/driver` (see [project README](../../README.md)).
 
 ## Getting started
 
-**Calibration is already done.** Day-to-day, from the repo root you can build and/or run with `./sprint1.sh` (`build`, `run`, etc. — see the [project README](../README.md#getting-started-normal-run)):
+**Calibration is already done.** Day-to-day, from the repo root you can build and/or run with `./sprint1.sh` (`build`, `run`, etc. — see the [project README](../../README.md#getting-started-normal-run)):
 
 ```bash
 ./sprint1.sh build
@@ -15,19 +15,19 @@ Or start the processes yourself:
 
 ```bash
 # Terminal 1 (repo root)
-sudo ./build/driver
+sudo ./build/src/driver/driver
 
 # Terminal 2
-cd camera-sdk && make
-./build/bin/sweep_run
+sudo ./build/src/camera-sdk/sweep_run
 ```
 
 ### Recalibration (only if needed)
 
 ```bash
-./build/bin/calibrate2 0.20 400 420
-./build/bin/calibrate2 0.14 400 420
-./build/bin/calibrate2 0.10 400 420
+mkdir -p src/camera-sdk/tmp
+./build/src/camera-sdk/calibrate2 0.20 400 420
+./build/src/camera-sdk/calibrate2 0.14 400 420
+./build/src/camera-sdk/calibrate2 0.10 400 420
 ```
 
 See [app/RECALIBRATE.md](app/RECALIBRATE.md).
@@ -41,16 +41,17 @@ See [app/RECALIBRATE.md](app/RECALIBRATE.md).
 | `thorlabs-dcc1545m/` | uEye backend implementing `cam_api.h` |
 | `../ipc/ipc_client.*` | FIFO client (`fifo_*`) |
 | `../logging/` | Shared logger / crash hooks |
+| `../TUI/` | Terminal UI helpers used by `sweep_tui` |
 
 ## Prerequisites
 
 ```bash
 sudo apt-get install -y libopencv-dev
-sudo dpkg -i ../vendor/debs/ueye/*.deb && sudo apt-get install -y -f
+sudo dpkg -i ../../vendor/debs/ueye/*.deb && sudo apt-get install -y -f
 sudo systemctl enable --now ueyeusbdrc
 ```
 
-Driver must be running for laser/motion. Full install notes: [../README.md](../README.md#prerequisites).
+Driver must be running for laser/motion. Full install notes: [../../README.md](../../README.md#prerequisites).
 
 ## APIs (short)
 
@@ -74,9 +75,15 @@ Crop (sensor coords): `CAM_CROP_*` = 600×740 at (350, 60).
 
 ## Build
 
+From the repo root (preferred):
+
 ```bash
-make                          # from repo root: make camera
-# or: make CAMERA=ueye
+./sprint1.sh camera-sdk
+# or:
+cmake -S . -B build
+cmake --build build --target sweep_run --target calibrate --target calibrate2
 ```
 
-Architecture diagrams: [../docs/architecture.puml](../docs/architecture.puml).
+Binaries: `build/src/camera-sdk/{sweep_run,calibrate,calibrate2}`.
+
+Architecture diagrams: [../../docs/architecture.puml](../../docs/architecture.puml).

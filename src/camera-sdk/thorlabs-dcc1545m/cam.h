@@ -14,9 +14,9 @@
  * Fixed crop applied by grab (sensor coordinates).
  * Detection and ROI work see only this window; ROI coords are relative to it.
  */
-#define CAM_CROP_X 350
+#define CAM_CROP_X 300
 #define CAM_CROP_Y 60
-#define CAM_CROP_W 600
+#define CAM_CROP_W 700
 #define CAM_CROP_H 740
 
 /** Backend-private session state (opaque @c cam_t to the rest of the tree). */

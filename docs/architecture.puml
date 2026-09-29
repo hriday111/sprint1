@@ -6,19 +6,23 @@ skinparam defaultFontName SansSerif
 title Sprint1 — components and FIFO IPC
 
 package "Host processes" {
-  component "build/driver\n(device façade)" as Driver
-  component "camera-sdk\nsweep_run / calibrate*" as CamTools
+  component "build/src/driver/driver\n(device façade)" as Driver
+  component "build/src/camera-sdk/\nsweep_run / calibrate*" as CamTools
 }
 
-package "Driver internals" {
+package "src/driver" {
   component "device.c" as Device
-  component "ipc_server" as IpcSrv
   component "motor_api\n(A4988 | SG-90)" as Motor
   component "illumination_api\n(Laser | LED)" as Illum
 }
 
-package "Camera-sdk internals" {
-  component "ipc_client\n(fifo_*)" as IpcCli
+package "src/ shared" {
+  component "ipc/ipc_server" as IpcSrv
+  component "ipc/ipc_client\n(fifo_*)" as IpcCli
+  component "logging/" as Log
+}
+
+package "src/camera-sdk" {
   component "cam_api\n(thorlabs-dcc1545m)" as Cam
   component "vision\n(roi / detect / interp)" as Vision
   component "app TUI\n(sweep_tui)" as Tui
@@ -40,12 +44,14 @@ CamTools --> IpcCli
 CamTools --> Cam
 CamTools --> Vision
 CamTools --> Tui
+CamTools --> Log
 IpcCli --> DataPipe : commands\\n(goto, bN, 1001, 4000, …)
 DataPipe --> IpcSrv
 IpcSrv --> PosPipe : position after 4000
 PosPipe --> IpcCli
 
 Driver --> Device
+Driver --> Log
 Device --> IpcSrv
 Device --> Motor
 Device --> Illum
@@ -55,15 +61,16 @@ Illum --> IllHw
 Cam --> Ueye
 
 note right of Driver
-  make MOTOR=a4988|sg90
-  make ILLUMINATION=laser|led
-  Binary: ./build/driver
+  CMake cache:
+  -DMOTOR=a4988|sg90
+  -DILLUMINATION=laser|led
+  Binary: build/src/driver/driver
 end note
 
 note right of CamTools
-  make CAMERA=ueye
-  Binaries under
-  camera-sdk/build/bin/
+  OpenCV + libueye_api
+  Binaries:
+  build/src/camera-sdk/
 end note
 
 @enduml
@@ -76,7 +83,7 @@ title Sweep measurement sequence (happy path)
 actor Operator
 participant "sweep_run\n(+ TUI)" as Sweep
 participant "ipc_client" as Cli
-participant "build/driver\nipc_server" as Drv
+participant "driver\nipc_server" as Drv
 participant "motor_api" as Mot
 participant "illumination_api" as Ill
 participant "camera_api" as Cam
@@ -109,18 +116,18 @@ Operator -> Sweep : Quit
 @startuml build_variants
 !theme plain
 skinparam shadowing false
-title Build-time backend selection
+title Build-time backend selection (CMake)
 
-rectangle "Root Makefile" as Root {
+rectangle "CMake (repo root)" as Root {
   (MOTOR=a4988) as Ma
   (MOTOR=sg90) as Ms
   (ILLUMINATION=laser) as Il
   (ILLUMINATION=led) as Ie
-  (build/driver) as Bin
+  (build/src/driver/driver) as Bin
 }
 
-rectangle "camera-sdk Makefile" as CamMk {
-  (CAMERA=ueye) as Cu
+rectangle "src/camera-sdk" as CamMk {
+  (thorlabs-dcc1545m / ueye) as Cu
   (sweep_run) as Sr
   (calibrate) as C1
   (calibrate2) as C2
@@ -138,6 +145,12 @@ Root -[hidden]-> CamMk
 note bottom of Bin
   device_open() homes motor,
   parks at prep, serve_fifo()
+end note
+
+note bottom of Root
+  ./sprint1.sh build
+  or: cmake -S . -B build && cmake --build build
+  backends: cmake -B build -DMOTOR=sg90 -DILLUMINATION=led
 end note
 
 @enduml

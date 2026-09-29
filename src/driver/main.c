@@ -26,5 +26,5 @@ int main(int argc, char **argv)
 
     rc = device_run(device);
     device_close(device);
-    return rc == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+    return rc == 0 ? EXIT_SUCCESS : EXIT_FAILURE;   
 }

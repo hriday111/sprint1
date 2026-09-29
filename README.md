@@ -1,8 +1,8 @@
 # Sprint1 — Prism scan controller {#mainpage}
 
-Sprint1 drives a Raspberry Pi–mounted motor and illumination (“the black box”) while `camera-sdk/` captures frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The **device driver** and **camera tools** talk over named FIFOs under `/run/sprint1/`.
+Sprint1 drives a Raspberry Pi–mounted motor and illumination (“the black box”) while `src/camera-sdk/` captures frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The **device driver** and **camera tools** talk over named FIFOs under `/run/sprint1/`.
 
-Hardware backends are selected at build time (`MOTOR`, `ILLUMINATION`, `CAMERA`). Default build: A4988 stepper + laser PWM + uEye camera.
+Hardware backends are selected at CMake configure time (`MOTOR`, `ILLUMINATION`). Default build: A4988 stepper + laser PWM + uEye camera.
 
 ## Documentation
 
@@ -10,48 +10,77 @@ Hardware backends are selected at build time (`MOTOR`, `ILLUMINATION`, `CAMERA`)
 - Architecture source: [docs/architecture.puml](docs/architecture.puml) (SVGs rendered by the Docs workflow onto GitHub Pages)
 - Local Doxygen: `doxygen Doxyfile` → `docs/html/index.html`
 
+## Repository layout
+
+```
+sprint1/
+├── CMakeLists.txt          # top-level: add_subdirectory(src)
+├── sprint1.sh              # build / run helper
+├── docs/                   # architecture.puml + generated HTML/SVG
+├── vendor/                 # uEye debs, etc.
+└── src/
+    ├── CMakeLists.txt
+    ├── driver/             # device façade + motor/illumination backends
+    ├── camera-sdk/         # sweep_run, calibrate, calibrate2
+    ├── ipc/                # FIFO server (driver) + client (camera)
+    ├── logging/
+    ├── common/
+    └── TUI/
+```
+
+Binaries land under `build/src/` after `cmake -S . -B build`:
+
+| Binary | Path |
+|--------|------|
+| Driver | `build/src/driver/driver` |
+| Sweep | `build/src/camera-sdk/sweep_run` |
+| Calibrate | `build/src/camera-sdk/calibrate` |
+| Calibrate2 | `build/src/camera-sdk/calibrate2` |
+
 ## Getting started (normal run)
 
 **ROI calibration is already done** for the current optics (`/var/lib/sprint1/rois.json`). Day-to-day you can use `sprint1.sh` to build and/or run:
 
 ```bash
-./sprint1.sh build      # make all (driver + camera-sdk)
+./sprint1.sh build      # cmake configure + build (driver + camera-sdk)
 ./sprint1.sh driver     # build driver only
-./sprint1.sh camera-sdk # build camera-sdk only
-./sprint1.sh rebuild    # make clean && make all
+./sprint1.sh camera-sdk # build camera tools only
+./sprint1.sh rebuild    # wipe build/, reconfigure, build all
 ./sprint1.sh run        # start driver, then sweep_run (stops driver on exit)
 ```
 
 Or run the two processes yourself:
 
 ```bash
+# Configure + build once
+cmake -S . -B build
+cmake --build build
+
 # Terminal 1 — device driver (motor + illumination + FIFO server)
-sudo make driver          # or: sudo make   (also builds camera-sdk)
-sudo ./build/driver
+sudo ./build/src/driver/driver
 
 # Terminal 2 — main intensity measurements (interactive TUI)
-cd camera-sdk && make
-./build/bin/sweep_run
+sudo ./build/src/camera-sdk/sweep_run
 ```
 
-`sweep_run` assigns diseases D1–D10 to blob 1 and blob 2, then Start/Reset for the scan. Quitting leaves `./build/driver` running (FIFO closed without `-1`) unless you used `./sprint1.sh run`, which sends `-1` on exit.
+`sweep_run` assigns diseases D1–D10 to blob 1 and blob 2, then Start/Reset for the scan. Quitting leaves the driver running (FIFO closed without `-1`) unless you used `./sprint1.sh run`, which sends `-1` on exit.
 
 ### If you must recalibrate
 
 Only after moving the lens or remounting optics. Prefer `calibrate2` and try several exposures:
 
 ```bash
-cd camera-sdk && mkdir -p tmp
-./build/bin/calibrate2 0.20 400 420
-./build/bin/calibrate2 0.14 400 420
-./build/bin/calibrate2 0.10 400 420
+mkdir -p src/camera-sdk/tmp
+./build/src/camera-sdk/calibrate2 0.20 400 420
+./build/src/camera-sdk/calibrate2 0.14 400 420
+./build/src/camera-sdk/calibrate2 0.10 400 420
 ```
 
-Compare `tmp/detected_*.png` — green ellipses must sit on the three dark discs. See [camera-sdk/app/RECALIBRATE.md](camera-sdk/app/RECALIBRATE.md).
+Compare `src/camera-sdk/tmp/detected_*.png` — green ellipses must sit on the three dark discs. See [src/camera-sdk/app/RECALIBRATE.md](src/camera-sdk/app/RECALIBRATE.md).
 
 ## Prerequisites
 
-Hardware: Raspberry Pi 4, WiringPi, root (or GPIO) for the driver (PWM on BCM 18). Shared paths: `/run/sprint1/`, `/var/lib/sprint1/`, and a writable `logs/` cwd.
+Hardware: Raspberry Pi 4, WiringPi, root (or GPIO) for the driver (PWM on BCM 18). Shared paths: `/run/sprint1/`, `/var/lib/sprint1/`, and a writable `logs/` cwd. Build requires **CMake ≥ 3.10**.
 
 ### Library installation
 
@@ -81,6 +110,7 @@ sudo apt install ./debian-template/wiringpi-3.x.deb
 
 | Dependency | Source |
 |------------|--------|
+| **CMake ≥ 3.10** | `apt-get install -y cmake` |
 | **OpenCV 4** | `apt-get install -y libopencv-dev` |
 | **IDS uEye + udev** | `vendor/debs/ueye/*.deb` |
 | **WiringPi** | [WiringPi](https://github.com/WiringPi/WiringPi) (`-lwiringPi`) |
@@ -102,15 +132,15 @@ Source: [docs/architecture.puml](docs/architecture.puml). Edit the `.puml` and p
 
 | Component | Role |
 |-----------|------|
-| `build/driver` | Device façade: home, park, serve FIFO commands |
-| `device.c` | Composes `motor_api` + `illumination_api` + `ipc_server` |
-| `A4988/` / `SG-90/` | Motor backends (`make MOTOR=a4988\|sg90`) |
-| `Laser/` / `Led/` | Illumination backends (`make ILLUMINATION=laser\|led`) |
-| `ipc/` | FIFO server (driver) and client (camera tools) |
-| `camera-sdk/app/` | `sweep_run`, `calibrate`, `calibrate2`, TUI |
-| `camera-sdk/vision/` | ROI, detect, interp |
-| `camera-sdk/thorlabs-dcc1545m/` | uEye backend (`CAMERA=ueye`) |
-| `logging/` | File + console logger, crash/core-dump hooks |
+| `build/src/driver/driver` | Device façade: home, park, serve FIFO commands |
+| `src/driver/device.c` | Composes `motor_api` + `illumination_api` + `ipc_server` |
+| `src/driver/A4988/` / `SG-90/` | Motor backends (`-DMOTOR=a4988\|sg90`) |
+| `src/driver/Laser/` / `Led/` | Illumination backends (`-DILLUMINATION=laser\|led`) |
+| `src/ipc/` | FIFO server (driver) and client (camera tools) |
+| `src/camera-sdk/app/` | `sweep_run`, `calibrate`, `calibrate2`, TUI |
+| `src/camera-sdk/vision/` | ROI, detect, interp |
+| `src/camera-sdk/thorlabs-dcc1545m/` | uEye backend |
+| `src/logging/` | File + console logger, crash/core-dump hooks |
 
 | Path | Direction | Purpose |
 |------|-----------|---------|
@@ -120,15 +150,15 @@ Source: [docs/architecture.puml](docs/architecture.puml). Edit the `.puml` and p
 ### Build knobs
 
 ```bash
-make driver                         # default: MOTOR=a4988 ILLUMINATION=laser
-make driver MOTOR=sg90 ILLUMINATION=led
-make camera                         # camera-sdk tools
-make                                # driver + camera
+./sprint1.sh build                                    # defaults: MOTOR=a4988 ILLUMINATION=laser
+cmake -S . -B build -DMOTOR=sg90 -DILLUMINATION=led   # alternate backends
+cmake --build build --target driver                   # driver only
+cmake --build build --target sweep_run                # one camera tool
 ```
 
 ## Pinout
 
-BCM pins in `gpio_pins.h`. Enable is active LOW; endstop is active HIGH; illumination uses hardware PWM on GPIO 18.
+BCM pins in `src/driver/gpio_pins.h`. Enable is active LOW; endstop is active HIGH; illumination uses hardware PWM on GPIO 18.
 
 | Signal | GPIO | Typical wire |
 |--------|------|--------------|
@@ -176,9 +206,9 @@ Angle: **0.1125°/step**. Homing ≈ `CMD_POS_ZERO` + `DELTA` (400 + 34).
 
 | Symptom | Fix |
 |---------|-----|
-| `no reader` | Start `sudo ./build/driver` first |
+| `no reader` | Start `sudo ./build/src/driver/driver` first |
 | `EPIPE` | Keep one write fd open for the whole session |
 | Bad ellipses | `calibrate2` at 0.20 / 0.14 / 0.10 |
-| Wrong binary name | Driver is `build/driver` (not `servo_calib`) |
+| Wrong binary path | Driver is `build/src/driver/driver` (not `build/driver` / `servo_calib`) |
 
-Camera tools detail: [camera-sdk/README.md](camera-sdk/README.md).
+Camera tools detail: [src/camera-sdk/README.md](src/camera-sdk/README.md).
