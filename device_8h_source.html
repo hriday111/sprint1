@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: device.h Source File</title>
+<title>Sprint1: src/driver/device.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
+   <div id="projectbrief">CMake-built driver + camera-sdk; start build/src/driver/driver then sweep_run</div>
   </td>
  </tr>
  </tbody>
@@ -101,26 +101,31 @@ $(document).ready(function(){initNavTree('device_8h_source.html',''); initResiza
 <div class="contents">
 <a href="device_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef DEVICE_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define DEVICE_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="motor__api_8h.html">motor_api.h</a>&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="device_8h.html#a7b572d3f5a6e3ec7e00ecf487b0acf49">    9</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structdevice.html">device</a> <a class="code hl_struct" href="structdevice.html">device_t</a>;</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_struct" href="structdevice.html">device_t</a> *<a class="code hl_function" href="device_8h.html#af9bcf6384f9ef40a32f5a8c28cc82359">device_open</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">int</span> <a class="code hl_function" href="device_8h.html#a8c4abaefa99911ac79346aadb4b22e87">device_run</a>(<a class="code hl_struct" href="structdevice.html">device_t</a> *<a class="code hl_struct" href="structdevice.html">device</a>);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span> <a class="code hl_function" href="device_8h.html#ac720d6f0deae41f6f0f4bb0eca5bfee5">device_close</a>(<a class="code hl_struct" href="structdevice.html">device_t</a> *<a class="code hl_struct" href="structdevice.html">device</a>);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="adevice_8h_html_a8c4abaefa99911ac79346aadb4b22e87"><div class="ttname"><a href="device_8h.html#a8c4abaefa99911ac79346aadb4b22e87">device_run</a></div><div class="ttdeci">int device_run(device_t *device)</div><div class="ttdoc">Serve the command FIFO until the client requests exit.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00096">device.c:96</a></div></div>
-<div class="ttc" id="adevice_8h_html_ac720d6f0deae41f6f0f4bb0eca5bfee5"><div class="ttname"><a href="device_8h.html#ac720d6f0deae41f6f0f4bb0eca5bfee5">device_close</a></div><div class="ttdeci">void device_close(device_t *device)</div><div class="ttdoc">Close illumination + motor, free device, flush logging.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00023">device.c:23</a></div></div>
-<div class="ttc" id="adevice_8h_html_af9bcf6384f9ef40a32f5a8c28cc82359"><div class="ttname"><a href="device_8h.html#af9bcf6384f9ef40a32f5a8c28cc82359">device_open</a></div><div class="ttdeci">device_t * device_open(void)</div><div class="ttdoc">Init logging, open motor + illumination, home, load params, park.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00044">device.c:44</a></div></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keywordtype">void</span> <a class="code hl_function" href="device_8h.html#a9f6781d2d32720b53e992a6784dd9fab">load_params</a>(<span class="keywordtype">char</span>* <a class="code hl_variable" href="logger_8c.html#af6a8f5950a36cd4a6e5a675609f2b1e5">filename</a>, <a class="code hl_struct" href="structmotor.html">motor_t</a>* <a class="code hl_struct" href="structmotor.html">motor</a>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><a class="code hl_struct" href="structdevice.html">device_t</a> *<a class="code hl_function" href="device_8h.html#af9bcf6384f9ef40a32f5a8c28cc82359">device_open</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">int</span> <a class="code hl_function" href="device_8h.html#a8c4abaefa99911ac79346aadb4b22e87">device_run</a>(<a class="code hl_struct" href="structdevice.html">device_t</a> *<a class="code hl_struct" href="structdevice.html">device</a>);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> <a class="code hl_function" href="device_8h.html#ac720d6f0deae41f6f0f4bb0eca5bfee5">device_close</a>(<a class="code hl_struct" href="structdevice.html">device_t</a> *<a class="code hl_struct" href="structdevice.html">device</a>);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="adevice_8h_html_a8c4abaefa99911ac79346aadb4b22e87"><div class="ttname"><a href="device_8h.html#a8c4abaefa99911ac79346aadb4b22e87">device_run</a></div><div class="ttdeci">int device_run(device_t *device)</div><div class="ttdoc">Serve the command FIFO until the client requests exit.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00134">device.c:134</a></div></div>
+<div class="ttc" id="adevice_8h_html_a9f6781d2d32720b53e992a6784dd9fab"><div class="ttname"><a href="device_8h.html#a9f6781d2d32720b53e992a6784dd9fab">load_params</a></div><div class="ttdeci">void load_params(char *filename, motor_t *motor)</div><div class="ttdoc">Load Parameters from .prm file.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00022">device.c:22</a></div></div>
+<div class="ttc" id="adevice_8h_html_ac720d6f0deae41f6f0f4bb0eca5bfee5"><div class="ttname"><a href="device_8h.html#ac720d6f0deae41f6f0f4bb0eca5bfee5">device_close</a></div><div class="ttdeci">void device_close(device_t *device)</div><div class="ttdoc">Close illumination + motor, free device, flush logging.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00061">device.c:61</a></div></div>
+<div class="ttc" id="adevice_8h_html_af9bcf6384f9ef40a32f5a8c28cc82359"><div class="ttname"><a href="device_8h.html#af9bcf6384f9ef40a32f5a8c28cc82359">device_open</a></div><div class="ttdeci">device_t * device_open(void)</div><div class="ttdoc">Init logging, open motor + illumination, home, load params, park.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00082">device.c:82</a></div></div>
+<div class="ttc" id="alogger_8c_html_af6a8f5950a36cd4a6e5a675609f2b1e5"><div class="ttname"><a href="logger_8c.html#af6a8f5950a36cd4a6e5a675609f2b1e5">filename</a></div><div class="ttdeci">char filename[kMaxFileNameLen+1]</div><div class="ttdef"><b>Definition</b> <a href="logger_8c_source.html#l00034">logger.c:34</a></div></div>
+<div class="ttc" id="amotor__api_8h_html"><div class="ttname"><a href="motor__api_8h.html">motor_api.h</a></div><div class="ttdoc">Motor driver abstraction (A4988 stepper / SG-90 servo).</div></div>
 <div class="ttc" id="astructdevice_html"><div class="ttname"><a href="structdevice.html">device</a></div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00018">device.c:18</a></div></div>
+<div class="ttc" id="astructmotor_html"><div class="ttname"><a href="structmotor.html">motor</a></div><div class="ttdoc">Completes the opaque motor_t from motor_api.h.</div><div class="ttdef"><b>Definition</b> <a href="stepper_8h_source.html#l00010">stepper.h:10</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="device_8h.html">device.h</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4db3a2f7aa3a8b9901e70dfeb2571af9.html">driver</a></li><li class="navelem"><a class="el" href="device_8h.html">device.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

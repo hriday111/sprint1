@@ -1,5 +1,26 @@
 var searchData=
 [
-  ['json_5fkey_5fdouble_0',['json_key_double',['../roi_8c.html#a02a5f0fb7550611ab3b73afed70de3ab',1,'json_key_double(const char *obj, const char *end, const char *key, double *out):&#160;roi.c'],['../roi__interp_8c.html#a02a5f0fb7550611ab3b73afed70de3ab',1,'json_key_double(const char *obj, const char *end, const char *key, double *out):&#160;roi_interp.c']]],
-  ['json_5fkey_5fstring_1',['json_key_string',['../roi_8c.html#a26e3532b73692df661905e64090e4380',1,'roi.c']]]
+  ['laser_5fclose_0',['laser_close',['../laser_8c.html#a6d177b06f0cad4b6cea511808eade3be',1,'laser.c']]],
+  ['laser_5foff_1',['laser_off',['../laser_8c.html#a8a9a2139dcac44b941be757aac163ce9',1,'laser.c']]],
+  ['laser_5fon_2',['laser_on',['../laser_8c.html#ae3134e76c10b94a1215182aeaf8de871',1,'laser.c']]],
+  ['laser_5fopen_3',['laser_open',['../laser_8c.html#aa75e44d886acfb4698944b2539f8f985',1,'laser.c']]],
+  ['laser_5fset_5fbrightness_4',['laser_set_brightness',['../laser_8c.html#aea15ef9afcd1dc0292159a9ec342b07a',1,'laser.c']]],
+  ['led_5fclose_5',['led_close',['../led_8c.html#a379f36b9113a41772d52e64a1e4f6d8e',1,'led.c']]],
+  ['led_5foff_6',['led_off',['../led_8c.html#a96b4546f984590ae1eed51ec2b8a248b',1,'led.c']]],
+  ['led_5fon_7',['led_on',['../led_8c.html#a87aa70a6068f6e0c1e47c62315511b67',1,'led.c']]],
+  ['led_5fopen_8',['led_open',['../led_8c.html#aa7ca8380551593089dffa542294467ad',1,'led.c']]],
+  ['led_5fset_5fbrightness_9',['led_set_brightness',['../led_8c.html#af0edfe75a95bd7648184ad6f22c8b1f0',1,'led.c']]],
+  ['load_5fparams_10',['load_params',['../device_8c.html#a9f6781d2d32720b53e992a6784dd9fab',1,'load_params(char *filename, motor_t *motor):&#160;device.c'],['../device_8h.html#a9f6781d2d32720b53e992a6784dd9fab',1,'load_params(char *filename, motor_t *motor):&#160;device.c']]],
+  ['load_5fprm_11',['load_prm',['../sweep__run_8c.html#a8921a12054691e985f97da92c91de954',1,'sweep_run.c']]],
+  ['lock_12',['lock',['../logger_8c.html#a92d638030a86fd259063b074c20e74eb',1,'logger.c']]],
+  ['logger_5fautoflush_13',['logger_autoflush',['../logger_8c.html#a1cda909c90ea3e394ca80c566b79a9e0',1,'logger_autoFlush(long interval):&#160;logger.c'],['../logger_8h.html#a1cda909c90ea3e394ca80c566b79a9e0',1,'logger_autoFlush(long interval):&#160;logger.c']]],
+  ['logger_5fconfigure_14',['logger_configure',['../loggerconf_8c.html#ade315543151ea7e388ebeae408562685',1,'logger_configure(const char *filename):&#160;loggerconf.c'],['../loggerconf_8h.html#ade315543151ea7e388ebeae408562685',1,'logger_configure(const char *filename):&#160;loggerconf.c']]],
+  ['logger_5fexitfilelogger_15',['logger_exitfilelogger',['../logger_8c.html#ad5d3a24fcd76144fec96b8beb5c38783',1,'logger_exitFileLogger(void):&#160;logger.c'],['../logger_8h.html#ad5d3a24fcd76144fec96b8beb5c38783',1,'logger_exitFileLogger(void):&#160;logger.c']]],
+  ['logger_5fflush_16',['logger_flush',['../logger_8c.html#a533628f2d321568458c67e0ed9148822',1,'logger_flush(void):&#160;logger.c'],['../logger_8h.html#a533628f2d321568458c67e0ed9148822',1,'logger_flush(void):&#160;logger.c']]],
+  ['logger_5fgetlevel_17',['logger_getlevel',['../logger_8c.html#ab3df101a807169932b206ae2e5b6b4db',1,'logger_getLevel(void):&#160;logger.c'],['../logger_8h.html#ab3df101a807169932b206ae2e5b6b4db',1,'logger_getLevel(void):&#160;logger.c']]],
+  ['logger_5finitconsolelogger_18',['logger_initConsoleLogger',['../logger_8h.html#a7b21fc8b632340ed7bb760f80e3480e0',1,'logger.h']]],
+  ['logger_5finitfilelogger_19',['logger_initfilelogger',['../logger_8c.html#a426e46a24c27812049028471209ffdc9',1,'logger_initFileLogger(const char *filename, long maxFileSize, unsigned char maxBackupFiles):&#160;logger.c'],['../logger_8h.html#a426e46a24c27812049028471209ffdc9',1,'logger_initFileLogger(const char *filename, long maxFileSize, unsigned char maxBackupFiles):&#160;logger.c']]],
+  ['logger_5fisenabled_20',['logger_isenabled',['../logger_8c.html#a02b2f771af9da38b2cb8ec5d1c6a437a',1,'logger_isEnabled(LogLevel level):&#160;logger.c'],['../logger_8h.html#a02b2f771af9da38b2cb8ec5d1c6a437a',1,'logger_isEnabled(LogLevel level):&#160;logger.c']]],
+  ['logger_5flog_21',['logger_log',['../logger_8c.html#ac2e7d3e96e1dea30be02d4dbda1301a1',1,'logger_log(LogLevel level, const char *file, int line, const char *fmt,...):&#160;logger.c'],['../logger_8h.html#ac2e7d3e96e1dea30be02d4dbda1301a1',1,'logger_log(LogLevel level, const char *file, int line, const char *fmt,...):&#160;logger.c']]],
+  ['logger_5fsetlevel_22',['logger_setlevel',['../logger_8c.html#a095e4aaeee136e42efdf4dd644b36d2e',1,'logger_setLevel(LogLevel level):&#160;logger.c'],['../logger_8h.html#a095e4aaeee136e42efdf4dd644b36d2e',1,'logger_setLevel(LogLevel level):&#160;logger.c']]]
 ];

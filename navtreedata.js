@@ -28,25 +28,21 @@ var NAVTREE =
     [ "Sprint1 — Prism scan controller", "index.html", "index" ],
     [ "Recalibrate chip marks after moving the lens", "recalibrate.html", null ],
     [ "camera-sdk", "camera_sdk.html", [
-      [ "Getting started", "camera_sdk.html#autotoc_md0", [
-        [ "Recalibration (only if needed)", "camera_sdk.html#autotoc_md1", null ]
+      [ "Getting started", "camera_sdk.html#autotoc_md13", [
+        [ "Recalibration (only if needed)", "camera_sdk.html#autotoc_md14", null ]
       ] ],
-      [ "Layout", "camera_sdk.html#autotoc_md2", null ],
-      [ "Prerequisites", "camera_sdk.html#autotoc_md3", null ],
-      [ "APIs (short)", "camera_sdk.html#autotoc_md4", null ],
-      [ "Tool CLI", "camera_sdk.html#autotoc_md5", null ],
-      [ "Build", "camera_sdk.html#autotoc_md6", null ]
-    ] ],
-    [ "Vendored IDS uEye <tt>.deb</tt> packages", "md_vendor_2debs_2README.html", [
-      [ "Install uEye + udev", "md_vendor_2debs_2README.html#autotoc_md20", null ]
+      [ "Layout", "camera_sdk.html#autotoc_md15", null ],
+      [ "Prerequisites", "camera_sdk.html#autotoc_md16", null ],
+      [ "APIs (short)", "camera_sdk.html#autotoc_md17", null ],
+      [ "Tool CLI", "camera_sdk.html#autotoc_md18", null ],
+      [ "Build", "camera_sdk.html#autotoc_md19", null ]
     ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
       [ "Data Fields", "functions.html", [
         [ "All", "functions.html", null ],
-        [ "Variables", "functions_vars.html", null ],
-        [ "Enumerator", "functions_eval.html", null ]
+        [ "Variables", "functions_vars.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -67,9 +63,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"ipc__server_8h.html#ae18d7badb9c89c495743692a1c6b01c7",
-"structcam.html#a867b2fe83d7e4e936ccadc7d03a5550c",
-"sweep__tui_8c.html#ad606f1a9614528871ec4339c3eb49426"
+"ipc__server_8h_source.html",
+"structcam.html#af1ddd7a8ee6265a008f2f4b732576f56"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

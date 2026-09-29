@@ -1,30 +1,5 @@
 var searchData=
 [
-  ['detect_5fat_5fpos_0',['detect_at_pos',['../calibrate2_8cpp.html#a0cc1494080b9eb8eddbfd001f26c3c21',1,'calibrate2.cpp']]],
-  ['detect_5fboxes_5fcv_1',['detect_boxes_cv',['../detect_8cpp.html#a1242173e85477390b128c596e9af1bb7',1,'detect_boxes_cv(const cv::Mat &amp;gray, int nwant, rois_t *out):&#160;detect.cpp'],['../detect_8hpp.html#a1242173e85477390b128c596e9af1bb7',1,'detect_boxes_cv(const cv::Mat &amp;gray, int nwant, rois_t *out):&#160;detect.cpp']]],
-  ['device_5fclose_2',['device_close',['../device_8c.html#ac720d6f0deae41f6f0f4bb0eca5bfee5',1,'device_close(device_t *device):&#160;device.c'],['../device_8h.html#ac720d6f0deae41f6f0f4bb0eca5bfee5',1,'device_close(device_t *device):&#160;device.c']]],
-  ['device_5fopen_3',['device_open',['../device_8c.html#af9bcf6384f9ef40a32f5a8c28cc82359',1,'device_open(void):&#160;device.c'],['../device_8h.html#af9bcf6384f9ef40a32f5a8c28cc82359',1,'device_open(void):&#160;device.c']]],
-  ['device_5frun_4',['device_run',['../device_8c.html#a8c4abaefa99911ac79346aadb4b22e87',1,'device_run(device_t *device):&#160;device.c'],['../device_8h.html#a8c4abaefa99911ac79346aadb4b22e87',1,'device_run(device_t *device):&#160;device.c']]],
-  ['disable_5fmotor_5',['disable_motor',['../stepper_8c.html#a227fea7966be0a0670501bd6914860ea',1,'stepper.c']]],
-  ['disease_5flabel_6',['disease_label',['../sweep__tui_8c.html#add40d722cb953828c83c3c710bdfe784',1,'disease_label(int id, char *buf, size_t buflen):&#160;sweep_tui.c'],['../sweep__tui_8h.html#add40d722cb953828c83c3c710bdfe784',1,'disease_label(int id, char *buf, size_t buflen):&#160;sweep_tui.c']]],
-  ['do_5freset_7',['do_reset',['../sweep__run_8c.html#a9076eb7aefb12b283d3c72ea4df9aa39',1,'sweep_run.c']]],
-  ['do_5fsweep_8',['do_sweep',['../sweep__run_8c.html#ae3581b71081b41d91a4438b5a55cf632',1,'sweep_run.c']]],
-  ['draw_5fassign_5ffooter_9',['draw_assign_footer',['../sweep__tui_8c.html#aa5e93a9f36bde74fb297be50ab218f35',1,'sweep_tui.c']]],
-  ['draw_5fclear_5fbtn_10',['draw_clear_btn',['../sweep__tui_8c.html#a846e8b580394566e7dabf45848a03612',1,'sweep_tui.c']]],
-  ['draw_5fconfirm_5fbtn_11',['draw_confirm_btn',['../sweep__tui_8c.html#a5caf85a9faebc72e9c95fa0c4ae9be15',1,'sweep_tui.c']]],
-  ['draw_5fdetail_12',['draw_detail',['../sweep__tui_8c.html#ac9a87775b8ca04b9dd7cb43eb55b56d4',1,'sweep_tui.c']]],
-  ['draw_5fdisease_5fbtn_13',['draw_disease_btn',['../sweep__tui_8c.html#a03e260b3a75125f19d90f8b012441241',1,'sweep_tui.c']]],
-  ['draw_5fellipse_5fmask_14',['draw_ellipse_mask',['../detect_8cpp.html#acef10141a28e3c0d4451e2d0a407cf36',1,'detect.cpp']]],
-  ['draw_5fhelp_15',['draw_help',['../sweep__tui_8c.html#a280d07a7d89e031490d920ec4a366bfc',1,'sweep_tui.c']]],
-  ['draw_5foverlay_16',['draw_overlay',['../calibrate2_8cpp.html#a19f674abefcfe9429a6e22e240b95058',1,'calibrate2.cpp']]],
-  ['draw_5fpick_5fhelp_17',['draw_pick_help',['../sweep__tui_8c.html#a2a68c5d92e145b2dbe5285d4c71007cf',1,'sweep_tui.c']]],
-  ['draw_5fpick_5fprompt_18',['draw_pick_prompt',['../sweep__tui_8c.html#ae1bc7f14029d98376f4b82e79f302421',1,'sweep_tui.c']]],
-  ['draw_5fpick_5fsummary_19',['draw_pick_summary',['../sweep__tui_8c.html#a619194fbbbc7b99470df3c7f600dd1bb',1,'sweep_tui.c']]],
-  ['draw_5fpick_5ftitle_20',['draw_pick_title',['../sweep__tui_8c.html#a72165712c62d75cf3addbfb3cafd2fc7',1,'sweep_tui.c']]],
-  ['draw_5fprogress_21',['draw_progress',['../sweep__tui_8c.html#a70fa121de0ba1a93004e8d188a67ed88',1,'sweep_tui.c']]],
-  ['draw_5frange_22',['draw_range',['../sweep__tui_8c.html#aad925a4c1c5405844158f9e9f2984f52',1,'sweep_tui.c']]],
-  ['draw_5freset_5fbtn_23',['draw_reset_btn',['../sweep__tui_8c.html#ac0238a5292521411faf9764dc5050198',1,'sweep_tui.c']]],
-  ['draw_5fstart_5fbtn_24',['draw_start_btn',['../sweep__tui_8c.html#acd4a6c73f708640ddf64210fb7b919c8',1,'sweep_tui.c']]],
-  ['draw_5fstatus_25',['draw_status',['../sweep__tui_8c.html#ab37443bc14ac2c65d75c19f0f723469f',1,'sweep_tui.c']]],
-  ['draw_5ftitle_26',['draw_title',['../sweep__tui_8c.html#abb3ec0f55c2cb460dffde2ef709aa413',1,'sweep_tui.c']]]
+  ['enable_5fmotor_0',['enable_motor',['../stepper_8c.html#a0076316181c753fe54a800f69b40ba32',1,'stepper.c']]],
+  ['expand_5fcore_5fpath_1',['expand_core_path',['../crash_8c.html#a2e31d73cec047504275aa4a44b3955b7',1,'crash.c']]]
 ];

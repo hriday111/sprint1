@@ -1,6 +1,28 @@
 var searchData=
 [
-  ['_5fui_5ftext_0',['_ui_text',['../tuibox_8h.html#a445d62be6aeeed10b8ce2f9fedadf9df',1,'tuibox.h']]],
-  ['_5fui_5ftext_5fwrap_1',['_ui_text_wrap',['../tuibox_8h.html#a799562f50de106e7bbcbbb6e80243565',1,'tuibox.h']]],
-  ['_5fui_5fupdate_2',['_ui_update',['../tuibox_8h.html#a438c50e5e4e223447932bd21e06ef886',1,'tuibox.h']]]
+  ['a4988_5fclose_0',['a4988_close',['../stepper_8c.html#a6e973348af9527008faa73e47d605b47',1,'stepper.c']]],
+  ['a4988_5fclose_5fsession_1',['a4988_close_session',['../stepper_8c.html#a268218ca833564ae37b2628879851de4',1,'stepper.c']]],
+  ['a4988_5fget_5fpercent_2',['a4988_get_percent',['../stepper_8c.html#aa035393136c0f208c9e621f49567fdec',1,'stepper.c']]],
+  ['a4988_5fget_5fpos_3',['a4988_get_pos',['../stepper_8c.html#addf536a9589470635369b00e84ee88f6',1,'stepper.c']]],
+  ['a4988_5fget_5fprep_4',['a4988_get_prep',['../stepper_8c.html#ac7c7984cb192aebc3aeb471621995b87',1,'stepper.c']]],
+  ['a4988_5fget_5fstart_5',['a4988_get_start',['../stepper_8c.html#a830a37ee8784411d9bfdf08f3d973233',1,'stepper.c']]],
+  ['a4988_5fget_5fstop_6',['a4988_get_stop',['../stepper_8c.html#a5a15ca83753d0ee05bd712e991991c53',1,'stepper.c']]],
+  ['a4988_5fgo_5fprepare_7',['a4988_go_prepare',['../stepper_8c.html#a17401e7884b207eb8f9ab3754e1228aa',1,'stepper.c']]],
+  ['a4988_5fgo_5frel_8',['a4988_go_rel',['../stepper_8c.html#a09c68c12952d9a9697e204d00bb28ef3',1,'stepper.c']]],
+  ['a4988_5fgo_5fstart_9',['a4988_go_start',['../stepper_8c.html#ab87e02591edc9ce146ec2c1c9c2b7078',1,'stepper.c']]],
+  ['a4988_5fgo_5fstop_10',['a4988_go_stop',['../stepper_8c.html#a3fd471117b0c9d26b5b2adcea5d50e17',1,'stepper.c']]],
+  ['a4988_5fgo_5fto_11',['a4988_go_to',['../stepper_8c.html#a98ca956bb248d40eeb36372f0d73d386',1,'stepper.c']]],
+  ['a4988_5fgo_5fzero_12',['a4988_go_zero',['../stepper_8c.html#a46819015402a629b40340bc7198c7dd4',1,'stepper.c']]],
+  ['a4988_5finit_13',['a4988_init',['../stepper_8c.html#a2540dcb215fef8820ab732f77fb01eda',1,'stepper.c']]],
+  ['a4988_5fnext_14',['a4988_next',['../stepper_8c.html#a072ccd3bf30a5e3ad262c6d540fca875',1,'stepper.c']]],
+  ['a4988_5fopen_15',['a4988_open',['../stepper_8c.html#af338ef193fffe872100b20040ca6e4b6',1,'stepper.c']]],
+  ['a4988_5fopen_5fsession_16',['a4988_open_session',['../stepper_8c.html#acac917ed0702b27b2c43ef0ccb5e5414',1,'stepper.c']]],
+  ['a4988_5fprev_17',['a4988_prev',['../stepper_8c.html#a7b3d0286c37befd2faaf4896f999c609',1,'stepper.c']]],
+  ['a4988_5fprism_5fangle_18',['a4988_prism_angle',['../stepper_8c.html#affd98a657379fc013e5de40d63934b3f',1,'stepper.c']]],
+  ['a4988_5fread_19',['a4988_read',['../stepper_8c.html#ad900f6865292b6315d967e4bb69fe155',1,'stepper.c']]],
+  ['a4988_5fsend_20',['a4988_send',['../stepper_8c.html#a7e07fdb633decd5a748599b9c30d3917',1,'stepper.c']]],
+  ['a4988_5fset_5fscan_5fparams_21',['a4988_set_scan_params',['../stepper_8c.html#a2d5aa214e447c3abe74620ca2cf6947d',1,'stepper.c']]],
+  ['account_5fstep_22',['account_step',['../stepper_8c.html#aaadc6de3a22e68f24419c338310cd126',1,'stepper.c']]],
+  ['accum_5fblob_23',['accum_blob',['../roi_8c.html#a88010e419ea2d8dc860919a4371178ed',1,'roi.c']]],
+  ['assignments_5fready_24',['assignments_ready',['../sweep__tui_8c.html#a1452c54bcf1fae99309832fe2832aa64',1,'sweep_tui.c']]]
 ];

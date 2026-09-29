@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: ipc/ipc_server.c File Reference</title>
+<title>Sprint1: src/ipc/ipc_server.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
+   <div id="projectbrief">CMake-built driver + camera-sdk; start build/src/driver/driver then sweep_run</div>
   </td>
  </tr>
  </tbody>
@@ -110,8 +110,6 @@ $(document).ready(function(){initNavTree('ipc__server_8c.html',''); initResizabl
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9f6781d2d32720b53e992a6784dd9fab" id="r_a9f6781d2d32720b53e992a6784dd9fab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ipc__server_8c.html#a9f6781d2d32720b53e992a6784dd9fab">load_params</a> (char *<a class="el" href="logger_8c.html#af6a8f5950a36cd4a6e5a675609f2b1e5">filename</a>, <a class="el" href="motor__api_8h.html#af9204da17a4e26209efd65c04c2aadd7">motor_t</a> *<a class="el" href="structmotor.html">motor</a>)</td></tr>
-<tr class="separator:a9f6781d2d32720b53e992a6784dd9fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc4cb9fb43145502933e3f825577323e" id="r_afc4cb9fb43145502933e3f825577323e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ipc__server_8c.html#afc4cb9fb43145502933e3f825577323e">make_fifo</a> (const char *path)</td></tr>
 <tr class="separator:afc4cb9fb43145502933e3f825577323e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58d63fce7b26f4544fc4f0e6be6f4829" id="r_a58d63fce7b26f4544fc4f0e6be6f4829"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ipc__server_8c.html#a58d63fce7b26f4544fc4f0e6be6f4829">write_position</a> (int pos)</td></tr>
@@ -154,45 +152,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ipc__server_8c_source.html#l00093">93</a> of file <a class="el" href="ipc__server_8c_source.html">ipc_server.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ipc__server_8c_source.html#l00055">55</a> of file <a class="el" href="ipc__server_8c_source.html">ipc_server.c</a>.</p>
 
-<p class="reference">References <a class="el" href="commands_8h_source.html#l00028">CMD_GETPOS</a>, <a class="el" href="commands_8h_source.html#l00026">CMD_LASER_OFF</a>, <a class="el" href="commands_8h_source.html#l00025">CMD_LASER_ON</a>, <a class="el" href="commands_8h_source.html#l00023">CMD_LOADFILE</a>, <a class="el" href="motor__api_8h_source.html#l00052">motor_api_t::get_pos</a>, <a class="el" href="laser_8c_source.html#l00063">illumination_api</a>, <a class="el" href="ipc__server_8c_source.html#l00019">load_params()</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="stepper_8c_source.html#l00511">motor_api</a>, <a class="el" href="illumination__api_8h_source.html#l00028">illumination_api_t::off</a>, <a class="el" href="illumination__api_8h_source.html#l00027">illumination_api_t::on</a>, <a class="el" href="sweep__run_8c_source.html#l00033">PRM_FILE</a>, <a class="el" href="motor__api_8h_source.html#l00033">motor_api_t::send</a>, <a class="el" href="illumination__api_8h_source.html#l00034">illumination_api_t::set_brightness</a>, and <a class="el" href="ipc__server_8c_source.html#l00075">write_position()</a>.</p>
+<p class="reference">References <a class="el" href="commands_8h_source.html#l00028">CMD_GETPOS</a>, <a class="el" href="commands_8h_source.html#l00026">CMD_LASER_OFF</a>, <a class="el" href="commands_8h_source.html#l00025">CMD_LASER_ON</a>, <a class="el" href="motor__api_8h_source.html#l00052">motor_api_t::get_pos</a>, <a class="el" href="laser_8c_source.html#l00063">illumination_api</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="stepper_8c_source.html#l00511">motor_api</a>, <a class="el" href="illumination__api_8h_source.html#l00028">illumination_api_t::off</a>, <a class="el" href="illumination__api_8h_source.html#l00027">illumination_api_t::on</a>, <a class="el" href="motor__api_8h_source.html#l00033">motor_api_t::send</a>, <a class="el" href="illumination__api_8h_source.html#l00034">illumination_api_t::set_brightness</a>, and <a class="el" href="ipc__server_8c_source.html#l00037">write_position()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="ipc__server_8c_source.html#l00152">serve_fifo()</a>.</p>
-
-</div>
-</div>
-<a id="a9f6781d2d32720b53e992a6784dd9fab" name="a9f6781d2d32720b53e992a6784dd9fab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f6781d2d32720b53e992a6784dd9fab">&#9670;&#160;</a></span>load_params()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void load_params </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>filename</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="motor__api_8h.html#af9204da17a4e26209efd65c04c2aadd7">motor_t</a> *&#160;</td>
-          <td class="paramname"><em>motor</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ipc__server_8c_source.html#l00019">19</a> of file <a class="el" href="ipc__server_8c_source.html">ipc_server.c</a>.</p>
-
-<p class="reference">References <a class="el" href="utils_8h_source.html#l00026">ERR</a>, <a class="el" href="logger_8c_source.html#l00034">filename</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00033">LOG_FATAL</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="stepper_8c_source.html#l00511">motor_api</a>, and <a class="el" href="motor__api_8h_source.html#l00056">motor_api_t::set_scan_params</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="device_8c_source.html#l00044">device_open()</a>, and <a class="el" href="ipc__server_8c_source.html#l00093">handle_command()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ipc__server_8c_source.html#l00111">serve_fifo()</a>.</p>
 
 </div>
 </div>
@@ -212,11 +176,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ipc__server_8c_source.html#l00057">57</a> of file <a class="el" href="ipc__server_8c_source.html">ipc_server.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ipc__server_8c_source.html#l00018">18</a> of file <a class="el" href="ipc__server_8c_source.html">ipc_server.c</a>.</p>
 
 <p class="reference">References <a class="el" href="utils_8h_source.html#l00036">BASE</a>, <a class="el" href="utils_8h_source.html#l00026">ERR</a>, <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, and <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="ipc__server_8c_source.html#l00152">serve_fifo()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ipc__server_8c_source.html#l00111">serve_fifo()</a>.</p>
 
 </div>
 </div>
@@ -252,11 +216,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ipc__server_8c_source.html#l00152">152</a> of file <a class="el" href="ipc__server_8c_source.html">ipc_server.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ipc__server_8c_source.html#l00111">111</a> of file <a class="el" href="ipc__server_8c_source.html">ipc_server.c</a>.</p>
 
-<p class="reference">References <a class="el" href="utils_8h_source.html#l00026">ERR</a>, <a class="el" href="ipc__server_8c_source.html#l00093">handle_command()</a>, <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="ipc__server_8c_source.html#l00057">make_fifo()</a>, and <a class="el" href="utils_8h_source.html#l00042">POS_PIPE</a>.</p>
+<p class="reference">References <a class="el" href="utils_8h_source.html#l00026">ERR</a>, <a class="el" href="ipc__server_8c_source.html#l00055">handle_command()</a>, <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, <a class="el" href="logger_8h_source.html#l00032">LOG_ERROR</a>, <a class="el" href="logger_8h_source.html#l00030">LOG_INFO</a>, <a class="el" href="logger_8h_source.html#l00031">LOG_WARN</a>, <a class="el" href="ipc__server_8c_source.html#l00018">make_fifo()</a>, and <a class="el" href="utils_8h_source.html#l00042">POS_PIPE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="device_8c_source.html#l00096">device_run()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="device_8c_source.html#l00134">device_run()</a>.</p>
 
 </div>
 </div>
@@ -276,11 +240,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ipc__server_8c_source.html#l00075">75</a> of file <a class="el" href="ipc__server_8c_source.html">ipc_server.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ipc__server_8c_source.html#l00037">37</a> of file <a class="el" href="ipc__server_8c_source.html">ipc_server.c</a>.</p>
 
 <p class="reference">References <a class="el" href="utils_8h_source.html#l00026">ERR</a>, <a class="el" href="logger_8h_source.html#l00029">LOG_DEBUG</a>, and <a class="el" href="utils_8h_source.html#l00042">POS_PIPE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="ipc__server_8c_source.html#l00093">handle_command()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="ipc__server_8c_source.html#l00055">handle_command()</a>.</p>
 
 </div>
 </div>
@@ -289,7 +253,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_5da80c67b0d1e58ff4c3e0614ce822b4.html">ipc</a></li><li class="navelem"><a class="el" href="ipc__server_8c.html">ipc_server.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b94456e2763cc4ff61641ee1fd517631.html">ipc</a></li><li class="navelem"><a class="el" href="ipc__server_8c.html">ipc_server.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

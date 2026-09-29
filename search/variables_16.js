@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y_0',['y',['../structroi__t.html#a953fa16a66e0520a2790a89ce091725c',1,'roi_t::y'],['../structui__box__t.html#a3d5d463b786d133077861355daf8ea20',1,'ui_box_t::y']]]
+  ['zero_0',['zero',['../structmotor.html#a3dce15f50c7c07b2e744b1db0cbcd80d',1,'motor']]]
 ];

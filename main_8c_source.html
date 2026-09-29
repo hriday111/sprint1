@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: main.c Source File</title>
+<title>Sprint1: src/driver/main.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
+   <div id="projectbrief">CMake-built driver + camera-sdk; start build/src/driver/driver then sweep_run</div>
   </td>
  </tr>
  </tbody>
@@ -122,12 +122,12 @@ $(document).ready(function(){initNavTree('main_8c_source.html',''); initResizabl
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    rc = <a class="code hl_function" href="device_8c.html#a8c4abaefa99911ac79346aadb4b22e87">device_run</a>(<a class="code hl_struct" href="structdevice.html">device</a>);</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="device_8c.html#ac720d6f0deae41f6f0f4bb0eca5bfee5">device_close</a>(<a class="code hl_struct" href="structdevice.html">device</a>);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">return</span> rc == 0 ? EXIT_SUCCESS : EXIT_FAILURE;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">return</span> rc == 0 ? EXIT_SUCCESS : EXIT_FAILURE;   </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
 </div>
-<div class="ttc" id="adevice_8c_html_a8c4abaefa99911ac79346aadb4b22e87"><div class="ttname"><a href="device_8c.html#a8c4abaefa99911ac79346aadb4b22e87">device_run</a></div><div class="ttdeci">int device_run(device_t *device)</div><div class="ttdoc">Serve the command FIFO until the client requests exit.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00096">device.c:96</a></div></div>
-<div class="ttc" id="adevice_8c_html_ac720d6f0deae41f6f0f4bb0eca5bfee5"><div class="ttname"><a href="device_8c.html#ac720d6f0deae41f6f0f4bb0eca5bfee5">device_close</a></div><div class="ttdeci">void device_close(device_t *device)</div><div class="ttdoc">Close illumination + motor, free device, flush logging.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00023">device.c:23</a></div></div>
-<div class="ttc" id="adevice_8c_html_af9bcf6384f9ef40a32f5a8c28cc82359"><div class="ttname"><a href="device_8c.html#af9bcf6384f9ef40a32f5a8c28cc82359">device_open</a></div><div class="ttdeci">device_t * device_open(void)</div><div class="ttdoc">Init logging, open motor + illumination, home, load params, park.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00044">device.c:44</a></div></div>
+<div class="ttc" id="adevice_8c_html_a8c4abaefa99911ac79346aadb4b22e87"><div class="ttname"><a href="device_8c.html#a8c4abaefa99911ac79346aadb4b22e87">device_run</a></div><div class="ttdeci">int device_run(device_t *device)</div><div class="ttdoc">Serve the command FIFO until the client requests exit.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00134">device.c:134</a></div></div>
+<div class="ttc" id="adevice_8c_html_ac720d6f0deae41f6f0f4bb0eca5bfee5"><div class="ttname"><a href="device_8c.html#ac720d6f0deae41f6f0f4bb0eca5bfee5">device_close</a></div><div class="ttdeci">void device_close(device_t *device)</div><div class="ttdoc">Close illumination + motor, free device, flush logging.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00061">device.c:61</a></div></div>
+<div class="ttc" id="adevice_8c_html_af9bcf6384f9ef40a32f5a8c28cc82359"><div class="ttname"><a href="device_8c.html#af9bcf6384f9ef40a32f5a8c28cc82359">device_open</a></div><div class="ttdeci">device_t * device_open(void)</div><div class="ttdoc">Init logging, open motor + illumination, home, load params, park.</div><div class="ttdef"><b>Definition</b> <a href="device_8c_source.html#l00082">device.c:82</a></div></div>
 <div class="ttc" id="adevice_8h_html"><div class="ttname"><a href="device_8h.html">device.h</a></div><div class="ttdoc">Device façade: motor + illumination lifecycle for the daemon binary.</div></div>
 <div class="ttc" id="alogger_8h_html"><div class="ttname"><a href="logger_8h.html">logger.h</a></div><div class="ttdoc">Thread-safe console/file logger used by build/driver and camera-sdk.</div></div>
 <div class="ttc" id="alogger_8h_html_adba1363ea408060eab75cb5a48dcb907"><div class="ttname"><a href="logger_8h.html#adba1363ea408060eab75cb5a48dcb907">LOG_WARN</a></div><div class="ttdeci">#define LOG_WARN(fmt,...)</div><div class="ttdef"><b>Definition</b> <a href="logger_8h_source.html#l00031">logger.h:31</a></div></div>
@@ -138,7 +138,7 @@ $(document).ready(function(){initNavTree('main_8c_source.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="main_8c.html">main.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4db3a2f7aa3a8b9901e70dfeb2571af9.html">driver</a></li><li class="navelem"><a class="el" href="main_8c.html">main.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

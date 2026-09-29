@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: camera-sdk/app/sweep_tui.c File Reference</title>
+<title>Sprint1: src/camera-sdk/app/sweep_tui.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
+   <div id="projectbrief">CMake-built driver + camera-sdk; start build/src/driver/driver then sweep_run</div>
   </td>
  </tr>
  </tbody>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('sweep__tui_8c.html',''); initResizable
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="tuibox_8h_source.html">tuibox.h</a>&quot;</code><br />
+<code>#include &quot;tuibox.h&quot;</code><br />
 </div>
 <p><a href="sweep__tui_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -147,7 +147,7 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:add40d722cb953828c83c3c710bdfe784" id="r_add40d722cb953828c83c3c710bdfe784"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#add40d722cb953828c83c3c710bdfe784">disease_label</a> (int id, char *buf, size_t buflen)</td></tr>
 <tr class="separator:add40d722cb953828c83c3c710bdfe784"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30e3b118f4115a1100d910dea41aff02" id="r_a30e3b118f4115a1100d910dea41aff02"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a30e3b118f4115a1100d910dea41aff02">panel_width</a> (<a class="el" href="structui__t.html">ui_t</a> *ui)</td></tr>
+<tr class="memitem:a30e3b118f4115a1100d910dea41aff02" id="r_a30e3b118f4115a1100d910dea41aff02"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a30e3b118f4115a1100d910dea41aff02">panel_width</a> (ui_t *ui)</td></tr>
 <tr class="separator:a30e3b118f4115a1100d910dea41aff02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae29adb116b6bd915f6b77f82a484f95d" id="r_ae29adb116b6bd915f6b77f82a484f95d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#ae29adb116b6bd915f6b77f82a484f95d">bump</a> (void)</td></tr>
 <tr class="separator:ae29adb116b6bd915f6b77f82a484f95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,29 +155,29 @@ Functions</h2></td></tr>
 <tr class="separator:a1d2d99772c216f4e4075d42cf0ee99d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1452c54bcf1fae99309832fe2832aa64" id="r_a1452c54bcf1fae99309832fe2832aa64"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a1452c54bcf1fae99309832fe2832aa64">assignments_ready</a> (void)</td></tr>
 <tr class="separator:a1452c54bcf1fae99309832fe2832aa64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72165712c62d75cf3addbfb3cafd2fc7" id="r_a72165712c62d75cf3addbfb3cafd2fc7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a72165712c62d75cf3addbfb3cafd2fc7">draw_pick_title</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:a72165712c62d75cf3addbfb3cafd2fc7" id="r_a72165712c62d75cf3addbfb3cafd2fc7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a72165712c62d75cf3addbfb3cafd2fc7">draw_pick_title</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:a72165712c62d75cf3addbfb3cafd2fc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1bc7f14029d98376f4b82e79f302421" id="r_ae1bc7f14029d98376f4b82e79f302421"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#ae1bc7f14029d98376f4b82e79f302421">draw_pick_prompt</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:ae1bc7f14029d98376f4b82e79f302421" id="r_ae1bc7f14029d98376f4b82e79f302421"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#ae1bc7f14029d98376f4b82e79f302421">draw_pick_prompt</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:ae1bc7f14029d98376f4b82e79f302421"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a619194fbbbc7b99470df3c7f600dd1bb" id="r_a619194fbbbc7b99470df3c7f600dd1bb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a619194fbbbc7b99470df3c7f600dd1bb">draw_pick_summary</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:a619194fbbbc7b99470df3c7f600dd1bb" id="r_a619194fbbbc7b99470df3c7f600dd1bb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a619194fbbbc7b99470df3c7f600dd1bb">draw_pick_summary</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:a619194fbbbc7b99470df3c7f600dd1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03e260b3a75125f19d90f8b012441241" id="r_a03e260b3a75125f19d90f8b012441241"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a03e260b3a75125f19d90f8b012441241">draw_disease_btn</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:a03e260b3a75125f19d90f8b012441241" id="r_a03e260b3a75125f19d90f8b012441241"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a03e260b3a75125f19d90f8b012441241">draw_disease_btn</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:a03e260b3a75125f19d90f8b012441241"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5caf85a9faebc72e9c95fa0c4ae9be15" id="r_a5caf85a9faebc72e9c95fa0c4ae9be15"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a5caf85a9faebc72e9c95fa0c4ae9be15">draw_confirm_btn</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:a5caf85a9faebc72e9c95fa0c4ae9be15" id="r_a5caf85a9faebc72e9c95fa0c4ae9be15"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a5caf85a9faebc72e9c95fa0c4ae9be15">draw_confirm_btn</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:a5caf85a9faebc72e9c95fa0c4ae9be15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a846e8b580394566e7dabf45848a03612" id="r_a846e8b580394566e7dabf45848a03612"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a846e8b580394566e7dabf45848a03612">draw_clear_btn</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:a846e8b580394566e7dabf45848a03612" id="r_a846e8b580394566e7dabf45848a03612"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a846e8b580394566e7dabf45848a03612">draw_clear_btn</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:a846e8b580394566e7dabf45848a03612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a68c5d92e145b2dbe5285d4c71007cf" id="r_a2a68c5d92e145b2dbe5285d4c71007cf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a2a68c5d92e145b2dbe5285d4c71007cf">draw_pick_help</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:a2a68c5d92e145b2dbe5285d4c71007cf" id="r_a2a68c5d92e145b2dbe5285d4c71007cf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a2a68c5d92e145b2dbe5285d4c71007cf">draw_pick_help</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:a2a68c5d92e145b2dbe5285d4c71007cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedd3f912d756dd0d955522d532981cda" id="r_aedd3f912d756dd0d955522d532981cda"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#aedd3f912d756dd0d955522d532981cda">build_run_ui</a> (<a class="el" href="structui__t.html">ui_t</a> *ui)</td></tr>
+<tr class="memitem:aedd3f912d756dd0d955522d532981cda" id="r_aedd3f912d756dd0d955522d532981cda"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#aedd3f912d756dd0d955522d532981cda">build_run_ui</a> (ui_t *ui)</td></tr>
 <tr class="separator:aedd3f912d756dd0d955522d532981cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85f299c55d808d9a3bb8de673b3e3427" id="r_a85f299c55d808d9a3bb8de673b3e3427"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a85f299c55d808d9a3bb8de673b3e3427">go_run_screen</a> (void)</td></tr>
 <tr class="separator:a85f299c55d808d9a3bb8de673b3e3427"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81a213030402c7b022dd95ed3f114681" id="r_a81a213030402c7b022dd95ed3f114681"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a81a213030402c7b022dd95ed3f114681">on_disease_click</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, int x, int y, int down)</td></tr>
+<tr class="memitem:a81a213030402c7b022dd95ed3f114681" id="r_a81a213030402c7b022dd95ed3f114681"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a81a213030402c7b022dd95ed3f114681">on_disease_click</a> (ui_box_t *b, int x, int y, int down)</td></tr>
 <tr class="separator:a81a213030402c7b022dd95ed3f114681"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5683553576db1eeba70a2ed3b372f0e2" id="r_a5683553576db1eeba70a2ed3b372f0e2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a5683553576db1eeba70a2ed3b372f0e2">on_confirm_click</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, int x, int y, int down)</td></tr>
+<tr class="memitem:a5683553576db1eeba70a2ed3b372f0e2" id="r_a5683553576db1eeba70a2ed3b372f0e2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a5683553576db1eeba70a2ed3b372f0e2">on_confirm_click</a> (ui_box_t *b, int x, int y, int down)</td></tr>
 <tr class="separator:a5683553576db1eeba70a2ed3b372f0e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11a4398d05a885eb6be9a67f6926783d" id="r_a11a4398d05a885eb6be9a67f6926783d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a11a4398d05a885eb6be9a67f6926783d">on_clear_click</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, int x, int y, int down)</td></tr>
+<tr class="memitem:a11a4398d05a885eb6be9a67f6926783d" id="r_a11a4398d05a885eb6be9a67f6926783d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a11a4398d05a885eb6be9a67f6926783d">on_clear_click</a> (ui_box_t *b, int x, int y, int down)</td></tr>
 <tr class="separator:a11a4398d05a885eb6be9a67f6926783d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cd074aefe4244f7e076ab3487c4919d" id="r_a2cd074aefe4244f7e076ab3487c4919d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a2cd074aefe4244f7e076ab3487c4919d">on_quit</a> (void)</td></tr>
 <tr class="separator:a2cd074aefe4244f7e076ab3487c4919d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,25 +207,25 @@ Functions</h2></td></tr>
 <tr class="separator:a05e12ea8f8d1b1cc8a6f51433264fd21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa5f3d4a06b8766e0dfbac6802b2dad2" id="r_afa5f3d4a06b8766e0dfbac6802b2dad2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#afa5f3d4a06b8766e0dfbac6802b2dad2">on_key_clear</a> (void)</td></tr>
 <tr class="separator:afa5f3d4a06b8766e0dfbac6802b2dad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a15ef0bcb8ccf1b90a8a09638643442" id="r_a9a15ef0bcb8ccf1b90a8a09638643442"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a9a15ef0bcb8ccf1b90a8a09638643442">build_pick_ui</a> (<a class="el" href="structui__t.html">ui_t</a> *ui)</td></tr>
+<tr class="memitem:a9a15ef0bcb8ccf1b90a8a09638643442" id="r_a9a15ef0bcb8ccf1b90a8a09638643442"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a9a15ef0bcb8ccf1b90a8a09638643442">build_pick_ui</a> (ui_t *ui)</td></tr>
 <tr class="separator:a9a15ef0bcb8ccf1b90a8a09638643442"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb3ec0f55c2cb460dffde2ef709aa413" id="r_abb3ec0f55c2cb460dffde2ef709aa413"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#abb3ec0f55c2cb460dffde2ef709aa413">draw_title</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:abb3ec0f55c2cb460dffde2ef709aa413" id="r_abb3ec0f55c2cb460dffde2ef709aa413"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#abb3ec0f55c2cb460dffde2ef709aa413">draw_title</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:abb3ec0f55c2cb460dffde2ef709aa413"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd4a6c73f708640ddf64210fb7b919c8" id="r_acd4a6c73f708640ddf64210fb7b919c8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#acd4a6c73f708640ddf64210fb7b919c8">draw_start_btn</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:acd4a6c73f708640ddf64210fb7b919c8" id="r_acd4a6c73f708640ddf64210fb7b919c8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#acd4a6c73f708640ddf64210fb7b919c8">draw_start_btn</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:acd4a6c73f708640ddf64210fb7b919c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0238a5292521411faf9764dc5050198" id="r_ac0238a5292521411faf9764dc5050198"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#ac0238a5292521411faf9764dc5050198">draw_reset_btn</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:ac0238a5292521411faf9764dc5050198" id="r_ac0238a5292521411faf9764dc5050198"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#ac0238a5292521411faf9764dc5050198">draw_reset_btn</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:ac0238a5292521411faf9764dc5050198"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab37443bc14ac2c65d75c19f0f723469f" id="r_ab37443bc14ac2c65d75c19f0f723469f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#ab37443bc14ac2c65d75c19f0f723469f">draw_status</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:ab37443bc14ac2c65d75c19f0f723469f" id="r_ab37443bc14ac2c65d75c19f0f723469f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#ab37443bc14ac2c65d75c19f0f723469f">draw_status</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:ab37443bc14ac2c65d75c19f0f723469f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9a87775b8ca04b9dd7cb43eb55b56d4" id="r_ac9a87775b8ca04b9dd7cb43eb55b56d4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#ac9a87775b8ca04b9dd7cb43eb55b56d4">draw_detail</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:ac9a87775b8ca04b9dd7cb43eb55b56d4" id="r_ac9a87775b8ca04b9dd7cb43eb55b56d4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#ac9a87775b8ca04b9dd7cb43eb55b56d4">draw_detail</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:ac9a87775b8ca04b9dd7cb43eb55b56d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70fa121de0ba1a93004e8d188a67ed88" id="r_a70fa121de0ba1a93004e8d188a67ed88"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a70fa121de0ba1a93004e8d188a67ed88">draw_progress</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:a70fa121de0ba1a93004e8d188a67ed88" id="r_a70fa121de0ba1a93004e8d188a67ed88"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a70fa121de0ba1a93004e8d188a67ed88">draw_progress</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:a70fa121de0ba1a93004e8d188a67ed88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a280d07a7d89e031490d920ec4a366bfc" id="r_a280d07a7d89e031490d920ec4a366bfc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a280d07a7d89e031490d920ec4a366bfc">draw_help</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:a280d07a7d89e031490d920ec4a366bfc" id="r_a280d07a7d89e031490d920ec4a366bfc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a280d07a7d89e031490d920ec4a366bfc">draw_help</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:a280d07a7d89e031490d920ec4a366bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad925a4c1c5405844158f9e9f2984f52" id="r_aad925a4c1c5405844158f9e9f2984f52"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#aad925a4c1c5405844158f9e9f2984f52">draw_range</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:aad925a4c1c5405844158f9e9f2984f52" id="r_aad925a4c1c5405844158f9e9f2984f52"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#aad925a4c1c5405844158f9e9f2984f52">draw_range</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:aad925a4c1c5405844158f9e9f2984f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5e93a9f36bde74fb297be50ab218f35" id="r_aa5e93a9f36bde74fb297be50ab218f35"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#aa5e93a9f36bde74fb297be50ab218f35">draw_assign_footer</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, char *out)</td></tr>
+<tr class="memitem:aa5e93a9f36bde74fb297be50ab218f35" id="r_aa5e93a9f36bde74fb297be50ab218f35"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#aa5e93a9f36bde74fb297be50ab218f35">draw_assign_footer</a> (ui_box_t *b, char *out)</td></tr>
 <tr class="separator:aa5e93a9f36bde74fb297be50ab218f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73ce2cfaf98a0f4716e612b82767ac26" id="r_a73ce2cfaf98a0f4716e612b82767ac26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a73ce2cfaf98a0f4716e612b82767ac26">sweep_tui_set_running</a> (const char *status, const char *detail)</td></tr>
 <tr class="memdesc:a73ce2cfaf98a0f4716e612b82767ac26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Status helpers for use inside <code>on_start</code> / <code>on_reset</code> callbacks.  <br /></td></tr>
@@ -240,9 +240,9 @@ Functions</h2></td></tr>
 <tr class="separator:ab3a402ad3704332d7b5486ddd6bc1a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45a2993fe58f4050335281768713b632" id="r_a45a2993fe58f4050335281768713b632"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a45a2993fe58f4050335281768713b632">sweep_tui_is_running</a> (void)</td></tr>
 <tr class="separator:a45a2993fe58f4050335281768713b632"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44394cd703e3391269e4307e04a6dbce" id="r_a44394cd703e3391269e4307e04a6dbce"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a44394cd703e3391269e4307e04a6dbce">on_start</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, int x, int y, int down)</td></tr>
+<tr class="memitem:a44394cd703e3391269e4307e04a6dbce" id="r_a44394cd703e3391269e4307e04a6dbce"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a44394cd703e3391269e4307e04a6dbce">on_start</a> (ui_box_t *b, int x, int y, int down)</td></tr>
 <tr class="separator:a44394cd703e3391269e4307e04a6dbce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e574a12a93b7e19b377c891f0af686c" id="r_a2e574a12a93b7e19b377c891f0af686c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a2e574a12a93b7e19b377c891f0af686c">on_reset</a> (<a class="el" href="structui__box__t.html">ui_box_t</a> *b, int x, int y, int down)</td></tr>
+<tr class="memitem:a2e574a12a93b7e19b377c891f0af686c" id="r_a2e574a12a93b7e19b377c891f0af686c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a2e574a12a93b7e19b377c891f0af686c">on_reset</a> (ui_box_t *b, int x, int y, int down)</td></tr>
 <tr class="separator:a2e574a12a93b7e19b377c891f0af686c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a275a0cef145da5ec21c59b60985cfa02" id="r_a275a0cef145da5ec21c59b60985cfa02"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a275a0cef145da5ec21c59b60985cfa02">on_key_start</a> (void)</td></tr>
 <tr class="separator:a275a0cef145da5ec21c59b60985cfa02"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -250,7 +250,7 @@ Functions</h2></td></tr>
 <tr class="separator:ab0fd744e26b3fdb8dd9356a508519d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2ee11ae86381afbab6408b7096c1e5c" id="r_aa2ee11ae86381afbab6408b7096c1e5c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#aa2ee11ae86381afbab6408b7096c1e5c">on_key_back</a> (void)</td></tr>
 <tr class="separator:aa2ee11ae86381afbab6408b7096c1e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88e7b9505c81a7ebc9e60d3cacf5a73b" id="r_a88e7b9505c81a7ebc9e60d3cacf5a73b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a88e7b9505c81a7ebc9e60d3cacf5a73b">build_all</a> (<a class="el" href="structui__t.html">ui_t</a> *ui)</td></tr>
+<tr class="memitem:a88e7b9505c81a7ebc9e60d3cacf5a73b" id="r_a88e7b9505c81a7ebc9e60d3cacf5a73b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a88e7b9505c81a7ebc9e60d3cacf5a73b">build_all</a> (ui_t *ui)</td></tr>
 <tr class="separator:a88e7b9505c81a7ebc9e60d3cacf5a73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95adbdbe1d041d91f88bb76d828698bc" id="r_a95adbdbe1d041d91f88bb76d828698bc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sweep__tui_8c.html#a95adbdbe1d041d91f88bb76d828698bc">sweep_tui_run</a> (<a class="el" href="structdisease__assign__t.html">disease_assign_t</a> *assign, const <a class="el" href="structsweep__tui__hooks__t.html">sweep_tui_hooks_t</a> *hooks)</td></tr>
 <tr class="memdesc:a95adbdbe1d041d91f88bb76d828698bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the interactive TUI until Quit.  <br /></td></tr>
@@ -420,7 +420,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void build_all </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__t.html">ui_t</a> *&#160;</td>
+          <td class="paramtype">ui_t *&#160;</td>
           <td class="paramname"><em>ui</em></td><td>)</td>
           <td></td>
         </tr>
@@ -434,7 +434,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00589">589</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>, <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>, <a class="el" href="tuibox_8h_source.html#l00395">ui_t::canscroll</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00059">panel_width()</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, and <a class="el" href="tuibox_8h_source.html#l00549">ui_reset()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>, <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, and <a class="el" href="sweep__tui_8c_source.html#l00059">panel_width()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00605">sweep_tui_run()</a>.</p>
 
@@ -452,7 +452,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void build_pick_ui </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__t.html">ui_t</a> *&#160;</td>
+          <td class="paramtype">ui_t *&#160;</td>
           <td class="paramname"><em>ui</em></td><td>)</td>
           <td></td>
         </tr>
@@ -466,7 +466,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00269">269</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00158">draw_clear_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00143">draw_confirm_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00127">draw_disease_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00167">draw_pick_help()</a>, <a class="el" href="sweep__tui_8c_source.html#l00102">draw_pick_prompt()</a>, <a class="el" href="sweep__tui_8c_source.html#l00115">draw_pick_summary()</a>, <a class="el" href="sweep__tui_8c_source.html#l00093">draw_pick_title()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00218">on_clear_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00208">on_confirm_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00186">on_disease_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00263">on_key_clear()</a>, <a class="el" href="sweep__tui_8c_source.html#l00257">on_key_continue()</a>, <a class="el" href="sweep__tui_8c_source.html#l00246">on_key_d1()</a>, <a class="el" href="sweep__tui_8c_source.html#l00255">on_key_d10()</a>, <a class="el" href="sweep__tui_8c_source.html#l00247">on_key_d2()</a>, <a class="el" href="sweep__tui_8c_source.html#l00248">on_key_d3()</a>, <a class="el" href="sweep__tui_8c_source.html#l00249">on_key_d4()</a>, <a class="el" href="sweep__tui_8c_source.html#l00250">on_key_d5()</a>, <a class="el" href="sweep__tui_8c_source.html#l00251">on_key_d6()</a>, <a class="el" href="sweep__tui_8c_source.html#l00252">on_key_d7()</a>, <a class="el" href="sweep__tui_8c_source.html#l00253">on_key_d8()</a>, <a class="el" href="sweep__tui_8c_source.html#l00254">on_key_d9()</a>, <a class="el" href="sweep__tui_8c_source.html#l00232">on_quit()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, <a class="el" href="sweep__tui_8h_source.html#l00019">SWEEP_DISEASE_COUNT</a>, <a class="el" href="sweep__tui_8c_source.html#l00046">tui_t::tick</a>, <a class="el" href="tuibox_8h_source.html#l00479">ui_add()</a>, and <a class="el" href="tuibox_8h_source.html#l00520">ui_key()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00158">draw_clear_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00143">draw_confirm_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00127">draw_disease_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00167">draw_pick_help()</a>, <a class="el" href="sweep__tui_8c_source.html#l00102">draw_pick_prompt()</a>, <a class="el" href="sweep__tui_8c_source.html#l00115">draw_pick_summary()</a>, <a class="el" href="sweep__tui_8c_source.html#l00093">draw_pick_title()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00218">on_clear_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00208">on_confirm_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00186">on_disease_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00263">on_key_clear()</a>, <a class="el" href="sweep__tui_8c_source.html#l00257">on_key_continue()</a>, <a class="el" href="sweep__tui_8c_source.html#l00246">on_key_d1()</a>, <a class="el" href="sweep__tui_8c_source.html#l00255">on_key_d10()</a>, <a class="el" href="sweep__tui_8c_source.html#l00247">on_key_d2()</a>, <a class="el" href="sweep__tui_8c_source.html#l00248">on_key_d3()</a>, <a class="el" href="sweep__tui_8c_source.html#l00249">on_key_d4()</a>, <a class="el" href="sweep__tui_8c_source.html#l00250">on_key_d5()</a>, <a class="el" href="sweep__tui_8c_source.html#l00251">on_key_d6()</a>, <a class="el" href="sweep__tui_8c_source.html#l00252">on_key_d7()</a>, <a class="el" href="sweep__tui_8c_source.html#l00253">on_key_d8()</a>, <a class="el" href="sweep__tui_8c_source.html#l00254">on_key_d9()</a>, <a class="el" href="sweep__tui_8c_source.html#l00232">on_quit()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="sweep__tui_8h_source.html#l00019">SWEEP_DISEASE_COUNT</a>, and <a class="el" href="sweep__tui_8c_source.html#l00046">tui_t::tick</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00589">build_all()</a>.</p>
 
@@ -484,7 +484,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void build_run_ui </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__t.html">ui_t</a> *&#160;</td>
+          <td class="paramtype">ui_t *&#160;</td>
           <td class="paramname"><em>ui</em></td><td>)</td>
           <td></td>
         </tr>
@@ -498,7 +498,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00545">545</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00449">draw_assign_footer()</a>, <a class="el" href="sweep__tui_8c_source.html#l00395">draw_detail()</a>, <a class="el" href="sweep__tui_8c_source.html#l00431">draw_help()</a>, <a class="el" href="sweep__tui_8c_source.html#l00403">draw_progress()</a>, <a class="el" href="sweep__tui_8c_source.html#l00439">draw_range()</a>, <a class="el" href="sweep__tui_8c_source.html#l00356">draw_reset_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00340">draw_start_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00372">draw_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00318">draw_title()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00535">on_key_back()</a>, <a class="el" href="sweep__tui_8c_source.html#l00530">on_key_reset()</a>, <a class="el" href="sweep__tui_8c_source.html#l00525">on_key_start()</a>, <a class="el" href="sweep__tui_8c_source.html#l00232">on_quit()</a>, <a class="el" href="sweep__tui_8c_source.html#l00514">on_reset()</a>, <a class="el" href="sweep__tui_8c_source.html#l00502">on_start()</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, <a class="el" href="sweep__tui_8c_source.html#l00046">tui_t::tick</a>, <a class="el" href="tuibox_8h_source.html#l00479">ui_add()</a>, <a class="el" href="tuibox_8h_source.html#l00319">ui_center_x</a>, and <a class="el" href="tuibox_8h_source.html#l00520">ui_key()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00449">draw_assign_footer()</a>, <a class="el" href="sweep__tui_8c_source.html#l00395">draw_detail()</a>, <a class="el" href="sweep__tui_8c_source.html#l00431">draw_help()</a>, <a class="el" href="sweep__tui_8c_source.html#l00403">draw_progress()</a>, <a class="el" href="sweep__tui_8c_source.html#l00439">draw_range()</a>, <a class="el" href="sweep__tui_8c_source.html#l00356">draw_reset_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00340">draw_start_btn()</a>, <a class="el" href="sweep__tui_8c_source.html#l00372">draw_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00318">draw_title()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00535">on_key_back()</a>, <a class="el" href="sweep__tui_8c_source.html#l00530">on_key_reset()</a>, <a class="el" href="sweep__tui_8c_source.html#l00525">on_key_start()</a>, <a class="el" href="sweep__tui_8c_source.html#l00232">on_quit()</a>, <a class="el" href="sweep__tui_8c_source.html#l00514">on_reset()</a>, <a class="el" href="sweep__tui_8c_source.html#l00502">on_start()</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, and <a class="el" href="sweep__tui_8c_source.html#l00046">tui_t::tick</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00589">build_all()</a>.</p>
 
@@ -530,7 +530,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00069">69</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00059">panel_width()</a>, <a class="el" href="sweep__tui_8c_source.html#l00046">tui_t::tick</a>, <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>, <a class="el" href="tuibox_8h_source.html#l00632">ui_redraw()</a>, and <a class="el" href="tuibox_8h_source.html#l00531">ui_refresh_size()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00059">panel_width()</a>, <a class="el" href="sweep__tui_8c_source.html#l00046">tui_t::tick</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00176">go_run_screen()</a>, <a class="el" href="sweep__tui_8c_source.html#l00218">on_clear_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00186">on_disease_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00535">on_key_back()</a>, <a class="el" href="sweep__tui_8c_source.html#l00476">sweep_tui_set_done()</a>, <a class="el" href="sweep__tui_8c_source.html#l00483">sweep_tui_set_error()</a>, <a class="el" href="sweep__tui_8c_source.html#l00489">sweep_tui_set_progress()</a>, <a class="el" href="sweep__tui_8c_source.html#l00470">sweep_tui_set_ready()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00464">sweep_tui_set_running()</a>.</p>
 
@@ -588,7 +588,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_assign_footer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -612,7 +612,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00449">449</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00051">disease_label()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, and <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00051">disease_label()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
@@ -630,7 +630,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_clear_btn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -654,8 +654,6 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00158">158</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
 </div>
@@ -672,7 +670,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_confirm_btn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -696,7 +694,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00143">143</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, and <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
@@ -714,7 +712,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_detail </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -738,7 +736,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00395">395</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00045">tui_t::detail</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, and <a class="el" href="tuibox_8h_source.html#l00720">ui_wrap_text()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00045">tui_t::detail</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, and <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
@@ -756,7 +754,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_disease_btn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -780,7 +778,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00127">127</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="tuibox_8h_source.html#l00376">ui_box_t::data1</a>, <a class="el" href="sweep__tui_8c_source.html#l00051">disease_label()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, and <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00051">disease_label()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
@@ -798,7 +796,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_help </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -822,8 +820,6 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00431">431</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
 </div>
@@ -840,7 +836,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_pick_help </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -864,8 +860,6 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00167">167</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
 </div>
@@ -882,7 +876,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_pick_prompt </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -906,7 +900,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00102">102</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, and <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, and <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
@@ -924,7 +918,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_pick_summary </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -948,7 +942,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00115">115</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00051">disease_label()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, and <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00051">disease_label()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
@@ -966,7 +960,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_pick_title </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -990,8 +984,6 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00093">93</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
 </div>
@@ -1008,7 +1000,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_progress </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -1032,7 +1024,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00403">403</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00041">tui_t::progress</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, and <a class="el" href="tuibox_8h_source.html#l00720">ui_wrap_text()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00041">tui_t::progress</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, and <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
@@ -1050,7 +1042,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_range </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -1074,7 +1066,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00439">439</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8h_source.html#l00036">sweep_tui_hooks_t::scan_prep</a>, <a class="el" href="sweep__tui_8h_source.html#l00034">sweep_tui_hooks_t::scan_start</a>, <a class="el" href="sweep__tui_8h_source.html#l00035">sweep_tui_hooks_t::scan_stop</a>, and <a class="el" href="tuibox_8h_source.html#l00720">ui_wrap_text()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8h_source.html#l00036">sweep_tui_hooks_t::scan_prep</a>, <a class="el" href="sweep__tui_8h_source.html#l00034">sweep_tui_hooks_t::scan_start</a>, and <a class="el" href="sweep__tui_8h_source.html#l00035">sweep_tui_hooks_t::scan_stop</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
@@ -1092,7 +1084,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_reset_btn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -1116,7 +1108,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00356">356</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, and <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, and <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
@@ -1134,7 +1126,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_start_btn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -1158,7 +1150,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00340">340</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, and <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, and <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
@@ -1176,7 +1168,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_status </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -1200,7 +1192,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00372">372</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00024">ST_DONE</a>, <a class="el" href="sweep__tui_8c_source.html#l00025">ST_ERROR</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, <a class="el" href="sweep__tui_8c_source.html#l00044">tui_t::status</a>, and <a class="el" href="tuibox_8h_source.html#l00720">ui_wrap_text()</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00024">ST_DONE</a>, <a class="el" href="sweep__tui_8c_source.html#l00025">ST_ERROR</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, and <a class="el" href="sweep__tui_8c_source.html#l00044">tui_t::status</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
@@ -1218,7 +1210,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void draw_title </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -1242,7 +1234,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00318">318</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="tuibox_8h_source.html#l00311">MAXCACHESIZE</a>, and <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, and <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
@@ -1274,7 +1266,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00176">176</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00069">bump()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00041">tui_t::progress</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>, and <a class="el" href="tuibox_8h_source.html#l00317">ui_screen</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00069">bump()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00041">tui_t::progress</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00208">on_confirm_click()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00257">on_key_continue()</a>.</p>
 
@@ -1292,7 +1284,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void on_clear_click </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -1328,7 +1320,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00218">218</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00069">bump()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00069">bump()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00263">on_key_clear()</a>.</p>
 
@@ -1346,7 +1338,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void on_confirm_click </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -1382,7 +1374,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00208">208</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00176">go_run_screen()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00176">go_run_screen()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
@@ -1400,7 +1392,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void on_disease_click </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -1436,7 +1428,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00186">186</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00069">bump()</a>, <a class="el" href="tuibox_8h_source.html#l00376">ui_box_t::data1</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00031">PICK_BLOB2</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00069">bump()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00031">PICK_BLOB2</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00237">pick_disease()</a>.</p>
 
@@ -1468,7 +1460,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00535">535</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00069">bump()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00031">PICK_BLOB2</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>, and <a class="el" href="tuibox_8h_source.html#l00317">ui_screen</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00069">bump()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00031">PICK_BLOB2</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>.</p>
 
@@ -1500,7 +1492,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00263">263</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00218">on_clear_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00218">on_clear_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
@@ -1532,7 +1524,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00257">257</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00176">go_run_screen()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00176">go_run_screen()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00269">build_pick_ui()</a>.</p>
 
@@ -1966,7 +1958,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void on_reset </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -2002,7 +1994,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00514">514</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="sweep__tui_8h_source.html#l00032">sweep_tui_hooks_t::on_reset</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>, and <a class="el" href="sweep__tui_8h_source.html#l00033">sweep_tui_hooks_t::userdata</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="sweep__tui_8h_source.html#l00032">sweep_tui_hooks_t::on_reset</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>, and <a class="el" href="sweep__tui_8h_source.html#l00033">sweep_tui_hooks_t::userdata</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00530">on_key_reset()</a>.</p>
 
@@ -2020,7 +2012,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void on_start </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__box__t.html">ui_box_t</a> *&#160;</td>
+          <td class="paramtype">ui_box_t *&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -2056,7 +2048,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00502">502</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="sweep__tui_8h_source.html#l00031">sweep_tui_hooks_t::on_start</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>, and <a class="el" href="sweep__tui_8h_source.html#l00033">sweep_tui_hooks_t::userdata</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00086">assignments_ready()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="sweep__tui_8h_source.html#l00031">sweep_tui_hooks_t::on_start</a>, <a class="el" href="sweep__tui_8c_source.html#l00019">SCR_RUN</a>, <a class="el" href="sweep__tui_8c_source.html#l00023">ST_RUNNING</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>, and <a class="el" href="sweep__tui_8h_source.html#l00033">sweep_tui_hooks_t::userdata</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00545">build_run_ui()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00525">on_key_start()</a>.</p>
 
@@ -2074,7 +2066,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static int panel_width </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structui__t.html">ui_t</a> *&#160;</td>
+          <td class="paramtype">ui_t *&#160;</td>
           <td class="paramname"><em>ui</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2088,7 +2080,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00059">59</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00016">PANEL_MAX</a>, <a class="el" href="sweep__tui_8c_source.html#l00017">PANEL_MIN</a>, and <a class="el" href="tuibox_8h_source.html#l00390">ui_t::ws</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00016">PANEL_MAX</a>, and <a class="el" href="sweep__tui_8c_source.html#l00017">PANEL_MIN</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00589">build_all()</a>, <a class="el" href="sweep__tui_8c_source.html#l00069">bump()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00605">sweep_tui_run()</a>.</p>
 
@@ -2120,7 +2112,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00237">237</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="tuibox_8h_source.html#l00376">ui_box_t::data1</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00186">on_disease_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00186">on_disease_click()</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__tui_8c_source.html#l00246">on_key_d1()</a>, <a class="el" href="sweep__tui_8c_source.html#l00255">on_key_d10()</a>, <a class="el" href="sweep__tui_8c_source.html#l00247">on_key_d2()</a>, <a class="el" href="sweep__tui_8c_source.html#l00248">on_key_d3()</a>, <a class="el" href="sweep__tui_8c_source.html#l00249">on_key_d4()</a>, <a class="el" href="sweep__tui_8c_source.html#l00250">on_key_d5()</a>, <a class="el" href="sweep__tui_8c_source.html#l00251">on_key_d6()</a>, <a class="el" href="sweep__tui_8c_source.html#l00252">on_key_d7()</a>, <a class="el" href="sweep__tui_8c_source.html#l00253">on_key_d8()</a>, and <a class="el" href="sweep__tui_8c_source.html#l00254">on_key_d9()</a>.</p>
 
@@ -2227,7 +2219,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="sweep__tui_8c_source.html#l00605">605</a> of file <a class="el" href="sweep__tui_8c_source.html">sweep_tui.c</a>.</p>
 
-<p class="reference">References <a class="el" href="tuibox_8h_source.html#l00648">_ui_update()</a>, <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00589">build_all()</a>, <a class="el" href="tuibox_8h_source.html#l00395">ui_t::canscroll</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00059">panel_width()</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00040">tui_t::quit</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="tuibox_8h_source.html#l00394">ui_t::screen</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00025">ST_ERROR</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>, <a class="el" href="tuibox_8h_source.html#l00615">ui_draw()</a>, <a class="el" href="tuibox_8h_source.html#l00441">ui_free()</a>, <a class="el" href="tuibox_8h_source.html#l00408">ui_new()</a>, <a class="el" href="tuibox_8h_source.html#l00531">ui_refresh_size()</a>, and <a class="el" href="tuibox_8h_source.html#l00390">ui_t::ws</a>.</p>
+<p class="reference">References <a class="el" href="sweep__tui_8c_source.html#l00036">tui_t::assign</a>, <a class="el" href="sweep__tui_8h_source.html#l00023">disease_assign_t::blob1</a>, <a class="el" href="sweep__tui_8h_source.html#l00024">disease_assign_t::blob2</a>, <a class="el" href="sweep__tui_8c_source.html#l00589">build_all()</a>, <a class="el" href="sweep__tui_8c_source.html#l00049">g</a>, <a class="el" href="sweep__tui_8c_source.html#l00037">tui_t::hooks</a>, <a class="el" href="sweep__tui_8c_source.html#l00042">tui_t::panel_w</a>, <a class="el" href="sweep__tui_8c_source.html#l00059">panel_width()</a>, <a class="el" href="sweep__tui_8c_source.html#l00043">tui_t::phase</a>, <a class="el" href="sweep__tui_8c_source.html#l00030">PICK_BLOB1</a>, <a class="el" href="sweep__tui_8c_source.html#l00040">tui_t::quit</a>, <a class="el" href="sweep__tui_8c_source.html#l00018">SCR_PICK</a>, <a class="el" href="sweep__tui_8c_source.html#l00079">set_status()</a>, <a class="el" href="sweep__tui_8c_source.html#l00025">ST_ERROR</a>, <a class="el" href="sweep__tui_8c_source.html#l00022">ST_READY</a>, <a class="el" href="sweep__tui_8c_source.html#l00039">tui_t::state</a>, and <a class="el" href="sweep__tui_8c_source.html#l00035">tui_t::ui</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="sweep__run_8c_source.html#l00183">main()</a>.</p>
 
@@ -2437,7 +2429,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="dir_e9ddf481a9bfc56f37ab1e84b76feea0.html">app</a></li><li class="navelem"><a class="el" href="sweep__tui_8c.html">sweep_tui.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_637a8caf01ed01fb8bafe19ecbfbd661.html">camera-sdk</a></li><li class="navelem"><a class="el" href="dir_278700dba4b9289e0241dfa9c3240d77.html">app</a></li><li class="navelem"><a class="el" href="sweep__tui_8c.html">sweep_tui.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

@@ -9,7 +9,7 @@ var searchData=
   ['pos_6',['pos',['../structmotor.html#a8f5b490e9807703f4b29959cf6e66798',1,'motor']]],
   ['pos0_7',['pos0',['../structroi__interp__t.html#a8e47d62281ff42016c3a9c36dedad61a',1,'roi_interp_t']]],
   ['pos1_8',['pos1',['../structroi__interp__t.html#a6af1161c390e46f5072f99f6a8b6485b',1,'roi_interp_t']]],
-  ['prep_9',['prep',['../structmotor.html#a7847dafe5e8ac08a99ee4fea4e213891',1,'motor::prep'],['../structsweep__ctx__t.html#a23628b4f31671cfe9e612de362fd7038',1,'sweep_ctx_t::prep']]],
+  ['prep_9',['prep',['../structsweep__ctx__t.html#a23628b4f31671cfe9e612de362fd7038',1,'sweep_ctx_t::prep'],['../structmotor.html#a7847dafe5e8ac08a99ee4fea4e213891',1,'motor::prep']]],
   ['prev_10',['prev',['../structmotor__api__t.html#ae5d4df83d15593f8f899babfd18dac36',1,'motor_api_t']]],
   ['prism_5fangle_11',['prism_angle',['../structmotor__api__t.html#a142c96609db55f4c6642e7b5a70ce013',1,'motor_api_t']]],
   ['progress_12',['progress',['../structtui__t.html#ac5b0106865141a611833cd4f1f489b84',1,'tui_t']]]

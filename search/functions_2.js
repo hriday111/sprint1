@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['build_5fall_0',['build_all',['../sweep__tui_8c.html#a88e7b9505c81a7ebc9e60d3cacf5a73b',1,'sweep_tui.c']]],
-  ['build_5fpick_5fui_1',['build_pick_ui',['../sweep__tui_8c.html#a9a15ef0bcb8ccf1b90a8a09638643442',1,'sweep_tui.c']]],
-  ['build_5frun_5fui_2',['build_run_ui',['../sweep__tui_8c.html#aedd3f912d756dd0d955522d532981cda',1,'sweep_tui.c']]],
-  ['bump_3',['bump',['../sweep__tui_8c.html#ae29adb116b6bd915f6b77f82a484f95d',1,'sweep_tui.c']]]
+  ['check_0',['check',['../cam_8c.html#a243a36ab0636223b6744f96d894fafb3',1,'cam.c']]],
+  ['check_5fendstop_1',['check_endstop',['../stepper_8c.html#a31631b7217a52d7f95af7378c28b8c15',1,'stepper.c']]],
+  ['chip_5fmask_2',['chip_mask',['../detect_8cpp.html#a395dac5c29965df5ca42c84bd66e3f17',1,'detect.cpp']]],
+  ['claim_5finput_5fpullup_3',['claim_input_pullup',['../stepper_8c.html#afe6f07ea90d8b0f1588e006d130c3deb',1,'stepper.c']]],
+  ['claim_5foutput_4',['claim_output',['../stepper_8c.html#a0313a51ec9d37a0b97f17b3ca602000c',1,'stepper.c']]],
+  ['crash_5fsetup_5',['crash_setup',['../crash_8c.html#a986a0cb797cf1b286408a4c1db4fad25',1,'crash_setup(void):&#160;crash.c'],['../crash_8h.html#a986a0cb797cf1b286408a4c1db4fad25',1,'crash_setup(void):&#160;crash.c']]],
+  ['crash_5fsignal_5fhandler_6',['crash_signal_handler',['../crash_8c.html#a4f89f74bf5cfbea5b63289f6c3377a38',1,'crash.c']]]
 ];

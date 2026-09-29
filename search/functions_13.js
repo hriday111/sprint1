@@ -1,28 +1,4 @@
 var searchData=
 [
-  ['ueye_5fclose_0',['ueye_close',['../cam_8c.html#a5b873496f26f1b99657a0bfbfa79e2b9',1,'cam.c']]],
-  ['ueye_5fget_5fexposure_5fms_1',['ueye_get_exposure_ms',['../cam_8c.html#aa5f5285480ac7af0e595278cbf81116d',1,'cam.c']]],
-  ['ueye_5fgrab_2',['ueye_grab',['../cam_8c.html#ada849201374f93655e0af0d00cecae91',1,'cam.c']]],
-  ['ueye_5fheight_3',['ueye_height',['../cam_8c.html#a8fa897e094e887c43529b514f7c32c18',1,'cam.c']]],
-  ['ueye_5fopen_4',['ueye_open',['../cam_8c.html#a41157068da5f7737e02a9efcaeb30591',1,'cam.c']]],
-  ['ueye_5fpitch_5',['ueye_pitch',['../cam_8c.html#a77abd7d194f566be0a954864203b084a',1,'cam.c']]],
-  ['ueye_5fsensor_6',['ueye_sensor',['../cam_8c.html#ab0c5af1e8f5531e3170c28dd361c4d20',1,'cam.c']]],
-  ['ueye_5fset_5fexposure_5fms_7',['ueye_set_exposure_ms',['../cam_8c.html#a304cc0841a95814f204af7da364a57ec',1,'cam.c']]],
-  ['ueye_5fwidth_8',['ueye_width',['../cam_8c.html#a7374a37e36c351a7304525cf6c69ba50',1,'cam.c']]],
-  ['ui_5fadd_9',['ui_add',['../tuibox_8h.html#a9ca860aa3b4e0c569f26a2489301fd9a',1,'tuibox.h']]],
-  ['ui_5fclear_10',['ui_clear',['../tuibox_8h.html#ae49ccc7ea3a09f29d812a9f99fc83bcf',1,'tuibox.h']]],
-  ['ui_5fdraw_11',['ui_draw',['../tuibox_8h.html#aee1994be5ceb18d118aa6003c566594b',1,'tuibox.h']]],
-  ['ui_5fdraw_5fone_12',['ui_draw_one',['../tuibox_8h.html#a53ce3457959d1a74cfb22cc193dcdea8',1,'tuibox.h']]],
-  ['ui_5ffree_13',['ui_free',['../tuibox_8h.html#a870389b59e3e6490845927db460c8a57',1,'tuibox.h']]],
-  ['ui_5fkey_14',['ui_key',['../tuibox_8h.html#a9fe597264550b2c7e9d9164219aa6bab',1,'tuibox.h']]],
-  ['ui_5fnew_15',['ui_new',['../tuibox_8h.html#ab18ddb2bcbcd09a12c7b8a3577812f36',1,'tuibox.h']]],
-  ['ui_5fredraw_16',['ui_redraw',['../tuibox_8h.html#aaaf583d0b2dcabf158b269a19b829013',1,'tuibox.h']]],
-  ['ui_5frefresh_5fsize_17',['ui_refresh_size',['../tuibox_8h.html#ab050f872d52903ab1d1b96c9fb812df7',1,'tuibox.h']]],
-  ['ui_5freset_18',['ui_reset',['../tuibox_8h.html#a13ac1b8b6a1733d10865898bc033cdfc',1,'tuibox.h']]],
-  ['ui_5ftext_19',['ui_text',['../tuibox_8h.html#a3ba49964d4d4face9d09dbca086c57dd',1,'tuibox.h']]],
-  ['ui_5ftext_5fwrap_20',['ui_text_wrap',['../tuibox_8h.html#a4c474d5baec015d54c1656578d2f21e3',1,'tuibox.h']]],
-  ['ui_5fvisible_5flen_21',['ui_visible_len',['../tuibox_8h.html#a5d6f1a5f93959a4ac1a3816ca9179d0a',1,'tuibox.h']]],
-  ['ui_5fwrap_5ftext_22',['ui_wrap_text',['../tuibox_8h.html#af85adc3941916b2bfd6e837b29a2cd9b',1,'tuibox.h']]],
-  ['unlock_23',['unlock',['../logger_8c.html#abb7cc7eb4e959fda6a43c8dd85f20090',1,'logger.c']]],
-  ['update_5flid_24',['update_lid',['../stepper_8c.html#a7cbb26ae6e08f8bb9a221937f7c6516d',1,'stepper.c']]]
+  ['vflog_0',['vflog',['../logger_8c.html#a1ffaf0b966fdfa31d296b3f529436ec6',1,'logger.c']]]
 ];

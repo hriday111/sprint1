@@ -21,12 +21,10 @@ var searchData=
   ['on_5fkey_5freset_18',['on_key_reset',['../sweep__tui_8c.html#ab0fd744e26b3fdb8dd9356a508519d49',1,'sweep_tui.c']]],
   ['on_5fkey_5fstart_19',['on_key_start',['../sweep__tui_8c.html#a275a0cef145da5ec21c59b60985cfa02',1,'sweep_tui.c']]],
   ['on_5fquit_20',['on_quit',['../sweep__tui_8c.html#a2cd074aefe4244f7e076ab3487c4919d',1,'sweep_tui.c']]],
-  ['on_5freset_21',['on_reset',['../structsweep__tui__hooks__t.html#ac2ec0647015e48688ebaaf031758c7cd',1,'sweep_tui_hooks_t::on_reset'],['../sweep__tui_8c.html#a2e574a12a93b7e19b377c891f0af686c',1,'on_reset():&#160;sweep_tui.c']]],
-  ['on_5fstart_22',['on_start',['../structsweep__tui__hooks__t.html#aa211971caed2040dc571c801fe4fbfd5',1,'sweep_tui_hooks_t::on_start'],['../sweep__tui_8c.html#a44394cd703e3391269e4307e04a6dbce',1,'on_start():&#160;sweep_tui.c']]],
-  ['onclick_23',['onclick',['../structui__box__t.html#ad81752051468c98796973d7e68c9338e',1,'ui_box_t']]],
-  ['onhover_24',['onhover',['../structui__box__t.html#a1515ef6e5da1b2ff2904c65c257ff0bb',1,'ui_box_t']]],
-  ['only_20if_20needed_25',['Recalibration (only if needed)',['../camera_sdk.html#autotoc_md1',1,'']]],
-  ['open_26',['open',['../structcam__api__t.html#ac2a2dd8926c6cb29cbe455de4dbcb8e4',1,'cam_api_t::open'],['../structcam.html#a07ff1fae996271afc47092f925e3863f',1,'cam::open'],['../structillumination__api__t.html#ac4a66a8d962a44e8fc87ff0825286c82',1,'illumination_api_t::open'],['../structmotor__api__t.html#a3613e6759925afb762968d483d247b0c',1,'motor_api_t::open']]],
-  ['output_27',['output',['../logger_8c.html#ab41bf19330e50c3c7bf3544c53f30971',1,'output:&#160;logger.c'],['../loggerconf_8c.html#ab41bf19330e50c3c7bf3544c53f30971',1,'output:&#160;loggerconf.c']]],
-  ['overlaps_28',['overlaps',['../detect_8cpp.html#a73a806f53fc087a5d0465320a0110d97',1,'detect.cpp']]]
+  ['on_5freset_21',['on_reset',['../sweep__tui_8c.html#a2e574a12a93b7e19b377c891f0af686c',1,'on_reset():&#160;sweep_tui.c'],['../structsweep__tui__hooks__t.html#ac2ec0647015e48688ebaaf031758c7cd',1,'sweep_tui_hooks_t::on_reset']]],
+  ['on_5fstart_22',['on_start',['../sweep__tui_8c.html#a44394cd703e3391269e4307e04a6dbce',1,'on_start():&#160;sweep_tui.c'],['../structsweep__tui__hooks__t.html#aa211971caed2040dc571c801fe4fbfd5',1,'sweep_tui_hooks_t::on_start']]],
+  ['only_20if_20needed_23',['Recalibration (only if needed)',['../camera_sdk.html#autotoc_md14',1,'']]],
+  ['open_24',['open',['../structcam__api__t.html#ac2a2dd8926c6cb29cbe455de4dbcb8e4',1,'cam_api_t::open'],['../structcam.html#a07ff1fae996271afc47092f925e3863f',1,'cam::open'],['../structillumination__api__t.html#ac4a66a8d962a44e8fc87ff0825286c82',1,'illumination_api_t::open'],['../structmotor__api__t.html#a3613e6759925afb762968d483d247b0c',1,'motor_api_t::open']]],
+  ['output_25',['output',['../logger_8c.html#ab41bf19330e50c3c7bf3544c53f30971',1,'output:&#160;logger.c'],['../loggerconf_8c.html#ab41bf19330e50c3c7bf3544c53f30971',1,'output:&#160;loggerconf.c']]],
+  ['overlaps_26',['overlaps',['../detect_8cpp.html#a73a806f53fc087a5d0465320a0110d97',1,'detect.cpp']]]
 ];

@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
+   <div id="projectbrief">CMake-built driver + camera-sdk; start build/src/driver/driver then sweep_run</div>
   </td>
  </tr>
  </tbody>
@@ -94,44 +94,74 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Sprint1 — Prism scan controller </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="mainpage"></a> Sprint1 drives a Raspberry Pi–mounted motor and illumination (“the black box”) while <code>camera-sdk/</code> captures frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The <b>device driver</b> and <b>camera tools</b> talk over named FIFOs under <code>/run/sprint1/</code>.</p>
-<p>Hardware backends are selected at build time (<code>MOTOR</code>, <code>ILLUMINATION</code>, <code>CAMERA</code>). Default build: A4988 stepper + laser PWM + uEye camera.</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<div class="textblock"><p><a class="anchor" id="mainpage"></a> Sprint1 drives a Raspberry Pi–mounted motor and illumination (“the black box”) while <code>src/camera-sdk/</code> captures frames from a Thorlabs DCC1545M (IDS uEye) and records ROI intensities. The <b>device driver</b> and <b>camera tools</b> talk over named FIFOs under <code>/run/sprint1/</code>.</p>
+<p>Hardware backends are selected at CMake configure time (<code>MOTOR</code>, <code>ILLUMINATION</code>). Default build: A4988 stepper + laser PWM + uEye camera.</p>
+<h1><a class="anchor" id="autotoc_md0"></a>
 Documentation</h1>
 <ul>
 <li>Published API: <a href="https://hriday111.github.io/sprint1">https://hriday111.github.io/sprint1</a></li>
 <li>Architecture source: <a href="docs/architecture.puml">docs/architecture.puml</a> (SVGs rendered by the Docs workflow onto GitHub Pages)</li>
 <li>Local Doxygen: <code>doxygen Doxyfile</code> → <code>docs/html/index.html</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Repository layout</h1>
+<div class="fragment"><div class="line">sprint1/</div>
+<div class="line">├── CMakeLists.txt          # top-level: add_subdirectory(src)</div>
+<div class="line">├── sprint1.sh              # build / run helper</div>
+<div class="line">├── docs/                   # architecture.puml + generated HTML/SVG</div>
+<div class="line">├── vendor/                 # uEye debs, etc.</div>
+<div class="line">└── src/</div>
+<div class="line">    ├── CMakeLists.txt</div>
+<div class="line">    ├── driver/             # device façade + motor/illumination backends</div>
+<div class="line">    ├── camera-sdk/         # sweep_run, calibrate, calibrate2</div>
+<div class="line">    ├── ipc/                # FIFO server (driver) + client (camera)</div>
+<div class="line">    ├── logging/</div>
+<div class="line">    ├── common/</div>
+<div class="line">    └── TUI/</div>
+</div><!-- fragment --><p>Binaries land under <code>build/src/</code> after <code>cmake -S . -B build</code>:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Binary   </th><th class="markdownTableHeadNone">Path    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Driver   </td><td class="markdownTableBodyNone"><code>build/src/driver/driver</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Sweep   </td><td class="markdownTableBodyNone"><code>build/src/camera-sdk/sweep_run</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Calibrate   </td><td class="markdownTableBodyNone"><code>build/src/camera-sdk/calibrate</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Calibrate2   </td><td class="markdownTableBodyNone"><code>build/src/camera-sdk/calibrate2</code>   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Getting started (normal run)</h1>
 <p><b>ROI calibration is already done</b> for the current optics (<code>/var/lib/sprint1/rois.json</code>). Day-to-day you can use <code>sprint1.sh</code> to build and/or run:</p>
-<div class="fragment"><div class="line">./sprint1.sh build      # make all (driver + camera-sdk)</div>
+<div class="fragment"><div class="line">./sprint1.sh build      # cmake configure + build (driver + camera-sdk)</div>
 <div class="line">./sprint1.sh driver     # build driver only</div>
-<div class="line">./sprint1.sh camera-sdk # build camera-sdk only</div>
-<div class="line">./sprint1.sh rebuild    # make clean &amp;&amp; make all</div>
+<div class="line">./sprint1.sh camera-sdk # build camera tools only</div>
+<div class="line">./sprint1.sh rebuild    # wipe build/, reconfigure, build all</div>
 <div class="line">./sprint1.sh run        # start driver, then sweep_run (stops driver on exit)</div>
 </div><!-- fragment --><p>Or run the two processes yourself:</p>
-<div class="fragment"><div class="line"># Terminal 1 — device driver (motor + illumination + FIFO server)</div>
-<div class="line">sudo make driver          # or: sudo make   (also builds camera-sdk)</div>
-<div class="line">sudo ./build/driver</div>
+<div class="fragment"><div class="line"># Configure + build once</div>
+<div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build</div>
+<div class="line"> </div>
+<div class="line"># Terminal 1 — device driver (motor + illumination + FIFO server)</div>
+<div class="line">sudo ./build/src/driver/driver</div>
 <div class="line"> </div>
 <div class="line"># Terminal 2 — main intensity measurements (interactive TUI)</div>
-<div class="line">cd camera-sdk &amp;&amp; make</div>
-<div class="line">./build/bin/sweep_run</div>
-</div><!-- fragment --><p><code>sweep_run</code> assigns diseases D1–D10 to blob 1 and blob 2, then Start/Reset for the scan. Quitting leaves <code>./build/driver</code> running (FIFO closed without <code>-1</code>) unless you used <code>./sprint1.sh run</code>, which sends <code>-1</code> on exit.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<div class="line">sudo ./build/src/camera-sdk/sweep_run</div>
+</div><!-- fragment --><p><code>sweep_run</code> assigns diseases D1–D10 to blob 1 and blob 2, then Start/Reset for the scan. Quitting leaves the driver running (FIFO closed without <code>-1</code>) unless you used <code>./sprint1.sh run</code>, which sends <code>-1</code> on exit.</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
 If you must recalibrate</h2>
 <p>Only after moving the lens or remounting optics. Prefer <code>calibrate2</code> and try several exposures:</p>
-<div class="fragment"><div class="line">cd camera-sdk &amp;&amp; mkdir -p tmp</div>
-<div class="line">./build/bin/calibrate2 0.20 400 420</div>
-<div class="line">./build/bin/calibrate2 0.14 400 420</div>
-<div class="line">./build/bin/calibrate2 0.10 400 420</div>
-</div><!-- fragment --><p>Compare <code>tmp/detected_*.png</code> — green ellipses must sit on the three dark discs. See <a class="el" href="RECALIBRATE_8md.html">camera-sdk/app/RECALIBRATE.md</a>.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<div class="fragment"><div class="line">mkdir -p src/camera-sdk/tmp</div>
+<div class="line">./build/src/camera-sdk/calibrate2 0.20 400 420</div>
+<div class="line">./build/src/camera-sdk/calibrate2 0.14 400 420</div>
+<div class="line">./build/src/camera-sdk/calibrate2 0.10 400 420</div>
+</div><!-- fragment --><p>Compare <code>src/camera-sdk/tmp/detected_*.png</code> — green ellipses must sit on the three dark discs. See <a class="el" href="RECALIBRATE_8md.html">src/camera-sdk/app/RECALIBRATE.md</a>.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Prerequisites</h1>
-<p>Hardware: Raspberry Pi 4, WiringPi, root (or GPIO) for the driver (PWM on BCM 18). Shared paths: <code>/run/sprint1/</code>, <code>/var/lib/sprint1/</code>, and a writable <code>logs/</code> cwd.</p>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<p>Hardware: Raspberry Pi 4, WiringPi, root (or GPIO) for the driver (PWM on BCM 18). Shared paths: <code>/run/sprint1/</code>, <code>/var/lib/sprint1/</code>, and a writable <code>logs/</code> cwd. Build requires <b>CMake ≥ 3.10</b>.</p>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Library installation</h2>
 <p><b>OpenCV</b> (for <code>calibrate</code> / <code>calibrate2</code>):</p>
 <div class="fragment"><div class="line">sudo apt-get install -y libopencv-dev</div>
@@ -149,13 +179,15 @@ Library installation</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Dependency   </th><th class="markdownTableHeadNone">Source    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>OpenCV 4</b>   </td><td class="markdownTableBodyNone"><code>apt-get install -y libopencv-dev</code>    </td></tr>
+<td class="markdownTableBodyNone"><b>CMake ≥ 3.10</b>   </td><td class="markdownTableBodyNone"><code>apt-get install -y cmake</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>IDS uEye + udev</b>   </td><td class="markdownTableBodyNone"><code>vendor/debs/ueye/*.deb</code>    </td></tr>
+<td class="markdownTableBodyNone"><b>OpenCV 4</b>   </td><td class="markdownTableBodyNone"><code>apt-get install -y libopencv-dev</code>    </td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>IDS uEye + udev</b>   </td><td class="markdownTableBodyNone"><code>vendor/debs/ueye/*.deb</code>    </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>WiringPi</b>   </td><td class="markdownTableBodyNone"><a href="https://github.com/WiringPi/WiringPi">WiringPi</a> (<code>-lwiringPi</code>)   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Architecture</h1>
 <p><img src="https://hriday111.github.io/sprint1/architecture.svg" alt="Sprint1 components and FIFO IPC" style="pointer-events: none;" class="inline"/></p>
 <details >
@@ -171,23 +203,23 @@ Sweep sequence and build variants</summary>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Component   </th><th class="markdownTableHeadNone">Role    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>build/driver</code>   </td><td class="markdownTableBodyNone">Device façade: home, park, serve FIFO commands    </td></tr>
+<td class="markdownTableBodyNone"><code>build/src/driver/driver</code>   </td><td class="markdownTableBodyNone">Device façade: home, park, serve FIFO commands    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code><a class="el" href="device_8c.html" title="Compose motor_api + illumination_api + ipc_server for the daemon.">device.c</a></code>   </td><td class="markdownTableBodyNone">Composes <code>motor_api</code> + <code>illumination_api</code> + <code>ipc_server</code>    </td></tr>
+<td class="markdownTableBodyNone"><code><a class="el" href="device_8c.html" title="Compose motor_api + illumination_api + ipc_server for the daemon.">src/driver/device.c</a></code>   </td><td class="markdownTableBodyNone">Composes <code>motor_api</code> + <code>illumination_api</code> + <code>ipc_server</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>A4988/</code> / <code>SG-90/</code>   </td><td class="markdownTableBodyNone">Motor backends (<code>make MOTOR=a4988\|sg90</code>)    </td></tr>
+<td class="markdownTableBodyNone"><code>src/driver/A4988/</code> / <code>SG-90/</code>   </td><td class="markdownTableBodyNone">Motor backends (<code>-DMOTOR=a4988\|sg90</code>)    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>Laser/</code> / <code>Led/</code>   </td><td class="markdownTableBodyNone">Illumination backends (<code>make ILLUMINATION=laser\|led</code>)    </td></tr>
+<td class="markdownTableBodyNone"><code>src/driver/Laser/</code> / <code>Led/</code>   </td><td class="markdownTableBodyNone">Illumination backends (<code>-DILLUMINATION=laser\|led</code>)    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>ipc/</code>   </td><td class="markdownTableBodyNone">FIFO server (driver) and client (camera tools)    </td></tr>
+<td class="markdownTableBodyNone"><code>src/ipc/</code>   </td><td class="markdownTableBodyNone">FIFO server (driver) and client (camera tools)    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>camera-sdk/app/</code>   </td><td class="markdownTableBodyNone"><code>sweep_run</code>, <code>calibrate</code>, <code>calibrate2</code>, TUI    </td></tr>
+<td class="markdownTableBodyNone"><code>src/camera-sdk/app/</code>   </td><td class="markdownTableBodyNone"><code>sweep_run</code>, <code>calibrate</code>, <code>calibrate2</code>, TUI    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>camera-sdk/vision/</code>   </td><td class="markdownTableBodyNone">ROI, detect, interp    </td></tr>
+<td class="markdownTableBodyNone"><code>src/camera-sdk/vision/</code>   </td><td class="markdownTableBodyNone">ROI, detect, interp    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>camera-sdk/thorlabs-dcc1545m/</code>   </td><td class="markdownTableBodyNone">uEye backend (<code>CAMERA=ueye</code>)    </td></tr>
+<td class="markdownTableBodyNone"><code>src/camera-sdk/thorlabs-dcc1545m/</code>   </td><td class="markdownTableBodyNone">uEye backend    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>logging/</code>   </td><td class="markdownTableBodyNone">File + console logger, crash/core-dump hooks   </td></tr>
+<td class="markdownTableBodyNone"><code>src/logging/</code>   </td><td class="markdownTableBodyNone">File + console logger, crash/core-dump hooks   </td></tr>
 </table>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -197,15 +229,15 @@ Sweep sequence and build variants</summary>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>/run/sprint1/pos_pipe</code>   </td><td class="markdownTableBodyNone">driver → client   </td><td class="markdownTableBodyNone">position after <code>4000</code>   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 Build knobs</h2>
-<div class="fragment"><div class="line">make driver                         # default: MOTOR=a4988 ILLUMINATION=laser</div>
-<div class="line">make driver MOTOR=sg90 ILLUMINATION=led</div>
-<div class="line">make camera                         # camera-sdk tools</div>
-<div class="line">make                                # driver + camera</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md14"></a>
+<div class="fragment"><div class="line">./sprint1.sh build                                    # defaults: MOTOR=a4988 ILLUMINATION=laser</div>
+<div class="line">cmake -S . -B build -DMOTOR=sg90 -DILLUMINATION=led   # alternate backends</div>
+<div class="line">cmake --build build --target driver                   # driver only</div>
+<div class="line">cmake --build build --target sweep_run                # one camera tool</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
 Pinout</h1>
-<p>BCM pins in <code><a class="el" href="gpio__pins_8h.html" title="BCM GPIO mapping for Raspberry Pi 4 (A4988 motor + illumination).">gpio_pins.h</a></code>. Enable is active LOW; endstop is active HIGH; illumination uses hardware PWM on GPIO 18.</p>
+<p>BCM pins in <code><a class="el" href="gpio__pins_8h.html" title="BCM GPIO mapping for Raspberry Pi 4 (A4988 motor + illumination).">src/driver/gpio_pins.h</a></code>. Enable is active LOW; endstop is active HIGH; illumination uses hardware PWM on GPIO 18.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Signal   </th><th class="markdownTableHeadNone">GPIO   </th><th class="markdownTableHeadNone">Typical wire    </th></tr>
@@ -219,7 +251,7 @@ Pinout</h1>
 <td class="markdownTableBodyNone">Illumination / Endstop   </td><td class="markdownTableBodyNone">18 / 17   </td><td class="markdownTableBodyNone">Blue→White / Grey   </td></tr>
 </table>
 <p>Microstepping (A4988): 1/16. Step half-period: <code>STEP_DELAY_US</code> (20 ms).</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 Command protocol</h1>
 <p>ASCII lines on <code>data_pipe</code>. Integer lines are commands; <code>bN</code> sets illumination brightness (0–255).</p>
 <table class="markdownTable">
@@ -246,31 +278,31 @@ Command protocol</h1>
 <div class="line">printf &#39;b255\n1001\n4000\n&#39; &gt;&amp;3</div>
 <div class="line">timeout 1 cat /run/sprint1/pos_pipe</div>
 </div><!-- fragment --><p>Angle: <b>0.1125°/step</b>. Homing ≈ <code>CMD_POS_ZERO</code> + <code>DELTA</code> (400 + 34).</p>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Config files</h1>
 <ul>
 <li>**<code>/var/lib/sprint1/saved.prm</code>** — <code>start stop prep</code> (each 0–999)</li>
 <li>**<code>/var/lib/sprint1/rois.json</code>** — elliptical blobs <code>{name,cx,cy,rx,ry,angle}</code></li>
 <li>**<code>/var/lib/sprint1/rois_interp.json</code>** — two-point model from <code>calibrate2</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md11"></a>
 Logging</h1>
 <p><code>sprint1_logging_init</code> writes <code>logs/&lt;app&gt;-&lt;epoch&gt;.log</code> + stderr (DEBUG, 100 ms auto-flush). Fatal signals log the expected core path then re-raise.</p>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md12"></a>
 Common pitfalls</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Symptom   </th><th class="markdownTableHeadNone">Fix    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>no reader</code>   </td><td class="markdownTableBodyNone">Start <code>sudo ./build/driver</code> first    </td></tr>
+<td class="markdownTableBodyNone"><code>no reader</code>   </td><td class="markdownTableBodyNone">Start <code>sudo ./build/src/driver/driver</code> first    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>EPIPE</code>   </td><td class="markdownTableBodyNone">Keep one write fd open for the whole session    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Bad ellipses   </td><td class="markdownTableBodyNone"><code>calibrate2</code> at 0.20 / 0.14 / 0.10    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Wrong binary name   </td><td class="markdownTableBodyNone">Driver is <code>build/driver</code> (not <code>servo_calib</code>)   </td></tr>
+<td class="markdownTableBodyNone">Wrong binary path   </td><td class="markdownTableBodyNone">Driver is <code>build/src/driver/driver</code> (not <code>build/driver</code> / <code>servo_calib</code>)   </td></tr>
 </table>
-<p>Camera tools detail: <a class="el" href="camera-sdk_2README_8md.html">camera-sdk/README.md</a>. </p>
+<p>Camera tools detail: <a class="el" href="src_2camera-sdk_2README_8md.html">src/camera-sdk/README.md</a>. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

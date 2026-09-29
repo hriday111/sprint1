@@ -16,14 +16,11 @@ var searchData=
   ['get_5fprep_13',['get_prep',['../structmotor__api__t.html#a0e654eefc727ad6ac01f4efe9402d936',1,'motor_api_t']]],
   ['get_5fstart_14',['get_start',['../structmotor__api__t.html#ac677f2ca1fbe8d06d593f747ded35711',1,'motor_api_t']]],
   ['get_5fstop_15',['get_stop',['../structmotor__api__t.html#ae8ea68e782fd84cfc99681e471399684',1,'motor_api_t']]],
-  ['global_5fbg_16',['global_bg',['../vt100utils_8h.html#a2fc2954c95a08fbd7889d60948e10a6f',1,'vt100utils.h']]],
-  ['global_5ffg_17',['global_fg',['../vt100utils_8h.html#a8f42c32dc86fd1118ff09e43c1fb9424',1,'vt100utils.h']]],
-  ['global_5fmode_18',['global_mode',['../vt100utils_8h.html#a79e9a712c9ad6aad190070e4cf31bd02',1,'vt100utils.h']]],
-  ['go_5fprepare_19',['go_prepare',['../structmotor__api__t.html#a84d45c830d4f6896cdeadd62e42747b9',1,'motor_api_t']]],
-  ['go_5frel_20',['go_rel',['../structmotor__api__t.html#ae929369a43d0464ecb902d59edd9e5ff',1,'motor_api_t']]],
-  ['go_5fstart_21',['go_start',['../structmotor__api__t.html#ab227f55068940cb4fb357ec82725d6b1',1,'motor_api_t']]],
-  ['go_5fstop_22',['go_stop',['../structmotor__api__t.html#a97af597e12d5d903148b0c7913713dd8',1,'motor_api_t']]],
-  ['go_5fto_23',['go_to',['../structmotor__api__t.html#a81c3c6745ef650ab3d6288872090e5de',1,'motor_api_t']]],
-  ['go_5fzero_24',['go_zero',['../structmotor__api__t.html#ab57fe97e6cdf24e584266ca3ea596c75',1,'motor_api_t']]],
-  ['grab_25',['grab',['../structcam__api__t.html#a4ed687db16642a9dae70571fca74f320',1,'cam_api_t']]]
+  ['go_5fprepare_16',['go_prepare',['../structmotor__api__t.html#a84d45c830d4f6896cdeadd62e42747b9',1,'motor_api_t']]],
+  ['go_5frel_17',['go_rel',['../structmotor__api__t.html#ae929369a43d0464ecb902d59edd9e5ff',1,'motor_api_t']]],
+  ['go_5fstart_18',['go_start',['../structmotor__api__t.html#ab227f55068940cb4fb357ec82725d6b1',1,'motor_api_t']]],
+  ['go_5fstop_19',['go_stop',['../structmotor__api__t.html#a97af597e12d5d903148b0c7913713dd8',1,'motor_api_t']]],
+  ['go_5fto_20',['go_to',['../structmotor__api__t.html#a81c3c6745ef650ab3d6288872090e5de',1,'motor_api_t']]],
+  ['go_5fzero_21',['go_zero',['../structmotor__api__t.html#ab57fe97e6cdf24e584266ca3ea596c75',1,'motor_api_t']]],
+  ['grab_22',['grab',['../structcam__api__t.html#a4ed687db16642a9dae70571fca74f320',1,'cam_api_t']]]
 ];

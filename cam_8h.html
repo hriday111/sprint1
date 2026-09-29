@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sprint1: camera-sdk/thorlabs-dcc1545m/cam.h File Reference</title>
+<title>Sprint1: src/camera-sdk/thorlabs-dcc1545m/cam.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
+   <div id="projectbrief">CMake-built driver + camera-sdk; start build/src/driver/driver then sweep_run</div>
   </td>
  </tr>
  </tbody>
@@ -112,12 +112,12 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:acba56ccad9d299c98779ecb14d797b18" id="r_acba56ccad9d299c98779ecb14d797b18"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#acba56ccad9d299c98779ecb14d797b18">CAM_CROP_X</a>&#160;&#160;&#160;350</td></tr>
+<tr class="memitem:acba56ccad9d299c98779ecb14d797b18" id="r_acba56ccad9d299c98779ecb14d797b18"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#acba56ccad9d299c98779ecb14d797b18">CAM_CROP_X</a>&#160;&#160;&#160;300</td></tr>
 <tr class="memdesc:acba56ccad9d299c98779ecb14d797b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed crop applied by grab (sensor coordinates).  <br /></td></tr>
 <tr class="separator:acba56ccad9d299c98779ecb14d797b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0f71d4ea2c6cb41e628f21c3a6a5a0d" id="r_ac0f71d4ea2c6cb41e628f21c3a6a5a0d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#ac0f71d4ea2c6cb41e628f21c3a6a5a0d">CAM_CROP_Y</a>&#160;&#160;&#160;60</td></tr>
 <tr class="separator:ac0f71d4ea2c6cb41e628f21c3a6a5a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0a34c5a6c5676493594f78cf96b9f43" id="r_aa0a34c5a6c5676493594f78cf96b9f43"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#aa0a34c5a6c5676493594f78cf96b9f43">CAM_CROP_W</a>&#160;&#160;&#160;600</td></tr>
+<tr class="memitem:aa0a34c5a6c5676493594f78cf96b9f43" id="r_aa0a34c5a6c5676493594f78cf96b9f43"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#aa0a34c5a6c5676493594f78cf96b9f43">CAM_CROP_W</a>&#160;&#160;&#160;700</td></tr>
 <tr class="separator:aa0a34c5a6c5676493594f78cf96b9f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85ca7a289a7d15d8c2445932cc339849" id="r_a85ca7a289a7d15d8c2445932cc339849"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cam_8h.html#a85ca7a289a7d15d8c2445932cc339849">CAM_CROP_H</a>&#160;&#160;&#160;740</td></tr>
 <tr class="separator:a85ca7a289a7d15d8c2445932cc339849"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,7 +151,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CAM_CROP_W&#160;&#160;&#160;600</td>
+          <td class="memname">#define CAM_CROP_W&#160;&#160;&#160;700</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -167,7 +167,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CAM_CROP_X&#160;&#160;&#160;350</td>
+          <td class="memname">#define CAM_CROP_X&#160;&#160;&#160;300</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -200,7 +200,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e34e6ed5a3107a114ffdbadbc95d5c83.html">camera-sdk</a></li><li class="navelem"><a class="el" href="dir_e4ca440a7f20306fabb590fa7d1134b5.html">thorlabs-dcc1545m</a></li><li class="navelem"><a class="el" href="cam_8h.html">cam.h</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_637a8caf01ed01fb8bafe19ecbfbd661.html">camera-sdk</a></li><li class="navelem"><a class="el" href="dir_ed174795bbca48e45dfa5ff8bd3c3178.html">thorlabs-dcc1545m</a></li><li class="navelem"><a class="el" href="cam_8h.html">cam.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

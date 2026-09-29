@@ -14,18 +14,5 @@ var annotated_dup =
     [ "rois_t", "structrois__t.html", "structrois__t" ],
     [ "sweep_ctx_t", "structsweep__ctx__t.html", "structsweep__ctx__t" ],
     [ "sweep_tui_hooks_t", "structsweep__tui__hooks__t.html", "structsweep__tui__hooks__t" ],
-    [ "tui_t", "structtui__t.html", "structtui__t" ],
-    [ "ui_box_t", "structui__box__t.html", "structui__box__t" ],
-    [ "ui_evt_t", "structui__evt__t.html", "structui__evt__t" ],
-    [ "ui_t", "structui__t.html", "structui__t" ],
-    [ "vec_box_t", "structvec__box__t.html", "structvec__box__t" ],
-    [ "vec_char_t", "structvec__char__t.html", "structvec__char__t" ],
-    [ "vec_double_t", "structvec__double__t.html", "structvec__double__t" ],
-    [ "vec_evt_t", "structvec__evt__t.html", "structvec__evt__t" ],
-    [ "vec_float_t", "structvec__float__t.html", "structvec__float__t" ],
-    [ "vec_int_t", "structvec__int__t.html", "structvec__int__t" ],
-    [ "vec_str_t", "structvec__str__t.html", "structvec__str__t" ],
-    [ "vec_void_t", "structvec__void__t.html", "structvec__void__t" ],
-    [ "vt100_color_t", "structvt100__color__t.html", "structvt100__color__t" ],
-    [ "vt100_node_t", "structvt100__node__t.html", "structvt100__node__t" ]
+    [ "tui_t", "structtui__t.html", "structtui__t" ]
 ];

@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">Sprint1
    </div>
-   <div id="projectbrief">Start servo_calib then sweep_run for measurements; elliptical ROI camera-sdk</div>
+   <div id="projectbrief">CMake-built driver + camera-sdk; start build/src/driver/driver then sweep_run</div>
   </td>
  </tr>
  </tbody>
@@ -94,26 +94,26 @@ $(document).ready(function(){initNavTree('camera_sdk.html',''); initResizable();
   <div class="headertitle"><div class="title">camera-sdk</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Thorlabs DCC1545M (IDS uEye) tools: mono8 crop, elliptical ROIs, optional two-point interpolation, and an interactive intensity sweep. Motion/illumination go through FIFOs owned by <code>./build/driver</code> (see <a class="el" href="README_8md.html">project README</a>).</p>
-<h1><a class="anchor" id="autotoc_md0"></a>
+<div class="textblock"><p>Thorlabs DCC1545M (IDS uEye) tools: mono8 crop, elliptical ROIs, optional two-point interpolation, and an interactive intensity sweep. Motion/illumination go through FIFOs owned by <code>build/src/driver/driver</code> (see <a class="el" href="README_8md.html">project README</a>).</p>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Getting started</h1>
-<p><b>Calibration is already done.</b> Day-to-day, from the repo root you can build and/or run with <code>./sprint1.sh</code> (<code>build</code>, <code>run</code>, etc. — see the <a href="../README.md#getting-started-normal-run">project README</a>):</p>
+<p><b>Calibration is already done.</b> Day-to-day, from the repo root you can build and/or run with <code>./sprint1.sh</code> (<code>build</code>, <code>run</code>, etc. — see the <a href="../../README.md#getting-started-normal-run">project README</a>):</p>
 <div class="fragment"><div class="line">./sprint1.sh build</div>
 <div class="line">./sprint1.sh run</div>
 </div><!-- fragment --><p>Or start the processes yourself:</p>
 <div class="fragment"><div class="line"># Terminal 1 (repo root)</div>
-<div class="line">sudo ./build/driver</div>
+<div class="line">sudo ./build/src/driver/driver</div>
 <div class="line"> </div>
 <div class="line"># Terminal 2</div>
-<div class="line">cd camera-sdk &amp;&amp; make</div>
-<div class="line">./build/bin/sweep_run</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1"></a>
+<div class="line">sudo ./build/src/camera-sdk/sweep_run</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md14"></a>
 Recalibration (only if needed)</h2>
-<div class="fragment"><div class="line">./build/bin/calibrate2 0.20 400 420</div>
-<div class="line">./build/bin/calibrate2 0.14 400 420</div>
-<div class="line">./build/bin/calibrate2 0.10 400 420</div>
+<div class="fragment"><div class="line">mkdir -p src/camera-sdk/tmp</div>
+<div class="line">./build/src/camera-sdk/calibrate2 0.20 400 420</div>
+<div class="line">./build/src/camera-sdk/calibrate2 0.14 400 420</div>
+<div class="line">./build/src/camera-sdk/calibrate2 0.10 400 420</div>
 </div><!-- fragment --><p>See <a class="el" href="RECALIBRATE_8md.html">app/RECALIBRATE.md</a>.</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
+<h1><a class="anchor" id="autotoc_md15"></a>
 Layout</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -127,15 +127,17 @@ Layout</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>../ipc/ipc_client.*</code>   </td><td class="markdownTableBodyNone">FIFO client (<code>fifo_*</code>)    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>../logging/</code>   </td><td class="markdownTableBodyNone">Shared logger / crash hooks   </td></tr>
+<td class="markdownTableBodyNone"><code>../logging/</code>   </td><td class="markdownTableBodyNone">Shared logger / crash hooks    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>../TUI/</code>   </td><td class="markdownTableBodyNone">Terminal UI helpers used by <code>sweep_tui</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Prerequisites</h1>
 <div class="fragment"><div class="line">sudo apt-get install -y libopencv-dev</div>
-<div class="line">sudo dpkg -i ../vendor/debs/ueye/*.deb &amp;&amp; sudo apt-get install -y -f</div>
+<div class="line">sudo dpkg -i ../../vendor/debs/ueye/*.deb &amp;&amp; sudo apt-get install -y -f</div>
 <div class="line">sudo systemctl enable --now ueyeusbdrc</div>
-</div><!-- fragment --><p>Driver must be running for laser/motion. Full install notes: <a href="../README.md#prerequisites">../README.md</a>.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+</div><!-- fragment --><p>Driver must be running for laser/motion. Full install notes: <a href="../../README.md#prerequisites">../../README.md</a>.</p>
+<h1><a class="anchor" id="autotoc_md17"></a>
 APIs (short)</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -152,7 +154,7 @@ APIs (short)</h1>
 <td class="markdownTableBodyNone">Detect   </td><td class="markdownTableBodyNone"><code>detect_boxes_cv</code>, <code>frame_mat</code>   </td></tr>
 </table>
 <p>Crop (sensor coords): <code>CAM_CROP_*</code> = 600×740 at (350, 60).</p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 Tool CLI</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -164,11 +166,15 @@ Tool CLI</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>calibrate2</code>   </td><td class="markdownTableBodyNone">Two poses → <code>rois_interp.json</code>; try exposures <b>0.20 / 0.14 / 0.10</b>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 Build</h1>
-<div class="fragment"><div class="line">make                          # from repo root: make camera</div>
-<div class="line"># or: make CAMERA=ueye</div>
-</div><!-- fragment --><p>Architecture diagrams: <a href="../docs/architecture.puml">../docs/architecture.puml</a>. </p>
+<p>From the repo root (preferred):</p>
+<div class="fragment"><div class="line">./sprint1.sh camera-sdk</div>
+<div class="line"># or:</div>
+<div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build --target sweep_run --target calibrate --target calibrate2</div>
+</div><!-- fragment --><p>Binaries: <code>build/src/camera-sdk/{sweep_run,calibrate,calibrate2}</code>.</p>
+<p>Architecture diagrams: <a href="../../docs/architecture.puml">../../docs/architecture.puml</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
